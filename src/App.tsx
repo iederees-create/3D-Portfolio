@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Globe, Github, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
+import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 import QuoteChat from './QuoteChat';
 
 interface Project {
@@ -9,7 +9,6 @@ interface Project {
   category: 'Service' | 'Beauty' | 'Education' | 'Creative';
   description: string;
   tags: string[];
-  repoUrl: string;
   liveUrl: string;
   etsyUrl: string;
   featured?: boolean;
@@ -102,36 +101,26 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
 
           {/* Actions */}
-          <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/5">
+          <div className="grid grid-cols-2 gap-2 pt-4 border-t border-white/5">
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
               title="Live Site"
             >
               <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live</span>
+              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live Site</span>
             </a>
             <a
               href={project.etsyUrl}
               target="_blank"
               rel="noreferrer"
-              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
+              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
               title="Buy on Etsy"
             >
               <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
-              <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Etsy</span>
-            </a>
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
-              title="Source Code"
-            >
-              <Github size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Code</span>
+              <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Buy Template</span>
             </a>
           </div>
         </div>
@@ -186,7 +175,6 @@ export default function App() {
       category: 'Service',
       description: 'Premium service business landing page engineered for local visibility, featuring optimized client onboarding paths.',
       tags: ['React', 'Tailwind', 'Vite'],
-      repoUrl: 'https://github.com/iederees-create/summit-painting-ct-ct',
       liveUrl: 'https://iederees-create.github.io/summit-painting-ct-ct/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
       featured: true,
@@ -196,7 +184,6 @@ export default function App() {
       category: 'Beauty',
       description: 'Elegant boutique beauty salon application showcasing creative portfolios, service menus, and modern interactive touchpoints.',
       tags: ['TypeScript', 'Tailwind CSS', 'UI/UX'],
-      repoUrl: 'https://github.com/iederees-create/amore-nails-ct',
       liveUrl: 'https://iederees-create.github.io/amore-nails-ct/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
       featured: true,
@@ -206,7 +193,6 @@ export default function App() {
       category: 'Beauty',
       description: 'Highly visual digital showroom tailored for modern salon styling branding and clean presentation workflows.',
       tags: ['React', 'Vite', 'Responsive Layout'],
-      repoUrl: 'https://github.com/iederees-create/pixel-perfect-hair',
       liveUrl: 'https://iederees-create.github.io/pixel-perfect-hair/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
@@ -215,7 +201,6 @@ export default function App() {
       category: 'Service',
       description: 'Conversion-driven emergency dispatch and routing hub optimized for high performance and clean visual hierarchy.',
       tags: ['React', 'SEO Framework', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/acme-plumbing-claremont-ct',
       liveUrl: 'https://iederees-create.github.io/acme-plumbing-claremont-ct/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
@@ -224,7 +209,6 @@ export default function App() {
       category: 'Service',
       description: 'Polished commercial service application focusing on interactive quotes and premium glass components.',
       tags: ['TypeScript', 'Vite', 'Components'],
-      repoUrl: 'https://github.com/iederees-create/window-wizards-ct-ct',
       liveUrl: 'https://iederees-create.github.io/window-wizards-ct-ct/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
@@ -233,7 +217,6 @@ export default function App() {
       category: 'Service',
       description: 'Heavyweight construction enterprise portal designed to showcase multi-stage real estate developments and scale.',
       tags: ['React', 'Production Build', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/first-choice-construction-ct',
       liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
       featured: true,
@@ -243,7 +226,6 @@ export default function App() {
       category: 'Creative',
       description: 'Stunning artistic branding workspace focused on visual design aesthetics, layout assets, and sign production.',
       tags: ['UI/UX Design', 'Vite', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/aura-signs',
       liveUrl: 'https://iederees-create.github.io/aura-signs/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
@@ -252,7 +234,6 @@ export default function App() {
       category: 'Education',
       description: 'Clean learning management index and appointment hub designed for modern educational structures and smooth navigation.',
       tags: ['TypeScript', 'React', 'Data Visuals'],
-      repoUrl: 'https://github.com/iederees-create/fluent-path-tutoring',
       liveUrl: 'https://iederees-create.github.io/fluent-path-tutoring/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
