@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FolderGit2, ExternalLink, Github, Layers, Code2 } from 'lucide-react';
+import { Globe, Github, Layers, Code2 } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -7,6 +7,7 @@ interface Project {
   description: string;
   tags: string[];
   repoUrl: string;
+  liveUrl: string;
 }
 
 export default function App() {
@@ -18,56 +19,64 @@ export default function App() {
       category: 'Service',
       description: 'Premium service business landing page engineered for local service visibility, featuring optimized client onboarding paths.',
       tags: ['React', 'Tailwind', 'Vite'],
-      repoUrl: 'https://github.com/iederees-create/summit-painting-ct-ct.git'
+      repoUrl: 'https://github.com/iederees-create/summit-painting-ct-ct',
+      liveUrl: 'https://iederees-create.github.io/summit-painting-ct-ct/'
     },
     {
       title: 'Amore Nails CT',
       category: 'Beauty',
       description: 'Elegant boutique beauty salon application showcasing creative portfolios, service menus, and modern interactive touchpoints.',
       tags: ['TypeScript', 'Tailwind CSS', 'UI/UX'],
-      repoUrl: 'https://github.com/iederees-create/amore-nails-ct.git'
+      repoUrl: 'https://github.com/iederees-create/amore-nails-ct',
+      liveUrl: 'https://iederees-create.github.io/amore-nails-ct/'
     },
     {
       title: 'Pixel Perfect Hair',
       category: 'Beauty',
       description: 'Highly visual, asset-optimized digital showroom tailored for modern salon styling branding and clean presentation workflows.',
       tags: ['React', 'Vite', 'Responsive Layout'],
-      repoUrl: 'https://github.com/iederees-create/pixel-perfect-hair.git'
+      repoUrl: 'https://github.com/iederees-create/pixel-perfect-hair',
+      liveUrl: 'https://iederees-create.github.io/pixel-perfect-hair/'
     },
     {
       title: 'Acme Plumbing Claremont',
       category: 'Service',
       description: 'Conversion-driven emergency dispatch and routing hub optimized for high performance and clean visual hierarchy.',
       tags: ['React', 'SEO Framework', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/acme-plumbing-claremont-ct.git'
+      repoUrl: 'https://github.com/iederees-create/acme-plumbing-claremont-ct',
+      liveUrl: 'https://iederees-create.github.io/acme-plumbing-claremont-ct/'
     },
     {
       title: 'Window Wizards CT',
       category: 'Service',
       description: 'Polished local commercial service application focusing on interactive quotes and slick, premium glass components.',
       tags: ['TypeScript', 'Vite', 'Components'],
-      repoUrl: 'https://github.com/iederees-create/window-wizards-ct-ct.git'
+      repoUrl: 'https://github.com/iederees-create/window-wizards-ct-ct',
+      liveUrl: 'https://iederees-create.github.io/window-wizards-ct-ct/'
     },
     {
       title: 'First Choice Construction',
       category: 'Service',
       description: 'Heavyweight construction enterprise portal designed to showcase multi-stage real estate developments and scale.',
       tags: ['React', 'Production Build', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/first-choice-construction-ct.git'
+      repoUrl: 'https://github.com/iederees-create/first-choice-construction-ct',
+      liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/'
     },
     {
       title: 'Aura Signs',
       category: 'Creative',
       description: 'Stunning artistic branding and graphics configuration workspace focused on visual design aesthetics and layout assets.',
       tags: ['UI/UX Design', 'Vite', 'Tailwind'],
-      repoUrl: 'https://github.com/iederees-create/aura-signs.git'
+      repoUrl: 'https://github.com/iederees-create/aura-signs',
+      liveUrl: 'https://iederees-create.github.io/aura-signs/'
     },
     {
       title: 'Fluent Path Tutoring',
       category: 'Education',
       description: 'Clean learning management index and appointment hub designed for modern educational structures and smooth user navigation.',
       tags: ['TypeScript', 'React', 'Data Visuals'],
-      repoUrl: 'https://github.com/iederees-create/fluent-path-tutoring.git'
+      repoUrl: 'https://github.com/iederees-create/fluent-path-tutoring',
+      liveUrl: 'https://iederees-create.github.io/fluent-path-tutoring/'
     }
   ];
 
@@ -144,7 +153,7 @@ export default function App() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 text-blue-400">
-                    <FolderGit2 size={20} strokeWidth={1.5} />
+                    <Globe size={20} strokeWidth={1.5} />
                   </div>
                   <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-400">
                     {project.category}
@@ -170,22 +179,22 @@ export default function App() {
 
                 <div className="flex items-center gap-2 pt-4 border-t border-white/5">
                   <a 
-                    href={project.repoUrl}
+                    href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 liquid-glass flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all"
                   >
-                    <Github size={14} />
-                    <span>Repository</span>
+                    <Globe size={14} />
+                    <span>Live Site</span>
                   </a>
                   <a 
-                    href={project.repoUrl.replace('.git', '')}
+                    href={project.repoUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="px-3 py-2.5 liquid-glass rounded-xl text-slate-400 hover:text-blue-400 transition-colors"
-                    title="Inspect Source Tree"
+                    title="View Repository"
                   >
-                    <ExternalLink size={14} />
+                    <Github size={14} />
                   </a>
                 </div>
               </div>
