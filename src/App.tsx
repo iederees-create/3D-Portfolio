@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { Globe, Github, Layers, Code2 } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { Globe, Github, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -8,8 +10,172 @@ interface Project {
   tags: string[];
   repoUrl: string;
   liveUrl: string;
+  etsyUrl: string;
+  featured?: boolean;
 }
 
+const catClass: Record<string, string> = {
+  Service: 'cat-service',
+  Beauty: 'cat-beauty',
+  Education: 'cat-education',
+  Creative: 'cat-creative',
+};
+
+const catEmoji: Record<string, string> = {
+  Service: '🔧',
+  Beauty: '💅',
+  Education: '📚',
+  Creative: '🎨',
+};
+
+// ─── Animated project card ───────────────────────────────
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -6;
+    const rotY = ((x - cx) / cx) * 6;
+    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+    card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+  }
+
+  function handleMouseLeave() {
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    }
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: index * 0.08, ease: [0.23, 1, 0.32, 1] }}
+    >
+      <div
+        ref={cardRef}
+        className={`glass-card rounded-2xl flex flex-col justify-between ${catClass[project.category]}`}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ transition: 'transform 0.18s ease, box-shadow 0.3s ease' }}
+      >
+        {/* Accent top line */}
+        <div className="card-accent-line rounded-t-2xl" />
+
+        <div className="p-6 flex flex-col flex-1">
+          {/* Header */}
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <span className="cat-icon-bg p-2 rounded-xl text-base">{catEmoji[project.category]}</span>
+              {project.featured && (
+                <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                  <Star size={9} fill="currentColor" /> Featured
+                </span>
+              )}
+            </div>
+            <span className={`cat-badge text-[11px] font-semibold px-2.5 py-1 rounded-full`}>
+              {project.category}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-lg font-semibold text-white mb-2 leading-snug">{project.title}</h3>
+          <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">{project.description}</p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {project.tags.map((tag, i) => (
+              <span key={i} className="tag-mono text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-slate-500 border border-white/5">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Actions */}
+          <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/5">
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+              title="Live Site"
+            >
+              <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live</span>
+            </a>
+            <a
+              href={project.etsyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
+              title="Buy on Etsy"
+            >
+              <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
+              <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Etsy</span>
+            </a>
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="col-span-1 flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+              title="Source Code"
+            >
+              <Github size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Code</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Skills ticker ───────────────────────────────────────
+const skills = ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Next.js', 'Framer Motion', 'Node.js', 'Supabase', 'Figma', 'UI/UX Design', 'SEO', 'GitHub Pages', 'Responsive Design', 'Web Performance'];
+
+function SkillsTicker() {
+  const doubled = [...skills, ...skills];
+  return (
+    <div className="ticker-wrap py-3 border-y border-white/5 my-16">
+      <div className="ticker-track">
+        {doubled.map((s, i) => (
+          <span key={i} className="flex items-center gap-3 px-6 text-sm text-slate-500 whitespace-nowrap">
+            <Zap size={11} className="text-indigo-500" fill="currentColor" />
+            {s}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Stat item ───────────────────────────────────────────
+function StatItem({ value, label }: { value: string; label: string }) {
+  const { ref, inView } = useInView({ triggerOnce: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.5, ease: 'backOut' }}
+      className="stat-card rounded-2xl px-6 py-5 text-center"
+    >
+      <div className="text-3xl font-bold gradient-text mb-1">{value}</div>
+      <div className="text-xs text-slate-500 font-medium uppercase tracking-widest">{label}</div>
+    </motion.div>
+  );
+}
+
+// ─── Main App ────────────────────────────────────────────
 export default function App() {
   const [filter, setFilter] = useState<string>('All');
 
@@ -17,10 +183,12 @@ export default function App() {
     {
       title: 'Summit Painting CT',
       category: 'Service',
-      description: 'Premium service business landing page engineered for local service visibility, featuring optimized client onboarding paths.',
+      description: 'Premium service business landing page engineered for local visibility, featuring optimized client onboarding paths.',
       tags: ['React', 'Tailwind', 'Vite'],
       repoUrl: 'https://github.com/iederees-create/summit-painting-ct-ct',
-      liveUrl: 'https://iederees-create.github.io/summit-painting-ct-ct/'
+      liveUrl: 'https://iederees-create.github.io/summit-painting-ct-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+      featured: true,
     },
     {
       title: 'Amore Nails CT',
@@ -28,15 +196,18 @@ export default function App() {
       description: 'Elegant boutique beauty salon application showcasing creative portfolios, service menus, and modern interactive touchpoints.',
       tags: ['TypeScript', 'Tailwind CSS', 'UI/UX'],
       repoUrl: 'https://github.com/iederees-create/amore-nails-ct',
-      liveUrl: 'https://iederees-create.github.io/amore-nails-ct/'
+      liveUrl: 'https://iederees-create.github.io/amore-nails-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+      featured: true,
     },
     {
       title: 'Pixel Perfect Hair',
       category: 'Beauty',
-      description: 'Highly visual, asset-optimized digital showroom tailored for modern salon styling branding and clean presentation workflows.',
+      description: 'Highly visual digital showroom tailored for modern salon styling branding and clean presentation workflows.',
       tags: ['React', 'Vite', 'Responsive Layout'],
       repoUrl: 'https://github.com/iederees-create/pixel-perfect-hair',
-      liveUrl: 'https://iederees-create.github.io/pixel-perfect-hair/'
+      liveUrl: 'https://iederees-create.github.io/pixel-perfect-hair/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
     },
     {
       title: 'Acme Plumbing Claremont',
@@ -44,15 +215,17 @@ export default function App() {
       description: 'Conversion-driven emergency dispatch and routing hub optimized for high performance and clean visual hierarchy.',
       tags: ['React', 'SEO Framework', 'Tailwind'],
       repoUrl: 'https://github.com/iederees-create/acme-plumbing-claremont-ct',
-      liveUrl: 'https://iederees-create.github.io/acme-plumbing-claremont-ct/'
+      liveUrl: 'https://iederees-create.github.io/acme-plumbing-claremont-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
     },
     {
       title: 'Window Wizards CT',
       category: 'Service',
-      description: 'Polished local commercial service application focusing on interactive quotes and slick, premium glass components.',
+      description: 'Polished commercial service application focusing on interactive quotes and premium glass components.',
       tags: ['TypeScript', 'Vite', 'Components'],
       repoUrl: 'https://github.com/iederees-create/window-wizards-ct-ct',
-      liveUrl: 'https://iederees-create.github.io/window-wizards-ct-ct/'
+      liveUrl: 'https://iederees-create.github.io/window-wizards-ct-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
     },
     {
       title: 'First Choice Construction',
@@ -60,151 +233,258 @@ export default function App() {
       description: 'Heavyweight construction enterprise portal designed to showcase multi-stage real estate developments and scale.',
       tags: ['React', 'Production Build', 'Tailwind'],
       repoUrl: 'https://github.com/iederees-create/first-choice-construction-ct',
-      liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/'
+      liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+      featured: true,
     },
     {
       title: 'Aura Signs',
       category: 'Creative',
-      description: 'Stunning artistic branding and graphics configuration workspace focused on visual design aesthetics and layout assets.',
+      description: 'Stunning artistic branding workspace focused on visual design aesthetics, layout assets, and sign production.',
       tags: ['UI/UX Design', 'Vite', 'Tailwind'],
       repoUrl: 'https://github.com/iederees-create/aura-signs',
-      liveUrl: 'https://iederees-create.github.io/aura-signs/'
+      liveUrl: 'https://iederees-create.github.io/aura-signs/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
     },
     {
       title: 'Fluent Path Tutoring',
       category: 'Education',
-      description: 'Clean learning management index and appointment hub designed for modern educational structures and smooth user navigation.',
+      description: 'Clean learning management index and appointment hub designed for modern educational structures and smooth navigation.',
       tags: ['TypeScript', 'React', 'Data Visuals'],
       repoUrl: 'https://github.com/iederees-create/fluent-path-tutoring',
-      liveUrl: 'https://iederees-create.github.io/fluent-path-tutoring/'
-    }
+      liveUrl: 'https://iederees-create.github.io/fluent-path-tutoring/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+    },
   ];
 
   const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative'];
-
-  const filteredProjects = filter === 'All' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0b0f19] text-slate-100 overflow-x-hidden">
-      {/* Structural Glow Backgrounds */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-900/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-purple-950/10 blur-[120px] pointer-events-none" />
+    <div className="relative w-full min-h-screen bg-[#080b14] text-slate-100 overflow-x-hidden noise">
 
-      {/* Navigation */}
-      <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-white/5">
-        <div className="flex items-center gap-2.5 font-semibold tracking-tight text-lg">
-          <Code2 className="text-blue-400" size={22} />
-          <span>DevWorkspace</span>
-        </div>
-        <a 
-          href="https://github.com/iederees-create" 
-          target="_blank" 
-          rel="noreferrer"
-          className="liquid-glass flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:text-white transition-colors"
-        >
-          <Github size={16} />
-          <span>Global Profile</span>
-        </a>
-      </header>
+      {/* ── Floating orbs ── */}
+      <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-indigo-900/20 blur-[130px]" />
+      <div className="orb-2 pointer-events-none fixed bottom-[5%]  right-[-15%] w-[50vw] h-[50vw] rounded-full bg-purple-900/15 blur-[120px]" />
+      <div className="orb-3 pointer-events-none fixed top-[40%] left-[40%]  w-[30vw] h-[30vw] rounded-full bg-pink-900/10 blur-[100px]" />
 
-      {/* Main Container */}
-      <main className="w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
-        
-        {/* Intro Hero Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-medium text-blue-300 mb-4">
-            <Layers size={12} />
-            <span>Active Production Tracking</span>
+      {/* ── Nav ── */}
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#080b14]/70"
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
+              <Sparkles size={15} className="text-indigo-400" />
+            </div>
+            <span className="font-bold text-lg tracking-tight">NextGenWebs</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-5">
-            Production Repository Hub
-          </h1>
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed">
-            An overview of responsive web assets, specialized frameworks, and premium client applications currently under management.
-          </p>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://nextgenwebs.etsy.com"
+              target="_blank"
+              rel="noreferrer"
+              className="liquid-glass flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-orange-300 hover:text-orange-200 transition-colors"
+            >
+              <ShoppingBag size={14} />
+              <span className="hidden sm:inline">Shop Templates</span>
+            </a>
+            <a
+              href="#contact"
+              className="btn-primary flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white"
+            >
+              Let's Talk
+            </a>
+          </div>
         </div>
+      </motion.header>
 
-        {/* Filter Navigation Control */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/5">
-          {categories.map((cat) => (
+      {/* ── Hero ── */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          className="max-w-4xl"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-xs font-semibold text-indigo-300 mb-6"
+          >
+            <Sparkles size={11} />
+            Premium Web Design · Cape Town, South Africa
+          </motion.div>
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
+            I build websites that{' '}
+            <span className="gradient-text">win clients</span>{' '}
+            for your business
+          </h1>
+
+          <p className="text-slate-400 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            Custom, high-converting websites for local businesses — from salons and plumbers to tutors and contractors.
+            Browse my live work below, or grab a ready-made template from my Etsy shop.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#work"
+              className="btn-primary flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
+            >
+              View My Work
+              <ArrowDown size={16} />
+            </a>
+            <a
+              href="https://nextgenwebs.etsy.com"
+              target="_blank"
+              rel="noreferrer"
+              className="liquid-glass flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
+            >
+              <ShoppingBag size={16} className="text-orange-400" />
+              Browse Templates
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="grid grid-cols-3 gap-4 mt-20 w-full max-w-lg"
+        >
+          <StatItem value="8+" label="Sites Built" />
+          <StatItem value="5" label="Industries" />
+          <StatItem value="100%" label="Custom Code" />
+        </motion.div>
+
+        {/* Scroll cue */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8 }}
+          >
+            <ArrowDown size={18} className="text-slate-600" />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ── Skills Ticker ── */}
+      <SkillsTicker />
+
+      {/* ── Work Grid ── */}
+      <section id="work" className="max-w-7xl mx-auto px-6 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-10"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/8 text-xs font-medium text-slate-400 mb-4">
+            <Layers size={11} />
+            Portfolio — {projects.length} Projects
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            Live client websites
+          </h2>
+          <p className="text-slate-400">Click any card to visit the live site, buy the template, or view the source code.</p>
+        </motion.div>
+
+        {/* Filter pills */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-4 py-2 text-sm rounded-xl transition-all ${
-                filter === cat 
-                  ? 'bg-white text-black font-medium shadow-lg' 
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                filter === cat
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
                   : 'liquid-glass text-slate-400 hover:text-white'
               }`}
             >
-              {cat}
+              {cat !== 'All' && catEmoji[cat] + ' '}{cat}
             </button>
           ))}
         </div>
 
-        {/* Dynamic Project Grid Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, idx) => (
-            <div 
-              key={idx} 
-              className="liquid-glass rounded-2xl p-6 flex flex-col justify-between hover:translate-y-[-2px] transition-all duration-300 group"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 text-blue-400">
-                    <Globe size={20} strokeWidth={1.5} />
-                  </div>
-                  <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-400">
-                    {project.category}
-                  </span>
-                </div>
+        {/* Cards */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={filter}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filtered.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </section>
 
-                <h3 className="text-lg font-medium text-white mb-2 group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  {project.description}
-                </p>
-              </div>
-
-              <div>
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-2 pt-4 border-t border-white/5">
-                  <a 
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 liquid-glass flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all"
-                  >
-                    <Globe size={14} />
-                    <span>Live Site</span>
-                  </a>
-                  <a 
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2.5 liquid-glass rounded-xl text-slate-400 hover:text-blue-400 transition-colors"
-                    title="View Repository"
-                  >
-                    <Github size={14} />
-                  </a>
-                </div>
-              </div>
+      {/* ── Contact CTA ── */}
+      <section id="contact" className="relative cta-glow py-24 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-xs font-medium text-pink-300 mb-6">
+              <Sparkles size={11} />
+              Ready to grow your business online?
             </div>
-          ))}
-        </div>
-      </main>
+            <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-5">
+              Let's build your{' '}
+              <span className="gradient-text-warm">online presence</span>
+            </h2>
+            <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto">
+              Get a custom, professional website built for your business — fast, mobile-ready, and designed to convert visitors into customers.
+            </p>
 
-      <footer className="w-full border-t border-white/5 mt-20 py-8 text-center text-xs text-slate-500">
-        <p>© 2026 Developer System Index. Built with React + TypeScript + Tailwind.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="https://nextgenwebs.etsy.com"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1"
+              >
+                <ShoppingBag size={18} />
+                Shop Templates on Etsy
+              </a>
+              <a
+                href="mailto:hello@nextgenwebs.co.za"
+                className="flex items-center gap-3 px-8 py-4 rounded-full liquid-glass text-slate-300 hover:text-white font-semibold text-base transition-all hover:-translate-y-1"
+              >
+                <Mail size={18} />
+                Get a Custom Quote
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-white/5 py-8 px-6 text-center">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Sparkles size={13} className="text-indigo-400" />
+          <span className="font-bold text-sm text-white">NextGenWebs</span>
+        </div>
+        <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design · Built with React + TypeScript + Framer Motion</p>
       </footer>
     </div>
   );
