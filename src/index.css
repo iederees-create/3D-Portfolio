@@ -14,6 +14,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0b0f19; }
@@ -108,6 +112,13 @@ html {
 .orb-2 { animation: float-orb-2 22s ease-in-out infinite; }
 .orb-3 { animation: float-orb-3 15s ease-in-out infinite; }
 
+/* Reduce orbs on mobile to prevent layout paint issues */
+@media (max-width: 640px) {
+  .orb-1 { width: 80vw !important; height: 80vw !important; }
+  .orb-2 { width: 70vw !important; height: 70vw !important; }
+  .orb-3 { width: 50vw !important; height: 50vw !important; }
+}
+
 /* ─── Skills Ticker ─────────────────────────────────── */
 @keyframes ticker {
   0%   { transform: translateX(0); }
@@ -190,6 +201,12 @@ html {
 .stat-card {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
+}
+
+@media (max-width: 400px) {
+  .stat-card { padding: 12px 8px; }
+  .stat-card .stat-value { font-size: 1.4rem; }
+  .stat-card .stat-label { font-size: 9px; letter-spacing: 0.05em; }
 }
 
 /* ─── CTA Section ───────────────────────────────────── */

@@ -304,12 +304,12 @@ export default function App() {
       </motion.header>
 
       {/* ── Hero ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 sm:pt-24 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="max-w-4xl"
+          className="max-w-4xl w-full"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -321,21 +321,21 @@ export default function App() {
             Premium Web Design · Cape Town, South Africa
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
             I build websites that{' '}
             <span className="gradient-text">win clients</span>{' '}
             for your business
           </h1>
 
-          <p className="text-slate-400 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto px-2 sm:px-0">
             Custom, high-converting websites for local businesses — from salons and plumbers to tutors and contractors.
             Browse my live work below, or grab a ready-made template from my Etsy shop.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
             <a
               href="#work"
-              className="btn-primary flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
+              className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
             >
               View My Work
               <ArrowDown size={16} />
@@ -344,7 +344,7 @@ export default function App() {
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="liquid-glass flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
+              className="liquid-glass w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
             >
               <ShoppingBag size={16} className="text-orange-400" />
               Browse Templates
@@ -357,7 +357,7 @@ export default function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="grid grid-cols-3 gap-4 mt-20 w-full max-w-lg"
+          className="grid grid-cols-3 gap-2 sm:gap-4 mt-12 sm:mt-20 w-full max-w-xs sm:max-w-lg"
         >
           <StatItem value="8+" label="Sites Built" />
           <StatItem value="5" label="Industries" />
@@ -384,7 +384,7 @@ export default function App() {
       <SkillsTicker />
 
       {/* ── Work Grid ── */}
-      <section id="work" className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="work" className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -396,7 +396,7 @@ export default function App() {
             <Layers size={11} />
             Portfolio — {projects.length} Projects
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
             Live client websites
           </h2>
           <p className="text-slate-400">Click any card to visit the live site, buy the template, or view the source code.</p>
@@ -437,7 +437,7 @@ export default function App() {
       </section>
 
       {/* ── Contact CTA ── */}
-      <section id="contact" className="relative cta-glow py-24 px-6">
+      <section id="contact" className="relative cta-glow py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -449,7 +449,7 @@ export default function App() {
               <Sparkles size={11} />
               Ready to grow your business online?
             </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-5">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-5">
               Let's build your{' '}
               <span className="gradient-text-warm">online presence</span>
             </h2>
@@ -457,19 +457,19 @@ export default function App() {
               Get a custom, professional website built for your business — fast, mobile-ready, and designed to convert visitors into customers.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <a
                 href="https://nextgenwebs.etsy.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1"
+                className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1"
               >
                 <ShoppingBag size={18} />
                 Shop Templates on Etsy
               </a>
               <a
                 href="mailto:hello@nextgenwebs.co.za"
-                className="flex items-center gap-3 px-8 py-4 rounded-full liquid-glass text-slate-300 hover:text-white font-semibold text-base transition-all hover:-translate-y-1"
+                className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full liquid-glass text-slate-300 hover:text-white font-semibold text-base transition-all hover:-translate-y-1"
               >
                 <Mail size={18} />
                 Get a Custom Quote

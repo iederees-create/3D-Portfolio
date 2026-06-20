@@ -230,13 +230,13 @@ export default function QuoteChat() {
       {/* ── Floating trigger button ── */}
       <motion.button
         onClick={() => setOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3.5 rounded-full font-semibold text-sm text-white shadow-2xl shadow-indigo-500/30 transition-all ${open ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'}`}
+        className={`fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full font-semibold text-sm text-white shadow-2xl shadow-indigo-500/30 transition-all ${open ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'}`}
         style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
         whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(99,102,241,0.5)' }}
         whileTap={{ scale: 0.97 }}
       >
         <MessageCircle size={18} />
-        Get a Free Quote
+        <span className="hidden xs:inline sm:inline">Get a Free Quote</span>
         {/* Pulse ring */}
         <span className="absolute inset-0 rounded-full animate-ping opacity-20 bg-indigo-500" />
       </motion.button>
@@ -249,8 +249,16 @@ export default function QuoteChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-24px)] flex flex-col rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
-            style={{ height: '560px', border: '1px solid rgba(255,255,255,0.08)' }}
+          className="fixed inset-x-0 bottom-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50
+            w-full sm:w-[380px]
+            flex flex-col rounded-t-2xl sm:rounded-2xl overflow-hidden
+            shadow-2xl shadow-black/50"
+            style={{
+              height: 'min(100dvh, 600px)',
+              maxHeight: '100dvh',
+              border: '1px solid rgba(255,255,255,0.08)',
+              paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+            }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3.5" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>
@@ -332,7 +340,7 @@ export default function QuoteChat() {
               {!done && !typing && (
                 <>
                   {currentStep?.type === 'options' && (
-                    <div className="space-y-1.5 max-h-[160px] overflow-y-auto pr-1 mb-2">
+                    <div className="space-y-1.5 max-h-[40vh] sm:max-h-[180px] overflow-y-auto pr-1 mb-2">
                       {(currentStep as OptionStep).options.map(opt => {
                         const sel = multiSel.includes(opt);
                         return (
