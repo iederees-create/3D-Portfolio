@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Globe, Github, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
+import QuoteChat from './QuoteChat';
 
 interface Project {
   title: string;
@@ -486,6 +487,9 @@ export default function App() {
         </div>
         <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design · Built with React + TypeScript + Framer Motion</p>
       </footer>
+
+      {/* ── Floating Quote Chat ── */}
+      <QuoteChat />
     </div>
   );
 }
