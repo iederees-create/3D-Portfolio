@@ -171,6 +171,15 @@ export default function App() {
 
   const projects: Project[] = [
     {
+      title: 'AC Solar Solutions',
+      category: 'Service',
+      description: 'Premium interactive solar installation platform featuring a real-time ROI calculator and conversational AI quote generation.',
+      tags: ['Vanilla JS', 'Interactive UI', 'AI Chat'],
+      liveUrl: 'https://iederees-create.github.io/ac-solar-solutions-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+      featured: true,
+    },
+    {
       title: 'Summit Painting CT',
       category: 'Service',
       description: 'Premium service business landing page engineered for local visibility, featuring optimized client onboarding paths.',
