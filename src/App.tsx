@@ -10,7 +10,7 @@ interface Project {
   description: string;
   tags: string[];
   liveUrl: string;
-  etsyUrl: string;
+  etsyUrl?: string;
   featured?: boolean;
 }
 
@@ -101,7 +101,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
 
           {/* Actions */}
-          <div className="grid grid-cols-2 gap-2 pt-4 border-t border-white/5">
+          <div className={`grid ${project.etsyUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-2 pt-4 border-t border-white/5`}>
             <a
               href={project.liveUrl}
               target="_blank"
@@ -112,16 +112,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
               <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live Site</span>
             </a>
-            <a
-              href={project.etsyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
-              title="Buy on Etsy"
-            >
-              <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
-              <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Buy Template</span>
-            </a>
+            {project.etsyUrl && (
+              <a
+                href={project.etsyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
+                title="Buy on Etsy"
+              >
+                <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
+                <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Buy Template</span>
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -170,6 +172,14 @@ export default function App() {
   const [filter, setFilter] = useState<string>('All');
 
   const projects: Project[] = [
+    {
+      title: 'RAVERSUS Clinical Portal',
+      category: 'Service',
+      description: 'Advanced interactive digital clinic and product reservation platform engineered for high-end bioelectric healing technology.',
+      tags: ['E-Commerce', 'Custom Animations', 'API Integration'],
+      liveUrl: 'https://iederees-create.github.io/raversus-v3/',
+      featured: true,
+    },
     {
       title: 'AC Solar Solutions',
       category: 'Service',
