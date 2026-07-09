@@ -181,12 +181,13 @@ export default function App() {
       featured: true,
     },
     {
-      title: 'AC Solar Solutions',
+      title: 'Claude Code Solar Lead Generation Template',
       category: 'Service',
-      description: 'Premium interactive solar installation platform featuring a real-time ROI calculator and conversational AI quote generation.',
-      tags: ['Vanilla JS', 'Interactive UI', 'AI Chat'],
+      description: 'A responsive solar-installer website template developed with assistance from Claude Code. It includes an interactive savings calculator, lead-capture form, project filtering, configurable business information and mobile-first design.',
+      tags: ['Claude Code', 'HTML5', 'CSS3', 'JavaScript', 'GitHub Pages', 'Responsive Design'],
       liveUrl: 'https://iederees-create.github.io/ac-solar-solutions-ct/',
-      etsyUrl: 'https://nextgenwebs.etsy.com',
+      // etsyUrl intentionally omitted - the "View on Etsy" button only
+      // appears once a real Etsy listing URL exists for this template.
       featured: true,
     },
     {
@@ -237,6 +238,15 @@ export default function App() {
       description: 'Heavyweight construction enterprise portal designed to showcase multi-stage real estate developments and scale.',
       tags: ['React', 'Production Build', 'Tailwind'],
       liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/',
+      etsyUrl: 'https://nextgenwebs.etsy.com',
+      featured: true,
+    },
+    {
+      title: 'Creator Hub Pro Template',
+      category: 'Creative',
+      description: 'A modular, backend-ready portfolio ecosystem designed for high-tier digital creators to manage brand partnerships and media grids.',
+      tags: ['Component Driven', 'Supabase Ready', 'Responsive UI'],
+      liveUrl: 'https://iederees-create.github.io/creator-hub-template/',
       etsyUrl: 'https://nextgenwebs.etsy.com',
       featured: true,
     },
