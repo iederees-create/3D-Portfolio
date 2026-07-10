@@ -217,6 +217,14 @@ export default function App() {
       etsyUrl: 'https://nextgenwebs.etsy.com',
     },
     {
+      title: 'Zen Skin Studio Website Template',
+      category: 'Beauty',
+      description: 'A premium conversion-focused website template for aesthetic clinics, skincare studios and beauty practitioners, featuring treatment presentation, online enquiry flows, WhatsApp booking, mobile-first design and simple business customisation.',
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Beauty Business'],
+      liveUrl: 'https://iederees-create.github.io/zen-skin-studio-template/',
+      featured: true,
+    },
+    {
       title: 'Acme Plumbing Claremont',
       category: 'Service',
       description: 'Conversion-driven emergency dispatch and routing hub optimized for high performance and clean visual hierarchy.',
