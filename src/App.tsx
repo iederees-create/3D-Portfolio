@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
-import HeroBackground from './components/HeroBackground';
+
 import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import KonamiCode from './components/KonamiCode';
@@ -292,22 +292,22 @@ export default function App() {
   else greeting = 'Working late?';
 
   return (
-    <div className="relative w-full min-h-screen bg-[#080b14] text-slate-100 overflow-x-hidden noise">
+    <div className="relative w-full min-h-screen bg-[#1a1918] text-slate-100 overflow-x-hidden noise">
       <KonamiCode />
       <TerminalEasterEgg />
       
       {/* ── Floating orbs & 3D Background ── */}
-      <HeroBackground />
-      <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary-900/20 blur-[130px]" />
-      <div className="orb-2 pointer-events-none fixed bottom-[5%]  right-[-15%] w-[50vw] h-[50vw] rounded-full bg-purple-900/15 blur-[120px]" />
-      <div className="orb-3 pointer-events-none fixed top-[40%] left-[40%]  w-[30vw] h-[30vw] rounded-full bg-pink-900/10 blur-[100px]" />
+      
+      
+      
+      
 
       {/* ── Nav ── */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#080b14]/70"
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#1a1918]/70"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -355,7 +355,7 @@ export default function App() {
             {greeting} — Welcome to my portfolio
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-medium italic tracking-tight leading-[1.08] mb-6 overflow-hidden">
             <motion.span
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -508,7 +508,7 @@ export default function App() {
               <Sparkles size={11} />
               Ready to grow your business online?
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-5">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium italic leading-tight mb-5">
               Let's build your{' '}
               <span className="gradient-text-warm">online presence</span>
             </h2>

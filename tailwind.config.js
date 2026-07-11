@@ -9,6 +9,11 @@ export default {
       screens: {
         xs: '475px',
       },
+      fontFamily: {
+        sans: ['Inter', 'Outfit', 'sans-serif'],
+        serif: ['Newsreader', 'Playfair Display', 'serif'],
+        mono: ['Geist Mono', 'Fira Code', 'monospace'],
+      },
       colors: {
         primary: {
           300: 'var(--color-primary-300)',

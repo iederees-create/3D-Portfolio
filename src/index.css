@@ -26,7 +26,7 @@ body {
 
 /* ─── Gradient Text ─────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 40%, #c084fc 100%);
+  background: linear-gradient(135deg, #E58A6A 0%, #DE826A 40%, #c084fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -154,7 +154,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #6366f1);
+  background: linear-gradient(135deg, #D47A6A, #8b5cf6, #D47A6A);
   background-size: 200% auto;
   transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 0 20px rgba(99,102,241,0.3);
@@ -167,7 +167,7 @@ body {
 }
 
 /* ─── Category accent colours ──────────────────────── */
-.cat-service  { --cat-color: #6366f1; --cat-bg: rgba(99,102,241,0.12); }
+.cat-service  { --cat-color: #D47A6A; --cat-bg: rgba(99,102,241,0.12); }
 .cat-beauty   { --cat-color: #f472b6; --cat-bg: rgba(244,114,182,0.12); }
 .cat-education{ --cat-color: #fbbf24; --cat-bg: rgba(251,191,36,0.12); }
 .cat-creative { --cat-color: #a78bfa; --cat-bg: rgba(167,139,250,0.12); }
@@ -233,11 +233,11 @@ body {
 
 
 :root {
-  --color-primary-300: #a5b4fc;
-  --color-primary-400: #818cf8;
-  --color-primary-500: #6366f1;
-  --color-primary-600: #4f46e5;
-  --color-primary-900: #312e81;
+  --color-primary-300: #E58A6A;
+  --color-primary-400: #DE826A;
+  --color-primary-500: #D47A6A;
+  --color-primary-600: #C26354;
+  --color-primary-900: #5C2C24;
 }
 
 
