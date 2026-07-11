@@ -292,7 +292,7 @@ export default function App() {
   else greeting = 'Working late?';
 
   return (
-    <div className="relative w-full min-h-screen bg-[#FAFAFA] text-slate-800 overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-[#0F172A] text-slate-100 overflow-x-hidden">
       <KonamiCode />
       <TerminalEasterEgg />
       
@@ -306,7 +306,7 @@ export default function App() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-black/5 backdrop-blur-xl bg-white/60 supports-[backdrop-filter]:bg-white/50"
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#0F172A]/70 supports-[backdrop-filter]:bg-[#0F172A]/50"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -321,9 +321,9 @@ export default function App() {
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-primary-500 transition-colors bg-white/50 border border-black/5 shadow-sm hover:shadow-md"
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-colors bg-white/5 border border-white/10 hover:bg-white/10"
             >
-              <ShoppingBag size={14} className="text-orange-500" />
+              <ShoppingBag size={14} className="text-orange-400" />
               <span className="hidden sm:inline">Shop Templates</span>
             </a>
             <a
@@ -348,13 +348,13 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-600 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 mb-6"
           >
-            <Sparkles size={11} className="text-orange-500" />
+            <Sparkles size={11} className="text-orange-400" />
             {greeting} — I'm glad you're here.
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden text-center text-slate-900">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden text-center text-slate-100">
             <motion.span
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -367,13 +367,13 @@ export default function App() {
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="block text-slate-500"
+              className="block text-slate-400"
             >
               that help local businesses thrive.
             </motion.span>
           </h1>
 
-          <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
+          <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
             No corporate jargon or cookie-cutter templates. Just fast, custom web design built to turn your visitors into customers.
           </p>
 
