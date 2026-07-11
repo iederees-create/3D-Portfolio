@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
+import AboutSection from './components/AboutSection';
 
 import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
@@ -426,6 +427,9 @@ export default function App() {
 
         </div>
       </section>
+
+      {/* ── About Section ── */}
+      <AboutSection />
 
       {/* ── Skills Ticker ── */}
       <SkillsTicker />
