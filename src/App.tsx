@@ -9,6 +9,7 @@ import AboutSection from './components/AboutSection';
 import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import KonamiCode from './components/KonamiCode';
+import { ProjectMedia } from './components/ProjectMedia';
 interface Project {
   title: string;
   category: 'Service' | 'Beauty' | 'Education' | 'Creative';
@@ -17,6 +18,13 @@ interface Project {
   liveUrl: string;
   etsyUrl?: string;
   featured?: boolean;
+  /** Optional responsive media preview shown at the top of the card. */
+  coverImage?: string;
+  previewVideoMp4?: string;
+  previewVideoWebm?: string;
+  videoPoster?: string;
+  galleryImages?: string[];
+  mediaAlt?: string;
 }
 
 const catClass: Record<string, string> = {
@@ -73,6 +81,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         onMouseLeave={handleMouseLeave}
         style={{ transition: 'transform 0.18s ease, box-shadow 0.3s ease' }}
       >
+        <ProjectMedia
+          title={project.title}
+          coverImage={project.coverImage}
+          previewVideoMp4={project.previewVideoMp4}
+          previewVideoWebm={project.previewVideoWebm}
+          videoPoster={project.videoPoster}
+          mediaAlt={project.mediaAlt}
+        />
+
         {/* Accent top line */}
         <div className="card-accent-line rounded-t-2xl" />
 
@@ -204,6 +221,22 @@ export default function App() {
       // etsyUrl intentionally omitted - the "View on Etsy" button only
       // appears once a real, published Etsy listing URL exists for this template.
       featured: true,
+    },
+    {
+      title: 'Vitality Wellness Website Template',
+      category: 'Beauty',
+      description: 'A premium React website template for wellness studios, skincare businesses and beauty practitioners, featuring an interactive consultation finder, treatment presentation, booking flows, responsive design and central business customisation.',
+      tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Responsive Design', 'Local SEO', 'Lead Generation'],
+      liveUrl: 'https://iederees-create.github.io/vitality-wellness-claremont-ct/',
+      // etsyUrl intentionally omitted - the "View on Etsy" button only
+      // appears once a real, published Etsy listing URL exists for this template
+      // (the listing is currently only a draft, awaiting human review).
+      featured: true,
+      coverImage: `${import.meta.env.BASE_URL}projects/vitality-wellness/cover.webp`,
+      previewVideoMp4: `${import.meta.env.BASE_URL}projects/vitality-wellness/preview.mp4`,
+      previewVideoWebm: `${import.meta.env.BASE_URL}projects/vitality-wellness/preview.webm`,
+      videoPoster: `${import.meta.env.BASE_URL}projects/vitality-wellness/video-poster.webp`,
+      mediaAlt: 'Vitality Wellness website template: sage-and-gold wellness studio homepage with a hero section, consultation finder and treatment pricing cards.',
     },
     {
       title: 'Summit Painting CT',
