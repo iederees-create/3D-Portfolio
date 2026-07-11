@@ -1,10 +1,26 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
 function ParticleSwarm() {
   const ref = useRef<THREE.Points>(null);
+  const [color, setColor] = useState('#818cf8'); // default primary-400
+
+  useEffect(() => {
+    // Check initial local storage if needed, or wait for event
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'Rose') setColor('#fb7185');
+    else if (saved === 'Emerald') setColor('#34d399');
+    else if (saved === 'Amber') setColor('#fbbf24');
+
+    const handleThemeChange = (e: Event) => {
+      setColor((e as CustomEvent).detail);
+    };
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
+
   const sphere = useMemo(() => {
     const temp = [];
     for (let i = 0; i < 4000; i++) {
@@ -38,7 +54,7 @@ function ParticleSwarm() {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#818cf8"
+          color={color}
           size={0.015}
           sizeAttenuation={true}
           depthWrite={false}
@@ -58,3 +74,4 @@ export default function HeroBackground() {
     </div>
   );
 }
+

@@ -231,3 +231,18 @@ body {
 }
 
 
+
+:root {
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-900: #312e81;
+}
+
+
+body.konami-active {
+  filter: invert(1) hue-rotate(180deg);
+  transition: filter 0.5s ease;
+}
+

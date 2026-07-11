@@ -5,6 +5,9 @@ import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from
 import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
 import HeroBackground from './components/HeroBackground';
+import ThemePicker from './components/ThemePicker';
+import TerminalEasterEgg from './components/TerminalEasterEgg';
+import KonamiCode from './components/KonamiCode';
 interface Project {
   title: string;
   category: 'Service' | 'Beauty' | 'Education' | 'Creative';
@@ -142,7 +145,7 @@ function SkillsTicker() {
       <div className="ticker-track">
         {doubled.map((s, i) => (
           <span key={i} className="flex items-center gap-3 px-6 text-sm text-slate-500 whitespace-nowrap">
-            <Zap size={11} className="text-indigo-500" fill="currentColor" />
+            <Zap size={11} className="text-primary-500" fill="currentColor" />
             {s}
           </span>
         ))}
@@ -280,11 +283,22 @@ export default function App() {
   const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative'];
   const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
+  // Dynamic time-based greeting
+  const hour = new Date().getHours();
+  let greeting = 'Welcome';
+  if (hour < 12) greeting = 'Good morning';
+  else if (hour < 18) greeting = 'Good afternoon';
+  else if (hour < 22) greeting = 'Good evening';
+  else greeting = 'Working late?';
+
   return (
     <div className="relative w-full min-h-screen bg-[#080b14] text-slate-100 overflow-x-hidden noise">
+      <KonamiCode />
+      <TerminalEasterEgg />
+      
       {/* ── Floating orbs & 3D Background ── */}
       <HeroBackground />
-      <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-indigo-900/20 blur-[130px]" />
+      <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary-900/20 blur-[130px]" />
       <div className="orb-2 pointer-events-none fixed bottom-[5%]  right-[-15%] w-[50vw] h-[50vw] rounded-full bg-purple-900/15 blur-[120px]" />
       <div className="orb-3 pointer-events-none fixed top-[40%] left-[40%]  w-[30vw] h-[30vw] rounded-full bg-pink-900/10 blur-[100px]" />
 
@@ -297,12 +311,13 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
-              <Sparkles size={15} className="text-indigo-400" />
+            <div className="w-8 h-8 rounded-lg bg-primary-500/20 border border-primary-500/30 flex items-center justify-center">
+              <Sparkles size={15} className="text-primary-400" />
             </div>
             <span className="font-bold text-lg tracking-tight">NextGenWebs</span>
           </div>
           <div className="flex items-center gap-3">
+            <ThemePicker />
             <a
               href="https://nextgenwebs.etsy.com"
               target="_blank"
@@ -334,10 +349,10 @@ export default function App() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-xs font-semibold text-indigo-300 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/25 text-xs font-semibold text-primary-300 mb-6"
           >
             <Sparkles size={11} />
-            Premium Web Design · Cape Town, South Africa
+            {greeting} — Welcome to my portfolio
           </motion.div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden">
@@ -454,7 +469,7 @@ export default function App() {
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                 filter === cat
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
+                  ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/25'
                   : 'liquid-glass text-slate-400 hover:text-white'
               }`}
             >
@@ -530,7 +545,7 @@ export default function App() {
       {/* ── Footer ── */}
       <footer className="border-t border-white/5 py-8 px-6 text-center">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Sparkles size={13} className="text-indigo-400" />
+          <Sparkles size={13} className="text-primary-400" />
           <span className="font-bold text-sm text-white">NextGenWebs</span>
         </div>
         <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design · Built with React + TypeScript + Framer Motion</p>
