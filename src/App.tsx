@@ -292,7 +292,7 @@ export default function App() {
   else greeting = 'Working late?';
 
   return (
-    <div className="relative w-full min-h-screen bg-[#1a1918] text-slate-100 overflow-x-hidden noise">
+    <div className="relative w-full min-h-screen bg-black text-slate-100 overflow-x-hidden noise">
       <KonamiCode />
       <TerminalEasterEgg />
       
@@ -306,8 +306,8 @@ export default function App() {
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#1a1918]/70"
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-2xl bg-black/60 supports-[backdrop-filter]:bg-black/50"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -346,45 +346,36 @@ export default function App() {
           className="max-w-4xl w-full"
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 border border-primary-500/25 text-xs font-semibold text-primary-300 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 mb-6"
           >
             <Sparkles size={11} />
-            {greeting} — Welcome to my portfolio
+            {greeting} — Premium Web Engineering
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-medium italic tracking-tight leading-[1.08] mb-6 overflow-hidden">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] mb-6 overflow-hidden text-center text-white">
             <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="block"
             >
-              I build websites that
+              Code as craft.
             </motion.span>
             <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="block"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="block text-slate-500"
             >
-              <span className="gradient-text">win clients</span>
-            </motion.span>
-            <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-              className="block"
-            >
-              for your business
+              Design with purpose.
             </motion.span>
           </h1>
 
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto px-2 sm:px-0">
-            Custom, high-converting websites for local businesses — from salons and plumbers to tutors and contractors.
-            Browse my live work below, or grab a ready-made template from my Etsy shop.
+          <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
+            High-performance digital solutions engineered to scale your business.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
