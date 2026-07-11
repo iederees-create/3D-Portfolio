@@ -311,37 +311,44 @@ export default function App() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[#0F172A]"
+        className="fixed top-0 left-0 right-0 z-50 w-full bg-[#0F172A]/90 backdrop-blur-md"
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4 h-full">
-            <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm">
+        <div className="max-w-7xl mx-auto px-6 h-20 grid grid-cols-3 items-center">
+          {/* Logo - Left */}
+          <div className="flex items-center gap-4 justify-start">
+            <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm rounded-md">
               NX
             </div>
-            <span className="font-bold text-sm tracking-widest uppercase">NextGenWebs</span>
+            <span className="font-bold text-sm tracking-widest uppercase hidden sm:block">NextGenWebs</span>
           </div>
-          <div className="flex items-center h-full border-l border-white/10">
-            <a href="#" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+          
+          {/* Nav - Center */}
+          <div className="flex items-center justify-center gap-8">
+            <a href="#" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
               Home
             </a>
-            <a href="#work" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+            <a href="#work" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
               Work
             </a>
-            <a href="#about" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+            <a href="#about" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
               About
             </a>
+          </div>
+
+          {/* Actions - Right */}
+          <div className="flex items-center justify-end gap-6">
             <ThemePicker />
             <a
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center justify-center h-full px-6 text-xs font-semibold tracking-wide text-slate-300 hover:text-white hover:bg-white/5 border-l border-white/10 transition-colors"
+              className="hidden lg:flex text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors"
             >
               Templates
             </a>
             <a
               href="#contact"
-              className="flex items-center justify-center h-full px-8 bg-white text-black text-xs font-bold tracking-wide hover:bg-slate-200 transition-colors border-l border-white/10"
+              className="px-6 py-2.5 bg-white text-black text-xs font-bold tracking-wide rounded-full hover:bg-slate-200 transition-colors"
             >
               Contact
             </a>
@@ -349,18 +356,18 @@ export default function App() {
         </div>
       </motion.header>
 
-      {/* ── Architectural Hero ── */}
-      <section className="relative w-full pt-16 min-h-[90vh] flex flex-col border-b border-white/10">
-        <div className="flex-1 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-white/10">
+      {/* ── Hero ── */}
+      <section className="relative w-full pt-20 min-h-[90vh] flex flex-col">
+        <div className="flex-1 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 px-6">
           
           {/* Left Column (Main Copy) */}
-          <div className="lg:col-span-7 flex flex-col justify-center p-8 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/10">
+          <div className="lg:col-span-7 flex flex-col justify-center py-12 lg:py-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="inline-block border border-white/20 px-3 py-1 mb-8 text-[10px] tracking-wide text-slate-400 uppercase">
+              <div className="inline-block px-4 py-1.5 mb-8 text-[11px] font-medium tracking-wide text-slate-300 uppercase bg-white/5 rounded-full">
                 {greeting} — Welcome
               </div>
               
@@ -377,7 +384,7 @@ export default function App() {
                 <MagneticButton>
                   <a
                     href="#work"
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide hover:bg-slate-200 transition-colors"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-lg"
                   >
                     View Projects <ArrowDown size={16} />
                   </a>
@@ -387,32 +394,32 @@ export default function App() {
           </div>
 
           {/* Right Column (Data/Stats Grid) */}
-          <div className="lg:col-span-5 flex flex-col h-full">
-            <div className="flex-1 border-b border-white/10 p-8 flex flex-col justify-center">
+          <div className="lg:col-span-5 flex flex-col justify-center h-full lg:pl-8 lg:py-16 py-8">
+            <div className="flex-1 flex flex-col justify-center mb-12">
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
+                className="space-y-10"
               >
                 <div>
-                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-wide">Our Mission</div>
-                  <div className="text-lg font-medium text-slate-200">Convert traffic into revenue through strategic, beautiful design.</div>
+                  <div className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">Our Mission</div>
+                  <div className="text-xl font-medium text-slate-200 leading-snug">Convert traffic into revenue through strategic, beautiful design.</div>
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-wide">Tech Stack</div>
-                  <div className="text-lg font-medium text-slate-200">React / TypeScript / Tailwind</div>
+                  <div className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">Tech Stack</div>
+                  <div className="text-xl font-medium text-slate-200 leading-snug">React / TypeScript / Tailwind</div>
                 </div>
               </motion.div>
             </div>
-            <div className="h-48 grid grid-cols-2">
-              <div className="border-r border-white/10 p-6 flex flex-col justify-end bg-white/5">
-                <div className="text-4xl font-bold text-white mb-1">{projects.length}+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wide">Projects Launched</div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 bg-white/5 rounded-2xl flex flex-col justify-end">
+                <div className="text-5xl font-bold text-white mb-2">{projects.length}+</div>
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide">Projects Launched</div>
               </div>
-              <div className="p-6 flex flex-col justify-end">
-                <div className="text-4xl font-bold text-white mb-1">100%</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wide">Custom Built</div>
+              <div className="p-6 bg-white/5 rounded-2xl flex flex-col justify-end">
+                <div className="text-5xl font-bold text-white mb-2">100%</div>
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide">Custom Built</div>
               </div>
             </div>
           </div>
