@@ -24,12 +24,12 @@ function ParticleSwarm() {
       ref.current.rotation.x -= delta / 10;
       ref.current.rotation.y -= delta / 15;
       
-      // Gentle reaction to mouse
-      const targetX = (state.pointer.x * Math.PI) / 4;
-      const targetY = (state.pointer.y * Math.PI) / 4;
+      // Smooth, gentle reaction to mouse without initial jump
+      const targetX = (state.pointer.x * Math.PI) / 8;
+      const targetY = (state.pointer.y * Math.PI) / 8;
       
-      ref.current.rotation.y += 0.05 * (targetX - ref.current.rotation.y);
-      ref.current.rotation.x += 0.05 * (targetY - ref.current.rotation.x);
+      ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, targetX, delta * 0.5);
+      ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, targetY, delta * 0.5);
     }
   });
 

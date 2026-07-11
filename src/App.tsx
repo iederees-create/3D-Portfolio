@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 import QuoteChat from './QuoteChat';
-import CustomCursor from './components/CustomCursor';
 import MagneticButton from './components/MagneticButton';
 import HeroBackground from './components/HeroBackground';
 interface Project {
@@ -283,9 +282,6 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#080b14] text-slate-100 overflow-x-hidden noise">
-
-      <CustomCursor />
-
       {/* ── Floating orbs & 3D Background ── */}
       <HeroBackground />
       <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-indigo-900/20 blur-[130px]" />
