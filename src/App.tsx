@@ -306,137 +306,109 @@ export default function App() {
       <KonamiCode />
       <TerminalEasterEgg />
       
-      {/* ── Soft Aurora Orbs ── */}
-      <div className="orb-1 pointer-events-none fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary-400/20 blur-[100px]" />
-      <div className="orb-2 pointer-events-none fixed bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-orange-400/20 blur-[120px]" />
-      <div className="orb-3 pointer-events-none fixed top-[40%] left-[30%] w-[35vw] h-[35vw] rounded-full bg-pink-400/15 blur-[90px]" />
-
       {/* ── Nav ── */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-xl bg-[#0F172A]/70 supports-[backdrop-filter]:bg-[#0F172A]/50"
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[#0F172A]"
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-primary-500/20 border border-primary-500/30 flex items-center justify-center">
-              <Sparkles size={15} className="text-primary-400" />
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-4 h-full">
+            <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm">
+              NX
             </div>
-            <span className="font-bold text-lg tracking-tight">NextGenWebs</span>
+            <span className="font-bold text-sm tracking-widest uppercase">NextGenWebs</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center h-full border-l border-white/10">
             <ThemePicker />
             <a
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-colors bg-white/5 border border-white/10 hover:bg-white/10"
+              className="hidden sm:flex items-center justify-center h-full px-6 text-xs font-semibold tracking-widest uppercase text-slate-300 hover:text-white hover:bg-white/5 border-l border-white/10 transition-colors"
             >
-              <ShoppingBag size={14} className="text-orange-400" />
-              <span className="hidden sm:inline">Shop Templates</span>
+              Templates
             </a>
             <a
               href="#contact"
-              className="btn-primary flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white"
+              className="flex items-center justify-center h-full px-8 bg-white text-black text-xs font-bold tracking-widest uppercase hover:bg-slate-200 transition-colors border-l border-white/10"
             >
-              Let's Talk
+              Engage
             </a>
           </div>
         </div>
       </motion.header>
 
-      {/* ── Hero ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 sm:pt-24 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="max-w-4xl w-full"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 mb-6"
-          >
-            <Sparkles size={11} className="text-orange-400" />
-            {greeting} — I'm glad you're here.
-          </motion.div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden text-center text-slate-100">
-            <motion.span
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="block"
+      {/* ── Architectural Hero ── */}
+      <section className="relative w-full pt-16 min-h-[90vh] flex flex-col border-b border-white/10">
+        <div className="flex-1 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-white/10">
+          
+          {/* Left Column (Main Copy) */}
+          <div className="lg:col-span-7 flex flex-col justify-center p-8 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Crafting beautiful websites
-            </motion.span>
-            <motion.span
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="block text-slate-400"
-            >
-              that help local businesses thrive.
-            </motion.span>
-          </h1>
-
-          <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
-            No corporate jargon or cookie-cutter templates. Just fast, custom web design built to turn your visitors into customers.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
-            <MagneticButton>
-              <a
-                href="#work"
-                className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
-              >
-                View My Work
-                <ArrowDown size={16} />
-              </a>
-            </MagneticButton>
-            <MagneticButton>
-              <a
-                href="https://nextgenwebs.etsy.com"
-                target="_blank"
-                rel="noreferrer"
-                className="liquid-glass w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
-              >
-                <ShoppingBag size={16} className="text-orange-400" />
-                Browse Templates
-              </a>
-            </MagneticButton>
+              <div className="inline-block border border-white/20 px-3 py-1 mb-8 text-[10px] font-mono tracking-widest text-slate-400 uppercase">
+                {greeting} // System Active
+              </div>
+              
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] mb-8 text-white">
+                Engineered<br />
+                <span className="text-slate-500">Web Solutions.</span>
+              </h1>
+              
+              <p className="text-slate-400 text-lg font-medium leading-relaxed max-w-lg mb-12">
+                We build high-performance, scalable digital infrastructure for serious businesses. No templates. No shortcuts. Strict engineering.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <MagneticButton>
+                  <a
+                    href="#work"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-slate-200 transition-colors"
+                  >
+                    View Projects <ArrowDown size={16} />
+                  </a>
+                </MagneticButton>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="grid grid-cols-3 gap-2 sm:gap-4 mt-12 sm:mt-20 w-full max-w-xs sm:max-w-lg"
-        >
-          <StatItem value={`${projects.length}+`} label="Sites Built" />
-          <StatItem value={`${new Set(projects.map(p => p.category)).size}`} label="Industries" />
-          <StatItem value="100%" label="Custom Code" />
-        </motion.div>
+          {/* Right Column (Data/Stats Grid) */}
+          <div className="lg:col-span-5 flex flex-col h-full">
+            <div className="flex-1 border-b border-white/10 p-8 flex flex-col justify-center">
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                <div>
+                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-widest">Core Directive</div>
+                  <div className="text-lg font-medium text-slate-200">Convert traffic into quantifiable revenue through structured design.</div>
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-widest">Architecture</div>
+                  <div className="text-lg font-medium text-slate-200">React / TypeScript / Tailwind</div>
+                </div>
+              </motion.div>
+            </div>
+            <div className="h-48 grid grid-cols-2">
+              <div className="border-r border-white/10 p-6 flex flex-col justify-end bg-white/5">
+                <div className="text-4xl font-bold text-white mb-1">{projects.length}+</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Deployments</div>
+              </div>
+              <div className="p-6 flex flex-col justify-end">
+                <div className="text-4xl font-bold text-white mb-1">100%</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Custom Code</div>
+              </div>
+            </div>
+          </div>
 
-        {/* Scroll cue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8 }}
-          >
-            <ArrowDown size={18} className="text-slate-600" />
-          </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ── Skills Ticker ── */}
