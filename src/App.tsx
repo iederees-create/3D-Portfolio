@@ -377,8 +377,8 @@ export default function App() {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="grid grid-cols-3 gap-2 sm:gap-4 mt-12 sm:mt-20 w-full max-w-xs sm:max-w-lg"
         >
-          <StatItem value="8+" label="Sites Built" />
-          <StatItem value="5" label="Industries" />
+          <StatItem value={`${projects.length}+`} label="Sites Built" />
+          <StatItem value={`${new Set(projects.map(p => p.category)).size}`} label="Industries" />
           <StatItem value="100%" label="Custom Code" />
         </motion.div>
 
