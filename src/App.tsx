@@ -321,20 +321,29 @@ export default function App() {
             <span className="font-bold text-sm tracking-widest uppercase">NextGenWebs</span>
           </div>
           <div className="flex items-center h-full border-l border-white/10">
+            <a href="#" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+              Home
+            </a>
+            <a href="#work" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+              Work
+            </a>
+            <a href="#about" className="hidden md:flex items-center justify-center h-full px-5 text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+              About
+            </a>
             <ThemePicker />
             <a
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center justify-center h-full px-6 text-xs font-semibold tracking-widest uppercase text-slate-300 hover:text-white hover:bg-white/5 border-l border-white/10 transition-colors"
+              className="hidden sm:flex items-center justify-center h-full px-6 text-xs font-semibold tracking-wide text-slate-300 hover:text-white hover:bg-white/5 border-l border-white/10 transition-colors"
             >
               Templates
             </a>
             <a
               href="#contact"
-              className="flex items-center justify-center h-full px-8 bg-white text-black text-xs font-bold tracking-widest uppercase hover:bg-slate-200 transition-colors border-l border-white/10"
+              className="flex items-center justify-center h-full px-8 bg-white text-black text-xs font-bold tracking-wide hover:bg-slate-200 transition-colors border-l border-white/10"
             >
-              Engage
+              Contact
             </a>
           </div>
         </div>
@@ -351,24 +360,24 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="inline-block border border-white/20 px-3 py-1 mb-8 text-[10px] font-mono tracking-widest text-slate-400 uppercase">
-                {greeting} // System Active
+              <div className="inline-block border border-white/20 px-3 py-1 mb-8 text-[10px] tracking-wide text-slate-400 uppercase">
+                {greeting} — Welcome
               </div>
               
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] mb-8 text-white">
-                Engineered<br />
-                <span className="text-slate-500">Web Solutions.</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-8 text-white">
+                Premium<br />
+                <span className="text-slate-500">Web Development.</span>
               </h1>
               
               <p className="text-slate-400 text-lg font-medium leading-relaxed max-w-lg mb-12">
-                We build high-performance, scalable digital infrastructure for serious businesses. No templates. No shortcuts. Strict engineering.
+                We build fast, high-performance websites designed to help your business grow. Custom code, clean design, and real results.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <MagneticButton>
                   <a
                     href="#work"
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-slate-200 transition-colors"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide hover:bg-slate-200 transition-colors"
                   >
                     View Projects <ArrowDown size={16} />
                   </a>
@@ -387,11 +396,11 @@ export default function App() {
                 className="space-y-8"
               >
                 <div>
-                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-widest">Core Directive</div>
-                  <div className="text-lg font-medium text-slate-200">Convert traffic into quantifiable revenue through structured design.</div>
+                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-wide">Our Mission</div>
+                  <div className="text-lg font-medium text-slate-200">Convert traffic into revenue through strategic, beautiful design.</div>
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-widest">Architecture</div>
+                  <div className="text-xs font-mono text-slate-500 mb-1 uppercase tracking-wide">Tech Stack</div>
                   <div className="text-lg font-medium text-slate-200">React / TypeScript / Tailwind</div>
                 </div>
               </motion.div>
@@ -399,11 +408,11 @@ export default function App() {
             <div className="h-48 grid grid-cols-2">
               <div className="border-r border-white/10 p-6 flex flex-col justify-end bg-white/5">
                 <div className="text-4xl font-bold text-white mb-1">{projects.length}+</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Deployments</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wide">Projects Launched</div>
               </div>
               <div className="p-6 flex flex-col justify-end">
                 <div className="text-4xl font-bold text-white mb-1">100%</div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Custom Code</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wide">Custom Built</div>
               </div>
             </div>
           </div>
