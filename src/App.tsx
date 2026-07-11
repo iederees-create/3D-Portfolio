@@ -292,22 +292,21 @@ export default function App() {
   else greeting = 'Working late?';
 
   return (
-    <div className="relative w-full min-h-screen bg-black text-slate-100 overflow-x-hidden noise">
+    <div className="relative w-full min-h-screen bg-[#FAFAFA] text-slate-800 overflow-x-hidden">
       <KonamiCode />
       <TerminalEasterEgg />
       
-      {/* ── Floating orbs & 3D Background ── */}
-      
-      
-      
-      
+      {/* ── Soft Aurora Orbs ── */}
+      <div className="orb-1 pointer-events-none fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary-400/20 blur-[100px]" />
+      <div className="orb-2 pointer-events-none fixed bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-orange-400/20 blur-[120px]" />
+      <div className="orb-3 pointer-events-none fixed top-[40%] left-[30%] w-[35vw] h-[35vw] rounded-full bg-pink-400/15 blur-[90px]" />
 
       {/* ── Nav ── */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5 backdrop-blur-2xl bg-black/60 supports-[backdrop-filter]:bg-black/50"
+        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-black/5 backdrop-blur-xl bg-white/60 supports-[backdrop-filter]:bg-white/50"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -322,9 +321,9 @@ export default function App() {
               href="https://nextgenwebs.etsy.com"
               target="_blank"
               rel="noreferrer"
-              className="liquid-glass flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-orange-300 hover:text-orange-200 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-primary-500 transition-colors bg-white/50 border border-black/5 shadow-sm hover:shadow-md"
             >
-              <ShoppingBag size={14} />
+              <ShoppingBag size={14} className="text-orange-500" />
               <span className="hidden sm:inline">Shop Templates</span>
             </a>
             <a
@@ -349,20 +348,20 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-600 mb-6"
           >
-            <Sparkles size={11} />
-            {greeting} — Premium Web Engineering
+            <Sparkles size={11} className="text-orange-500" />
+            {greeting} — I'm glad you're here.
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] mb-6 overflow-hidden text-center text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden text-center text-slate-900">
             <motion.span
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="block"
             >
-              Code as craft.
+              Crafting beautiful websites
             </motion.span>
             <motion.span
               initial={{ y: "100%", opacity: 0 }}
@@ -370,12 +369,12 @@ export default function App() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
               className="block text-slate-500"
             >
-              Design with purpose.
+              that help local businesses thrive.
             </motion.span>
           </h1>
 
-          <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
-            High-performance digital solutions engineered to scale your business.
+          <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-0">
+            No corporate jargon or cookie-cutter templates. Just fast, custom web design built to turn your visitors into customers.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
