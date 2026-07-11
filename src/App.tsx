@@ -195,6 +195,16 @@ export default function App() {
       featured: true,
     },
     {
+      title: 'Pest Control Website Template',
+      category: 'Service',
+      description: 'A conversion-focused website template for pest-control companies, exterminators and termite specialists, featuring service presentation, quote-request flows, WhatsApp contact, mobile-first design and simple business customisation.',
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Pest Control'],
+      liveUrl: 'https://iederees-create.github.io/westlake-pest-control-template/',
+      // etsyUrl intentionally omitted - the "View on Etsy" button only
+      // appears once a real, published Etsy listing URL exists for this template.
+      featured: true,
+    },
+    {
       title: 'Summit Painting CT',
       category: 'Service',
       description: 'Premium service business landing page engineered for local visibility, featuring optimized client onboarding paths.',
