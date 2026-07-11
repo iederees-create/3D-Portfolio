@@ -3,7 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
 import QuoteChat from './QuoteChat';
-
+import CustomCursor from './components/CustomCursor';
+import MagneticButton from './components/MagneticButton';
+import HeroBackground from './components/HeroBackground';
 interface Project {
   title: string;
   category: 'Service' | 'Beauty' | 'Education' | 'Creative';
@@ -282,7 +284,10 @@ export default function App() {
   return (
     <div className="relative w-full min-h-screen bg-[#080b14] text-slate-100 overflow-x-hidden noise">
 
-      {/* ── Floating orbs ── */}
+      <CustomCursor />
+
+      {/* ── Floating orbs & 3D Background ── */}
+      <HeroBackground />
       <div className="orb-1 pointer-events-none fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-indigo-900/20 blur-[130px]" />
       <div className="orb-2 pointer-events-none fixed bottom-[5%]  right-[-15%] w-[50vw] h-[50vw] rounded-full bg-purple-900/15 blur-[120px]" />
       <div className="orb-3 pointer-events-none fixed top-[40%] left-[40%]  w-[30vw] h-[30vw] rounded-full bg-pink-900/10 blur-[100px]" />
@@ -339,10 +344,31 @@ export default function App() {
             Premium Web Design · Cape Town, South Africa
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
-            I build websites that{' '}
-            <span className="gradient-text">win clients</span>{' '}
-            for your business
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 overflow-hidden">
+            <motion.span
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="block"
+            >
+              I build websites that
+            </motion.span>
+            <motion.span
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="block"
+            >
+              <span className="gradient-text">win clients</span>
+            </motion.span>
+            <motion.span
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="block"
+            >
+              for your business
+            </motion.span>
           </h1>
 
           <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto px-2 sm:px-0">
@@ -351,22 +377,26 @@ export default function App() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
-            <a
-              href="#work"
-              className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
-            >
-              View My Work
-              <ArrowDown size={16} />
-            </a>
-            <a
-              href="https://nextgenwebs.etsy.com"
-              target="_blank"
-              rel="noreferrer"
-              className="liquid-glass w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
-            >
-              <ShoppingBag size={16} className="text-orange-400" />
-              Browse Templates
-            </a>
+            <MagneticButton>
+              <a
+                href="#work"
+                className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white"
+              >
+                View My Work
+                <ArrowDown size={16} />
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <a
+                href="https://nextgenwebs.etsy.com"
+                target="_blank"
+                rel="noreferrer"
+                className="liquid-glass w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-slate-300 hover:text-white transition-colors"
+              >
+                <ShoppingBag size={16} className="text-orange-400" />
+                Browse Templates
+              </a>
+            </MagneticButton>
           </div>
         </motion.div>
 
@@ -476,22 +506,26 @@ export default function App() {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <a
-                href="https://nextgenwebs.etsy.com"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1"
-              >
-                <ShoppingBag size={18} />
-                Shop Templates on Etsy
-              </a>
-              <a
-                href="mailto:hello@nextgenwebs.co.za"
-                className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full liquid-glass text-slate-300 hover:text-white font-semibold text-base transition-all hover:-translate-y-1"
-              >
-                <Mail size={18} />
-                Get a Custom Quote
-              </a>
+              <MagneticButton>
+                <a
+                  href="https://nextgenwebs.etsy.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-400 text-white font-bold text-base transition-all hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1"
+                >
+                  <ShoppingBag size={18} />
+                  Shop Templates on Etsy
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a
+                  href="mailto:hello@nextgenwebs.co.za"
+                  className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full liquid-glass text-slate-300 hover:text-white font-semibold text-base transition-all hover:-translate-y-1"
+                >
+                  <Mail size={18} />
+                  Get a Custom Quote
+                </a>
+              </MagneticButton>
             </div>
           </motion.div>
         </div>

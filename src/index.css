@@ -229,3 +229,6 @@ body {
 .tag-mono {
   font-family: 'Geist Mono', 'Fira Code', monospace;
 }
+
+@media (pointer: fine) { * { cursor: none !important; } }
+
