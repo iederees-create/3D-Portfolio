@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
+import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star, Images } from 'lucide-react';
 import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
 import AboutSection from './components/AboutSection';
@@ -10,6 +10,7 @@ import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import KonamiCode from './components/KonamiCode';
 import { ProjectMedia } from './components/ProjectMedia';
+import { ProjectShowcase } from './components/ProjectShowcase';
 interface Project {
   title: string;
   category: 'Service' | 'Beauty' | 'Education' | 'Creative';
@@ -24,7 +25,12 @@ interface Project {
   previewVideoWebm?: string;
   videoPoster?: string;
   galleryImages?: string[];
+  galleryImageAlts?: string[];
   mediaAlt?: string;
+  /** Optional full-showcase extras (modal with gallery + video + feature list). */
+  features?: string[];
+  toolHighlight?: string;
+  toolBadge?: string;
 }
 
 const catClass: Record<string, string> = {
@@ -45,6 +51,8 @@ const catEmoji: Record<string, string> = {
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [showcaseOpen, setShowcaseOpen] = useState(false);
+  const hasShowcase = Boolean(project.galleryImages && project.galleryImages.length > 0);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const card = cardRef.current;
@@ -111,7 +119,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           {/* Title */}
           <h3 className="text-lg font-semibold text-white mb-2 leading-snug">{project.title}</h3>
+          {project.toolBadge && (
+            <span className="inline-flex items-center gap-1 self-start text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-400/10 text-emerald-300 border border-emerald-400/20 mb-3 w-fit">
+              <Sparkles size={9} /> {project.toolBadge}
+            </span>
+          )}
           <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">{project.description}</p>
+
+          {hasShowcase && (
+            <button
+              type="button"
+              onClick={() => setShowcaseOpen(true)}
+              className="mb-5 inline-flex items-center gap-2 self-start text-xs font-medium text-amber-300 hover:text-amber-200 transition-colors"
+            >
+              <Images size={14} /> View full gallery &amp; preview video
+            </button>
+          )}
 
           {/* Tags */}
           <div className="flex flex-wrap gap-1.5 mb-5">
@@ -149,6 +172,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
       </div>
+      {hasShowcase && (
+        <ProjectShowcase
+          isOpen={showcaseOpen}
+          onClose={() => setShowcaseOpen(false)}
+          title={project.title}
+          description={project.description}
+          galleryImages={project.galleryImages ?? []}
+          mediaAlts={project.galleryImageAlts ?? []}
+          previewVideoMp4={project.previewVideoMp4}
+          previewVideoWebm={project.previewVideoWebm}
+          videoPoster={project.videoPoster}
+          features={project.features}
+          toolHighlight={project.toolHighlight}
+          liveUrl={project.liveUrl}
+          etsyUrl={project.etsyUrl}
+        />
+      )}
     </motion.div>
   );
 }
@@ -201,6 +241,57 @@ export default function App() {
       tags: ['E-Commerce', 'Custom Animations', 'API Integration'],
       liveUrl: 'https://iederees-create.github.io/raversus-v3/',
       featured: true,
+    },
+    {
+      title: 'Tiling Contractor Website Template',
+      category: 'Service',
+      description: 'A premium lead-generation website template for tiling contractors and flooring specialists, featuring an interactive Tile Project Planner, quantity estimator, structured quote summaries, WhatsApp handoff, responsive design and simple business customisation.',
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Tile Calculator'],
+      liveUrl: 'https://iederees-create.github.io/tableview-tiling-ct-ct/',
+      // etsyUrl intentionally omitted - the "View on Etsy" button only
+      // appears once a real, published Etsy listing URL exists for this template.
+      featured: true,
+      toolBadge: 'Interactive Tile Project Planner',
+      toolHighlight: 'The Tile Project Planner is an original 8-step calculator: visitors enter their room measurements and tile size, choose a layout, and get an instant area/tile/box/cost estimate with indicative material guidance — then send a structured quote request via WhatsApp or email.',
+      coverImage: `${import.meta.env.BASE_URL}projects/tableview-tiling/cover.webp`,
+      previewVideoMp4: `${import.meta.env.BASE_URL}projects/tableview-tiling/preview.mp4`,
+      previewVideoWebm: `${import.meta.env.BASE_URL}projects/tableview-tiling/preview.webm`,
+      videoPoster: `${import.meta.env.BASE_URL}projects/tableview-tiling/video-poster.webp`,
+      mediaAlt: 'Tiling contractor website template with an interactive Tile Project Planner',
+      galleryImages: [
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/01-cover.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/02-desktop.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/03-mobile.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/04-planner.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/05-results.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/06-quote-whatsapp.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/07-services-gallery.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/08-site-config.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/09-themes.webp`,
+        `${import.meta.env.BASE_URL}projects/tableview-tiling/10-included-files.webp`,
+      ],
+      galleryImageAlts: [
+        'Tiling contractor website template cover image showing the interactive tile calculator, responsive design, and digital download',
+        'Desktop homepage view of the tiling contractor website template with hero, services grid, and premium architectural design',
+        'Mobile homepage and open hamburger navigation menu on the tiling contractor website template',
+        'Tile Project Planner interactive tool showing the project-type selection step of the 8-step wizard',
+        'Tile Project Planner results step showing measured area, wastage, tile count, box count, and material cost',
+        'Tile Project Planner structured quote summary with copy, print, download, and WhatsApp send options',
+        'Tiling services grid and project gallery of layout patterns including herringbone and chevron',
+        'site-config.js configuration file used to rebrand the tiling website template without editing HTML',
+        'Three colour theme presets: Limestone Studio, Charcoal Brass, and Coastal Clay',
+        'List of included files, buyer guide, and support documentation in the tiling website template package',
+      ],
+      features: [
+        '8-step Tile Project Planner: type, measurements, tile size, layout, conditions, wastage, estimate, send',
+        'Unit conversion (m/cm/ft/in) and single/multiple/wall/floor-plus-wall measurement modes',
+        'Instant tile, box, and material-cost estimate — always rounded up, never fractional',
+        'Indicative adhesive/grout/levelling/waterproofing guidance, clearly labelled as non-binding',
+        'Structured quote summary: copy, print, download, WhatsApp, or email handoff',
+        'Three switchable colour themes: Limestone Studio, Charcoal Brass, Coastal Clay',
+        'Accessible: keyboard navigation, screen reader support, visible focus states',
+        'Zero external dependencies — no CDN fonts, scripts, or tracking',
+      ],
     },
     {
       title: 'Claude Code Solar Lead Generation Template',
