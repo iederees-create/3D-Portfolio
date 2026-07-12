@@ -6,6 +6,7 @@ import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
 import AboutSection from './components/AboutSection';
 import BlogSection from './components/BlogSection';
+import ReelShowcase from './components/ReelShowcase';
 
 import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
@@ -619,6 +620,9 @@ export default function App() {
           </motion.div>
         </AnimatePresence>
       </section>
+
+      {/* ── Reel Showcase ── */}
+      <ReelShowcase />
 
       {/* ── Blog / Insights Section ── */}
       <BlogSection />
