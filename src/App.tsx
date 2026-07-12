@@ -12,10 +12,11 @@ import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import KonamiCode from './components/KonamiCode';
 import { ProjectMedia } from './components/ProjectMedia';
-import { ProjectShowcase } from './components/ProjectShowcase';
+import { ProjectShowcase, type ProjectCaseStudy } from './components/ProjectShowcase';
+import CredentialsSection from './components/CredentialsSection';
 interface Project {
   title: string;
-  category: 'Service' | 'Beauty' | 'Education' | 'Creative';
+  category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data';
   description: string;
   tags: string[];
   liveUrl: string;
@@ -33,6 +34,8 @@ interface Project {
   features?: string[];
   toolHighlight?: string;
   toolBadge?: string;
+  /** Optional detailed case-study breakdown shown in the showcase modal. */
+  caseStudy?: ProjectCaseStudy;
 }
 
 const catClass: Record<string, string> = {
@@ -40,6 +43,7 @@ const catClass: Record<string, string> = {
   Beauty: 'cat-beauty',
   Education: 'cat-education',
   Creative: 'cat-creative',
+  Data: 'cat-data',
 };
 
 const catEmoji: Record<string, string> = {
@@ -47,6 +51,7 @@ const catEmoji: Record<string, string> = {
   Beauty: '💅',
   Education: '📚',
   Creative: '🎨',
+  Data: '📊',
 };
 
 // ─── Animated project card ───────────────────────────────
@@ -187,6 +192,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           videoPoster={project.videoPoster}
           features={project.features}
           toolHighlight={project.toolHighlight}
+          caseStudy={project.caseStudy}
           liveUrl={project.liveUrl}
           etsyUrl={project.etsyUrl}
         />
@@ -236,6 +242,71 @@ export default function App() {
   const [filter, setFilter] = useState<string>('All');
 
   const projects: Project[] = [
+    {
+      title: 'InsightForge Business Analytics Studio',
+      category: 'Data',
+      description: 'A privacy-first business intelligence web application that transforms CSV sales, customer and review data into interactive dashboards, customer segments, sentiment insights, forecasts, scenario plans and downloadable management reports.',
+      tags: ['React', 'TypeScript', 'Python', 'Pandas', 'D3', 'Data Visualisation', 'Machine Learning', 'Analytics'],
+      liveUrl: 'https://iederees-create.github.io/insightforge-business-analytics-dashboard/',
+      // etsyUrl intentionally omitted - the Etsy listing is still a draft
+      // and must not be linked publicly yet.
+      featured: true,
+      toolBadge: 'Privacy-First, Fully Client-Side',
+      toolHighlight: 'Every calculation — CSV parsing, customer segmentation, sentiment scoring, forecasting and report generation — runs locally in the browser. No sales, customer or review data is ever uploaded to a server.',
+      coverImage: `${import.meta.env.BASE_URL}projects/insightforge/cover.webp`,
+      previewVideoMp4: `${import.meta.env.BASE_URL}projects/insightforge/preview.mp4`,
+      previewVideoWebm: `${import.meta.env.BASE_URL}projects/insightforge/preview.webm`,
+      videoPoster: `${import.meta.env.BASE_URL}projects/insightforge/video-poster.webp`,
+      mediaAlt: 'InsightForge Business Analytics Studio dashboard showing interactive sales, customer and sentiment charts',
+      galleryImages: [
+        `${import.meta.env.BASE_URL}projects/insightforge/01-cover.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/02-dashboard-overview.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/03-csv-mapping-wizard.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/04-data-quality-lab.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/05-sales-product-analytics.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/06-customer-segmentation.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/07-sentiment-topic-explorer.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/08-forecast-scenario-planner.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/09-report-builder.webp`,
+        `${import.meta.env.BASE_URL}projects/insightforge/10-included-credentials.webp`,
+      ],
+      galleryImageAlts: [
+        'InsightForge Business Analytics Studio cover image showing the interactive analytics dashboard and privacy-first CSV workflow',
+        'Dashboard overview with interactive sales, revenue and performance charts',
+        'CSV column-mapping wizard for importing sales, customer and review data',
+        'Data Quality Lab screen highlighting missing values, duplicates and cleaning suggestions',
+        'Sales and product analytics view with trend lines and top-product breakdowns',
+        'Customer segmentation view showing grouped customer cohorts and segment profiles',
+        'Sentiment and topic explorer analysing customer review text for sentiment and recurring themes',
+        'Forecast and scenario planner showing projected sales under different business scenarios',
+        'Report builder screen for generating a downloadable management report',
+        'Included credentials and documentation screen listing what is provided with the analytics studio',
+      ],
+      features: [
+        'Client-only architecture — CSV parsing, analysis and visualisation run entirely in the browser',
+        'CSV column-mapping wizard for sales, customer and review data with a data-quality lab',
+        'Interactive sales, product and customer analytics dashboards',
+        'Automated customer segmentation and cohort profiling',
+        'Sentiment and topic analysis on free-text customer reviews',
+        'Forecasting and what-if scenario planning tools',
+        'One-click downloadable management reports',
+        'Optional companion Python/Pandas/scikit-learn toolkit with Jupyter notebooks for deeper offline analysis',
+      ],
+      caseStudy: {
+        methodology: 'Built as a fully client-only, single-page web application — all CSV parsing, analysis and visualisation happen in the visitor\'s own browser. There is no backend server and no database; the app ships as a static bundle (React + TypeScript + Vite) that runs entirely on the user\'s device.',
+        toolsUsed: ['React', 'TypeScript', 'Vite', 'Zustand', 'D3', 'Papa Parse', 'Tailwind CSS', 'Python (optional toolkit)', 'Pandas (optional toolkit)', 'scikit-learn (optional toolkit)'],
+        technicalChallenge: {
+          title: 'Papa Parse worker-thread hang under Vite',
+          body: 'During development, Papa Parse\'s worker: true mode silently hung when bundled by Vite\'s ESM-based build — parsing appeared to start but never resolved, with no console error. The issue only surfaced through live browser testing, not unit tests. It was fixed by switching to main-thread chunked parsing, trading a small amount of main-thread work on very large files for reliable, debuggable parsing behaviour.',
+        },
+        privacyDesign: 'All processing — CSV parsing, segmentation, sentiment analysis, forecasting and report generation — happens locally in the browser. No sales, customer or review data is ever uploaded to a server. The only thing persisted between sessions is the user\'s column-mapping preference, and it is only stored after the user explicitly opts in.',
+        testResults: [
+          '39 Vitest tests passing across the calculation engine',
+          '32 pytest tests passing in the optional Python toolkit',
+          'All 5 Jupyter notebooks verified executing cleanly end-to-end',
+        ],
+      },
+    },
     {
       title: 'RAVERSUS Clinical Portal',
       category: 'Service',
@@ -417,7 +488,7 @@ export default function App() {
     },
   ];
 
-  const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative'];
+  const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data'];
   const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   // Dynamic time-based greeting
@@ -462,6 +533,9 @@ export default function App() {
             </a>
             <a href="#blog" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
               Blog
+            </a>
+            <a href="#credentials" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+              Credentials
             </a>
           </div>
 
@@ -626,6 +700,9 @@ export default function App() {
 
       {/* ── Blog / Insights Section ── */}
       <BlogSection />
+
+      {/* ── Credentials & Analytics Lab ── */}
+      <CredentialsSection />
 
       {/* ── Contact CTA ── */}
       <section id="contact" className="relative cta-glow py-16 sm:py-24 px-4 sm:px-6">

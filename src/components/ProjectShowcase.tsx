@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, ExternalLink, Pause, Play, ShoppingBag, X } from 'lucide-react'
 
+export interface ProjectCaseStudy {
+  methodology: string
+  toolsUsed: string[]
+  technicalChallenge: { title: string; body: string }
+  privacyDesign: string
+  testResults: string[]
+}
+
 interface ProjectShowcaseProps {
   isOpen: boolean
   onClose: () => void
@@ -13,6 +21,8 @@ interface ProjectShowcaseProps {
   videoPoster?: string
   features?: string[]
   toolHighlight?: string
+  /** Optional detailed case-study breakdown (methodology, tooling, challenges, privacy, test results). */
+  caseStudy?: ProjectCaseStudy
   liveUrl: string
   etsyUrl?: string
 }
@@ -36,6 +46,7 @@ export function ProjectShowcase({
   videoPoster,
   features,
   toolHighlight,
+  caseStudy,
   liveUrl,
   etsyUrl,
 }: ProjectShowcaseProps) {
@@ -209,6 +220,47 @@ export function ProjectShowcase({
                 </li>
               ))}
             </ul>
+          )}
+
+          {caseStudy && (
+            <div className="mb-5 space-y-4 rounded-xl bg-white/[0.03] border border-white/5 p-4">
+              <h4 className="text-sm font-semibold text-white">Case Study</h4>
+              <div>
+                <h5 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Methodology</h5>
+                <p className="text-sm text-slate-300 leading-relaxed">{caseStudy.methodology}</p>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Tools &amp; Technologies</h5>
+                <div className="flex flex-wrap gap-1.5">
+                  {caseStudy.toolsUsed.map((tool, i) => (
+                    <span key={i} className="text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-slate-300 border border-white/10">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">
+                  Technical Challenge: {caseStudy.technicalChallenge.title}
+                </h5>
+                <p className="text-sm text-slate-300 leading-relaxed">{caseStudy.technicalChallenge.body}</p>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Privacy Design</h5>
+                <p className="text-sm text-slate-300 leading-relaxed">{caseStudy.privacyDesign}</p>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Test Results</h5>
+                <ul className="space-y-1">
+                  {caseStudy.testResults.map((result, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                      <span className="text-emerald-400 mt-0.5">✓</span>
+                      <span>{result}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           )}
 
           <div className="flex flex-wrap gap-3 pt-2 border-t border-white/5">
