@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star } from 'lucide-react';
+import { Globe, ShoppingBag, Mail, Sparkles, ArrowDown, Zap, Layers, Star, Twitter, Instagram, Youtube } from 'lucide-react';
 import QuoteChat from './QuoteChat';
 import MagneticButton from './components/MagneticButton';
 import AboutSection from './components/AboutSection';
+import BlogSection from './components/BlogSection';
 
 import ThemePicker from './components/ThemePicker';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
@@ -334,10 +335,18 @@ export default function App() {
             <a href="#about" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
               About
             </a>
+            <a href="#blog" className="hidden md:flex text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors">
+              Blog
+            </a>
           </div>
 
           {/* Actions - Right */}
-          <div className="flex items-center justify-end gap-6">
+          <div className="flex items-center justify-end gap-5">
+            <div className="hidden xl:flex items-center gap-3 mr-2 border-r border-white/10 pr-5">
+              <a href="https://x.com/nextgenwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Twitter size={16} /></a>
+              <a href="https://instagram.com/nextgenerationwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Instagram size={16} /></a>
+              <a href="https://youtube.com/channel/uc3cd_ossaxmwdtvfvxgxwgw" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Youtube size={16} /></a>
+            </div>
             <ThemePicker />
             <a
               href="https://nextgenwebs.etsy.com"
@@ -487,6 +496,9 @@ export default function App() {
         </AnimatePresence>
       </section>
 
+      {/* ── Blog / Insights Section ── */}
+      <BlogSection />
+
       {/* ── Contact CTA ── */}
       <section id="contact" className="relative cta-glow py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -535,12 +547,30 @@ export default function App() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-white/5 py-8 px-6 text-center">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <Sparkles size={13} className="text-primary-400" />
-          <span className="font-bold text-sm text-white">NextGenWebs</span>
+      <footer className="border-t border-white/5 py-12 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2">
+            <Sparkles size={13} className="text-primary-400" />
+            <span className="font-bold text-sm text-white uppercase tracking-widest">NextGenWebs</span>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <a href="https://x.com/nextgenwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+              <Twitter size={16} /> X.com
+            </a>
+            <a href="https://instagram.com/nextgenerationwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+              <Instagram size={16} /> Instagram
+            </a>
+            <a href="https://youtube.com/channel/uc3cd_ossaxmwdtvfvxgxwgw" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+              <Youtube size={16} /> YouTube
+            </a>
+            <a href="https://nextgenwebs.etsy.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+              <ShoppingBag size={16} /> Etsy Shop
+            </a>
+          </div>
+
+          <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design</p>
         </div>
-        <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design · Built with React + TypeScript + Framer Motion</p>
       </footer>
 
       {/* ── Floating Quote Chat ── */}
