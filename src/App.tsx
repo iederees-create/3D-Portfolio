@@ -10,6 +10,7 @@ import TerminalEasterEgg from './components/TerminalEasterEgg';
 // Pages
 import HomePage from './pages/HomePage';
 import WorkPage from './pages/WorkPage';
+import ProjectPage from './pages/ProjectPage';
 import AboutPage from './pages/AboutPage';
 import BlogIndexPage from './pages/BlogIndexPage';
 import ArticlePage from './pages/ArticlePage';
@@ -143,6 +144,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
         <Route path="/work" element={<PageWrapper><WorkPage /></PageWrapper>} />
+        <Route path="/work/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
