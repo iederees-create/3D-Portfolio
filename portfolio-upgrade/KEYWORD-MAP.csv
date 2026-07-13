@@ -1,0 +1,8 @@
+slug,page_type,primary_query,secondary_query,article_slug,notes
+southern-suburbs-builders,project-page,construction website template,builder website with renovation quote planner,construction-website-quote-planner,seed-2026-07-13
+tiling-contractor-website-template,project-page,tiling contractor website template,tile calculator website,,seed-2026-07-13
+insightforge-business-analytics-studio,project-page,CSV analytics dashboard,privacy-first business analytics dashboard,,seed-2026-07-13
+bank-desert-analysis-student-lab,project-page,bank desert analysis python,census financial access analysis,bank-desert-analysis-python-census-google-places,seed-2026-07-13
+pest-control-website-template,project-page,pest control website template,exterminator website quote form,,seed-2026-07-13
+claude-code-solar-lead-generation-template,project-page,solar company website template,solar savings calculator website,,seed-2026-07-13
+construction-website-quote-planner,article,construction website better quote requests,renovation scope budget planner,,pairs with southern-suburbs-builders
