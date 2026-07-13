@@ -1,13 +1,28 @@
 import type { ArticleContentComponent, ArticleMeta } from './types';
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
+import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
 
 /**
- * Article metadata, newest first. To add article #3: write its content
+ * Article metadata, newest first. To add article #4: write its content
  * component in this directory, add one entry here, and register the
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'construction-website-quote-planner',
+    title: 'How to Build a Construction Website That Generates Better Quote Requests',
+    excerpt: 'Why a brochure-style contractor website loses good leads to vague enquiries, and how an interactive Renovation Scope & Budget Planner turns "how much to renovate?" into a structured, site-inspection-ready brief.',
+    datePublished: '2026-07-13',
+    dateModified: '2026-07-13',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Construction',
+    tags: ['Case Study', 'Construction', 'Lead Generation', 'HTML5', 'JavaScript'],
+    readingTimeMinutes: 6,
+    coverImage: `${import.meta.env.BASE_URL}projects/southern-suburbs-builders/cover.webp`,
+    coverImageAlt: 'Southern Suburbs Builders website template homepage with the Renovation Scope & Budget Planner',
+    relatedSlugs: ['bank-desert-analysis-python-census-google-places'],
+  },
   {
     slug: 'bank-desert-analysis-python-census-google-places',
     title: 'How to Build a Bank Desert Analysis Project with Python, Pandas, Census Data and Google Places',
@@ -39,6 +54,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
   'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
 };
