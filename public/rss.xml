@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
+  <item>
+    <title>How to Build a Construction Website That Generates Better Quote Requests</title>
+    <link>https://iederees-create.github.io/3D-Portfolio/blog/construction-website-quote-planner/</link>
+    <guid>https://iederees-create.github.io/3D-Portfolio/blog/construction-website-quote-planner/</guid>
+    <pubDate>Sun, 13 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Design a builder website that turns vague renovation enquiries into structured quote briefs — with a Renovation Scope &amp; Budget Planner and honest preliminary ranges.</description>
+  </item>
+
     <title>NextGenWebs Blog</title>
     <link>https://iederees-create.github.io/3D-Portfolio/blog/</link>
     <description>Case studies and practical guides on custom web development, data analysis, and building tools that respect the people who use them.</description>

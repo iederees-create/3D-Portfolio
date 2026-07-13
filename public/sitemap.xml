@@ -6,20 +6,154 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://iederees-create.github.io/3D-Portfolio/blog/why-educational-businesses-need-custom-learning-hubs/</loc>
-    <lastmod>2026-07-12</lastmod>
+    <loc>https://iederees-create.github.io/3D-Portfolio/about/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/credentials/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/construction-website-quote-planner/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/blog/bank-desert-analysis-python-census-google-places/</loc>
     <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/why-educational-businesses-need-custom-learning-hubs/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/insightforge-business-analytics-studio/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/bank-desert-analysis-student-lab/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/raversus-clinical-portal/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/tiling-contractor-website-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/southern-suburbs-builders/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/claude-code-solar-lead-generation-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/pest-control-website-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/vitality-wellness-website-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/summit-painting-ct/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/amore-nails-ct/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/pixel-perfect-hair/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/zen-skin-studio-website-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/acme-plumbing-claremont/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/window-wizards-ct/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/first-choice-construction/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/creator-hub-pro-template/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/aura-signs/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/fluent-path-tutoring/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
 </urlset>
