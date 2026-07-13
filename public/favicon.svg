@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>NextGenWebs rebellious NX mark</title>
+  <!-- Near-black fractured base -->
+  <path
+    fill="#050505"
+    d="M8 10h46v4l2 4v32l-3 4H10l-4-5V16l2-4V10z"
+  />
+  <path
+    fill="none"
+    stroke="#1a1a1a"
+    stroke-width="1.5"
+    d="M9 11.5h44v3.2l1.5 3.3v30.5l-2.2 3H11.2L8.5 45.5V16.8l1.3-3.5V11.5z"
+  />
+  <!-- Imperfect outer edge nicks -->
+  <path fill="#050505" d="M8 22h2v6H8zm52 18h-2v7h2zM20 10v2h8v-2zM40 54v-2h9v2z" />
+  <!-- Off-white NX monogram (stencil / brutalist) -->
+  <path
+    fill="#f4f1ea"
+    d="M16 20h5.2l7.8 12.4V20h5.5v24h-5.2L21.5 31.6V44H16V20zm22 0h5.4v18.2L51 20h6.2v24h-5.4V25.6L44.2 44H38V20z"
+  />
+  <!-- Aggressive red diagonal strike -->
+  <path
+    fill="none"
+    stroke="#e11d2e"
+    stroke-width="4.2"
+    stroke-linecap="square"
+    d="M12 48 L52 16"
+  />
+  <path
+    fill="none"
+    stroke="#9f1239"
+    stroke-width="1.2"
+    stroke-linecap="square"
+    d="M13 50 L53 18"
+  />
+  <!-- Acid-lime disruption mark -->
+  <rect x="46" y="44" width="7" height="7" fill="#c8f542" transform="rotate(-12 49.5 47.5)" />
+  <path fill="#050505" d="M47.5 46.2h4v1.1h-4z" />
+</svg>

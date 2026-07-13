@@ -52,11 +52,20 @@ function Navbar() {
 
         {/* Logo */}
         <div className="flex items-center gap-4 justify-start">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm rounded-md">
-              NX
+          <Link to="/" className="flex items-center gap-3 group" aria-label="NextGenWebs home">
+            <div
+              className="relative w-8 h-8 bg-[#050505] text-[#f4f1ea] flex items-center justify-center font-bold font-mono text-sm rounded-md overflow-hidden border border-white/10"
+              aria-hidden="true"
+            >
+              <span className="relative z-10 tracking-tighter">NX</span>
+              <span className="pointer-events-none absolute inset-0 z-20">
+                <span className="absolute left-[-10%] top-[70%] h-[3px] w-[120%] -rotate-[28deg] bg-[#e11d2e]" />
+                <span className="absolute right-0.5 bottom-0.5 h-1.5 w-1.5 bg-[#c8f542]" />
+              </span>
             </div>
-            <span className="font-bold text-sm tracking-widest uppercase hidden sm:block">NextGenWebs</span>
+            <span className="font-bold text-sm tracking-widest uppercase hidden sm:block group-hover:text-white transition-colors">
+              NextGenWebs
+            </span>
           </Link>
         </div>
 
