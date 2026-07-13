@@ -1,0 +1,37 @@
+{
+  "project": "vitality-wellness",
+  "items": [
+    {
+      "filename": "cover.webp",
+      "original_source": "public/projects/vitality-wellness/",
+      "file_size_bytes": 52014,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 1125
+    },
+    {
+      "filename": "preview.mp4",
+      "original_source": "public/projects/vitality-wellness/",
+      "file_size_bytes": 862597,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "preview.webm",
+      "original_source": "public/projects/vitality-wellness/",
+      "file_size_bytes": 991559,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "video-poster.webp",
+      "original_source": "public/projects/vitality-wellness/",
+      "file_size_bytes": 45694,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}

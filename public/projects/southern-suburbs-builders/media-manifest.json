@@ -1,0 +1,157 @@
+{
+  "project": "southern-suburbs-builders",
+  "items": [
+    {
+      "filename": "cover.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 85916,
+      "purpose": "cover",
+      "alt_text": "Southern Suburbs Builders website template cover with renovation scope and budget planner",
+      "gallery_order": 0,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "01-cover.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 85916,
+      "purpose": "gallery",
+      "alt_text": "Cover image for Southern Suburbs Builders construction website template",
+      "gallery_order": 1,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "02-desktop.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 79618,
+      "purpose": "gallery",
+      "alt_text": "Desktop homepage of the Southern Suburbs Builders construction website template",
+      "gallery_order": 2,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "03-mobile.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 75076,
+      "purpose": "gallery",
+      "alt_text": "Mobile experience of the Southern Suburbs Builders website template",
+      "gallery_order": 3,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "04-planner.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 61690,
+      "purpose": "gallery",
+      "alt_text": "Renovation Scope and Budget Planner interface on the construction website template",
+      "gallery_order": 4,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "05-results.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 61902,
+      "purpose": "gallery",
+      "alt_text": "Structured project inputs and scope results in the renovation planner",
+      "gallery_order": 5,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "06-budget.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 90872,
+      "purpose": "gallery",
+      "alt_text": "Preliminary budget range and assumptions with non-binding disclaimer",
+      "gallery_order": 6,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "07-quote-summary.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 70014,
+      "purpose": "gallery",
+      "alt_text": "Structured quote summary produced by the renovation planner",
+      "gallery_order": 7,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "08-handoff.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 62162,
+      "purpose": "gallery",
+      "alt_text": "WhatsApp and email handoff of a structured construction quote brief",
+      "gallery_order": 8,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "09-config-themes.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 82230,
+      "purpose": "gallery",
+      "alt_text": "Business configuration and theme options for the construction template",
+      "gallery_order": 9,
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000,
+      "aspect_ratio": "2000:2000"
+    },
+    {
+      "filename": "video-poster.webp",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 47080,
+      "purpose": "poster",
+      "alt_text": "Poster frame for Southern Suburbs Builders portfolio preview video",
+      "gallery_order": 10,
+      "date_verified": "2026-07-13",
+      "width": 1080,
+      "height": 1080,
+      "aspect_ratio": "1080:1080"
+    },
+    {
+      "filename": "preview.mp4",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 468188,
+      "purpose": "video",
+      "alt_text": "Portfolio preview video of the Southern Suburbs Builders website template",
+      "gallery_order": 11,
+      "date_verified": "2026-07-13",
+      "video_duration_seconds": 36.0
+    },
+    {
+      "filename": "preview.webm",
+      "original_source": "release-build/southern-suburbs-builders-ct/seller-pack/media",
+      "file_size_bytes": 457270,
+      "purpose": "video",
+      "alt_text": "Portfolio preview video WebM of the Southern Suburbs Builders website template",
+      "gallery_order": 12,
+      "date_verified": "2026-07-13",
+      "video_duration_seconds": 24.834
+    }
+  ]
+}

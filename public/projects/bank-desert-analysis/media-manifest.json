@@ -1,0 +1,64 @@
+{
+  "project": "bank-desert-analysis",
+  "items": [
+    {
+      "filename": "01-cover.png",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 84141,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "filename": "05-interactive-map.png",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 637972,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "filename": "06-poverty-access-analysis.png",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 324993,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "filename": "07-statistics-lab.png",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 478395,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "filename": "preview.mp4",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 640231,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "preview.webm",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 1752511,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "video-poster.webp",
+      "original_source": "public/projects/bank-desert-analysis/",
+      "file_size_bytes": 65890,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1600,
+      "height": 1000
+    }
+  ]
+}

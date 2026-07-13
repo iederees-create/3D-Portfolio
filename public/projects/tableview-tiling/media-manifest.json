@@ -1,0 +1,127 @@
+{
+  "project": "tableview-tiling",
+  "items": [
+    {
+      "filename": "01-cover.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 64828,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "02-desktop.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 47952,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "03-mobile.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 52548,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "04-planner.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 36936,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "05-results.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 49938,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "06-quote-whatsapp.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 45058,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "07-services-gallery.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 46640,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "08-site-config.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 42270,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "09-themes.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 40418,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "10-included-files.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 48404,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "cover.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 64828,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "preview.mp4",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 1661777,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "preview.webm",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 2188801,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "video-poster.webp",
+      "original_source": "public/projects/tableview-tiling/",
+      "file_size_bytes": 30966,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1080,
+      "height": 1080
+    }
+  ]
+}

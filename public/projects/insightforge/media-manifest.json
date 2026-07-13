@@ -1,0 +1,127 @@
+{
+  "project": "insightforge",
+  "items": [
+    {
+      "filename": "01-cover.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 52486,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "02-dashboard-overview.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 83538,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "03-csv-mapping-wizard.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 52884,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "04-data-quality-lab.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 84966,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "05-sales-product-analytics.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 70406,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "06-customer-segmentation.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 76300,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "07-sentiment-topic-explorer.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 70818,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "08-forecast-scenario-planner.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 56212,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "09-report-builder.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 55182,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "10-included-credentials.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 64874,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "filename": "cover.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 42782,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "filename": "preview.mp4",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 718698,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "preview.webm",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 2488965,
+      "purpose": "media",
+      "date_verified": "2026-07-13"
+    },
+    {
+      "filename": "video-poster.webp",
+      "original_source": "public/projects/insightforge/",
+      "file_size_bytes": 33138,
+      "purpose": "media",
+      "date_verified": "2026-07-13",
+      "width": 1080,
+      "height": 1080
+    }
+  ]
+}
