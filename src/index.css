@@ -242,6 +242,15 @@ body {
 }
 
 
+/* ─── Hide scrollbar (used in horizontal scroll containers) ── */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Opera */
+}
+
 body.konami-active {
   filter: invert(1) hue-rotate(180deg);
   transition: filter 0.5s ease;
