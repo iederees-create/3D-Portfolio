@@ -47,7 +47,7 @@ const certificates: Certificate[] = [
 const courseProjects: CourseProject[] = [
   {
     title: 'Bank Desert Analysis',
-    description: 'Course project analysing geographic access to banking services to identify underserved areas. A learning exercise from the UCT Data Analysis course, not a deployed application.',
+    description: 'Started as a UCT Data Analysis course project on geographic access to banking services, and later grew into the full Bank Desert Analysis Student Lab — see the Data category above and the companion blog article for the deployed product.',
   },
   {
     title: 'Interactive Earthquake Map',
@@ -159,7 +159,8 @@ export default function CredentialsSection() {
         <p className="text-slate-400 max-w-2xl">
           University-backed data credentials, plus a set of course and learning projects completed
           along the way. These are academic exercises for background and credibility — distinct
-          from the live, deployed InsightForge Business Analytics Studio above.
+          from the live, deployed InsightForge Business Analytics Studio and Bank Desert Analysis
+          Student Lab above.
         </p>
       </motion.div>
 

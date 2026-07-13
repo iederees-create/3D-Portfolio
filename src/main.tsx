@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App.tsx';
 import './index.css';
 
+// import.meta.env.BASE_URL is '/3D-Portfolio/'; react-router's basename
+// wants no trailing slash.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
 );

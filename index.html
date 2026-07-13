@@ -3,15 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Fallback title/description only — every route (including "/") renders
+      its own <SEO> component via react-helmet-async, which replaces these
+      on mount. They are intentionally NOT duplicated here as static meta/og
+      tags: react-helmet-async only *adds* tags it renders, it does not
+      delete pre-existing static ones, so a static meta[name=description]
+      here would sit alongside the Helmet-managed one and (since it comes
+      first in the DOM) would be the one crawlers and querySelector actually
+      see — silently defeating per-route SEO. Keep only the singleton
+      <title>, which Helmet safely overwrites in place.
+    -->
     <title>NextGenWebs — Premium Web Design for Local Businesses</title>
-    <meta name="description" content="Custom, high-converting websites for local businesses. Browse live portfolio work and ready-made templates on Etsy. Cape Town web designer." />
     <meta name="keywords" content="web design, local business websites, Cape Town web designer, Etsy website templates, React developer" />
-    <meta property="og:title" content="NextGenWebs — Premium Web Design" />
-    <meta property="og:description" content="Custom websites for salons, plumbers, tutors, and contractors. Browse live work and Etsy templates." />
-    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="application/rss+xml" title="NextGenWebs Blog" href="/3D-Portfolio/rss.xml" />
+    <!--
+      Decodes the query-string path produced by public/404.html's GitHub
+      Pages SPA redirect (see that file for why) back into a real URL via
+      history.replaceState, before React Router mounts and reads the URL.
+    -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
   </head>
   <body class="bg-[#0F172A]">
     <div id="root"></div>
