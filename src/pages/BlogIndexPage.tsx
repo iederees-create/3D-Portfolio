@@ -2,25 +2,25 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock } from 'lucide-react';
 import SEO from '../components/SEO';
-import SiteHeader from '../components/SiteHeader';
-import SiteFooter from '../components/SiteFooter';
 import { articles } from '../content/blog/articles';
 
 /**
  * /blog/ — lists every article, newest first. Adding article #3 to
  * `articles.ts` is all it takes for it to appear here automatically.
+ *
+ * Nav/footer chrome comes from the global <Navbar>/<Footer> in App.tsx,
+ * which wraps every route — this page only owns its own content.
  */
 export default function BlogIndexPage() {
   const sorted = [...articles].sort((a, b) => (a.datePublished < b.datePublished ? 1 : -1));
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0F172A] text-slate-100 overflow-x-hidden">
+    <>
       <SEO
         title="Blog"
         description="Case studies and practical guides on custom web development, data analysis, and building tools that respect the people who use them."
         path="blog/"
       />
-      <SiteHeader />
 
       <main className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
         <motion.div
@@ -78,8 +78,6 @@ export default function BlogIndexPage() {
           ))}
         </div>
       </main>
-
-      <SiteFooter />
-    </div>
+    </>
   );
 }

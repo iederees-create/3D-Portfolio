@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ChevronRight, Linkedin, Twitter } from 'lucide-react';
 import SEO from '../SEO';
-import SiteHeader from '../SiteHeader';
-import SiteFooter from '../SiteFooter';
 import type { ArticleMeta } from '../../content/blog/types';
 import { articles, getRelatedArticles } from '../../content/blog/articles';
 import { SITE_NAME, toAbsoluteUrl } from '../../lib/site';
@@ -99,7 +97,7 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0F172A] text-slate-100 overflow-x-hidden">
+    <>
       <SEO
         title={meta.title}
         description={meta.excerpt}
@@ -121,8 +119,6 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
         <script type="application/ld+json">{JSON.stringify(blogPostingJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
-
-      <SiteHeader />
 
       <article className="pt-32 pb-20 px-6 max-w-4xl mx-auto scroll-mt-24">
         {/* Breadcrumb */}
@@ -261,8 +257,6 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
           </Link>
         </div>
       </article>
-
-      <SiteFooter />
-    </div>
+    </>
   );
 }
