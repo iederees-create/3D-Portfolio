@@ -1,7 +1,7 @@
 # Portfolio SEO Release Report
 
 1. **Branch:** agent/grok-portfolio-seo  
-2. **Latest commit SHA:** (set at push time)  
+2. **Latest commit SHA:** 2bd829f0dce10a180d674da8cf391fb44bba8d83  
 3. **Projects discovered:** 18 in catalogue (17 prior + Southern Suburbs Builders)  
 4. **Projects updated:** All extracted to content module; SSB added with media; SEO fields on key projects  
 5. **New project pages:** `/work/:slug/` for all 18 slugs  
