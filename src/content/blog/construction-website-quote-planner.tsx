@@ -108,7 +108,7 @@ export default function ConstructionWebsiteQuotePlannerContent() {
             southern-suburbs-builders-ct
           </a>
           . Portfolio case study:{' '}
-          <a className="text-sky-300 hover:underline" href="../work/southern-suburbs-builders/">
+          <a className="text-sky-300 hover:underline" href={`${import.meta.env.BASE_URL}work/southern-suburbs-builders/`}>
             /work/southern-suburbs-builders/
           </a>
           .
@@ -228,13 +228,13 @@ export default function ConstructionWebsiteQuotePlannerContent() {
             </a>
           </li>
           <li>
-            <a href="../work/southern-suburbs-builders/">Open the portfolio case-study page</a>
+            <a href={`${import.meta.env.BASE_URL}work/southern-suburbs-builders/`}>Open the portfolio case-study page</a>
           </li>
           <li>
-            <a href="../work/tiling-contractor-website-template/">Related: Tiling Contractor Website Template</a>
+            <a href={`${import.meta.env.BASE_URL}work/tiling-contractor-website-template/`}>Related: Tiling Contractor Website Template</a>
           </li>
           <li>
-            <a href="../contact/">Contact NextGenWebs</a>
+            <a href={`${import.meta.env.BASE_URL}contact/`}>Contact NextGenWebs</a>
           </li>
         </ul>
       </section>
