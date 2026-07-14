@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">NextGenWebs rebellious NX mark</title>
+  <rect x="4" y="4" width="56" height="56" fill="#050505"/>
+  <path d="M6 6h12v4H10v8H6V6Zm40 0h12v14h-4V10h-8V6ZM6 46h4v8h10v4H6V46Zm48 0h4v12H44v-4h10v-8Z" fill="#F4F1E8"/>
+  <path d="M14 18h8l12 20V18h7v28h-8L21 26v20h-7V18Z" fill="#F4F1E8"/>
+  <path d="M43 18h8l-9 14 10 14h-8l-6-9-6 9h-8l10-14-9-14h8l5 8 5-8Z" fill="#F4F1E8"/>
+  <path d="M9 42 52 13l4 7-43 29-4-7Z" fill="#D9182E"/>
+  <path d="M47 43h8v8h-8v-8Z" fill="#B6FF00"/>
+  <path d="M4 30h8v4H4v-4Zm48-2h8v4h-8v-4ZM28 4h4v8h-4V4Zm2 48h4v8h-4v-8Z" fill="#F4F1E8"/>
+</svg>
