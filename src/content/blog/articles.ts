@@ -2,6 +2,7 @@ import type { ArticleContentComponent, ArticleMeta } from './types';
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
+import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -9,6 +10,20 @@ import ConstructionWebsiteQuotePlannerContent from './construction-website-quote
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'laser-cutting-website-quote-planner',
+    title: 'How to Build a Laser Cutting Website That Gets Better Quote Requests',
+    excerpt: 'Why "how much to laser this?" enquiries waste time on both sides, and how an interactive Laser Cut & Engraving Quote Planner turns them into structured, production-ready quote briefs.',
+    datePublished: '2026-07-14',
+    dateModified: '2026-07-14',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Fabrication',
+    tags: ['Case Study', 'Laser Cutting', 'Fabrication', 'HTML5', 'JavaScript'],
+    readingTimeMinutes: 6,
+    coverImage: `${import.meta.env.BASE_URL}projects/precision-laser/cover.webp`,
+    coverImageAlt: 'Precision Laser Website Template homepage with the Laser Cut & Engraving Quote Planner',
+    relatedSlugs: ['construction-website-quote-planner'],
+  },
   {
     slug: 'construction-website-quote-planner',
     title: 'How to Build a Construction Website That Generates Better Quote Requests',
@@ -54,6 +69,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
   'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
