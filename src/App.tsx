@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Sparkles, Twitter, Instagram, Youtube } from 'lucide-react';
@@ -7,15 +8,16 @@ import ThemePicker from './components/ThemePicker';
 import KonamiCode from './components/KonamiCode';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 
-// Pages
-import HomePage from './pages/HomePage';
-import WorkPage from './pages/WorkPage';
-import AboutPage from './pages/AboutPage';
-import BlogIndexPage from './pages/BlogIndexPage';
-import ArticlePage from './pages/ArticlePage';
-import ContactPage from './pages/ContactPage';
-import CredentialsPage from './pages/CredentialsPage';
-import ProjectPage from './pages/ProjectPage';
+// Route-level code splitting keeps the initial JS payload smaller than a
+// single eager bundle of every page + blog module.
+const HomePage = lazy(() => import('./pages/HomePage'));
+const WorkPage = lazy(() => import('./pages/WorkPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
+const ArticlePage = lazy(() => import('./pages/ArticlePage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const CredentialsPage = lazy(() => import('./pages/CredentialsPage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 
 // ─── Animated page wrapper ────────────────────────────────────────────────────
 function PageWrapper({ children }: { children: React.ReactNode }) {
@@ -140,22 +142,36 @@ function Footer() {
   );
 }
 
+function RouteFallback() {
+  return (
+    <div
+      className="min-h-[50vh] w-full flex items-center justify-center text-slate-500 text-sm tracking-wide"
+      aria-busy="true"
+      aria-live="polite"
+    >
+      Loading…
+    </div>
+  );
+}
+
 // ─── Animated Routes wrapper ──────────────────────────────────────────────────
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
-        <Route path="/work" element={<PageWrapper><WorkPage /></PageWrapper>} />
-        <Route path="/work/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
-        <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
-        <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
-        <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
-        <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<RouteFallback />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
+          <Route path="/work" element={<PageWrapper><WorkPage /></PageWrapper>} />
+          <Route path="/work/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
+          <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
+          <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
+          <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
+          <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 }
 

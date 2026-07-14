@@ -28,4 +28,34 @@ export default defineConfig({
     })
   ],
   base: '/3D-Portfolio/', // Add this line verbatim
+  build: {
+    // Route-level lazy imports + vendor splits keep the entry under the
+    // default 500 kB warning when possible. Three.js is not currently
+    // imported by live routes (HeroBackground is unused).
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          if (id.includes('three') || id.includes('@react-three')) {
+            return 'three-vendor';
+          }
+          if (id.includes('framer-motion')) {
+            return 'motion-vendor';
+          }
+          if (id.includes('lucide-react')) {
+            return 'icons-vendor';
+          }
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('react-router') ||
+            id.includes('react-helmet-async') ||
+            id.includes('scheduler')
+          ) {
+            return 'react-vendor';
+          }
+        },
+      },
+    },
+  },
 });
