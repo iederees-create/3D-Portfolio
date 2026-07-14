@@ -45,12 +45,10 @@ export default function WhyEducationalBusinessesNeedCustomLearningHubsContent() 
           <p className="text-sm text-slate-400">Ready to deploy. High conversion. SEO optimized.</p>
         </div>
         <a
-          href="https://nextgenwebs.etsy.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`${import.meta.env.BASE_URL}contact`}
           className="bg-primary-500 hover:bg-primary-400 text-white font-bold py-3 px-6 rounded-full text-sm tracking-wide transition-colors whitespace-nowrap"
         >
-          Buy on Etsy
+          Discuss a Project
         </a>
       </div>
 

@@ -15,6 +15,7 @@ import BlogIndexPage from './pages/BlogIndexPage';
 import ArticlePage from './pages/ArticlePage';
 import ContactPage from './pages/ContactPage';
 import CredentialsPage from './pages/CredentialsPage';
+import ProjectPage from './pages/ProjectPage';
 
 // ─── Animated page wrapper ────────────────────────────────────────────────────
 function PageWrapper({ children }: { children: React.ReactNode }) {
@@ -52,8 +53,12 @@ function Navbar() {
         {/* Logo */}
         <div className="flex items-center gap-4 justify-start">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm rounded-md">
-              NX
+            <div className="relative w-8 h-8 bg-[#050505] text-[#f4f1e8] flex items-center justify-center font-bold font-mono text-[11px] border border-[#f4f1e8]/80 overflow-hidden" aria-hidden="true">
+              <span className="relative z-10">NX</span>
+              <span className="absolute h-1 w-12 rotate-[-34deg] bg-[#d9182e]" />
+              <span className="absolute bottom-1 right-1 h-1.5 w-1.5 bg-[#b6ff00]" />
+              <span className="absolute left-0 top-3 h-1 w-1.5 bg-[#f4f1e8]" />
+              <span className="absolute right-0 top-2 h-1 w-1.5 bg-[#f4f1e8]" />
             </div>
             <span className="font-bold text-sm tracking-widest uppercase hidden sm:block">NextGenWebs</span>
           </Link>
@@ -143,6 +148,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
         <Route path="/work" element={<PageWrapper><WorkPage /></PageWrapper>} />
+        <Route path="/work/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
