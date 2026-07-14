@@ -1,0 +1,135 @@
+{
+  "project": "Pest Control Website Template",
+  "dateVerified": "2026-07-14",
+  "sourceFolder": "/home/iedrees/Workspace/ct-lead-gen/clients/westlake-pest-control/seller-pack",
+  "assets": [
+    {
+      "filename": "cover.webp",
+      "originalSource": "images/01-cover.png",
+      "dimensions": "2000x2000",
+      "fileSize": "97.2KiB",
+      "purpose": "portfolio cover",
+      "altText": "Westlake Pest Control website template cover image showing responsive design, digital download, and easy customisation",
+      "galleryOrder": null
+    },
+    {
+      "filename": "preview.mp4",
+      "originalSource": "westlake-pest-control-reel.mp4",
+      "dimensions": "1080x1920",
+      "fileSize": "1958813 bytes",
+      "videoDuration": "15.00s",
+      "purpose": "portfolio preview video",
+      "altText": "Westlake Pest Control website template vertical preview video",
+      "galleryOrder": null
+    },
+    {
+      "filename": "preview.webm",
+      "originalSource": "westlake-pest-control-reel.mp4",
+      "dimensions": "1080x1920",
+      "fileSize": "1627412 bytes",
+      "videoDuration": "15.00s",
+      "purpose": "portfolio preview video fallback",
+      "altText": "Westlake Pest Control website template vertical preview video",
+      "galleryOrder": null
+    },
+    {
+      "filename": "video-poster.webp",
+      "originalSource": "westlake-pest-control-reel.mp4 frame at 00:00:01",
+      "dimensions": "1920x3413",
+      "fileSize": "91.2KiB",
+      "purpose": "preview video poster",
+      "altText": "Westlake Pest Control website template video poster",
+      "galleryOrder": null
+    },
+    {
+      "filename": "01-cover.webp",
+      "originalSource": "images/01-cover.png",
+      "dimensions": "2000x2000",
+      "fileSize": "97.2KiB",
+      "purpose": "gallery image",
+      "altText": "Westlake Pest Control website template cover image showing responsive design, digital download, and easy customisation",
+      "galleryOrder": 1
+    },
+    {
+      "filename": "02-desktop.webp",
+      "originalSource": "images/02-desktop.png",
+      "dimensions": "2000x2000",
+      "fileSize": "86.4KiB",
+      "purpose": "gallery image",
+      "altText": "Desktop homepage view of the pest control website template with hero, quote CTA, and service sections",
+      "galleryOrder": 2
+    },
+    {
+      "filename": "03-mobile.webp",
+      "originalSource": "images/03-mobile.png",
+      "dimensions": "2000x2000",
+      "fileSize": "84.1KiB",
+      "purpose": "gallery image",
+      "altText": "Mobile homepage view of the pest control website template showing the hamburger navigation menu",
+      "galleryOrder": 3
+    },
+    {
+      "filename": "04-tool.webp",
+      "originalSource": "images/04-services.png",
+      "dimensions": "2000x2000",
+      "fileSize": "122.6KiB",
+      "purpose": "gallery image",
+      "altText": "Pest control services grid showing residential, commercial, termite, and rodent control service cards",
+      "galleryOrder": 4
+    },
+    {
+      "filename": "05-results.webp",
+      "originalSource": "images/05-quote-whatsapp.png",
+      "dimensions": "2000x2000",
+      "fileSize": "49.2KiB",
+      "purpose": "gallery image",
+      "altText": "Quote request form and WhatsApp contact button for lead generation on the pest control website template",
+      "galleryOrder": 5
+    },
+    {
+      "filename": "06-features.webp",
+      "originalSource": "images/06-site-config.png",
+      "dimensions": "2000x2000",
+      "fileSize": "72.8KiB",
+      "purpose": "gallery image",
+      "altText": "site-config.js configuration file used to rebrand the template without editing HTML",
+      "galleryOrder": 6
+    },
+    {
+      "filename": "07-configuration.webp",
+      "originalSource": "images/07-theme-presets.png",
+      "dimensions": "2000x2000",
+      "fileSize": "123.1KiB",
+      "purpose": "gallery image",
+      "altText": "Three colour theme presets: Amber Shield, Green Guard, and Red Response",
+      "galleryOrder": 7
+    },
+    {
+      "filename": "08-themes.webp",
+      "originalSource": "images/08-included-files.png",
+      "dimensions": "2000x2000",
+      "fileSize": "55.6KiB",
+      "purpose": "gallery image",
+      "altText": "List of included pages and files in the pest control website template package",
+      "galleryOrder": 8
+    },
+    {
+      "filename": "09-files.webp",
+      "originalSource": "images/09-responsive-a11y.png",
+      "dimensions": "2000x2000",
+      "fileSize": "139.7KiB",
+      "purpose": "gallery image",
+      "altText": "Responsive layout and accessibility features including keyboard focus states and FAQ accordion",
+      "galleryOrder": 9
+    },
+    {
+      "filename": "10-summary.webp",
+      "originalSource": "images/10-buyer-guide.png",
+      "dimensions": "2000x2000",
+      "fileSize": "51.8KiB",
+      "purpose": "gallery image",
+      "altText": "Buyer guide and support information included with the pest control website template",
+      "galleryOrder": 10
+    }
+  ]
+}

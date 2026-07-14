@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, ShoppingBag, Sparkles, Layers, Star, Images } from 'lucide-react';
 import { ProjectMedia } from '../components/ProjectMedia';
 import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectShowcase';
 
-interface Project {
+export interface Project {
   title: string;
   category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data';
   description: string;
@@ -143,7 +144,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
 
           {/* Actions */}
-          <div className={`grid ${project.etsyUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-2 pt-4 border-t border-white/5`}>
+          <div className={`grid ${project.etsyUrl ? 'grid-cols-3' : 'grid-cols-2'} gap-2 pt-4 border-t border-white/5`}>
+            <Link
+              to={`/work/${projectSlug(project)}/`}
+              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+              title="Project details"
+            >
+              <Images size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Details</span>
+            </Link>
             <a
               href={project.liveUrl}
               target="_blank"
@@ -192,7 +201,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 // ─── Projects data ────────────────────────────────────────────────────────────
-const projects: Project[] = [
+export const projectSlug = (project: Pick<Project, 'title'>) =>
+  project.title
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+export const projects: Project[] = [
   {
     title: 'InsightForge Business Analytics Studio',
     category: 'Data',
@@ -449,6 +465,44 @@ const projects: Project[] = [
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Pest Control'],
     liveUrl: 'https://iederees-create.github.io/westlake-pest-control-template/',
     featured: true,
+    toolBadge: 'Quote Request Flow',
+    toolHighlight: 'A mobile-first pest-control template with service presentation, quote request validation, WhatsApp handoff, theme presets, and one-file business configuration for fast rebrands.',
+    coverImage: `${import.meta.env.BASE_URL}projects/westlake-pest-control/cover.webp`,
+    previewVideoMp4: `${import.meta.env.BASE_URL}projects/westlake-pest-control/preview.mp4`,
+    previewVideoWebm: `${import.meta.env.BASE_URL}projects/westlake-pest-control/preview.webm`,
+    videoPoster: `${import.meta.env.BASE_URL}projects/westlake-pest-control/video-poster.webp`,
+    mediaAlt: 'Westlake Pest Control website template cover image showing responsive design, digital download, and easy customisation',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/01-cover.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/02-desktop.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/03-mobile.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/04-tool.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/05-results.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/06-features.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/07-configuration.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/08-themes.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/09-files.webp`,
+      `${import.meta.env.BASE_URL}projects/westlake-pest-control/10-summary.webp`,
+    ],
+    galleryImageAlts: [
+      'Westlake Pest Control website template cover image showing responsive design, digital download, and easy customisation',
+      'Desktop homepage view of the pest control website template with hero, quote CTA, and service sections',
+      'Mobile homepage view of the pest control website template showing the hamburger navigation menu',
+      'Pest control services grid showing residential, commercial, termite, and rodent control service cards',
+      'Quote request form and WhatsApp contact button for lead generation on the pest control website template',
+      'site-config.js configuration file used to rebrand the template without editing HTML',
+      'Three colour theme presets: Amber Shield, Green Guard, and Red Response',
+      'List of included pages and files in the pest control website template package',
+      'Responsive layout and accessibility features including keyboard focus states and FAQ accordion',
+      'Buyer guide and support information included with the pest control website template',
+    ],
+    features: [
+      'Mobile-first pest-control website template for exterminators, termite specialists and local service teams',
+      'Quote request form with WhatsApp handoff and print-friendly summary',
+      'Service cards for residential, commercial, termite, rodent, cockroach, ant, bed bug and fumigation services',
+      'Three switchable colour themes and a central site-config.js rebrand file',
+      'Privacy, terms, disclaimer, sitemap, robots.txt and structured data included',
+    ],
   },
   {
     title: 'Vitality Wellness Website Template',
@@ -462,6 +516,37 @@ const projects: Project[] = [
     previewVideoWebm: `${import.meta.env.BASE_URL}projects/vitality-wellness/preview.webm`,
     videoPoster: `${import.meta.env.BASE_URL}projects/vitality-wellness/video-poster.webp`,
     mediaAlt: 'Vitality Wellness website template: sage-and-gold wellness studio homepage with a hero section, consultation finder and treatment pricing cards.',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/01-cover.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/02-desktop.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/03-mobile.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/04-tool.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/05-results.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/06-features.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/07-configuration.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/08-themes.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/09-files.webp`,
+      `${import.meta.env.BASE_URL}projects/vitality-wellness/10-summary.webp`,
+    ],
+    galleryImageAlts: [
+      'Vitality Wellness website template cover graphic: React wellness and spa website template, three switchable themes, instant digital download',
+      'Desktop view of the Vitality Wellness homepage showing the hero section, trust indicators, and navigation bar in the Sage Serenity theme',
+      'Mobile view of the Vitality Wellness website template showing the responsive hamburger navigation menu and hero section',
+      'The Wellness Consultation Finder interactive two-question tool, showing a sample suggestion result and WhatsApp hand-off button',
+      'Treatment category cards and pricing section showing sample facials, massage, and wellness ritual services with prices and durations',
+      'Floating WhatsApp contact button, contact form, and business-hours section used to convert visitors into enquiries',
+      'The siteConfig.ts configuration file used to rebrand business name, contact details, treatments, and pricing without editing component code',
+      'Side-by-side comparison of the three built-in color themes: Sage Serenity, Champagne Glow, and Midnight Botanica',
+      'List of included pages and files in the Vitality Wellness template package, including Privacy, Terms, Disclaimer, and 404 pages',
+      'START-HERE guide and Complete Buyer Guide documentation included with the Vitality Wellness website template',
+    ],
+    features: [
+      'React, TypeScript, Vite and Tailwind CSS wellness website template',
+      'Interactive two-question Wellness Consultation Finder with WhatsApp or email handoff',
+      'Treatment cards, pricing, booking conversion sections, FAQ and legal starter pages',
+      'Three switchable colour themes and a central siteConfig.ts rebrand file',
+      'Local SEO metadata, Open Graph tags, JSON-LD, sitemap and robots.txt included',
+    ],
   },
   {
     title: 'Summit Painting CT',
