@@ -1,0 +1,20 @@
+product,platform,file_type,expected_extension,expected_use,status
+tiling,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+insightforge,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+bank-desert,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+bank-desert,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+wellness,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+wellness,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+wellness,etsy-listing-videos,audio,.mp3,Etsy listing voiceover,missing
+pest-control,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+pest-control,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+pest-control,etsy-listing-videos,audio,.mp3,Etsy listing voiceover,missing
+zen-skin,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+zen-skin,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+zen-skin,etsy-listing-videos,audio,.mp3,Etsy listing voiceover,missing
+solar,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+solar,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+solar,etsy-listing-videos,audio,.mp3,Etsy listing voiceover,missing
+precision-laser,youtube-talking-heads,video,.mp4,YouTube talking-head video,missing
+precision-laser,etsy-listing-videos,video,.mp4,Etsy listing video,missing
+precision-laser,etsy-listing-videos,audio,.mp3,Etsy listing voiceover,missing
