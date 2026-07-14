@@ -12,14 +12,16 @@ export default defineConfig({
         name: 'NextGenWebs Portfolio',
         short_name: 'NextGenWebs',
         description: 'Premium Web Design Portfolio',
-        theme_color: '#080b14',
-        background_color: '#080b14',
+        start_url: '/3D-Portfolio/',
+        theme_color: '#050505',
+        background_color: '#0F172A',
         display: 'standalone',
         icons: [
           {
-            src: 'https://vitejs.dev/logo.svg', // Placeholder icon
-            sizes: '192x192',
-            type: 'image/svg+xml'
+            src: '/3D-Portfolio/favicon.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           }
         ]
       }
