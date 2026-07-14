@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-07-14T16:19:06.574Z",
+  "base_path": "/media/elevenlabs/",
+  "files": [
+    {
+      "path": "/media/elevenlabs/projects/construction/construction-talking-head-youtube-v1.mp4",
+      "product": "construction",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 8929980,
+      "duration_seconds": "37.80",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/media/elevenlabs/projects/insightforge/insightforge-talking-head-youtube-v1.mp4",
+      "product": "insightforge",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7120234,
+      "duration_seconds": "30.32",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/media/elevenlabs/projects/tiling/tiling-talking-head-youtube-v1.mp4",
+      "product": "tiling",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7853310,
+      "duration_seconds": "33.96",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    }
+  ]
+}

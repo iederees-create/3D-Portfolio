@@ -1,0 +1,669 @@
+{
+  "generated_at": "2026-07-14T16:19:06.573Z",
+  "source_roots": {
+    "audio": "/home/iedrees/Workspace/nextgenwebs-audio",
+    "video": "/home/iedrees/Workspace/nextgenwebs-video"
+  },
+  "counts": {
+    "audio_files": 9,
+    "video_files": 19,
+    "copied_portfolio_files": 3
+  },
+  "expected_folders": [
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/youtube-shorts",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/portfolio-walkthroughs",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/social-reels",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/cold-outreach",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/homepage-brand",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/etsy-listing-videos",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-shorts",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/portfolio-walkthroughs",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/social-reels",
+      "exists": true
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/homepage-brand",
+      "exists": true
+    }
+  ],
+  "media": [
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/bank-desert-etsy-video-voiceover-v1.mp3",
+      "root": "audio",
+      "relative_path": "etsy-listing-videos/bank-desert-etsy-video-voiceover-v1.mp3",
+      "filename": "bank-desert-etsy-video-voiceover-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "bank-desert",
+      "media_type": "etsy listing voiceover",
+      "size_bytes": 474005,
+      "size_mb": "0.45",
+      "duration_seconds": "27.40",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/construction-etsy-video-voiceover-v1.mp3",
+      "root": "audio",
+      "relative_path": "etsy-listing-videos/construction-etsy-video-voiceover-v1.mp3",
+      "filename": "construction-etsy-video-voiceover-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "construction",
+      "media_type": "etsy listing voiceover",
+      "size_bytes": 550491,
+      "size_mb": "0.52",
+      "duration_seconds": "32.18",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/insightforge-etsy-video-voiceover-v1.mp3",
+      "root": "audio",
+      "relative_path": "etsy-listing-videos/insightforge-etsy-video-voiceover-v1.mp3",
+      "filename": "insightforge-etsy-video-voiceover-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "insightforge",
+      "media_type": "etsy listing voiceover",
+      "size_bytes": 524160,
+      "size_mb": "0.50",
+      "duration_seconds": "30.54",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/tiling-etsy-video-voiceover-v1.mp3",
+      "root": "audio",
+      "relative_path": "etsy-listing-videos/tiling-etsy-video-voiceover-v1.mp3",
+      "filename": "tiling-etsy-video-voiceover-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "tiling",
+      "media_type": "etsy listing voiceover",
+      "size_bytes": 575569,
+      "size_mb": "0.55",
+      "duration_seconds": "33.75",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/wellness-etsy-video-voiceover-v1.mp3",
+      "root": "audio",
+      "relative_path": "etsy-listing-videos/wellness-etsy-video-voiceover-v1.mp3",
+      "filename": "wellness-etsy-video-voiceover-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "wellness",
+      "media_type": "etsy listing voiceover",
+      "size_bytes": 447672,
+      "size_mb": "0.43",
+      "duration_seconds": "25.73",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/homepage-brand/nextgenwebs-custom-build-v1.mp3",
+      "root": "audio",
+      "relative_path": "homepage-brand/nextgenwebs-custom-build-v1.mp3",
+      "filename": "nextgenwebs-custom-build-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "nextgenwebs",
+      "media_type": "homepage brand",
+      "size_bytes": 222811,
+      "size_mb": "0.21",
+      "duration_seconds": "11.70",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/homepage-brand/nextgenwebs-homepage-intro-v1.mp3",
+      "root": "audio",
+      "relative_path": "homepage-brand/nextgenwebs-homepage-intro-v1.mp3",
+      "filename": "nextgenwebs-homepage-intro-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "nextgenwebs",
+      "media_type": "homepage brand",
+      "size_bytes": 329809,
+      "size_mb": "0.31",
+      "duration_seconds": "18.39",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/homepage-brand/nextgenwebs-template-shop-v1.mp3",
+      "root": "audio",
+      "relative_path": "homepage-brand/nextgenwebs-template-shop-v1.mp3",
+      "filename": "nextgenwebs-template-shop-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "nextgenwebs",
+      "media_type": "homepage brand",
+      "size_bytes": 259174,
+      "size_mb": "0.25",
+      "duration_seconds": "13.98",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-audio/homepage-brand/nextgenwebs-what-we-build-v1.mp3",
+      "root": "audio",
+      "relative_path": "homepage-brand/nextgenwebs-what-we-build-v1.mp3",
+      "filename": "nextgenwebs-what-we-build-v1.mp3",
+      "extension": ".mp3",
+      "kind": "audio",
+      "product": "nextgenwebs",
+      "media_type": "homepage brand",
+      "size_bytes": 282997,
+      "size_mb": "0.27",
+      "duration_seconds": "15.46",
+      "width": "",
+      "height": "",
+      "codec": "mp3"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid1.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid1.mp4",
+      "filename": "vid1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2843823,
+      "size_mb": "2.71",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid10.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid10.mp4",
+      "filename": "vid10.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2536576,
+      "size_mb": "2.42",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid11.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid11.mp4",
+      "filename": "vid11.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2700235,
+      "size_mb": "2.58",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid12.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid12.mp4",
+      "filename": "vid12.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2742722,
+      "size_mb": "2.62",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid13.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid13.mp4",
+      "filename": "vid13.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2726246,
+      "size_mb": "2.60",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid14.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid14.mp4",
+      "filename": "vid14.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2203211,
+      "size_mb": "2.10",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid2.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid2.mp4",
+      "filename": "vid2.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2890311,
+      "size_mb": "2.76",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid3.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid3.mp4",
+      "filename": "vid3.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2819807,
+      "size_mb": "2.69",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid5.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid5.mp4",
+      "filename": "vid5.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2357725,
+      "size_mb": "2.25",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid6.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid6.mp4",
+      "filename": "vid6.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2918682,
+      "size_mb": "2.78",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid7.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid7.mp4",
+      "filename": "vid7.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2260754,
+      "size_mb": "2.16",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid8.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid8.mp4",
+      "filename": "vid8.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2572486,
+      "size_mb": "2.45",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid9.mp4",
+      "root": "video",
+      "relative_path": "_unsorted-video/vid9.mp4",
+      "filename": "vid9.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "unknown",
+      "size_bytes": 2829376,
+      "size_mb": "2.70",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/etsy-listing-videos/construction-etsy-listing-video-v1.mp4",
+      "root": "video",
+      "relative_path": "etsy-listing-videos/construction-etsy-listing-video-v1.mp4",
+      "filename": "construction-etsy-listing-video-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "construction",
+      "media_type": "Etsy only",
+      "size_bytes": 2863777,
+      "size_mb": "2.73",
+      "duration_seconds": "11.80",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/social-reels/act-as-an-expert-short-form-video-v1.mp4",
+      "root": "video",
+      "relative_path": "social-reels/act-as-an-expert-short-form-video-v1.mp4",
+      "filename": "act-as-an-expert-short-form-video-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "unknown",
+      "media_type": "YouTube Short",
+      "size_bytes": 2644264,
+      "size_mb": "2.52",
+      "duration_seconds": "10.01",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/construction-talking-head-youtube-v1.mp4",
+      "root": "video",
+      "relative_path": "youtube-talking-heads/construction-talking-head-youtube-v1.mp4",
+      "filename": "construction-talking-head-youtube-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "construction",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 8929980,
+      "size_mb": "8.52",
+      "duration_seconds": "37.80",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/insightforge-talking-head-youtube-v1.mp4",
+      "root": "video",
+      "relative_path": "youtube-talking-heads/insightforge-talking-head-youtube-v1.mp4",
+      "filename": "insightforge-talking-head-youtube-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "insightforge",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7120234,
+      "size_mb": "6.79",
+      "duration_seconds": "30.32",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/tiling-talking-head-youtube-v1.mp4",
+      "root": "video",
+      "relative_path": "youtube-talking-heads/tiling-talking-head-youtube-v1.mp4",
+      "filename": "tiling-talking-head-youtube-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "tiling",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7853310,
+      "size_mb": "7.49",
+      "duration_seconds": "33.96",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    },
+    {
+      "path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/wellness-talking-head-youtube-v1.mp4",
+      "root": "video",
+      "relative_path": "youtube-talking-heads/wellness-talking-head-youtube-v1.mp4",
+      "filename": "wellness-talking-head-youtube-v1.mp4",
+      "extension": ".mp4",
+      "kind": "video",
+      "product": "wellness",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 5831077,
+      "size_mb": "5.56",
+      "duration_seconds": "23.68",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac"
+    }
+  ],
+  "copied_portfolio_media": [
+    {
+      "path": "/media/elevenlabs/projects/construction/construction-talking-head-youtube-v1.mp4",
+      "repo_path": "public/media/elevenlabs/projects/construction/construction-talking-head-youtube-v1.mp4",
+      "filename": "construction-talking-head-youtube-v1.mp4",
+      "product": "construction",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 8929980,
+      "size_mb": "8.52",
+      "duration_seconds": "37.80",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac",
+      "warning": ""
+    },
+    {
+      "path": "/media/elevenlabs/projects/insightforge/insightforge-talking-head-youtube-v1.mp4",
+      "repo_path": "public/media/elevenlabs/projects/insightforge/insightforge-talking-head-youtube-v1.mp4",
+      "filename": "insightforge-talking-head-youtube-v1.mp4",
+      "product": "insightforge",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7120234,
+      "size_mb": "6.79",
+      "duration_seconds": "30.32",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac",
+      "warning": ""
+    },
+    {
+      "path": "/media/elevenlabs/projects/tiling/tiling-talking-head-youtube-v1.mp4",
+      "repo_path": "public/media/elevenlabs/projects/tiling/tiling-talking-head-youtube-v1.mp4",
+      "filename": "tiling-talking-head-youtube-v1.mp4",
+      "product": "tiling",
+      "media_type": "talking-head YouTube video",
+      "size_bytes": 7853310,
+      "size_mb": "7.49",
+      "duration_seconds": "33.96",
+      "width": 832,
+      "height": 1088,
+      "codec": "h264+aac",
+      "warning": ""
+    }
+  ],
+  "rename_log": [
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/wellness-etsy-video-voiceover-v1..mp3",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/wellness-etsy-video-voiceover-v1.mp3",
+      "reason": "Moved misplaced Etsy MP3 into expected folder and fixed double-dot filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/insightforge-etsy-video-voiceover-v1.mp3",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/insightforge-etsy-video-voiceover-v1.mp3",
+      "reason": "Moved misplaced Etsy MP3 into expected folder."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/tiling-etsy-video-voiceover-v1.mp3",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/tiling-etsy-video-voiceover-v1.mp3",
+      "reason": "Moved misplaced Etsy MP3 into expected folder."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/bank-desert-etsy-video-voiceover-v1.mp3",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos/bank-desert-etsy-video-voiceover-v1.mp3",
+      "reason": "Moved misplaced Etsy MP3 into expected folder."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/insightforge-talking-head-youtube-v1.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/insightforge-talking-head-youtube-v1.mp4",
+      "reason": "Moved MP4 out of audio tree into expected video folder."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/tiling-talking-head-youtube-v1.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/tiling-talking-head-youtube-v1.mp4",
+      "reason": "Moved MP4 out of audio tree into expected video folder."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/nextgenwebs-audio/wellnes_talkinghead.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/wellness-talking-head-youtube-v1.mp4",
+      "reason": "Moved MP4 out of audio tree and normalized typo/generic talking-head filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/Act_as_an_expert_short_form_vi.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/social-reels/act-as-an-expert-short-form-video-v1.mp4",
+      "reason": "Moved root MP4 into social reels and normalized descriptive filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid1.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid1.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid2.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid2.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid3.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid3.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid5.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid5.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid6.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid6.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid7.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid7.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid8.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid8.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid9.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid9.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid10.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid10.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid11.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid11.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid12.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid12.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid13.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid13.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    },
+    {
+      "old_path": "/home/iedrees/Workspace/3D-Portfolio/vid14.mp4",
+      "new_path": "/home/iedrees/Workspace/nextgenwebs-video/_unsorted-video/vid14.mp4",
+      "reason": "Moved generic root MP4 into unsorted video because product/use could not be determined from filename."
+    }
+  ],
+  "warnings": [
+    "Generic vid*.mp4 files were placed in _unsorted-video because filenames did not identify product or campaign.",
+    "No NextGenWebs homepage intro video was found; only MP3 homepage-brand voiceovers exist.",
+    "No Precision Laser talking-head video was found.",
+    "No portfolio walkthrough videos were found in nextgenwebs-video/portfolio-walkthroughs."
+  ]
+}

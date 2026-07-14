@@ -1,0 +1,19 @@
+expected_item,status,note
+NextGenWebs homepage intro talking-head video,missing,Only homepage-brand MP3 voiceovers were found; no homepage intro MP4/WEBM exists.
+Construction talking-head video,found,/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/construction-talking-head-youtube-v1.mp4
+Tiling talking-head video,found,/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/tiling-talking-head-youtube-v1.mp4
+InsightForge talking-head video,found,/home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads/insightforge-talking-head-youtube-v1.mp4
+Precision Laser talking-head video,missing,No precision-laser talking-head MP4/WEBM found in the source folders.
+Portfolio walkthrough videos,missing,No MP4/WEBM files found under nextgenwebs-video/portfolio-walkthroughs.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/etsy-listing-videos,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/youtube-shorts,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/portfolio-walkthroughs,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/social-reels,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/cold-outreach,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-audio/homepage-brand,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/etsy-listing-videos,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/youtube-talking-heads,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/youtube-shorts,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/portfolio-walkthroughs,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/social-reels,found,Folder exists.
+Folder: /home/iedrees/Workspace/nextgenwebs-video/homepage-brand,found,Folder exists.
