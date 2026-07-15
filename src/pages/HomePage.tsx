@@ -166,12 +166,12 @@ const base = import.meta.env.BASE_URL;
 
 function HeroReel() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   function toggle() {
     if (!videoRef.current) return;
-    if (videoRef.current.paused) { videoRef.current.play(); setPlaying(true); }
-    else { videoRef.current.pause(); setPlaying(false); }
+    if (videoRef.current.paused) { videoRef.current.play(); setPaused(false); }
+    else { videoRef.current.pause(); setPaused(true); }
   }
 
   return (
@@ -187,19 +187,23 @@ function HeroReel() {
         ref={videoRef}
         src={`${base}videos/grok2.mp4`}
         className="w-full h-full object-cover"
+        autoPlay
         loop
         playsInline
         muted
-        preload="metadata"
+        preload="auto"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-      {!playing && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+
+      {/* Show play icon only when manually paused */}
+      {paused && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+          <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center">
             <Play className="text-white ml-1" fill="white" size={22} />
           </div>
         </div>
       )}
+
       <div className="absolute bottom-4 left-4 right-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs text-white font-medium">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
