@@ -9,7 +9,7 @@ import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectSho
 
 export interface Project {
   title: string;
-  category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data';
+  category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data' | 'Marketing / Finance / Affiliate Funnel';
   description: string;
   tags: string[];
   liveUrl: string;
@@ -35,6 +35,7 @@ const catClass: Record<string, string> = {
   Education: 'cat-education',
   Creative: 'cat-creative',
   Data: 'cat-data',
+  'Marketing / Finance / Affiliate Funnel': 'cat-marketing-finance',
 };
 
 const catEmoji: Record<string, string> = {
@@ -43,6 +44,7 @@ const catEmoji: Record<string, string> = {
   Education: '📚',
   Creative: '🎨',
   Data: '📊',
+  'Marketing / Finance / Affiliate Funnel': '📈',
 };
 
 // ─── Animated project card ───────────────────────────────────────────────────
@@ -209,6 +211,43 @@ export const projectSlug = (project: Pick<Project, 'title'>) =>
     .replace(/^-|-$/g, '');
 
 export const projects: Project[] = [
+  {
+    title: 'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad',
+    category: 'Marketing / Finance / Affiliate Funnel',
+    description: 'A rebrandable trading affiliate website template designed for broker partners, introducing brokers, trading educators, and finance creators who need a compliant, conversion-focused referral funnel.',
+    tags: ['Affiliate Funnel', 'React', 'TypeScript', 'Vite', 'SEO', 'Lead Capture', 'Risk Disclosure', 'Rebrandable Config'],
+    liveUrl: 'https://iederees-create.github.io/deriv-affiliate-launchpad-template/',
+    // Etsy URL intentionally omitted: product listing is pending and must not use a fake or generic Etsy URL.
+    featured: true,
+    toolBadge: 'Compliance-Friendly Affiliate Funnel',
+    toolHighlight: 'A static, rebrandable broker affiliate launchpad with placeholder affiliate links, risk disclosure copy, broker programme explainer sections, SEO blog structure, WhatsApp/email lead capture, and buyer setup documentation. It does not imply Deriv endorsement, guaranteed earnings, or trading profits.',
+    mediaAlt: 'Trading Affiliate Website Template demo showing a dark fintech affiliate funnel for broker partners and finance creators',
+    features: [
+      'Affiliate link manager controlled from src/config/affiliateConfig.ts',
+      'Broker partner programme explainer with cautious, non-official Deriv Partner programme demo wording',
+      'Trading platform pages covering MT5, Deriv Bot, Deriv Trader, Deriv GO, cTrader and TradingView with availability caveats',
+      'Dedicated risk disclosure page and affiliate disclosure copy throughout the funnel',
+      'SEO blog hub plus long-form article content for search-led traffic',
+      'WhatsApp and email lead capture with editable buyer config',
+      'Mobile-first dark fintech design built with Vite, React and TypeScript',
+      'Buyer setup guide, affiliate link replacement guide, SEO guide and seller listing support files',
+    ],
+    caseStudy: {
+      methodology: 'Built as a static, GitHub Pages-ready Vite + React + TypeScript template for trading affiliates, introducing brokers, finance creators and broker partner programme promoters. The architecture separates page design from affiliate configuration so buyers can replace brand details, placeholder affiliate links, WhatsApp, email, social links and disclosure text from one config file.',
+      toolsUsed: ['Vite', 'React', 'TypeScript', 'Responsive CSS', 'React Router', 'GitHub Pages', 'SEO Metadata', 'JSON-LD'],
+      technicalChallenge: {
+        title: 'Designing conversion copy without unsafe finance claims',
+        body: 'The main constraint was building a conversion-focused affiliate funnel without implying broker endorsement, guaranteed earnings, guaranteed trading profits or investment advice. The solution uses explicit affiliate disclosure, visible risk warnings, placeholder links, cautious Deriv Partner programme demo wording, and buyer documentation that explains compliance review before publication.',
+      },
+      privacyDesign: 'The template has no backend and no database. Lead capture uses editable WhatsApp and email routes, and every broker or partner CTA is sourced from a local config file with placeholder links until the buyer replaces them.',
+      testResults: [
+        'npm install completed with zero reported vulnerabilities',
+        'Production build passed with no TypeScript errors',
+        'Internal route and sitemap check passed for all public routes',
+        'GitHub Pages deployment returned HTTP 200 at the public demo URL',
+      ],
+    },
+  },
   {
     title: 'InsightForge Business Analytics Studio',
     category: 'Data',
@@ -699,7 +738,7 @@ export const projects: Project[] = [
   },
 ];
 
-const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data'];
+const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data', 'Marketing / Finance / Affiliate Funnel'];
 
 export default function WorkPage() {
   const [filter, setFilter] = useState<string>('All');

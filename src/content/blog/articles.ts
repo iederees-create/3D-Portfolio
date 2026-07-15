@@ -3,6 +3,7 @@ import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educati
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
 import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
+import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -10,6 +11,18 @@ import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quot
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'trading-affiliate-website-template',
+    title: 'How We Built a Plug-and-Play Trading Affiliate Website for Introducing Brokers and Broker Partners',
+    excerpt: 'A detailed build case study for a rebrandable trading affiliate website template with affiliate link management, risk disclosures, broker programme education, SEO content and lead capture.',
+    datePublished: '2026-07-16',
+    dateModified: '2026-07-16',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Affiliate Marketing',
+    tags: ['Case Study', 'Affiliate Marketing', 'Trading Education', 'Compliance Copy', 'React', 'TypeScript'],
+    readingTimeMinutes: 14,
+    relatedSlugs: ['construction-website-quote-planner', 'laser-cutting-website-quote-planner'],
+  },
   {
     slug: 'laser-cutting-website-quote-planner',
     title: 'How to Build a Laser Cutting Website That Gets Better Quote Requests',
@@ -69,6 +82,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
   'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,

@@ -32,6 +32,7 @@ const articleByProjectTitle: Record<string, string> = {
   'Construction Website Template': 'construction-website-quote-planner',
   'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'Fluent Path Tutoring': 'why-educational-businesses-need-custom-learning-hubs',
+  'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
 };
 
 // ─── Enquiry CTA block ────────────────────────────────────
