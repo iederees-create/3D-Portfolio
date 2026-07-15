@@ -230,7 +230,7 @@ export default function CredentialsPage() {
             </MagneticButton>
             <MagneticButton>
               <a
-                href="mailto:hello@nextgenwebs.co.za?subject=CV Request"
+                href="mailto:iedereesfrancis@gmail.com?subject=CV Request — NextGenWebs Portfolio"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 text-slate-300 font-bold text-sm tracking-wide rounded-full border border-white/10 hover:bg-white/10 transition-colors"
               >
                 <Download size={15} /> Request Full CV
@@ -386,7 +386,7 @@ export default function CredentialsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <MagneticButton>
                 <a
-                  href="mailto:hello@nextgenwebs.co.za"
+                  href="mailto:iedereesfrancis@gmail.com?subject=Enquiry from Portfolio — Credentials page"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-xl"
                 >
                   Get in touch
