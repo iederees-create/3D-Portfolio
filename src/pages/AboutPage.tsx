@@ -9,7 +9,14 @@ import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
 
 // ─── VideoCard ────────────────────────────────────────────────────────────────
-function VideoCard({ src, title }: { src: string; title: string }) {
+function VideoCard({
+  src, title, featured = false, tag,
+}: {
+  src: string;
+  title: string;
+  featured?: boolean;
+  tag?: string;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -25,6 +32,68 @@ function VideoCard({ src, title }: { src: string; title: string }) {
     }
   }, [isHovered]);
 
+  // Featured: full-width card, 16:9-ish landscape with play-on-hover
+  if (featured) {
+    return (
+      <div
+        className="relative w-full rounded-2xl overflow-hidden glass-card group cursor-pointer border border-white/10"
+        style={{ aspectRatio: '9/16' }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => {
+          if (videoRef.current) {
+            if (isPlaying) { videoRef.current.pause(); setIsPlaying(false); }
+            else { videoRef.current.play(); setIsPlaying(true); }
+          }
+        }}
+      >
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-full object-cover"
+          preload="metadata"
+          loop
+          playsInline
+          muted={isMuted}
+        />
+
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+        {/* Tag badge */}
+        {tag && (
+          <div className="absolute top-4 left-4">
+            <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-primary-500/20 border border-primary-500/30 text-primary-300 uppercase tracking-widest">
+              {tag}
+            </span>
+          </div>
+        )}
+
+        {/* Play overlay */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+            <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-md border border-white/30 group-hover:scale-110 transition-transform duration-300">
+              <Play className="text-white ml-1" fill="white" size={22} />
+            </div>
+          </div>
+        )}
+
+        {/* Title + mute */}
+        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
+          <p className="text-white text-sm font-semibold leading-snug line-clamp-2 flex-1">{title}</p>
+          <button
+            onClick={e => { e.stopPropagation(); setIsMuted(m => !m); }}
+            className="flex-shrink-0 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/20 hover:bg-white/20 transition-colors"
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+          >
+            {isMuted ? <VolumeX size={13} className="text-white" /> : <Volume2 size={13} className="text-white" />}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Default: portrait scroll card
   return (
     <div
       className="relative flex-shrink-0 w-56 h-96 rounded-2xl overflow-hidden glass-card group cursor-pointer border border-white/10 snap-center"
@@ -78,6 +147,7 @@ function VideoCard({ src, title }: { src: string; title: string }) {
   );
 }
 
+
 // ─── Feature cards data ───────────────────────────────────────────────────────
 const featureCards = [
   {
@@ -110,6 +180,15 @@ const skills = [
 
 // ─── Videos ──────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
+
+// Featured spotlight reels (grok-produced, higher production value)
+const featuredReels = [
+  { src: `${base}videos/grok1.mp4`, title: 'What makes a website actually convert?', tag: 'Conversion' },
+  { src: `${base}videos/grok2.mp4`, title: 'The web strategy most businesses miss.', tag: 'Strategy' },
+  { src: `${base}videos/grok3.mp4`, title: 'Why I build websites differently.', tag: 'Process' },
+];
+
+// Full reel bank — IG short-form clips
 const videos = [
   { src: `${base}videos/vid1.mp4`,  title: 'Stop using generic website templates.' },
   { src: `${base}videos/vid2.mp4`,  title: 'Why your website is loading slowly.' },
@@ -303,13 +382,31 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
-        {/* Horizontal scrollable video row */}
+        {/* ── Featured spotlight reels (3-col grid) ── */}
+        <div className="max-w-7xl mx-auto px-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {featuredReels.map((vid, i) => (
+              <motion.div
+                key={vid.src}
+                initial={{ opacity: 0, y: 24 }}
+                animate={videoInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+              >
+                <VideoCard src={vid.src} title={vid.title} featured tag={vid.tag} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Short-form reel scroll ── */}
+        <div className="max-w-7xl mx-auto px-6 mb-4">
+          <p className="text-xs text-slate-600 uppercase tracking-widest font-mono">More clips ↓ scroll to explore</p>
+        </div>
         <div className="relative w-full">
           <div
             className="flex gap-5 overflow-x-auto px-6 pb-6 pt-2 snap-x snap-mandatory hide-scrollbar"
             style={{ scrollBehavior: 'smooth' }}
           >
-            {/* Alignment spacer */}
             <div className="w-[calc((100vw-80rem)/2)] flex-shrink-0 hidden xl:block" />
 
             {videos.map((vid, i) => (
