@@ -2,7 +2,7 @@ import { Routes, Route, NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Sparkles, Twitter, Instagram, Youtube } from 'lucide-react';
 
-import QuoteChat from './QuoteChat';
+import NextGenWebsAssistant from './NextGenWebsAssistant';
 import ThemePicker from './components/ThemePicker';
 import KonamiCode from './components/KonamiCode';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
@@ -191,8 +191,8 @@ export default function App() {
 
       <Footer />
 
-      {/* Floating Quote Chat — visible on all pages */}
-      <QuoteChat />
+      {/* Floating NextGenWebs AI assistant — visible on all pages */}
+      <NextGenWebsAssistant />
     </div>
   );
 }

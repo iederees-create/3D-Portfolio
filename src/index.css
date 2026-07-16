@@ -173,6 +173,7 @@ body {
 .cat-creative { --cat-color: #a78bfa; --cat-bg: rgba(167,139,250,0.12); }
 .cat-data     { --cat-color: #34d399; --cat-bg: rgba(52,211,153,0.12); }
 .cat-marketing-finance { --cat-color: #6be4c4; --cat-bg: rgba(107,228,196,0.12); }
+.cat-ai-web-app { --cat-color: #67e8f9; --cat-bg: rgba(103,232,249,0.12); }
 
 .cat-badge {
   color: var(--cat-color);

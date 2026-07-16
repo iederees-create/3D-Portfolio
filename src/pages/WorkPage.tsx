@@ -9,7 +9,7 @@ import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectSho
 
 export interface Project {
   title: string;
-  category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data' | 'Marketing / Finance / Affiliate Funnel';
+  category: 'Service' | 'Beauty' | 'Education' | 'Creative' | 'Data' | 'Marketing / Finance / Affiliate Funnel' | 'AI / Web App / Support Automation';
   description: string;
   tags: string[];
   liveUrl: string;
@@ -36,6 +36,7 @@ const catClass: Record<string, string> = {
   Creative: 'cat-creative',
   Data: 'cat-data',
   'Marketing / Finance / Affiliate Funnel': 'cat-marketing-finance',
+  'AI / Web App / Support Automation': 'cat-ai-web-app',
 };
 
 const catEmoji: Record<string, string> = {
@@ -45,6 +46,7 @@ const catEmoji: Record<string, string> = {
   Creative: '🎨',
   Data: '📊',
   'Marketing / Finance / Affiliate Funnel': '📈',
+  'AI / Web App / Support Automation': '🤖',
 };
 
 // ─── Animated project card ───────────────────────────────────────────────────
@@ -211,6 +213,44 @@ export const projectSlug = (project: Pick<Project, 'title'>) =>
     .replace(/^-|-$/g, '');
 
 export const projects: Project[] = [
+
+  {
+    title: 'SupportForge AI Assistant',
+    category: 'AI / Web App / Support Automation',
+    description: 'A custom AI assistant template that helps businesses answer website visitor questions using a controlled knowledge base, branded chat UI, lead-routing prompts, and safe escalation rules.',
+    tags: ['AI Assistant', 'Node.js', 'Express', 'OpenAI', 'Knowledge Base', 'Support Automation', 'Lead Routing', 'Mobile UI'],
+    liveUrl: 'https://github.com/iedrees-create/supportforge-ai-assistant-template',
+    // Etsy URL pending - do not link a fake product URL or the generic shop URL.
+    featured: true,
+    toolBadge: 'Controlled AI Support Assistant',
+    toolHighlight: 'A branded support assistant architecture with a controlled markdown knowledge base, server-side OpenAI endpoint, safe fallback responses, WhatsApp/contact escalation, transcript export, mobile-first UI, Render-ready deployment and Etsy-ready product packaging.',
+    features: [
+      'Branded AI chat widget',
+      'Controlled company knowledge base',
+      'OpenAI-powered backend',
+      'Lead capture-ready structure',
+      'WhatsApp/contact escalation',
+      'Safe response rules',
+      'Mobile-first interface',
+      'Portfolio integration',
+      'Render-ready backend',
+      'Etsy-ready product package',
+    ],
+    caseStudy: {
+      methodology: 'Built as a portfolio-safe AI support assistant template with a static frontend, a Node.js/Express backend and editable markdown knowledge docs. Business-specific answers are grounded in the knowledge base instead of private memory or hidden client content.',
+      toolsUsed: ['Node.js', 'Express', 'OpenAI API', 'Markdown Knowledge Base', 'HTML', 'CSS', 'JavaScript', 'Render'],
+      technicalChallenge: {
+        title: 'Making a public AI assistant useful without exposing private data',
+        body: 'The key constraint was separating the visitor-facing experience from private business systems. The assistant uses server-side API calls, controlled knowledge files, safe fallback responses and explicit limitations so the frontend never receives API keys and the model is not asked to rely on private memory.',
+      },
+      privacyDesign: 'The frontend sends only the visitor conversation to a public chat endpoint. API keys remain server-side, and the assistant is informational only: it cannot access Etsy secrets, private dashboards, unpublished listing data or perform actions.',
+      testResults: [
+        'SupportForge local install completed with zero reported vulnerabilities',
+        'Local /api/chat smoke test returned a safe demo response',
+        'Portfolio integration uses a backend endpoint with no frontend API key exposure',
+      ],
+    },
+  },
   {
     title: 'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad',
     category: 'Marketing / Finance / Affiliate Funnel',

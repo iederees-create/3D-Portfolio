@@ -29,6 +29,7 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'SupportForge AI Assistant': 'ai-portfolio-assistant',
   'Construction Website Template': 'construction-website-quote-planner',
   'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'Fluent Path Tutoring': 'why-educational-businesses-need-custom-learning-hubs',

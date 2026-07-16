@@ -4,6 +4,7 @@ import BankDesertAnalysisContent from './bank-desert-analysis-python-census-goog
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
 import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
 import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
+import AiPortfolioAssistantContent from './ai-portfolio-assistant';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -11,6 +12,19 @@ import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+
+  {
+    slug: 'ai-portfolio-assistant',
+    title: 'How I Built an AI Portfolio Assistant That Helps Visitors Find the Right Service',
+    excerpt: 'A practical case study on adding a controlled-knowledge AI assistant to the NextGenWebs portfolio without exposing API keys, private dashboard data, or fake Etsy product links.',
+    datePublished: '2026-07-16',
+    dateModified: '2026-07-16',
+    author: 'Iedrees Francis',
+    category: 'Case Study / AI Integration',
+    tags: ['AI Assistant', 'Portfolio', 'OpenAI', 'Node.js', 'React', 'Lead Routing'],
+    readingTimeMinutes: 7,
+    relatedSlugs: ['trading-affiliate-website-template', 'construction-website-quote-planner'],
+  },
   {
     slug: 'trading-affiliate-website-template',
     title: 'How We Built a Plug-and-Play Trading Affiliate Website for Introducing Brokers and Broker Partners',
@@ -82,6 +96,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'ai-portfolio-assistant': AiPortfolioAssistantContent,
   'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
   'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
