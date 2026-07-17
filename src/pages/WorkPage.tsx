@@ -220,7 +220,7 @@ export const projects: Project[] = [
     description: 'A custom AI assistant template that helps businesses answer website visitor questions using a controlled knowledge base, branded chat UI, lead-routing prompts, and safe escalation rules.',
     tags: ['AI Assistant', 'Node.js', 'Express', 'OpenAI', 'Knowledge Base', 'Support Automation', 'Lead Routing', 'Mobile UI'],
     liveUrl: 'https://github.com/iedrees-create/supportforge-ai-assistant-template',
-    // Etsy URL pending - do not link a fake product URL or the generic shop URL.
+    etsyUrl: 'https://www.etsy.com/listing/4539479674',
     featured: true,
     toolBadge: 'Controlled AI Support Assistant',
     toolHighlight: 'A branded support assistant architecture with a controlled markdown knowledge base, server-side OpenAI endpoint, safe fallback responses, WhatsApp/contact escalation, transcript export, mobile-first UI, Render-ready deployment and Etsy-ready product packaging.',
@@ -294,8 +294,7 @@ export const projects: Project[] = [
     description: 'A privacy-first business intelligence web application that transforms CSV sales, customer and review data into interactive dashboards, customer segments, sentiment insights, forecasts, scenario plans and downloadable management reports.',
     tags: ['React', 'TypeScript', 'Python', 'Pandas', 'D3', 'Data Visualisation', 'Machine Learning', 'Analytics'],
     liveUrl: 'https://iederees-create.github.io/insightforge-business-analytics-dashboard/',
-    // etsyUrl intentionally omitted - the Etsy listing is still a draft
-    // and must not be linked publicly yet.
+    etsyUrl: 'https://www.etsy.com/listing/4536792669',
     featured: true,
     toolBadge: 'Privacy-First, Fully Client-Side',
     toolHighlight: 'Every calculation — CSV parsing, customer segmentation, sentiment scoring, forecasting and report generation — runs locally in the browser. No sales, customer or review data is ever uploaded to a server.',
@@ -359,8 +358,7 @@ export const projects: Project[] = [
     description: 'An academically responsible Python and Pandas learning toolkit that helps students design, analyse and explain financial-access research using demographic data, institution locations, interactive maps and transparent statistical models.',
     tags: ['Python', 'Pandas', 'Jupyter', 'Census API', 'Leaflet', 'Statistics', 'Data Visualisation', 'Geospatial Analysis'],
     liveUrl: 'https://iederees-create.github.io/bank-desert-analysis-student-lab/',
-    // etsyUrl intentionally omitted - the Etsy listing is still a draft
-    // and must not be linked publicly yet.
+    etsyUrl: 'https://www.etsy.com/listing/4537098414',
     featured: true,
     toolBadge: 'Privacy-First, Fully Client-Side',
     toolHighlight: 'A static, client-only single-page app — CSV parsing, the Financial Access Score, and every Statistics Lab calculation run in the student\'s browser. Nothing is sent to a server, because there isn\'t one.',
@@ -421,6 +419,7 @@ export const projects: Project[] = [
     description: 'A premium lead-generation website template for tiling contractors and flooring specialists, featuring an interactive Tile Project Planner, quantity estimator, structured quote summaries, WhatsApp handoff, responsive design and simple business customisation.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Tile Calculator'],
     liveUrl: 'https://iederees-create.github.io/tableview-tiling-ct-ct/',
+    etsyUrl: 'https://www.etsy.com/listing/4536569497',
     featured: true,
     toolBadge: 'Interactive Tile Project Planner',
     toolHighlight: 'The Tile Project Planner is an original 8-step calculator: visitors enter their room measurements and tile size, choose a layout, and get an instant area/tile/box/cost estimate with indicative material guidance — then send a structured quote request via WhatsApp or email.',
@@ -470,8 +469,7 @@ export const projects: Project[] = [
     description: 'A premium lead-generation website template for builders and renovation contractors, featuring an interactive Renovation Scope & Budget Planner, structured quote summaries, configurable assumptions, responsive design and WhatsApp or email quote handoff.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Quote Planner', 'Accessibility'],
     liveUrl: 'https://iederees-create.github.io/southern-suburbs-builders-ct/',
-    // etsyUrl intentionally omitted - the Etsy listing is still a draft
-    // and must not be linked publicly yet. See PORTFOLIO-ETSY-LINK-AUDIT.md.
+    etsyUrl: 'https://www.etsy.com/listing/4537523196',
     featured: true,
     toolBadge: 'Renovation Scope & Budget Planner',
     toolHighlight: 'Visitors define their project (type, dimensions, finish level, trades, site access, occupancy) and get an instant preliminary scope, complexity indicator, configurable budget range, trade checklist, photo checklist and structured summary — with an explicit-confirmation step before any WhatsApp or email message is sent.',
@@ -535,8 +533,7 @@ export const projects: Project[] = [
     description: 'A premium website template for laser cutting, engraving, signage and custom fabrication businesses, featuring an interactive Laser Cut & Engraving Quote Planner, material and file-readiness checklists, structured quote summaries, responsive design and WhatsApp or email handoff.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Quote Planner', 'Accessibility', 'GitHub Pages'],
     liveUrl: 'https://iederees-create.github.io/precision-laser-works-template/',
-    // etsyUrl intentionally omitted - the Etsy listing is still a draft
-    // and must not be linked publicly yet.
+    etsyUrl: 'https://www.etsy.com/listing/4537642227',
     featured: true,
     toolBadge: 'Laser Cut & Engraving Quote Planner',
     toolHighlight: 'Visitors choose a service type and material, enter thickness, dimensions (mm/cm/m/inches) and quantity, and get an instant material area, complexity indicator, service checklist, file-preparation checklist, and a configurable preliminary budget range — with an explicit-confirmation step before any WhatsApp or email message is sent.',
@@ -608,6 +605,7 @@ export const projects: Project[] = [
     description: 'A conversion-focused website template for pest-control companies, exterminators and termite specialists, featuring service presentation, quote-request flows, WhatsApp contact, mobile-first design and simple business customisation.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Lead Generation', 'Pest Control'],
     liveUrl: 'https://iederees-create.github.io/westlake-pest-control-template/',
+    etsyUrl: 'https://www.etsy.com/listing/4536200319',
     featured: true,
     toolBadge: 'Quote Request Flow',
     toolHighlight: 'A mobile-first pest-control template with service presentation, quote request validation, WhatsApp handoff, theme presets, and one-file business configuration for fast rebrands.',
@@ -654,6 +652,7 @@ export const projects: Project[] = [
     description: 'A premium React website template for wellness studios, skincare businesses and beauty practitioners, featuring an interactive consultation finder, treatment presentation, booking flows, responsive design and central business customisation.',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Responsive Design', 'Local SEO', 'Lead Generation'],
     liveUrl: 'https://iederees-create.github.io/vitality-wellness-claremont-ct/',
+    etsyUrl: 'https://www.etsy.com/listing/4536353299',
     featured: true,
     coverImage: `${import.meta.env.BASE_URL}projects/vitality-wellness/cover.webp`,
     previewVideoMp4: `${import.meta.env.BASE_URL}projects/vitality-wellness/preview.mp4`,
@@ -724,6 +723,7 @@ export const projects: Project[] = [
     description: 'A premium conversion-focused website template for aesthetic clinics, skincare studios and beauty practitioners, featuring treatment presentation, online enquiry flows, WhatsApp booking, mobile-first design and simple business customisation.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Beauty Business'],
     liveUrl: 'https://iederees-create.github.io/zen-skin-studio-template/',
+    etsyUrl: 'https://www.etsy.com/listing/4536125418',
     featured: true,
   },
   {
