@@ -3,8 +3,9 @@ import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educati
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
 import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
-import AboutNextGenWebsContent from './about-nextgenwebs-web-developer-cape-town';
+import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
 import AiPortfolioAssistantContent from './ai-portfolio-assistant';
+import AboutNextGenWebsContent from './about-nextgenwebs-web-developer-cape-town';
 import AmoreNailsCtWebsiteContent from './amore-nails-ct-website';
 import ConstructionCompanyWebsiteDesignCapeTownContent from './construction-company-website-design-cape-town';
 import CreatorHubDigitalPortfolioTemplateContent from './creator-hub-digital-portfolio-template';
@@ -17,11 +18,15 @@ import RaversusClinicalPortalContent from './raversus-clinical-portal';
 import SignageBusinessWebsiteDesignContent from './signage-business-website-design';
 import SolarLeadGenerationWebsiteTemplateContent from './solar-lead-generation-website-template';
 import TilingContractorWebsiteTemplateContent from './tiling-contractor-website-template';
-import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
 import VitalityWellnessWebsiteTemplateContent from './vitality-wellness-website-template';
 import WindowCleaningGlazingWebsiteDesignContent from './window-cleaning-glazing-website-design';
 import ZenSkinStudioContent from './zen-skin-studio-website-template';
 
+/**
+ * Article metadata, newest first. To add article #4: write its content
+ * component in this directory, add one entry here, and register the
+ * component below in `articleContentMap` — nothing else needs to change.
+ */
 export const articles: ArticleMeta[] = [
   {
     slug: 'about-nextgenwebs-web-developer-cape-town',
@@ -33,19 +38,6 @@ export const articles: ArticleMeta[] = [
     category: 'Case Study',
     tags: ['Case Study', 'Web Design', 'NextGenWebs'],
     readingTimeMinutes: 14,
-    // No cover image
-    relatedSlugs: [],
-  },
-  {
-    slug: 'ai-portfolio-assistant',
-    title: 'ai-portfolio-assistant',
-    excerpt: 'ai-portfolio-assistant',
-    datePublished: '2026-07-16',
-    dateModified: '2026-07-16',
-    author: 'Iedrees Francis',
-    category: 'Case Study',
-    tags: ['Case Study', 'Web Design', 'NextGenWebs'],
-    readingTimeMinutes: 4,
     // No cover image
     relatedSlugs: [],
   },
@@ -206,19 +198,6 @@ export const articles: ArticleMeta[] = [
     relatedSlugs: [],
   },
   {
-    slug: 'trading-affiliate-website-template',
-    title: 'trading-affiliate-website-template',
-    excerpt: 'trading-affiliate-website-template',
-    datePublished: '2026-07-16',
-    dateModified: '2026-07-16',
-    author: 'Iedrees Francis',
-    category: 'Case Study',
-    tags: ['Case Study', 'Web Design', 'NextGenWebs'],
-    readingTimeMinutes: 15,
-    // No cover image
-    relatedSlugs: [],
-  },
-  {
     slug: 'vitality-wellness-website-template',
     title: 'How I Built a Premium React Website Template for Wellness Studios, Spas and Skincare Businesses',
     excerpt: 'A detailed technical and strategic breakdown of the Vitality Wellness React/TypeScript/Tailwind template built by NextGenWebs — covering the interactive Consultation Finder, multi-theme design system, siteConfig.ts architecture, and the case for why wellness businesses need a custom website instead of relying on Instagram and booking platforms.',
@@ -257,17 +236,42 @@ export const articles: ArticleMeta[] = [
     // No cover image
     relatedSlugs: [],
   },
+
+  {
+    slug: 'ai-portfolio-assistant',
+    title: 'How I Built an AI Portfolio Assistant That Helps Visitors Find the Right Service',
+    excerpt: 'A practical case study on adding a controlled-knowledge AI assistant to the NextGenWebs portfolio without exposing API keys, private dashboard data, or fake Etsy product links.',
+    datePublished: '2026-07-16',
+    dateModified: '2026-07-16',
+    author: 'Iedrees Francis',
+    category: 'Case Study / AI Integration',
+    tags: ['AI Assistant', 'Portfolio', 'OpenAI', 'Node.js', 'React', 'Lead Routing'],
+    readingTimeMinutes: 7,
+    relatedSlugs: ['trading-affiliate-website-template', 'construction-website-quote-planner'],
+  },
+  {
+    slug: 'trading-affiliate-website-template',
+    title: 'How We Built a Plug-and-Play Trading Affiliate Website for Introducing Brokers and Broker Partners',
+    excerpt: 'A detailed build case study for a rebrandable trading affiliate website template with affiliate link management, risk disclosures, broker programme education, SEO content and lead capture.',
+    datePublished: '2026-07-16',
+    dateModified: '2026-07-16',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Affiliate Marketing',
+    tags: ['Case Study', 'Affiliate Marketing', 'Trading Education', 'Compliance Copy', 'React', 'TypeScript'],
+    readingTimeMinutes: 14,
+    relatedSlugs: ['construction-website-quote-planner', 'laser-cutting-website-quote-planner'],
+  },
   {
     slug: 'laser-cutting-website-quote-planner',
     title: 'How to Build a Laser Cutting Website That Gets Better Quote Requests',
-    excerpt: 'Why "how much to laser this?" enquiries waste time on both sides, and how an interactive Laser Cut & Engraving Quote Planner turns them into structured, production-ready quote briefs.',
+    excerpt: 'A media-rich case study showing how a laser cutting website template uses screenshots, video, Instagram Story assets and an interactive quote planner to turn vague enquiries into structured quote briefs.',
     datePublished: '2026-07-14',
-    dateModified: '2026-07-14',
+    dateModified: '2026-07-17',
     author: 'Iedrees Francis',
     category: 'Case Study / Fabrication',
-    tags: ['Case Study', 'Laser Cutting', 'Fabrication', 'HTML5', 'JavaScript'],
-    readingTimeMinutes: 6,
-    coverImage: ${import.meta.env.BASE_URL}projects/precision-laser/cover.webp,
+    tags: ['Case Study', 'Laser Cutting', 'Fabrication', 'Quote Planner', 'SEO', 'Video Marketing', 'JavaScript'],
+    readingTimeMinutes: 10,
+    coverImage: `${import.meta.env.BASE_URL}projects/precision-laser/cover.webp`,
     coverImageAlt: 'Precision Laser Website Template homepage with the Laser Cut & Engraving Quote Planner',
     relatedSlugs: ['construction-website-quote-planner'],
   },
@@ -281,21 +285,21 @@ export const articles: ArticleMeta[] = [
     category: 'Case Study / Construction',
     tags: ['Case Study', 'Construction', 'Lead Generation', 'HTML5', 'JavaScript'],
     readingTimeMinutes: 6,
-    coverImage: ${import.meta.env.BASE_URL}projects/southern-suburbs-builders/cover.webp,
+    coverImage: `${import.meta.env.BASE_URL}projects/southern-suburbs-builders/cover.webp`,
     coverImageAlt: 'Southern Suburbs Builders website template homepage with the Renovation Scope & Budget Planner',
     relatedSlugs: ['bank-desert-analysis-python-census-google-places'],
   },
   {
     slug: 'bank-desert-analysis-python-census-google-places',
     title: 'How to Build a Bank Desert Analysis Project with Python, Pandas, Census Data and Google Places',
-    excerpt: 'A practical guide to planning, sourcing data for, and analysing a bank desert / financial-access project in Python � Census ACS, Google Places, Pandas cleaning, mapping, and statistics, without a fabricated conclusion.',
+    excerpt: 'A practical guide to planning, sourcing data for, and analysing a bank desert / financial-access project in Python — Census ACS, Google Places, Pandas cleaning, mapping, and statistics, without a fabricated conclusion.',
     datePublished: '2026-07-13',
     dateModified: '2026-07-13',
     author: 'Iedrees Francis',
     category: 'Data',
     tags: ['Python', 'Pandas', 'Census API', 'Geospatial', 'Statistics', 'Financial Inclusion'],
     readingTimeMinutes: 12,
-    coverImage: ${import.meta.env.BASE_URL}projects/bank-desert-analysis/01-cover.png,
+    coverImage: `${import.meta.env.BASE_URL}projects/bank-desert-analysis/01-cover.png`,
     coverImageAlt: 'Bank Desert Analysis Student Lab dashboard showing the Financial Access Score, interactive map, and statistics lab used to teach bank desert research',
     relatedSlugs: ['why-educational-businesses-need-custom-learning-hubs'],
   },
@@ -309,16 +313,14 @@ export const articles: ArticleMeta[] = [
     category: 'Case Study / EdTech',
     tags: ['Case Study', 'EdTech', 'React', 'TypeScript'],
     readingTimeMinutes: 4,
+    // No dedicated Fluent Path screenshot exists in this repo yet — omitted
+    // rather than borrowing an unrelated project's image.
     relatedSlugs: ['bank-desert-analysis-python-census-google-places'],
   },
 ];
+
 export const articleContentMap: Record<string, ArticleContentComponent> = {
-  'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
-  'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
-  'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
-  'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
   'about-nextgenwebs-web-developer-cape-town': AboutNextGenWebsContent,
-  'ai-portfolio-assistant': AiPortfolioAssistantContent,
   'amore-nails-ct-website': AmoreNailsCtWebsiteContent,
   'construction-company-website-design-cape-town': ConstructionCompanyWebsiteDesignCapeTownContent,
   'creator-hub-digital-portfolio-template': CreatorHubDigitalPortfolioTemplateContent,
@@ -331,10 +333,15 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'signage-business-website-design': SignageBusinessWebsiteDesignContent,
   'solar-lead-generation-website-template': SolarLeadGenerationWebsiteTemplateContent,
   'tiling-contractor-website-template': TilingContractorWebsiteTemplateContent,
-  'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
   'vitality-wellness-website-template': VitalityWellnessWebsiteTemplateContent,
   'window-cleaning-glazing-website-design': WindowCleaningGlazingWebsiteDesignContent,
   'zen-skin-studio-website-template': ZenSkinStudioContent,
+  'ai-portfolio-assistant': AiPortfolioAssistantContent,
+  'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
+  'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
+  'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
+  'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
+  'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
 };
 
 export function getArticleBySlug(slug: string): ArticleMeta | undefined {

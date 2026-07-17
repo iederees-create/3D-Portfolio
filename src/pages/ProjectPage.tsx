@@ -29,62 +29,27 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
+  'RAVERSUS Clinical Portal': 'raversus-clinical-portal',
+  'Tiling Contractor Website Template': 'tiling-contractor-website-template',
+  'Claude Code Solar Lead Generation Template': 'solar-lead-generation-website-template',
+  'Pest Control Website Template': 'pest-control-website-template',
+  'Vitality Wellness Website Template': 'vitality-wellness-website-template',
+  'Summit Painting CT': 'painting-contractor-website-design',
   'Amore Nails CT': 'amore-nails-ct-website',
+  'Pixel Perfect Hair': 'pixel-perfect-hair-salon-website',
+  'Zen Skin Studio Website Template': 'zen-skin-studio-website-template',
+  'Acme Plumbing Claremont': 'plumbing-website-design-cape-town',
+  'Window Wizards CT': 'window-cleaning-glazing-website-design',
   'First Choice Construction': 'construction-company-website-design-cape-town',
   'Creator Hub Pro Template': 'creator-hub-digital-portfolio-template',
-  'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
-  'Summit Painting CT': 'painting-contractor-website-design',
-  'Pest Control Website Template': 'pest-control-website-template',
-  'Pixel Perfect Hair': 'pixel-perfect-hair-salon-website',
-  'Acme Plumbing Claremont': 'plumbing-website-design-cape-town',
-  'RAVERSUS Clinical Portal': 'raversus-clinical-portal',
   'Aura Signs': 'signage-business-website-design',
-  'Claude Code Solar Lead Generation Template': 'solar-lead-generation-website-template',
-  'Tiling Contractor Website Template': 'tiling-contractor-website-template',
-  'Vitality Wellness Website Template': 'vitality-wellness-website-template',
-  'Window Wizards CT': 'window-cleaning-glazing-website-design',
-  'Zen Skin Studio Website Template': 'zen-skin-studio-website-template',
-<<<<<<< HEAD
+
   'SupportForge AI Assistant': 'ai-portfolio-assistant',
   'Construction Website Template': 'construction-website-quote-planner',
   'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'Fluent Path Tutoring': 'why-educational-businesses-need-custom-learning-hubs',
   'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
-=======
-  'Amore Nails CT': 'amore-nails-ct-website',
-  'First Choice Construction': 'construction-company-website-design-cape-town',
-  'Creator Hub Pro Template': 'creator-hub-digital-portfolio-template',
-  'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
-  'Summit Painting CT': 'painting-contractor-website-design',
-  'Pest Control Website Template': 'pest-control-website-template',
-  'Pixel Perfect Hair': 'pixel-perfect-hair-salon-website',
-  'Acme Plumbing Claremont': 'plumbing-website-design-cape-town',
-  'RAVERSUS Clinical Portal': 'raversus-clinical-portal',
-  'Aura Signs': 'signage-business-website-design',
-  'Claude Code Solar Lead Generation Template': 'solar-lead-generation-website-template',
-  'Tiling Contractor Website Template': 'tiling-contractor-website-template',
-  'Vitality Wellness Website Template': 'vitality-wellness-website-template',
-  'Window Wizards CT': 'window-cleaning-glazing-website-design',
-  'Zen Skin Studio Website Template': 'zen-skin-studio-website-template',
-  'Construction Website Template': 'construction-website-quote-planner',
-  'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
-  'Fluent Path Tutoring': 'why-educational-businesses-need-custom-learning-hubs',
-  'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
-  'RAVERSUS Clinical Portal': 'raversus-clinical-portal',
-  'Tiling Contractor Website Template': 'tiling-contractor-website-template',
-  'Claude Code Solar Lead Generation Template': 'solar-lead-generation-website-template',
-  'Pest Control Website Template': 'pest-control-website-template',
-  'Vitality Wellness Website Template': 'vitality-wellness-website-template',
-  'Summit Painting CT': 'painting-contractor-website-design',
-  'Amore Nails CT': 'amore-nails-ct-website',
-  'Pixel Perfect Hair': 'pixel-perfect-hair-salon-website',
-  'Zen Skin Studio Website Template': 'zen-skin-studio-website-template',
-  'Acme Plumbing Claremont': 'plumbing-website-design-cape-town',
-  'Window Wizards CT': 'window-cleaning-glazing-website-design',
-  'First Choice Construction': 'construction-company-website-design-cape-town',
-  'Creator Hub Pro Template': 'creator-hub-digital-portfolio-template',
-  'Aura Signs': 'signage-business-website-design',
->>>>>>> fc48972 (Add SEO-optimized blog posts and register in articles.ts)
 };
 
 // ─── Enquiry CTA block ────────────────────────────────────
@@ -347,5 +312,4 @@ export default function ProjectPage() {
     </>
   );
 }
-
 
