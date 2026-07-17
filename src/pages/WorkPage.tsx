@@ -212,6 +212,24 @@ export const projectSlug = (project: Pick<Project, 'title'>) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
+const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' | 'previewVideoMp4' | 'previewVideoWebm' | 'videoPoster' | 'mediaAlt' | 'galleryImages' | 'galleryImageAlts'> => ({
+  coverImage: `${import.meta.env.BASE_URL}projects/${slug}/cover.webp`,
+  previewVideoMp4: `${import.meta.env.BASE_URL}projects/${slug}/preview.mp4`,
+  previewVideoWebm: `${import.meta.env.BASE_URL}projects/${slug}/preview.webm`,
+  videoPoster: `${import.meta.env.BASE_URL}projects/${slug}/video-poster.webp`,
+  mediaAlt: `${label} website preview showing the live project interface`,
+  galleryImages: [
+    `${import.meta.env.BASE_URL}projects/${slug}/01-desktop.webp`,
+    `${import.meta.env.BASE_URL}projects/${slug}/02-mobile.webp`,
+    `${import.meta.env.BASE_URL}projects/${slug}/03-responsive.webp`,
+  ],
+  galleryImageAlts: [
+    `${label} desktop website preview`,
+    `${label} mobile website preview`,
+    `${label} responsive desktop and mobile website preview`,
+  ],
+});
+
 export const projects: Project[] = [
 
   {
@@ -221,6 +239,7 @@ export const projects: Project[] = [
     tags: ['AI Assistant', 'Node.js', 'Express', 'OpenAI', 'Knowledge Base', 'Support Automation', 'Lead Routing', 'Mobile UI'],
     liveUrl: 'https://github.com/iedrees-create/supportforge-ai-assistant-template',
     etsyUrl: 'https://www.etsy.com/listing/4539479674',
+    ...projectMedia('supportforge-ai', 'SupportForge AI Assistant'),
     featured: true,
     toolBadge: 'Controlled AI Support Assistant',
     toolHighlight: 'A branded support assistant architecture with a controlled markdown knowledge base, server-side OpenAI endpoint, safe fallback responses, WhatsApp/contact escalation, transcript export, mobile-first UI, Render-ready deployment and Etsy-ready product packaging.',
@@ -258,6 +277,7 @@ export const projects: Project[] = [
     tags: ['Affiliate Funnel', 'React', 'TypeScript', 'Vite', 'SEO', 'Lead Capture', 'Risk Disclosure', 'Rebrandable Config'],
     liveUrl: 'https://iederees-create.github.io/deriv-affiliate-launchpad-template/',
     // Etsy URL intentionally omitted: product listing is pending and must not use a fake or generic Etsy URL.
+    ...projectMedia('trading-affiliate', 'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad'),
     featured: true,
     toolBadge: 'Compliance-Friendly Affiliate Funnel',
     toolHighlight: 'A static, rebrandable broker affiliate launchpad with placeholder affiliate links, risk disclosure copy, broker programme explainer sections, SEO blog structure, WhatsApp/email lead capture, and buyer setup documentation. It does not imply Deriv endorsement, guaranteed earnings, or trading profits.',
@@ -411,6 +431,7 @@ export const projects: Project[] = [
     description: 'Advanced interactive digital clinic and product reservation platform engineered for high-end bioelectric healing technology.',
     tags: ['E-Commerce', 'Custom Animations', 'API Integration'],
     liveUrl: 'https://iederees-create.github.io/raversus-v3/',
+    ...projectMedia('raversus', 'RAVERSUS Clinical Portal'),
     featured: true,
   },
   {
@@ -597,6 +618,7 @@ export const projects: Project[] = [
     description: 'A responsive solar-installer website template developed with assistance from Claude Code. It includes an interactive savings calculator, lead-capture form, project filtering, configurable business information and mobile-first design.',
     tags: ['Claude Code', 'HTML5', 'CSS3', 'JavaScript', 'GitHub Pages', 'Responsive Design'],
     liveUrl: 'https://iederees-create.github.io/ac-solar-solutions-ct/',
+    ...projectMedia('solar-lead-gen', 'Claude Code Solar Lead Generation Template'),
     featured: true,
   },
   {
@@ -698,6 +720,7 @@ export const projects: Project[] = [
     tags: ['React', 'Tailwind', 'Vite'],
     liveUrl: 'https://iederees-create.github.io/summit-painting-ct-ct/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('summit-painting', 'Summit Painting CT'),
     featured: true,
   },
   {
@@ -707,6 +730,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'Tailwind CSS', 'UI/UX'],
     liveUrl: 'https://iederees-create.github.io/amore-nails-ct/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('amore-nails', 'Amore Nails CT'),
     featured: true,
   },
   {
@@ -716,6 +740,7 @@ export const projects: Project[] = [
     tags: ['React', 'Vite', 'Responsive Layout'],
     liveUrl: 'https://iederees-create.github.io/pixel-perfect-hair/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('pixel-perfect-hair', 'Pixel Perfect Hair'),
   },
   {
     title: 'Zen Skin Studio Website Template',
@@ -724,6 +749,7 @@ export const projects: Project[] = [
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Local SEO', 'Beauty Business'],
     liveUrl: 'https://iederees-create.github.io/zen-skin-studio-template/',
     etsyUrl: 'https://www.etsy.com/listing/4536125418',
+    ...projectMedia('zen-skin-studio', 'Zen Skin Studio Website Template'),
     featured: true,
   },
   {
@@ -733,6 +759,7 @@ export const projects: Project[] = [
     tags: ['React', 'SEO Framework', 'Tailwind'],
     liveUrl: 'https://iederees-create.github.io/acme-plumbing-claremont-ct/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('acme-plumbing', 'Acme Plumbing Claremont'),
   },
   {
     title: 'Window Wizards CT',
@@ -741,6 +768,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'Vite', 'Components'],
     liveUrl: 'https://iederees-create.github.io/window-wizards-ct-ct/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('window-wizards', 'Window Wizards CT'),
   },
   {
     title: 'First Choice Construction',
@@ -749,6 +777,7 @@ export const projects: Project[] = [
     tags: ['React', 'Production Build', 'Tailwind'],
     liveUrl: 'https://iederees-create.github.io/first-choice-construction-ct/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('first-choice-construction', 'First Choice Construction'),
     featured: true,
   },
   {
@@ -758,6 +787,7 @@ export const projects: Project[] = [
     tags: ['Component Driven', 'Supabase Ready', 'Responsive UI'],
     liveUrl: 'https://iederees-create.github.io/creator-hub-template/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('creator-hub', 'Creator Hub Pro Template'),
     featured: true,
   },
   {
@@ -767,6 +797,7 @@ export const projects: Project[] = [
     tags: ['UI/UX Design', 'Vite', 'Tailwind'],
     liveUrl: 'https://iederees-create.github.io/aura-signs/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('aura-signs', 'Aura Signs'),
   },
   {
     title: 'Fluent Path Tutoring',
@@ -775,6 +806,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'React', 'Data Visuals'],
     liveUrl: 'https://iederees-create.github.io/fluent-path-tutoring/',
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
+    ...projectMedia('fluent-path', 'Fluent Path Tutoring'),
   },
 ];
 
