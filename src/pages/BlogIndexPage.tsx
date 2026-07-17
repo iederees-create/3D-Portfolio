@@ -34,7 +34,10 @@ export default function BlogIndexPage() {
             <span className="text-xs font-semibold tracking-widest uppercase text-slate-400">Insights & Articles</span>
             <div className="h-px bg-white/20 flex-1" />
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">Blog</h1>
+          <div className="flex items-baseline gap-4 mb-3">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Blog</h1>
+            <span className="bg-primary-500/20 text-primary-300 text-sm font-bold px-3 py-1 rounded-full">{articles.length} Posts</span>
+          </div>
           <p className="text-slate-400 max-w-2xl">
             Case studies and practical guides from building custom websites and data-analysis tools.
           </p>
