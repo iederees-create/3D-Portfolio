@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Globe, ShoppingBag, Sparkles, Layers, Star, Images } from 'lucide-react';
 import { ProjectMedia } from '../components/ProjectMedia';
 import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectShowcase';
+import { isInternalProjectUrl, toRouterPath } from '../lib/site';
 
 export interface Project {
   title: string;
@@ -14,6 +15,8 @@ export interface Project {
   tags: string[];
   liveUrl: string;
   etsyUrl?: string;
+  /** Short label for the Etsy CTA button on the grid card. Defaults to 'Buy Template'. */
+  etsyCtaLabel?: string;
   featured?: boolean;
   coverImage?: string;
   previewVideoMp4?: string;
@@ -157,16 +160,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Images size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
               <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Details</span>
             </Link>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
-              title="Live Site"
-            >
-              <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live Site</span>
-            </a>
+            {isInternalProjectUrl(project.liveUrl) ? (
+              <Link
+                to={toRouterPath(project.liveUrl)}
+                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+                title="Case Study"
+              >
+                <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+                <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Case Study</span>
+              </Link>
+            ) : (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
+                title="Live Site"
+              >
+                <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+                <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live Site</span>
+              </a>
+            )}
             {project.etsyUrl && (
               <a
                 href={project.etsyUrl}
@@ -176,7 +190,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 title="Buy on Etsy"
               >
                 <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
-                <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">Buy Template</span>
+                <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">{project.etsyCtaLabel ?? 'Buy Template'}</span>
               </a>
             )}
           </div>
@@ -240,7 +254,11 @@ export const projects: Project[] = [
     liveUrl: import.meta.env.BASE_URL + 'projects/qualified-lead-research/',
     // TODO: Replace after the final Etsy draft listing is created. Do not create or edit the listing in this stage.
     etsyUrl: 'https://nextgenwebs.etsy.com?placeholder=qualified-lead-research-listing-url',
+    etsyCtaLabel: 'Buy Blueprint',
     coverImage: import.meta.env.BASE_URL + 'projects/qualified-lead-research/01-main-product-promise.svg',
+    previewVideoMp4: import.meta.env.BASE_URL + 'projects/qualified-lead-research/preview.mp4',
+    previewVideoWebm: import.meta.env.BASE_URL + 'projects/qualified-lead-research/preview.webm',
+    videoPoster: import.meta.env.BASE_URL + 'projects/qualified-lead-research/video-poster.webp',
     mediaAlt: 'Custom Lead Research and Prospecting Blueprint product graphic with ICP, scorecard and workbook artefacts',
     galleryImages: [
       import.meta.env.BASE_URL + 'projects/qualified-lead-research/03-package-deliverables.svg',

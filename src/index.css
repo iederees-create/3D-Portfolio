@@ -18,22 +18,37 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar — tracks theme surfaces + accent */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0b0f19; }
-::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.7); }
+::-webkit-scrollbar-track { background: var(--color-bg-muted); }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-glow-rgb) / 0.45);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-glow-rgb) / 0.75);
+}
 
 /* ─── Gradient Text ─────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #E58A6A 0%, #DE826A 40%, #c084fc 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-from) 0%,
+    var(--color-gradient-via) 40%,
+    var(--color-gradient-to) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-warm {
-  background: linear-gradient(135deg, #fbbf24 0%, #f472b6 60%, #a78bfa 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-from) 0%,
+    var(--color-gradient-via) 55%,
+    var(--color-gradient-to) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -80,7 +95,11 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 40%);
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgb(var(--color-glow-rgb) / 0.1),
+    transparent 40%
+  );
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
@@ -154,16 +173,22 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #D47A6A, #8b5cf6, #D47A6A);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-from),
+    var(--color-primary-500),
+    var(--color-gradient-to),
+    var(--color-gradient-from)
+  );
   background-size: 200% auto;
   transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 20px rgba(99,102,241,0.3);
+  box-shadow: 0 0 20px rgb(var(--color-glow-rgb) / 0.35);
 }
 
 .btn-primary:hover {
   background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(99,102,241,0.5);
+  box-shadow: 0 0 35px rgb(var(--color-glow-rgb) / 0.55);
 }
 
 /* ─── Category accent colours ──────────────────────── */
@@ -214,7 +239,11 @@ body {
 
 /* ─── CTA Section ───────────────────────────────────── */
 .cta-glow {
-  background: radial-gradient(ellipse at center, rgba(99,102,241,0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--color-glow-rgb) / 0.18) 0%,
+    transparent 70%
+  );
 }
 
 /* ─── Noise texture overlay ─────────────────────────── */
@@ -236,12 +265,33 @@ body {
 
 
 :root {
+  /* Defaults match NextGen brand — ThemePicker overrides at runtime */
   --color-primary-300: #E58A6A;
   --color-primary-400: #DE826A;
   --color-primary-500: #D47A6A;
   --color-primary-600: #C26354;
   --color-primary-900: #5C2C24;
+
+  --color-bg: #0F172A;
+  --color-bg-elevated: #0F172A;
+  --color-bg-muted: #0b0f19;
+  --color-glow-rgb: 212 122 106;
+  --color-gradient-from: #E58A6A;
+  --color-gradient-via: #DE826A;
+  --color-gradient-to: #c084fc;
 }
+
+html,
+body,
+#root {
+  background-color: var(--color-bg);
+  transition: background-color 0.35s ease;
+}
+
+/* Theme-aware chrome helpers (prefer these over hardcoded hex) */
+.theme-bg { background-color: var(--color-bg); }
+.theme-bg-elevated { background-color: var(--color-bg-elevated); }
+.theme-bg-muted { background-color: var(--color-bg-muted); }
 
 
 /* ─── Hide scrollbar (used in horizontal scroll containers) ── */

@@ -106,7 +106,7 @@ export default function ReelShowcase() {
   ]
 
   return (
-    <section className="py-20 bg-[#0b0f19] border-y border-white/5 overflow-hidden">
+    <section className="py-20 bg-surface-muted border-y border-white/5 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 mb-8">
         <motion.div
           ref={ref}

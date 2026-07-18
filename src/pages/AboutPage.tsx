@@ -7,6 +7,15 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
+import SEO from '../components/SEO';
+import {
+  PROFILE_IMAGE_ALT,
+  PROFILE_IMAGE_PATH,
+  PROFILE_IMAGE_URL,
+  PROFILE_NAME,
+  publicAsset,
+  toAbsoluteUrl,
+} from '../lib/site';
 
 // ─── VideoCard ────────────────────────────────────────────────────────────────
 function VideoCard({
@@ -209,9 +218,41 @@ const videos = [
 export default function AboutPage() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const { ref: videoRef, inView: videoInView } = useInView({ triggerOnce: true, threshold: 0.05 });
+  const portraitSrc = publicAsset(PROFILE_IMAGE_PATH);
 
   return (
     <div className="pt-20">
+      <SEO
+        title="About Iederees Francis | NextGenWebs Cape Town"
+        description="Meet Iederees Francis — Cape Town web developer behind NextGenWebs. Sales-rooted, conversion-minded websites, templates and business tools."
+        path="about/"
+        ogImage={PROFILE_IMAGE_URL}
+        ogImageAlt={PROFILE_IMAGE_ALT}
+      >
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: PROFILE_NAME,
+            url: toAbsoluteUrl('about/'),
+            image: PROFILE_IMAGE_URL,
+            jobTitle: 'Web Developer & Founder',
+            worksFor: { '@type': 'Organization', name: 'NextGenWebs' },
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Cape Town',
+              addressCountry: 'ZA',
+            },
+            sameAs: [
+              'https://www.linkedin.com/in/iederees-francis-936717392/',
+              'https://github.com/iederees-create',
+              'https://x.com/nextgenwebdevs',
+              'https://instagram.com/nextgenerationwebdevs',
+            ],
+          })}
+        </script>
+      </SEO>
+
       {/* ── Bio + Feature Cards ── */}
       <section className="relative py-24 px-6 max-w-7xl mx-auto">
         {/* Background glow accents */}
@@ -229,6 +270,21 @@ export default function AboutPage() {
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="inline-block px-3 py-1 mb-6 text-[10px] font-mono tracking-widest text-primary-400 uppercase border border-primary-500/20 rounded-full bg-primary-500/5">
               About Me
+            </div>
+
+            {/* Mobile portrait — above the headline on small screens */}
+            <div className="mb-8 flex justify-center lg:hidden">
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary-400/40 via-cyan-400/20 to-transparent blur-md" />
+                <img
+                  src={portraitSrc}
+                  alt={PROFILE_IMAGE_ALT}
+                  width={160}
+                  height={160}
+                  className="relative h-40 w-40 rounded-full object-cover border-2 border-white/15 shadow-2xl shadow-primary-500/20"
+                  decoding="async"
+                />
+              </div>
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-8 leading-[1.1]">
@@ -270,6 +326,29 @@ export default function AboutPage() {
 
           {/* Right Visual Column */}
           <div className="lg:col-span-5 flex flex-col gap-8">
+
+            {/* Portrait — desktop/tablet sidebar */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:flex flex-col items-center text-center"
+            >
+              <div className="relative mb-5">
+                <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-br from-primary-400/35 via-cyan-400/15 to-transparent blur-lg" />
+                <img
+                  src={portraitSrc}
+                  alt={PROFILE_IMAGE_ALT}
+                  width={320}
+                  height={320}
+                  className="relative h-72 w-72 xl:h-80 xl:w-80 rounded-[2rem] object-cover border border-white/15 shadow-2xl shadow-primary-500/20"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </div>
+              <p className="text-lg font-semibold text-white">{PROFILE_NAME}</p>
+              <p className="text-sm text-slate-400 mt-1">Founder · NextGenWebs · Cape Town</p>
+            </motion.div>
 
             {/* Quote Panel */}
             <motion.div
@@ -345,7 +424,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── In My Own Words — Video Section ── */}
-      <section className="py-20 bg-[#0b0f19] border-y border-white/5 overflow-hidden">
+      <section className="py-20 bg-surface-muted border-y border-white/5 overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 mb-10">
           <motion.div
             ref={videoRef}
@@ -424,8 +503,8 @@ export default function AboutPage() {
           </div>
 
           {/* Fade edges */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-6 w-16 bg-gradient-to-r from-[#0b0f19] to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-[#0b0f19] to-transparent" />
+          <div className="pointer-events-none absolute left-0 top-0 bottom-6 w-16 bg-gradient-to-r from-surface-muted to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-surface-muted to-transparent" />
         </div>
       </section>
     </div>

@@ -18,7 +18,7 @@ export default function SiteHeader() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 w-full bg-[#0F172A]/90 backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-surface-elevated/90 backdrop-blur-md"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 grid grid-cols-3 items-center">
         {/* Logo - Left — same mark as favicon.svg */}

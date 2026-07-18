@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, ExternalLink, Pause, Play, ShoppingBag, X } from 'lucide-react'
+import { isInternalProjectUrl, toRouterPath } from '../lib/site'
 
 export interface ProjectCaseStudy {
   methodology: string
@@ -264,14 +266,23 @@ export function ProjectShowcase({
           )}
 
           <div className="flex flex-wrap gap-3 pt-2 border-t border-white/5">
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-medium text-white transition-colors"
-            >
-              <ExternalLink size={15} /> View Live Demo
-            </a>
+            {isInternalProjectUrl(liveUrl) ? (
+              <Link
+                to={toRouterPath(liveUrl)}
+                className="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-medium text-white transition-colors"
+              >
+                <ExternalLink size={15} /> View Case Study
+              </Link>
+            ) : (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-medium text-white transition-colors"
+              >
+                <ExternalLink size={15} /> View Live Demo
+              </a>
+            )}
             {etsyUrl && (
               <a
                 href={etsyUrl}

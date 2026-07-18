@@ -2,9 +2,11 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ArrowRight, Target, TrendingUp, Users, Terminal } from 'lucide-react'
 import MagneticButton from './MagneticButton'
+import { PROFILE_IMAGE_ALT, PROFILE_IMAGE_PATH, PROFILE_NAME, publicAsset } from '../lib/site'
 
 export default function AboutSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
+  const portraitSrc = publicAsset(PROFILE_IMAGE_PATH)
 
   const featureCards = [
     {
@@ -93,6 +95,27 @@ export default function AboutSection() {
 
         {/* Right Visual / Highlight Column */}
         <div className="lg:col-span-5 flex flex-col gap-8">
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center text-center"
+          >
+            <div className="relative mb-5">
+              <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-br from-primary-400/35 via-cyan-400/15 to-transparent blur-lg" />
+              <img
+                src={portraitSrc}
+                alt={PROFILE_IMAGE_ALT}
+                width={288}
+                height={288}
+                className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-[2rem] object-cover border border-white/15 shadow-2xl shadow-primary-500/20"
+                decoding="async"
+              />
+            </div>
+            <p className="text-lg font-semibold text-white">{PROFILE_NAME}</p>
+            <p className="text-sm text-slate-400 mt-1">Founder · NextGenWebs · Cape Town</p>
+          </motion.div>
           
           {/* Highlight Glass Panel */}
           <motion.div 

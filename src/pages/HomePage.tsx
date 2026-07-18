@@ -26,6 +26,7 @@ import { useRef, useState } from 'react';
 import MagneticButton from '../components/MagneticButton';
 import SEO from '../components/SEO';
 import { articles } from '../content/blog/articles';
+import { PROFILE_IMAGE_URL, PROFILE_NAME } from '../lib/site';
 import { projectSlug, projects } from './WorkPage';
 
 const skills = [
@@ -286,6 +287,13 @@ export default function HomePage() {
             description:
               'Premium web design, website templates, interactive quote calculators and business dashboards for small businesses and digital product buyers.',
             areaServed: ['Cape Town', 'South Africa', 'Online'],
+            founder: {
+              '@type': 'Person',
+              name: PROFILE_NAME,
+              image: PROFILE_IMAGE_URL,
+              url: 'https://iederees-create.github.io/3D-Portfolio/about/',
+            },
+            image: PROFILE_IMAGE_URL,
             sameAs: [
               'https://nextgenwebs.etsy.com',
               'https://x.com/nextgenwebdevs',

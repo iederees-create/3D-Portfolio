@@ -6,9 +6,17 @@ import { Calendar, Clock, ChevronRight, Linkedin, Twitter } from 'lucide-react';
 import SEO from '../SEO';
 import type { ArticleMeta } from '../../content/blog/types';
 import { articles, getRelatedArticles } from '../../content/blog/articles';
-import { SITE_NAME, toAbsoluteUrl } from '../../lib/site';
+import {
+  PROFILE_IMAGE_ALT,
+  PROFILE_IMAGE_PATH,
+  PROFILE_IMAGE_URL,
+  SITE_NAME,
+  publicAsset,
+  toAbsoluteUrl,
+} from '../../lib/site';
 
 const BASE = import.meta.env.BASE_URL;
+const authorPortrait = publicAsset(PROFILE_IMAGE_PATH);
 
 interface TocEntry {
   id: string;
@@ -76,7 +84,12 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
     '@type': 'BlogPosting',
     headline: meta.title,
     description: meta.excerpt,
-    author: { '@type': 'Person', name: meta.author },
+    author: {
+      '@type': 'Person',
+      name: meta.author,
+      url: toAbsoluteUrl('about/'),
+      image: PROFILE_IMAGE_URL,
+    },
     publisher: { '@type': 'Organization', name: SITE_NAME },
     datePublished: meta.datePublished,
     dateModified: meta.dateModified,
@@ -149,7 +162,18 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
                 <span className="text-primary-400 font-semibold bg-primary-500/10 px-3 py-1 rounded-full">
                   {meta.category}
                 </span>
-                <span className="text-slate-500">By {meta.author}</span>
+                <span className="inline-flex items-center gap-2 text-slate-400 normal-case tracking-normal">
+                  <img
+                    src={authorPortrait}
+                    alt={PROFILE_IMAGE_ALT}
+                    width={28}
+                    height={28}
+                    className="h-7 w-7 rounded-full object-cover border border-white/15"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="text-slate-300">By {meta.author}</span>
+                </span>
               </div>
 
               <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">

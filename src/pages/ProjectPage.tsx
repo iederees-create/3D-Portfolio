@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import { getArticleBySlug } from '../content/blog/articles';
 import { projectSlug, projects } from './WorkPage';
+import { isInternalProjectUrl, toRouterPath } from '../lib/site';
 
 // ─── Contact constants ────────────────────────────────────
 const WHATSAPP = '27629494708';
@@ -175,7 +176,7 @@ export default function ProjectPage() {
             description: project.description,
             url: `https://iederees-create.github.io/3D-Portfolio/work/${projectSlug(project)}/`,
             image: project.coverImage,
-            sameAs: [project.liveUrl],
+            ...(isInternalProjectUrl(project.liveUrl) ? {} : { sameAs: [project.liveUrl] }),
           })}
         </script>
       </SEO>
@@ -220,9 +221,15 @@ export default function ProjectPage() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-black hover:bg-slate-200">
-                <ExternalLink size={16} /> Live Demo
-              </a>
+              {isInternalProjectUrl(project.liveUrl) ? (
+                <Link to={toRouterPath(project.liveUrl)} className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-black hover:bg-slate-200">
+                  <ExternalLink size={16} /> View Case Study
+                </Link>
+              ) : (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-black hover:bg-slate-200">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              )}
               {article && (
                 <Link to={`/blog/${article.slug}/`} className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10">
                   Related Article

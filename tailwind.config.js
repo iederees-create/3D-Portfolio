@@ -21,7 +21,12 @@ export default {
           500: 'var(--color-primary-500)',
           600: 'var(--color-primary-600)',
           900: 'var(--color-primary-900)',
-        }
+        },
+        surface: {
+          DEFAULT: 'var(--color-bg)',
+          elevated: 'var(--color-bg-elevated)',
+          muted: 'var(--color-bg-muted)',
+        },
       }
     },
   },

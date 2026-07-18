@@ -11,6 +11,7 @@ import {
   Globe,
   ChevronRight,
 } from 'lucide-react';
+import { PROFILE_IMAGE_ALT, PROFILE_IMAGE_PATH, PROFILE_NAME, publicAsset } from '../lib/site';
 
 // ─── Constants ────────────────────────────────────────────
 const WHATSAPP_NUMBER = '27629494708';
@@ -263,6 +264,17 @@ export default function ContactPage() {
           transition={{ duration: 0.7 }}
           className="text-center mb-12"
         >
+          <div className="relative mx-auto mb-6 inline-block">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary-400/40 via-cyan-400/20 to-transparent blur-md" />
+            <img
+              src={publicAsset(PROFILE_IMAGE_PATH)}
+              alt={PROFILE_IMAGE_ALT}
+              width={96}
+              height={96}
+              className="relative h-24 w-24 rounded-full object-cover border-2 border-white/15 shadow-xl shadow-primary-500/20"
+              decoding="async"
+            />
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-xs font-medium text-primary-300 mb-5">
             <Sparkles size={11} />
             Let's work together
@@ -271,7 +283,7 @@ export default function ContactPage() {
             Get in touch
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
-            Whether you have a project in mind or just want to explore what's possible — I'd love to hear from you.
+            Whether you have a project in mind or just want to explore what's possible — message {PROFILE_NAME} directly.
           </p>
         </motion.div>
 

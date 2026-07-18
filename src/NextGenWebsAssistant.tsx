@@ -106,7 +106,7 @@ export default function NextGenWebsAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[100dvh] flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#07111f] shadow-2xl shadow-black/60 sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[640px] sm:w-[410px] sm:rounded-3xl"
+            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[100dvh] flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-surface-elevated shadow-2xl shadow-black/60 sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[640px] sm:w-[410px] sm:rounded-3xl"
             aria-label="Ask NextGenWebs AI assistant"
           >
             <header className="border-b border-white/10 bg-white/[0.03] p-4">

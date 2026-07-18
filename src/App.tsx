@@ -78,7 +78,7 @@ function Navbar() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 w-full bg-[#0F172A]/95 backdrop-blur-md border-b border-white/5"
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-surface-elevated/95 backdrop-blur-md border-b border-white/5"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
 
@@ -170,7 +170,7 @@ function Navbar() {
             <motion.nav
               id={menuId}
               aria-label="Mobile primary"
-              className="lg:hidden absolute left-0 right-0 top-full z-50 border-t border-white/10 bg-[#0F172A] shadow-2xl shadow-black/40"
+              className="lg:hidden absolute left-0 right-0 top-full z-50 border-t border-white/10 bg-surface-elevated shadow-2xl shadow-black/40"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -282,7 +282,7 @@ function AnimatedRoutes() {
 // tags — App only owns the chrome (nav/footer) and route table.
 export default function App() {
   return (
-    <div className="relative w-full min-h-screen bg-[#0F172A] text-slate-100 overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
       <KonamiCode />
       <TerminalEasterEgg />
 
