@@ -21,6 +21,7 @@ import TilingContractorWebsiteTemplateContent from './tiling-contractor-website-
 import VitalityWellnessWebsiteTemplateContent from './vitality-wellness-website-template';
 import WindowCleaningGlazingWebsiteDesignContent from './window-cleaning-glazing-website-design';
 import ZenSkinStudioContent from './zen-skin-studio-website-template';
+import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-works';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -28,6 +29,20 @@ import ZenSkinStudioContent from './zen-skin-studio-website-template';
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'how-qualified-lead-research-works',
+    title: 'How I Turn a Vague Target Market Into a Qualified Prospecting Strategy',
+    excerpt: 'A practical workflow for defining an Ideal Customer Profile, writing inclusion and exclusion criteria, verifying prospects, checking funnel signals, scoring fit and controlling research quality without private data promises.',
+    datePublished: '2026-07-18',
+    dateModified: '2026-07-18',
+    author: 'Iedrees Francis',
+    category: 'Prospecting Strategy',
+    tags: ['Lead Research', 'Prospecting', 'ICP', 'Lead Scoring', 'Sales Strategy'],
+    readingTimeMinutes: 8,
+    coverImage: import.meta.env.BASE_URL + 'projects/qualified-lead-research/01-main-product-promise.svg',
+    coverImageAlt: 'Custom Lead Research and Prospecting Blueprint listing image showing ICP, scorecard and workbook artefacts',
+    relatedSlugs: ['trading-affiliate-website-template', 'ai-portfolio-assistant'],
+  },
   {
     slug: 'about-nextgenwebs-web-developer-cape-town',
     title: 'About NextGenWebs: Premium Web Design for Small Businesses in Cape Town and Beyond',
@@ -320,6 +335,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'how-qualified-lead-research-works': HowQualifiedLeadResearchWorksContent,
   'about-nextgenwebs-web-developer-cape-town': AboutNextGenWebsContent,
   'amore-nails-ct-website': AmoreNailsCtWebsiteContent,
   'construction-company-website-design-cape-town': ConstructionCompanyWebsiteDesignCapeTownContent,

@@ -233,6 +233,40 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 export const projects: Project[] = [
 
   {
+    title: 'Qualified Lead Research and Prospecting Blueprint',
+    category: 'Data',
+    description: 'A custom prospecting strategy product and fictionalised case study that turns a vague target market into an ICP, qualification criteria, public-research workflow, lead scorecard and reusable workbook.',
+    tags: ['Lead Research', 'ICP', 'Prospecting', 'Lead Scoring', 'Workbook', 'Etsy Product'],
+    liveUrl: import.meta.env.BASE_URL + 'projects/qualified-lead-research/',
+    // TODO: Replace after the final Etsy draft listing is created. Do not create or edit the listing in this stage.
+    etsyUrl: 'https://nextgenwebs.etsy.com?placeholder=qualified-lead-research-listing-url',
+    coverImage: import.meta.env.BASE_URL + 'projects/qualified-lead-research/01-main-product-promise.svg',
+    mediaAlt: 'Custom Lead Research and Prospecting Blueprint product graphic with ICP, scorecard and workbook artefacts',
+    galleryImages: [
+      import.meta.env.BASE_URL + 'projects/qualified-lead-research/03-package-deliverables.svg',
+      import.meta.env.BASE_URL + 'projects/qualified-lead-research/07-lead-scoring-framework.svg',
+      import.meta.env.BASE_URL + 'projects/qualified-lead-research/10-expectations-cta.svg',
+    ],
+    galleryImageAlts: [
+      'Listing graphic showing the deliverables included in the lead research package',
+      'Listing graphic showing the lead scoring framework for prioritising prospects',
+      'Listing graphic explaining strategy boundaries and no private data promises',
+    ],
+    featured: true,
+    toolBadge: 'Custom Prospecting Blueprint',
+    toolHighlight: 'A made-to-order strategy product: buyer questionnaire, personalised ICP, qualification and disqualification rules, public-source research workflow, scorecard, outreach angle themes, workbook and PDF report. Placeholder Etsy URL only until the draft listing exists.',
+    features: [
+      'Fictionalised Northstar Growth Studio case study with confidentiality disclosure',
+      'Ideal prospect definition for smaller online community owners',
+      'Inclusion and exclusion criteria for repeatable lead research',
+      'Owner, decision-maker and funnel verification checks',
+      'Lead-scoring methodology with weighted criteria',
+      'Fictional sample prospect table and downloadable sample files',
+      'Clear boundary: no private contact data and no guaranteed results',
+    ],
+  },
+
+  {
     title: 'SupportForge AI Assistant',
     category: 'AI / Web App / Support Automation',
     description: 'A custom AI assistant template that helps businesses answer website visitor questions using a controlled knowledge base, branded chat UI, lead-routing prompts, and safe escalation rules.',

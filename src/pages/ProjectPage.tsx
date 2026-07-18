@@ -29,6 +29,7 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'Qualified Lead Research and Prospecting Blueprint': 'how-qualified-lead-research-works',
   'SupportForge AI Assistant': 'ai-portfolio-assistant',
   'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
   'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',

@@ -16,6 +16,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/work/qualified-lead-research-and-prospecting-blueprint/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/projects/qualified-lead-research/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/work/bank-desert-analysis-student-lab/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -114,6 +125,12 @@
     <loc>https://iederees-create.github.io/3D-Portfolio/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/how-qualified-lead-research-works/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/blog/laser-cutting-website-quote-planner/</loc>
