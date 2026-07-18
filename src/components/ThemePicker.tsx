@@ -89,7 +89,7 @@ export default function ThemePicker() {
           >
             <div className="border-b border-white/10 px-3 py-2.5">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
-                Platform themes
+                Colour themes
               </p>
               <p className="mt-0.5 text-[11px] text-slate-500">
                 Full look — not just a tint
@@ -142,7 +142,7 @@ export default function ThemePicker() {
                         {theme.name}
                       </p>
                       <p className="mt-0.5 text-[10px] text-slate-400 leading-none">
-                        {theme.inspiredBy}
+                        {theme.tagline}
                       </p>
                     </div>
                   </button>

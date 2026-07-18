@@ -1,6 +1,9 @@
 /**
  * Full-site theme tokens. Each theme changes accent + page surfaces so the
- * switch is obvious — inspired by familiar product UIs, not just a hue swap.
+ * switch is obvious — not just a single hue swap.
+ *
+ * Internal IDs are stable for localStorage; display names are original aesthetic
+ * labels (no third-party brand names in the UI).
  */
 
 export type ThemeId =
@@ -41,8 +44,8 @@ export interface ThemeTokens {
 export interface PortfolioTheme {
   id: ThemeId;
   name: string;
-  /** Short platform label shown in the picker */
-  inspiredBy: string;
+  /** Short aesthetic tag shown under the name in the picker */
+  tagline: string;
   tokens: ThemeTokens;
 }
 
@@ -50,7 +53,7 @@ export const THEMES: PortfolioTheme[] = [
   {
     id: 'nextgen',
     name: 'NextGen',
-    inspiredBy: 'Brand coral',
+    tagline: 'Coral on navy',
     tokens: {
       primary300: '#E58A6A',
       primary400: '#DE826A',
@@ -68,8 +71,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'spotify',
-    name: 'Spotify',
-    inspiredBy: 'Spotify',
+    name: 'Neon Leaf',
+    tagline: 'Green on near-black',
     tokens: {
       primary300: '#1ed760',
       primary400: '#1db954',
@@ -87,8 +90,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'discord',
-    name: 'Discord',
-    inspiredBy: 'Discord',
+    name: 'Blurple Night',
+    tagline: 'Violet on charcoal',
     tokens: {
       primary300: '#949cf7',
       primary400: '#7983f5',
@@ -106,8 +109,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'linkedin',
-    name: 'LinkedIn',
-    inspiredBy: 'LinkedIn',
+    name: 'Ocean Navy',
+    tagline: 'Blue professional',
     tokens: {
       primary300: '#70b5f9',
       primary400: '#378fe9',
@@ -125,8 +128,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'youtube',
-    name: 'YouTube',
-    inspiredBy: 'YouTube',
+    name: 'Signal Red',
+    tagline: 'Red on black',
     tokens: {
       primary300: '#ff6b6b',
       primary400: '#ff4444',
@@ -144,8 +147,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'x',
-    name: 'X',
-    inspiredBy: 'X / Twitter',
+    name: 'Mono Pulse',
+    tagline: 'Sky on pure black',
     tokens: {
       primary300: '#8ecdf8',
       primary400: '#4dabf7',
@@ -163,8 +166,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'github',
-    name: 'GitHub',
-    inspiredBy: 'GitHub',
+    name: 'Code Moss',
+    tagline: 'Terminal green',
     tokens: {
       primary300: '#56d364',
       primary400: '#3fb950',
@@ -182,8 +185,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'netflix',
-    name: 'Netflix',
-    inspiredBy: 'Netflix',
+    name: 'Cinema Red',
+    tagline: 'Darkroom drama',
     tokens: {
       primary300: '#f87171',
       primary400: '#ef4444',
@@ -201,8 +204,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'linear',
-    name: 'Linear',
-    inspiredBy: 'Linear',
+    name: 'Soft Indigo',
+    tagline: 'Quiet product UI',
     tokens: {
       primary300: '#a5a9f5',
       primary400: '#828fff',
@@ -220,8 +223,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'stripe',
-    name: 'Stripe',
-    inspiredBy: 'Stripe',
+    name: 'Violet Tide',
+    tagline: 'Deep indigo sea',
     tokens: {
       primary300: '#a5b4fc',
       primary400: '#818cf8',
@@ -239,8 +242,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'figma',
-    name: 'Figma',
-    inspiredBy: 'Figma',
+    name: 'Studio Violet',
+    tagline: 'Creative dark',
     tokens: {
       primary300: '#c084fc',
       primary400: '#a855f7',
@@ -258,8 +261,8 @@ export const THEMES: PortfolioTheme[] = [
   },
   {
     id: 'slack',
-    name: 'Slack',
-    inspiredBy: 'Slack',
+    name: 'Aubergine',
+    tagline: 'Warm night purple',
     tokens: {
       primary300: '#e8b4ff',
       primary400: '#c678dd',
@@ -280,7 +283,7 @@ export const THEMES: PortfolioTheme[] = [
 export const DEFAULT_THEME_ID: ThemeId = 'nextgen';
 export const THEME_STORAGE_KEY = 'portfolio-theme';
 
-/** Map legacy single-hue theme names to the new platform IDs. */
+/** Map legacy single-hue theme names to the new IDs. */
 const LEGACY_THEME_MAP: Record<string, ThemeId> = {
   Indigo: 'stripe',
   Rose: 'netflix',
@@ -315,7 +318,6 @@ export function applyThemeTokens(theme: PortfolioTheme): void {
 
   root.dataset.theme = theme.id;
 
-  // Keep browser chrome / PWA bar in sync
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', tokens.bg);
 
