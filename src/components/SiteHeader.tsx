@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Twitter, Instagram, Youtube } from 'lucide-react';
 import ThemePicker from './ThemePicker';
+import BrandLogo from './BrandLogo';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -20,12 +21,9 @@ export default function SiteHeader() {
       className="fixed top-0 left-0 right-0 z-50 w-full bg-[#0F172A]/90 backdrop-blur-md"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 grid grid-cols-3 items-center">
-        {/* Logo - Left */}
-        <Link to="/" className="flex items-center gap-4 justify-start">
-          <div className="w-8 h-8 bg-white text-black flex items-center justify-center font-bold font-mono text-sm rounded-md">
-            NX
-          </div>
-          <span className="font-bold text-sm tracking-widest uppercase hidden sm:block">NextGenWebs</span>
+        {/* Logo - Left — same mark as favicon.svg */}
+        <Link to="/" className="flex items-center gap-4 justify-start" aria-label="NextGenWebs home">
+          <BrandLogo />
         </Link>
 
         {/* Nav - Center */}
