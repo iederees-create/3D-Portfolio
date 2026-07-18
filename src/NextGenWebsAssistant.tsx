@@ -38,6 +38,12 @@ export default function NextGenWebsAssistant() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typing, open]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('assistant') === 'open') setOpen(true);
+  }, []);
+
   async function sendMessage(prompt?: string) {
     const content = (prompt ?? input).trim();
     if (!content || typing) return;

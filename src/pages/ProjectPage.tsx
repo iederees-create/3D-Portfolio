@@ -29,9 +29,14 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'SupportForge AI Assistant': 'ai-portfolio-assistant',
+  'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
   'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
+  'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'RAVERSUS Clinical Portal': 'raversus-clinical-portal',
   'Tiling Contractor Website Template': 'tiling-contractor-website-template',
+  'Construction Website Template': 'construction-website-quote-planner',
+  'Precision Laser Website Template': 'laser-cutting-website-quote-planner',
   'Claude Code Solar Lead Generation Template': 'solar-lead-generation-website-template',
   'Pest Control Website Template': 'pest-control-website-template',
   'Vitality Wellness Website Template': 'vitality-wellness-website-template',
@@ -44,12 +49,7 @@ const articleByProjectTitle: Record<string, string> = {
   'First Choice Construction': 'construction-company-website-design-cape-town',
   'Creator Hub Pro Template': 'creator-hub-digital-portfolio-template',
   'Aura Signs': 'signage-business-website-design',
-
-  'SupportForge AI Assistant': 'ai-portfolio-assistant',
-  'Construction Website Template': 'construction-website-quote-planner',
-  'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'Fluent Path Tutoring': 'why-educational-businesses-need-custom-learning-hubs',
-  'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
 };
 
 // ─── Enquiry CTA block ────────────────────────────────────
