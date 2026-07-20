@@ -24,6 +24,9 @@ export interface ArticleMeta {
   coverImageAlt?: string;
   /** Slugs of other articles to surface in the "Related articles" section. */
   relatedSlugs: string[];
+  audioSrc?: string;
+  audioTranscript?: string;
+  listenEnabled?: boolean;
 }
 
 export type ArticleContentComponent = ComponentType;

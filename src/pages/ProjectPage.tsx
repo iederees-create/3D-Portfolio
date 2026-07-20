@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ExternalLink, Images, ShoppingBag, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import AudioNarrationPlayer from '../components/AudioNarrationPlayer';
 import { getArticleBySlug } from '../content/blog/articles';
 import { projectSlug, projects } from './WorkPage';
 import { isInternalProjectUrl, toRouterPath } from '../lib/site';
@@ -207,6 +208,8 @@ export default function ProjectPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">{project.title}</h1>
             <p className="text-slate-400 leading-relaxed mb-6">{project.description}</p>
+
+            <AudioNarrationPlayer text={project.title + '. ' + project.description + ' ' + (project.features?.join('. ') ?? '')} label="Listen to this project" />
 
             {project.toolHighlight && (
               <div className="mb-6 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-sm leading-relaxed text-amber-100">

@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, ExternalLink, MessageCircle, Send, Sparkles, X } from 'lucide-react';
+import { answerLocally } from './utils/localAssistantEngine';
 
 type ChatMessage = {
   role: 'user' | 'assistant';
   content: string;
 };
-
-const ASSISTANT_API_URL =
-  import.meta.env.VITE_NEXTGENWEBS_ASSISTANT_API_URL ||
-  'https://product-listing-server.onrender.com/api/public/nextgenwebs-assistant/chat';
 
 const quickPrompts = [
   'What can you build for me?',
@@ -23,7 +20,7 @@ const quickPrompts = [
 const welcomeMessage: ChatMessage = {
   role: 'assistant',
   content:
-    'Hi, I am the NextGenWebs AI assistant. Ask about services, website templates, AI chatbot builds, portfolio projects, pricing direction, or how to request a quote.',
+    'I’m a demo assistant trained on NextGenWebs services and projects. Ask about templates, Hydro Clean, AI chatbots, pricing direction, or how to request a quote.',
 };
 
 export default function NextGenWebsAssistant() {
@@ -55,22 +52,13 @@ export default function NextGenWebsAssistant() {
     setTyping(true);
 
     try {
-      const response = await fetch(ASSISTANT_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: nextMessages.slice(-10) }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(data.error || 'The assistant is unavailable right now.');
-      }
+      const data = answerLocally(content);
       setMessages((current) => [
         ...current,
         {
           role: 'assistant',
           content:
-            data.reply ||
-            'I am not certain about that. Please use the contact page and I will follow up directly.',
+            data.answer,
         },
       ]);
     } catch (err) {
@@ -117,7 +105,7 @@ export default function NextGenWebsAssistant() {
                   </div>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300">Portfolio assistant</p>
-                    <h2 className="text-base font-bold text-white">Ask NextGenWebs AI</h2>
+                    <h2 className="text-base font-bold text-white">NextGenWebs local assistant</h2>
                   </div>
                 </div>
                 <button
@@ -193,7 +181,7 @@ export default function NextGenWebsAssistant() {
               </form>
 
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-                <span>Informational only. No guaranteed results.</span>
+                <span>Demo mode: local assistant · No API key required · No guaranteed results.</span>
                 <Link to="/contact/" onClick={() => setOpen(false)} className="inline-flex items-center gap-1 font-semibold text-cyan-300 hover:text-cyan-200">
                   Request a quote <ExternalLink size={12} />
                 </Link>

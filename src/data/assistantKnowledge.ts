@@ -1,0 +1,13 @@
+export const assistantKnowledge = [
+  { keys: ['what do you build', 'services', 'build'], answer: 'NextGenWebs builds responsive small-business websites, editable website templates, quote planners, dashboards, data products, and local demo assistants.', links: ['/work/', '/contact/'] },
+  { keys: ['template', 'etsy products', 'etsy'], answer: 'The shop includes editable digital website templates and business tools. Browse the public NextGenWebs Etsy shop for active products; drafts are not presented as purchasable listings.', links: ['https://nextgenwebs.etsy.com'] },
+  { keys: ['ai chatbot', 'chatbot', 'assistant'], answer: 'Yes. SupportForge AI and portfolio demos show configurable chat experiences with clear human handoff and no claim of guaranteed outcomes.', links: ['/work/supportforge-ai-assistant-website-template/', '/contact/'] },
+  { keys: ['hydro clean', 'exterior cleaning'], answer: 'Hydro Clean is an editable exterior-cleaning website template with a structured surface-cleaning request planner, responsive layouts, and WhatsApp/email handoff.', links: ['/work/hydro-clean-ct-exterior-cleaning-website-template/', '/blog/exterior-cleaning-website-quote-planner/'] },
+  { keys: ['how much', 'cost', 'price'], answer: 'Pricing depends on scope, content, integrations, and delivery needs. Request a quote for a current scope-based estimate; I will not invent a price.', links: ['/contact/'] },
+  { keys: ['customise', 'customize', 'included'], answer: 'Templates include editable source, configuration guidance, buyer documentation, licensing and disclosure files. Replace sample business content before publishing.', links: ['/work/'] },
+  { keys: ['contact', 'reach', 'quote'], answer: 'Use the contact page or the listed email/WhatsApp options to describe your project and preferred timeline.', links: ['/contact/'] },
+  { keys: ['guarantee', 'guaranteed leads', 'sales'], answer: 'No. NextGenWebs does not guarantee leads, rankings, sales, income, or quote conversion. Results depend on the business, offer, traffic, content and follow-through.', links: ['/contact/'] },
+  { keys: ['without api', 'no api', 'offline'], answer: 'Yes. This portfolio assistant is demo mode: local assistant. No API key is required; it uses local keyword and intent matching.', links: ['/'] },
+  { keys: ['blog', 'article'], answer: 'The blog explains practical decisions behind the projects, including the Hydro Clean quote-planner article.', links: ['/blog/exterior-cleaning-website-quote-planner/', '/blog/'] },
+  { keys: ['latest projects', 'projects', 'choose a website'], answer: 'Browse the Work page and choose by goal: website template, quote planner, data product, or custom build.', links: ['/work/', '/contact/'] },
+];

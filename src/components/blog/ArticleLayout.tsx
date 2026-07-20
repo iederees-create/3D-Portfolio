@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ChevronRight, Linkedin, Twitter } from 'lucide-react';
 import SEO from '../SEO';
+import AudioNarrationPlayer from '../AudioNarrationPlayer';
 import type { ArticleMeta } from '../../content/blog/types';
 import { articles, getRelatedArticles } from '../../content/blog/articles';
 import {
@@ -179,6 +180,8 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
               <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
                 {meta.title}
               </h1>
+
+              <AudioNarrationPlayer text={meta.title + '. ' + meta.excerpt} label="Listen to this article" />
 
               {meta.coverImage && (
                 <img
