@@ -1,4 +1,5 @@
 import type { ArticleContentComponent, ArticleMeta } from './types';
+import ExteriorCleaningWebsiteQuotePlannerContent from './exterior-cleaning-website-quote-planner';
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
@@ -29,6 +30,20 @@ import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'exterior-cleaning-website-quote-planner',
+    title: 'How to Build an Exterior Cleaning Website That Turns Visitors Into Better Quote Requests',
+    excerpt: 'Why exterior cleaning businesses benefit from structured enquiries, what a configurable quote planner should collect, and why preliminary-estimate disclaimers matter.',
+    datePublished: '2026-07-20',
+    dateModified: '2026-07-20',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Service',
+    tags: ['Exterior Cleaning', 'Pressure Washing', 'Web Design', 'Quote Planner', 'Lead Generation'],
+    readingTimeMinutes: 5,
+    coverImage: import.meta.env.BASE_URL + 'projects/hydro-clean/cover.webp',
+    coverImageAlt: 'Hydro Clean exterior cleaning website template homepage',
+    relatedSlugs: ['window-cleaning-glazing-website-design', 'construction-website-quote-planner'],
+  },
   {
     slug: 'how-qualified-lead-research-works',
     title: 'How I Turn a Vague Target Market Into a Qualified Prospecting Strategy',
@@ -335,6 +350,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'exterior-cleaning-website-quote-planner': ExteriorCleaningWebsiteQuotePlannerContent,
   'how-qualified-lead-research-works': HowQualifiedLeadResearchWorksContent,
   'about-nextgenwebs-web-developer-cape-town': AboutNextGenWebsContent,
   'amore-nails-ct-website': AmoreNailsCtWebsiteContent,

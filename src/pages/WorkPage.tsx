@@ -247,6 +247,37 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 export const projects: Project[] = [
 
   {
+    title: 'Hydro Clean CT Exterior Cleaning Website Template',
+    category: 'Service',
+    description: 'A responsive exterior cleaning website template with a configurable service request planner for pressure washing, roof cleaning, gutter cleaning, paving, solar panel cleaning, and exterior property maintenance businesses.',
+    tags: ['Exterior Cleaning', 'Pressure Washing', 'Quote Planner', 'HTML', 'CSS', 'JavaScript', 'Responsive'],
+    liveUrl: 'https://iederees-create.github.io/ct-lead-gen/clients/hydro-clean-ct/',
+    coverImage: import.meta.env.BASE_URL + 'projects/hydro-clean/cover.webp',
+    mediaAlt: 'Hydro Clean exterior cleaning website template homepage',
+    galleryImages: [
+      import.meta.env.BASE_URL + 'projects/hydro-clean/01-desktop.webp',
+      import.meta.env.BASE_URL + 'projects/hydro-clean/02-mobile.webp',
+      import.meta.env.BASE_URL + 'projects/hydro-clean/03-planner.webp',
+    ],
+    galleryImageAlts: [
+      'Hydro Clean responsive desktop homepage',
+      'Hydro Clean mobile website view',
+      'Hydro Clean surface cleaning request planner',
+    ],
+    featured: true,
+    toolBadge: 'Surface Cleaning Request Planner',
+    toolHighlight: 'A configurable six-step enquiry tool covering project type, measurements, surface material, soiling condition, access difficulty, timing and contact details, with a preliminary summary and WhatsApp, email, copy and print handoff.',
+    features: [
+      'Configurable pressure washing and exterior cleaning services',
+      'Surface area, condition and access capture',
+      'Preliminary estimate with non-binding quote disclaimer',
+      'WhatsApp, email, copy and print handoff',
+      'Responsive layout and accessibility basics',
+      'Privacy, terms, disclaimer and 404 starter pages',
+    ],
+  },
+
+  {
     title: 'Qualified Lead Research and Prospecting Blueprint',
     category: 'Data',
     description: 'A custom prospecting strategy product and fictionalised case study that turns a vague target market into an ICP, qualification criteria, public-research workflow, lead scorecard and reusable workbook.',
