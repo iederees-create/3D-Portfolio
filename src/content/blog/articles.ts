@@ -43,6 +43,8 @@ export const articles: ArticleMeta[] = [
     coverImage: import.meta.env.BASE_URL + 'projects/hydro-clean/cover.webp',
     coverImageAlt: 'Hydro Clean exterior cleaning website template homepage',
     relatedSlugs: ['window-cleaning-glazing-website-design', 'construction-website-quote-planner'],
+    listenEnabled: true,
+    audioTranscript: 'public/audio/scripts/blog/exterior-cleaning-website-quote-planner.txt',
   },
   {
     slug: 'how-qualified-lead-research-works',

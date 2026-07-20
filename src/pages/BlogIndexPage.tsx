@@ -66,6 +66,7 @@ export default function BlogIndexPage() {
                   <span className="text-primary-400 font-semibold bg-primary-500/10 px-3 py-1 rounded-full">
                     {article.category}
                   </span>
+                  {(article.listenEnabled || article.slug === 'exterior-cleaning-website-quote-planner') && <span className="text-cyan-300 font-semibold bg-cyan-300/10 px-3 py-1 rounded-full">Listen available</span>}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">{article.title}</h2>
                 <p className="text-slate-400 text-sm leading-relaxed">{article.excerpt}</p>
