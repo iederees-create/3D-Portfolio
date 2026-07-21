@@ -40,7 +40,7 @@ export const articles: ArticleMeta[] = [
     category: 'Case Study / Service',
     tags: ['Exterior Cleaning', 'Pressure Washing', 'Web Design', 'Quote Planner', 'Lead Generation'],
     readingTimeMinutes: 5,
-    coverImage: import.meta.env.BASE_URL + 'projects/hydro-clean/cover.webp',
+    coverImage: import.meta.env.BASE_URL + 'media/projects/hydro-clean-ct/01-cover.png',
     coverImageAlt: 'Hydro Clean exterior cleaning website template homepage',
     relatedSlugs: ['window-cleaning-glazing-website-design', 'construction-website-quote-planner'],
     listenEnabled: true,
