@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock } from 'lucide-react';
 import SEO from '../components/SEO';
+import ShareWidget from '../components/ShareWidget';
+import { SITE_URL } from '../lib/site';
 import { articles } from '../content/blog/articles';
 
 /**
@@ -76,6 +78,14 @@ export default function BlogIndexPage() {
                       {tag}
                     </span>
                   ))}
+                </div>
+                <div className="mt-5" onClick={(e) => e.preventDefault()}>
+                   <ShareWidget 
+                     url={`${SITE_URL}blog/${article.slug}/`} 
+                     title={article.title} 
+                     text={article.excerpt} 
+                     label="" 
+                   />
                 </div>
               </Link>
             </motion.div>

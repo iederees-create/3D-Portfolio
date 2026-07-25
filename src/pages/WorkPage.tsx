@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import { Globe, ShoppingBag, Sparkles, Layers, Star, Images } from 'lucide-react';
 import { ProjectMedia } from '../components/ProjectMedia';
 import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectShowcase';
-import { isInternalProjectUrl, toRouterPath } from '../lib/site';
+import ShareWidget from '../components/ShareWidget';
+import { SITE_URL, isInternalProjectUrl, toRouterPath } from '../lib/site';
 
 export interface Project {
   title: string;
@@ -142,12 +143,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-5">
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {project.tags.map((tag, i) => (
               <span key={i} className="tag-mono text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-slate-500 border border-white/5">
                 {tag}
               </span>
             ))}
+          </div>
+
+          <div className="mb-4">
+             <ShareWidget 
+               url={`${SITE_URL}work/${projectSlug(project)}/`} 
+               title={project.title} 
+               text={project.description} 
+               label="" 
+             />
           </div>
 
           {/* Actions */}
