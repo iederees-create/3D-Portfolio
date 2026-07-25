@@ -15,6 +15,7 @@ import {
   publicAsset,
   toAbsoluteUrl,
 } from '../../lib/site';
+import ShareWidget from '../ShareWidget';
 
 const BASE = import.meta.env.BASE_URL;
 const authorPortrait = publicAsset(PROFILE_IMAGE_PATH);
@@ -211,27 +212,12 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
             <div ref={bodyRef}>{children}</div>
 
             {/* Social share */}
-            <div className="flex items-center gap-3 pt-8 mt-10 border-t border-white/10">
-              <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">Share</span>
-              <a
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(meta.title)}`}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Share on X (Twitter)"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-slate-300 transition-colors"
-              >
-                <Twitter size={14} />
-              </a>
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Share on LinkedIn"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-slate-300 transition-colors"
-              >
-                <Linkedin size={14} />
-              </a>
-            </div>
+            <ShareWidget 
+              url={articleUrl} 
+              title={meta.title} 
+              text={meta.excerpt}
+              className="pt-8 mt-10 border-t border-white/10"
+            />
           </div>
         </motion.div>
 

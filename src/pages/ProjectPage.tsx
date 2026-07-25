@@ -3,6 +3,8 @@ import { ExternalLink, Images, ShoppingBag, MessageCircle, Mail, ArrowRight } fr
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import AudioNarrationPlayer from '../components/AudioNarrationPlayer';
+import ShareWidget from '../components/ShareWidget';
+import { SITE_URL } from '../lib/site';
 import { getArticleBySlug } from '../content/blog/articles';
 import { projectSlug, projects } from './WorkPage';
 import { isInternalProjectUrl, toRouterPath } from '../lib/site';
@@ -244,6 +246,14 @@ export default function ProjectPage() {
                 </a>
               )}
             </div>
+
+            <ShareWidget 
+              url={`${SITE_URL}work/${projectSlug(project)}/`} 
+              title={project.title} 
+              text={project.description}
+              className="mb-8 pt-6 border-t border-white/5"
+            />
+
 
             {/* Per-project contact CTA (inline, right column) */}
             {showContact && (
