@@ -60,6 +60,16 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname);
 }
 
+// URLs for sitemap
+const sitemapUrls = [
+  '',
+  'work/',
+  'about/',
+  'blog/',
+  'contact/',
+  'credentials/'
+];
+
 // 1. Process Projects
 console.log('Processing projects...');
 const workPageContent = fs.readFileSync(path.join(__dirname, 'src/pages/WorkPage.tsx'), 'utf8');
@@ -99,6 +109,7 @@ for (let i = 1; i < projectBlocks.length; i++) {
     ensureDirectoryExistence(outPath);
     fs.writeFileSync(outPath, projectHtml);
     console.log(`Generated: ${urlPath}`);
+    sitemapUrls.push(urlPath);
   }
 }
 
@@ -140,6 +151,7 @@ for (let i = 1; i < articleBlocks.length; i++) {
     ensureDirectoryExistence(outPath);
     fs.writeFileSync(outPath, articleHtml);
     console.log(`Generated: ${urlPath}`);
+    sitemapUrls.push(urlPath);
   }
 }
 
@@ -148,4 +160,12 @@ console.log('Generating 404.html...');
 const notFoundHtml = baseHtml.replace('<title>', '<title>Page Not Found | NextGenWebs</title>\n    <!-- 404 Fallback -->\n    <title>');
 fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
 
-console.log('Meta tag generation complete!');
+// 4. Generate sitemap.xml
+console.log('Generating sitemap.xml...');
+const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `  <url>\n    <loc>${siteUrl}${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n  </url>`).join('\n')}
+</urlset>`;
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapContent);
+
+console.log('Meta tag and sitemap generation complete!');

@@ -16,6 +16,7 @@ import {
   toAbsoluteUrl,
 } from '../../lib/site';
 import ShareWidget from '../ShareWidget';
+import ReadingProgressBar from './ReadingProgressBar';
 
 const BASE = import.meta.env.BASE_URL;
 const authorPortrait = publicAsset(PROFILE_IMAGE_PATH);
@@ -113,6 +114,7 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
 
   return (
     <>
+      <ReadingProgressBar />
       <SEO
         title={meta.title}
         description={meta.excerpt}
@@ -135,7 +137,9 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
 
-      <article className="pt-32 pb-20 px-6 max-w-4xl mx-auto scroll-mt-24">
+      <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col xl:flex-row gap-12 items-start">
+        {/* Main Article Content */}
+        <article className="w-full max-w-4xl mx-auto xl:mx-0 xl:flex-1 scroll-mt-24">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 mb-8">
           <Link to="/" className="hover:text-slate-300 transition-colors">Home</Link>
@@ -144,6 +148,22 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
           <ChevronRight size={12} />
           <span className="text-slate-300 truncate max-w-[200px] sm:max-w-none">{meta.title}</span>
         </nav>
+
+        {/* Mobile TOC (Hidden on XL) */}
+        {toc.length > 1 && (
+          <nav aria-label="Table of contents" className="xl:hidden mb-10 rounded-2xl bg-white/[0.03] border border-white/5 p-5">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">On this page</h2>
+            <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm">
+              {toc.map((entry) => (
+                <li key={entry.id}>
+                  <a href={`#${entry.id}`} className="text-slate-400 hover:text-primary-300 transition-colors">
+                    {entry.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -193,21 +213,6 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
                 />
               )}
             </header>
-
-            {toc.length > 1 && (
-              <nav aria-label="Table of contents" className="mb-10 rounded-2xl bg-white/[0.03] border border-white/5 p-5">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">On this page</h2>
-                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm">
-                  {toc.map((entry) => (
-                    <li key={entry.id}>
-                      <a href={`#${entry.id}`} className="text-slate-400 hover:text-primary-300 transition-colors">
-                        {entry.text}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            )}
 
             <div ref={bodyRef}>{children}</div>
 
@@ -270,6 +275,25 @@ export default function ArticleLayout({ meta, children }: ArticleLayoutProps) {
           </Link>
         </div>
       </article>
+
+      {/* Sticky Sidebar TOC (XL Only) */}
+      {toc.length > 1 && (
+        <aside className="hidden xl:block w-72 shrink-0 sticky top-32">
+          <nav aria-label="Table of contents" className="rounded-2xl bg-white/[0.02] border border-white/5 p-6 shadow-2xl">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">On this page</h2>
+            <ol className="flex flex-col gap-3 text-sm">
+              {toc.map((entry) => (
+                <li key={entry.id}>
+                  <a href={`#${entry.id}`} className="text-slate-400 hover:text-primary-300 transition-colors leading-snug block">
+                    {entry.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+      )}
+      </div>
     </>
   );
 }
