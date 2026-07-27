@@ -8,6 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
 import SEO from '../components/SEO';
+import PhysicsSkills from '../components/PhysicsSkills';
 import {
   PROFILE_IMAGE_ALT,
   PROFILE_IMAGE_PATH,
@@ -371,19 +372,8 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/5"
             >
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6">Technical Arsenal</h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.map(skill => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1.5 text-xs font-medium text-slate-300 bg-white/5 border border-white/10 rounded-lg hover:border-primary-500/50 hover:text-primary-300 transition-colors cursor-default"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <PhysicsSkills />
             </motion.div>
 
             {/* Philosophy + CTAs */}
