@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import MiniGame from './MiniGame';
 
 const KONAMI_CODE = [
   'ArrowUp', 'ArrowUp',
@@ -10,9 +11,13 @@ const KONAMI_CODE = [
 
 export default function KonamiCode() {
   const [sequence, setSequence] = useState<string[]>([]);
+  const [showGame, setShowGame] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't listen if game is already showing
+      if (showGame) return;
+      
       const key = e.key;
       setSequence(prev => {
         const nextSeq = [...prev, key];
@@ -23,7 +28,7 @@ export default function KonamiCode() {
         
         // Check if sequence matches
         if (nextSeq.join(',') === KONAMI_CODE.join(',')) {
-          triggerEasterEgg();
+          setShowGame(true);
           return [];
         }
         return nextSeq;
@@ -32,12 +37,11 @@ export default function KonamiCode() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [showGame]);
 
-  const triggerEasterEgg = () => {
-    // Add a fun class to the body to hack the visual styling
-    document.body.classList.toggle('konami-active');
-  };
+  if (showGame) {
+    return <MiniGame onClose={() => setShowGame(false)} />;
+  }
 
-  return null; // Headless component
+  return null;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bot, ExternalLink, MessageCircle, Send, Sparkles, X } from 'lucide-react';
+import { Bot, ExternalLink, MessageCircle, Send, Sparkles, X, Mic, MicOff } from 'lucide-react';
 import { answerLocally } from './utils/localAssistantEngine';
 
 type ChatMessage = {
@@ -29,7 +29,47 @@ export default function NextGenWebsAssistant() {
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
   const [error, setError] = useState('');
+  const [isListening, setIsListening] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Initialize Speech Recognition if supported
+  const recognitionRef = useRef<any>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        recognitionRef.current = new SpeechRecognition();
+        recognitionRef.current.continuous = false;
+        recognitionRef.current.interimResults = false;
+        
+        recognitionRef.current.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          setInput(transcript);
+          setIsListening(false);
+          // Auto-send after a short delay
+          setTimeout(() => sendMessage(transcript), 500);
+        };
+        
+        recognitionRef.current.onerror = () => {
+          setIsListening(false);
+        };
+        
+        recognitionRef.current.onend = () => {
+          setIsListening(false);
+        };
+      }
+    }
+  }, []);
+
+  const toggleListening = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current?.start();
+      setIsListening(true);
+    }
+  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -57,10 +97,18 @@ export default function NextGenWebsAssistant() {
         ...current,
         {
           role: 'assistant',
-          content:
-            data.answer,
+          content: data.answer,
         },
       ]);
+      
+      // Text to Speech
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(data.answer);
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'The assistant is unavailable right now.';
       setError(`${message} You can still use the contact page to reach NextGenWebs.`);
@@ -110,7 +158,10 @@ export default function NextGenWebsAssistant() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+                  }}
                   className="rounded-full border border-white/10 bg-white/5 p-2 text-slate-300 hover:bg-white/10 hover:text-white"
                   aria-label="Close assistant"
                 >
@@ -160,19 +211,29 @@ export default function NextGenWebsAssistant() {
                 ))}
               </div>
 
-              <form onSubmit={handleSubmit} className="grid grid-cols-[1fr_auto] gap-2">
+              <form onSubmit={handleSubmit} className="flex gap-2 items-center">
                 <label className="sr-only" htmlFor="nextgenwebs-ai-message">Ask NextGenWebs AI</label>
                 <input
                   id="nextgenwebs-ai-message"
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
                   maxLength={1800}
-                  placeholder="Ask about services, templates, AI tools..."
-                  className="min-h-12 rounded-2xl border border-white/10 bg-black/25 px-4 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/50"
+                  placeholder={isListening ? "Listening..." : "Ask about services..."}
+                  className={`flex-1 min-h-12 rounded-2xl border border-white/10 bg-black/25 px-4 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/50 ${isListening ? 'border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.4)]' : ''}`}
                 />
+                {recognitionRef.current && (
+                  <button
+                    type="button"
+                    onClick={toggleListening}
+                    className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-colors ${isListening ? 'bg-red-500/20 text-red-400 border border-red-500/50' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
+                    aria-label="Voice input"
+                  >
+                    {isListening ? <MicOff size={17} /> : <Mic size={17} />}
+                  </button>
+                )}
                 <button
                   type="submit"
-                  className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-300 text-slate-950 hover:bg-cyan-200 disabled:opacity-50"
+                  className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-cyan-300 text-slate-950 hover:bg-cyan-200 disabled:opacity-50"
                   disabled={typing || !input.trim()}
                   aria-label="Send message"
                 >
@@ -181,7 +242,7 @@ export default function NextGenWebsAssistant() {
               </form>
 
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-                <span>Demo mode: local assistant · No API key required · No guaranteed results.</span>
+                <span>Demo mode: local assistant · Supports Voice Input</span>
                 <Link to="/contact/" onClick={() => setOpen(false)} className="inline-flex items-center gap-1 font-semibold text-cyan-300 hover:text-cyan-200">
                   Request a quote <ExternalLink size={12} />
                 </Link>

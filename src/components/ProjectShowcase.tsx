@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, ExternalLink, Pause, Play, ShoppingBag, X } from 'lucide-react'
 import { isInternalProjectUrl, toRouterPath } from '../lib/site'
+import DeviceShowcase3D from './DeviceShowcase3D'
 
 export interface ProjectCaseStudy {
   methodology: string
@@ -144,36 +145,35 @@ export function ProjectShowcase({
         </button>
 
         <div className="relative w-full bg-black/40" style={{ aspectRatio: '4 / 3' }}>
-          {isVideoSlide ? (
-            <>
-              <video
-                ref={videoRef}
-                muted
-                loop
-                playsInline
-                poster={videoPoster}
-                className="absolute inset-0 h-full w-full object-contain bg-black"
-              >
-                {previewVideoWebm && <source src={previewVideoWebm} type="video/webm" />}
-                {previewVideoMp4 && <source src={previewVideoMp4} type="video/mp4" />}
-              </video>
-              <button
-                type="button"
-                onClick={toggleVideo}
-                aria-label={isPlaying ? `Pause ${title} preview video` : `Play ${title} preview video`}
-                className="absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur-sm hover:bg-black/90 transition-colors"
-              >
-                {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-              </button>
-            </>
-          ) : (
-            <img
-              src={galleryImages[imageIndex]}
-              alt={mediaAlts[imageIndex] ?? `${title} screenshot ${imageIndex + 1}`}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-contain"
-            />
-          )}
+          <DeviceShowcase3D>
+            {isVideoSlide ? (
+              <>
+                <video
+                  ref={videoRef}
+                  muted
+                  loop
+                  playsInline
+                  poster={videoPoster}
+                  className="absolute inset-0 h-full w-full object-cover bg-black"
+                >
+                  {previewVideoWebm && <source src={previewVideoWebm} type="video/webm" />}
+                  {previewVideoMp4 && <source src={previewVideoMp4} type="video/mp4" />}
+                </video>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-black/50 p-4 rounded-full backdrop-blur text-white opacity-50">
+                    <Play size={48} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <img
+                src={galleryImages[imageIndex]}
+                alt={mediaAlts[imageIndex] ?? `${title} screenshot ${imageIndex + 1}`}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+          </DeviceShowcase3D>
 
           {slideCount > 1 && (
             <>

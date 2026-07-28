@@ -1,18 +1,60 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Trail, Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
+import * as THREE from 'three';
+
+function CursorMesh({ isHovering }: { isHovering: boolean }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { viewport } = useThree();
+  const targetScale = isHovering ? 2 : 1;
+
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      // Map normalized pointer coordinates to viewport units
+      const x = (state.pointer.x * viewport.width) / 2;
+      const y = (state.pointer.y * viewport.height) / 2;
+
+      // Lerp position for smooth trailing effect
+      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, x, delta * 15);
+      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, y, delta * 15);
+
+      // Lerp scale for hover effect
+      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 10);
+    }
+  });
+
+  return (
+    <Trail
+      width={isHovering ? 1.5 : 0.5}
+      color={new THREE.Color(0xffffff)}
+      length={isHovering ? 20 : 10}
+      decay={1}
+      local={false}
+      stride={0}
+      interval={1}
+    >
+      <Float speed={5} rotationIntensity={2} floatIntensity={2}>
+        <Sphere ref={meshRef} args={[0.15, 32, 32]}>
+          <MeshDistortMaterial
+            color="#ffffff"
+            emissive="#ffffff"
+            emissiveIntensity={2}
+            distort={0.4}
+            speed={4}
+            toneMapped={false}
+          />
+        </Sphere>
+      </Float>
+    </Trail>
+  );
+}
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Check if the target is clickable (a, button, or has role="button")
       if (
         target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
@@ -26,46 +68,18 @@ export default function CustomCursor() {
       }
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('mouseover', handleMouseOver);
-
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
 
-  // Use a subtle mix-blend-mode difference for that top-tier feel.
-  const variants = {
-    default: {
-      x: mousePosition.x - 10,
-      y: mousePosition.y - 10,
-      height: 20,
-      width: 20,
-      backgroundColor: '#fff',
-      mixBlendMode: 'difference' as const,
-    },
-    hover: {
-      x: mousePosition.x - 30,
-      y: mousePosition.y - 30,
-      height: 60,
-      width: 60,
-      backgroundColor: '#fff',
-      mixBlendMode: 'difference' as const,
-    },
-  };
-
   return (
-    <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999]"
-      variants={variants}
-      animate={isHovering ? 'hover' : 'default'}
-      transition={{
-        type: 'spring',
-        stiffness: 150,
-        damping: 15,
-        mass: 0.5,
-      }}
-    />
+    <div className="fixed inset-0 pointer-events-none z-[9999]" style={{ mixBlendMode: 'difference' }}>
+      <Canvas camera={{ position: [0, 0, 5] }}>
+        <ambientLight intensity={0.5} />
+        <CursorMesh isHovering={isHovering} />
+      </Canvas>
+    </div>
   );
 }

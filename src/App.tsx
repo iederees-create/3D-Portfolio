@@ -8,6 +8,8 @@ import ThemePicker from './components/ThemePicker';
 import KonamiCode from './components/KonamiCode';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import BrandLogo from './components/BrandLogo';
+import WebGLTransitionOverlay from './components/WebGLTransitionOverlay';
+import CustomCursor from './components/CustomCursor';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -283,8 +285,10 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
+      <CustomCursor />
       <KonamiCode />
       <TerminalEasterEgg />
+      <WebGLTransitionOverlay />
 
       <Navbar />
 
