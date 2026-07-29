@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MiniGame from './MiniGame';
+import { useMember } from './contexts/MemberContext';
 
 const KONAMI_CODE = [
   'ArrowUp', 'ArrowUp',
@@ -12,6 +13,7 @@ const KONAMI_CODE = [
 export default function KonamiCode() {
   const [sequence, setSequence] = useState<string[]>([]);
   const [showGame, setShowGame] = useState(false);
+  const { memberId, openVIPModal } = useMember();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -21,14 +23,16 @@ export default function KonamiCode() {
       const key = e.key;
       setSequence(prev => {
         const nextSeq = [...prev, key];
-        // Keep only the last N keys
         if (nextSeq.length > KONAMI_CODE.length) {
           nextSeq.shift();
         }
         
-        // Check if sequence matches
         if (nextSeq.join(',') === KONAMI_CODE.join(',')) {
-          setShowGame(true);
+          if (!memberId) {
+            openVIPModal();
+          } else {
+            setShowGame(true);
+          }
           return [];
         }
         return nextSeq;
@@ -37,7 +41,7 @@ export default function KonamiCode() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showGame]);
+  }, [showGame, memberId, openVIPModal]);
 
   if (showGame) {
     return <MiniGame onClose={() => setShowGame(false)} />;

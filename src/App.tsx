@@ -10,6 +10,9 @@ import TerminalEasterEgg from './components/TerminalEasterEgg';
 import BrandLogo from './components/BrandLogo';
 import WebGLTransitionOverlay from './components/WebGLTransitionOverlay';
 import CustomCursor from './components/CustomCursor';
+import MemberSignup from './components/MemberSignup';
+import { useMember } from './contexts/MemberContext';
+import { useAnalytics } from './hooks/useAnalytics';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -48,6 +51,7 @@ const navLinks = [
 ];
 
 function Navbar() {
+  const { memberId, openVIPModal } = useMember();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuId = useId();
@@ -141,6 +145,19 @@ function Navbar() {
           >
             Contact
           </Link>
+
+          {!memberId ? (
+            <button
+              onClick={openVIPModal}
+              className="hidden lg:inline-flex px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-bold tracking-wide rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] transition-all whitespace-nowrap"
+            >
+              VIP Access
+            </button>
+          ) : (
+            <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-cyan-400 text-xs font-bold tracking-wide rounded-full border border-cyan-400/30 whitespace-nowrap">
+              <Sparkles size={14} /> VIP Member
+            </div>
+          )}
 
           {/* Hamburger — mobile + mid desktop when nav links are hidden */}
           <button
@@ -283,6 +300,9 @@ function AnimatedRoutes() {
 // provided by main.tsx, along with HelmetProvider for per-route SEO/meta
 // tags — App only owns the chrome (nav/footer) and route table.
 export default function App() {
+  const { isVIPModalOpen, closeVIPModal, loginMember } = useMember();
+  useAnalytics();
+
   return (
     <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
       <CustomCursor />
@@ -300,6 +320,12 @@ export default function App() {
 
       {/* Floating NextGenWebs AI assistant — visible on all pages */}
       <NextGenWebsAssistant />
+
+      <MemberSignup 
+        isOpen={isVIPModalOpen} 
+        onClose={closeVIPModal} 
+        onSuccess={loginMember} 
+      />
     </div>
   );
 }

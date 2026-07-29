@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier';
-import { Environment, Text, useKeyboardControls, KeyboardControls } from '@react-three/drei';
+import { Environment, useKeyboardControls, KeyboardControls } from '@react-three/drei';
 import * as THREE from 'three';
-import { X } from 'lucide-react';
+import { X, Trophy } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useMember } from '../contexts/MemberContext';
 
-function Player() {
+function Player({ onImpulse }: { onImpulse: () => void }) {
   const body = useRef<any>(null);
   const [, get] = useKeyboardControls();
 
@@ -14,13 +16,17 @@ function Player() {
     const { forward, backward, left, right } = get();
     const impulseStrength = 0.5;
     const impulse = { x: 0, y: 0, z: 0 };
+    let moved = false;
 
-    if (forward) impulse.z -= impulseStrength;
-    if (backward) impulse.z += impulseStrength;
-    if (left) impulse.x -= impulseStrength;
-    if (right) impulse.x += impulseStrength;
+    if (forward) { impulse.z -= impulseStrength; moved = true; }
+    if (backward) { impulse.z += impulseStrength; moved = true; }
+    if (left) { impulse.x -= impulseStrength; moved = true; }
+    if (right) { impulse.x += impulseStrength; moved = true; }
 
-    body.current.applyImpulse(impulse, true);
+    if (moved) {
+      body.current.applyImpulse(impulse, true);
+      onImpulse();
+    }
   });
 
   return (
@@ -33,7 +39,7 @@ function Player() {
   );
 }
 
-function Blocks() {
+function Blocks({ onBlockHit }: { onBlockHit: () => void }) {
   const count = 15;
   const positions = Array.from({ length: count }, (_, i) => {
     const row = Math.floor((-1 + Math.sqrt(1 + 8 * i)) / 2);
@@ -42,7 +48,13 @@ function Blocks() {
   });
 
   return (
-    <InstancedRigidBodies positions={positions} colliders="cuboid" restitution={0.2} friction={0.8}>
+    <InstancedRigidBodies 
+      positions={positions} 
+      colliders="cuboid" 
+      restitution={0.2} 
+      friction={0.8}
+      onCollisionEnter={onBlockHit}
+    >
       <instancedMesh args={[undefined, undefined, count]} castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#f59e0b" />
@@ -52,7 +64,42 @@ function Blocks() {
 }
 
 export default function MiniGame({ onClose }: { onClose: () => void }) {
-  const [score, setScore] = useState(0);
+  const { memberId } = useMember();
+  const [gameState, setGameState] = useState<'playing' | 'calculating' | 'finished'>('playing');
+  const [persona, setPersona] = useState('');
+  
+  // Metrics
+  const startTime = useRef(Date.now());
+  const impulseCount = useRef(0);
+  const blockHits = useRef(0);
+
+  const finishGame = async () => {
+    if (gameState !== 'playing') return;
+    setGameState('calculating');
+    
+    const timeSpent = (Date.now() - startTime.current) / 1000;
+    const ips = impulseCount.current / timeSpent; // impulses per second (aggressiveness)
+
+    let calculatedPersona = 'The Methodical Strategist';
+    if (ips > 15) calculatedPersona = 'The Aggressive Executer';
+    else if (ips > 5 && timeSpent < 30) calculatedPersona = 'The Visionary Speedster';
+    
+    setPersona(calculatedPersona);
+
+    if (memberId) {
+      await supabase.from('members').update({
+        tech_persona: calculatedPersona,
+        game_stats: {
+          time_seconds: timeSpent,
+          total_impulses: impulseCount.current,
+          block_hits: blockHits.current,
+          impulses_per_second: ips
+        }
+      }).eq('id', memberId);
+    }
+
+    setGameState('finished');
+  };
 
   return (
     <div className="fixed inset-0 z-[10000] bg-slate-900 flex flex-col items-center justify-center">
@@ -63,10 +110,39 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
         <X size={24} />
       </button>
 
-      <div className="absolute top-6 left-6 z-10">
-        <h2 className="text-2xl font-bold text-cyan-400">NextGen Smash</h2>
-        <p className="text-slate-400">Use WASD or Arrows to smash the blocks!</p>
-      </div>
+      {gameState === 'playing' && (
+        <div className="absolute top-6 left-6 z-10">
+          <h2 className="text-2xl font-bold text-cyan-400">NextGen Assessment</h2>
+          <p className="text-slate-400">Use WASD to smash blocks. We are analyzing your style.</p>
+          <button 
+            onClick={finishGame}
+            className="mt-4 px-4 py-2 bg-amber-500 text-black text-sm font-bold rounded-lg hover:bg-amber-400"
+          >
+            Finish Assessment
+          </button>
+        </div>
+      )}
+
+      {gameState === 'finished' && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="bg-slate-900 p-8 rounded-3xl border border-white/10 text-center max-w-sm">
+            <div className="mx-auto w-16 h-16 bg-amber-500/20 text-amber-400 flex items-center justify-center rounded-2xl mb-4">
+              <Trophy size={32} />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Analysis Complete</h2>
+            <p className="text-slate-400 mb-6">Based on your movement patterns, aggression, and speed, your Tech Persona is:</p>
+            <div className="text-xl font-black text-cyan-400 mb-8 p-4 bg-cyan-400/10 rounded-xl border border-cyan-400/20">
+              {persona}
+            </div>
+            <button 
+              onClick={onClose}
+              className="w-full px-4 py-3 bg-white text-black font-bold rounded-xl hover:bg-slate-200"
+            >
+              Return to Portfolio
+            </button>
+          </div>
+        </div>
+      )}
 
       <KeyboardControls
         map={[
@@ -82,8 +158,8 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
           
           <Suspense fallback={null}>
             <Physics gravity={[0, -9.81, 0]}>
-              <Player />
-              <Blocks />
+              <Player onImpulse={() => impulseCount.current++} />
+              <Blocks onBlockHit={() => blockHits.current++} />
               
               {/* Floor */}
               <RigidBody type="fixed" position={[0, -0.5, 0]} restitution={0.5} friction={1}>

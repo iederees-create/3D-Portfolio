@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.tsx';
+import { MemberProvider } from './contexts/MemberContext';
 import './index.css';
 
 // import.meta.env.BASE_URL is '/3D-Portfolio/'; react-router's basename
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter basename={basename}>
-        <App />
+        <MemberProvider>
+          <App />
+        </MemberProvider>
       </BrowserRouter>
     </HelmetProvider>
   </React.StrictMode>,
