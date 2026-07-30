@@ -37,7 +37,6 @@ export function useAnalytics() {
 
     return () => {
       // In a full implementation, we could update the time_spent_seconds on unmount using a beacon or supabase update
-      const timeSpent = Math.floor((Date.now() - startTime) / 1000);
       // Optional: update the record with time spent
     };
   }, [location.pathname]);
