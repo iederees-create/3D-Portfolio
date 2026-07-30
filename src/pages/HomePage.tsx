@@ -324,6 +324,17 @@ export default function HomePage() {
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <MagneticButton>
+                <button 
+                  onClick={() => {
+                    const event = new CustomEvent('open-vip-modal');
+                    window.dispatchEvent(event);
+                  }}
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-7 py-4 text-sm font-bold tracking-wide text-white shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all hover:shadow-[0_0_35px_rgba(34,211,238,0.7)] hover:scale-[1.02]"
+                >
+                  Take the Assessment <Sparkles size={16} />
+                </button>
+              </MagneticButton>
+              <MagneticButton>
                 <Link to="/work" className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-bold tracking-wide text-black shadow-lg transition-colors hover:bg-slate-200">
                   View real work <ArrowRight size={16} />
                 </Link>

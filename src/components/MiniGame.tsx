@@ -7,6 +7,8 @@ import { X, Trophy } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useMember } from '../contexts/MemberContext';
 
+import { sendPersonaEmail } from '../lib/email';
+
 function Player({ onImpulse }: { onImpulse: () => void }) {
   const body = useRef<any>(null);
   const [, get] = useKeyboardControls();
@@ -64,9 +66,8 @@ function Blocks({ onBlockHit }: { onBlockHit: () => void }) {
 }
 
 export default function MiniGame({ onClose }: { onClose: () => void }) {
-  const { memberId } = useMember();
+  const { memberId, memberEmail, memberName } = useMember();
   const [gameState, setGameState] = useState<'playing' | 'calculating' | 'finished'>('playing');
-  const [persona, setPersona] = useState('');
   
   // Metrics
   const startTime = useRef(Date.now());
@@ -80,12 +81,17 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
     const timeSpent = (Date.now() - startTime.current) / 1000;
     const ips = impulseCount.current / timeSpent; // impulses per second (aggressiveness)
 
-    let calculatedPersona = 'The Methodical Strategist';
-    if (ips > 15) calculatedPersona = 'The Aggressive Executer';
-    else if (ips > 5 && timeSpent < 30) calculatedPersona = 'The Visionary Speedster';
+    let calculatedPersona = 'The Apex Strategist';
+    let personaDesc = 'You have an innate ability to process variables and execute with sniper-like precision. You thrive in high-stakes environments where calculation beats brute force.';
     
-    setPersona(calculatedPersona);
-
+    if (ips > 15) {
+      calculatedPersona = 'The Unstoppable Force';
+      personaDesc = 'You possess a rare, aggressive problem-solving trait. When faced with an obstacle, you apply overwhelming force to break through. This is the hallmark of a high-risk, high-reward executor.';
+    } else if (ips > 5 && timeSpent < 30) {
+      calculatedPersona = 'The Kinetic Visionary';
+      personaDesc = 'Your brain processes spatial relationships at lightning speed. You trust your instincts and can adapt to rapidly changing scenarios faster than 90% of the population.';
+    }
+    
     if (memberId) {
       await supabase.from('members').update({
         tech_persona: calculatedPersona,
@@ -96,6 +102,10 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
           impulses_per_second: ips
         }
       }).eq('id', memberId);
+    }
+
+    if (memberName && memberEmail) {
+      await sendPersonaEmail(memberName, memberEmail, calculatedPersona, personaDesc);
     }
 
     setGameState('finished');
@@ -112,8 +122,8 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
 
       {gameState === 'playing' && (
         <div className="absolute top-6 left-6 z-10">
-          <h2 className="text-2xl font-bold text-cyan-400">NextGen Assessment</h2>
-          <p className="text-slate-400">Use WASD to smash blocks. We are analyzing your style.</p>
+          <h2 className="text-2xl font-bold text-cyan-400">Cognitive Assessment</h2>
+          <p className="text-slate-400">Use WASD to navigate and interact. We are mapping your cognitive profile.</p>
           <button 
             onClick={finishGame}
             className="mt-4 px-4 py-2 bg-amber-500 text-black text-sm font-bold rounded-lg hover:bg-amber-400"
@@ -123,16 +133,25 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
         </div>
       )}
 
+      {gameState === 'calculating' && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+           <div className="text-center text-white">
+             <div className="mx-auto w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+             <h2 className="text-xl font-bold">Analyzing Cognitive Patterns...</h2>
+           </div>
+        </div>
+      )}
+
       {gameState === 'finished' && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm">
           <div className="bg-slate-900 p-8 rounded-3xl border border-white/10 text-center max-w-sm">
-            <div className="mx-auto w-16 h-16 bg-amber-500/20 text-amber-400 flex items-center justify-center rounded-2xl mb-4">
+            <div className="mx-auto w-16 h-16 bg-cyan-500/20 text-cyan-400 flex items-center justify-center rounded-2xl mb-4">
               <Trophy size={32} />
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Analysis Complete</h2>
-            <p className="text-slate-400 mb-6">Based on your movement patterns, aggression, and speed, your Tech Persona is:</p>
-            <div className="text-xl font-black text-cyan-400 mb-8 p-4 bg-cyan-400/10 rounded-xl border border-cyan-400/20">
-              {persona}
+            <p className="text-slate-400 mb-6">We have processed your spatial decision-making data and identified your innate Cognitive Profile.</p>
+            <div className="text-lg font-bold text-emerald-400 mb-8 p-4 bg-emerald-400/10 rounded-xl border border-emerald-400/20">
+              Check your email for your official results!
             </div>
             <button 
               onClick={onClose}

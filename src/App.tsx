@@ -5,12 +5,12 @@ import { Menu, ShoppingBag, Sparkles, Twitter, Instagram, X, Youtube } from 'luc
 
 import NextGenWebsAssistant from './NextGenWebsAssistant';
 import ThemePicker from './components/ThemePicker';
-import KonamiCode from './components/KonamiCode';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import BrandLogo from './components/BrandLogo';
 import WebGLTransitionOverlay from './components/WebGLTransitionOverlay';
 import CustomCursor from './components/CustomCursor';
 import MemberSignup from './components/MemberSignup';
+import MiniGame from './components/MiniGame';
 import { useMember } from './contexts/MemberContext';
 import { useAnalytics } from './hooks/useAnalytics';
 
@@ -151,7 +151,7 @@ function Navbar() {
               onClick={openVIPModal}
               className="hidden lg:inline-flex px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-bold tracking-wide rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] transition-all whitespace-nowrap"
             >
-              VIP Access
+              Take Assessment
             </button>
           ) : (
             <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-cyan-400 text-xs font-bold tracking-wide rounded-full border border-cyan-400/30 whitespace-nowrap">
@@ -300,13 +300,19 @@ function AnimatedRoutes() {
 // provided by main.tsx, along with HelmetProvider for per-route SEO/meta
 // tags — App only owns the chrome (nav/footer) and route table.
 export default function App() {
-  const { isVIPModalOpen, closeVIPModal, loginMember } = useMember();
+  const { isVIPModalOpen, openVIPModal, closeVIPModal, loginMember, isAssessmentRunning, stopAssessment } = useMember();
   useAnalytics();
+
+  useEffect(() => {
+    const handleOpenModal = () => openVIPModal();
+    window.addEventListener('open-vip-modal', handleOpenModal);
+    return () => window.removeEventListener('open-vip-modal', handleOpenModal);
+  }, [openVIPModal]);
 
   return (
     <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
       <CustomCursor />
-      <KonamiCode />
+      {isAssessmentRunning && <MiniGame onClose={stopAssessment} />}
       <TerminalEasterEgg />
       <WebGLTransitionOverlay />
 

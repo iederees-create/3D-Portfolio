@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 interface MemberSignupProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: (memberId: string) => void;
+  onSuccess: (memberId: string, email: string, name: string) => void;
 }
 
 export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignupProps) {
@@ -41,7 +41,7 @@ export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignu
             .single();
           
           if (existingData) {
-            onSuccess(existingData.id);
+            onSuccess(existingData.id, email, name);
             return;
           }
         }
@@ -49,7 +49,7 @@ export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignu
       }
 
       if (data) {
-        onSuccess(data.id);
+        onSuccess(data.id, email, name);
       }
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -82,9 +82,9 @@ export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignu
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/20 text-cyan-400">
                   <Sparkles size={24} />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">NextGen VIP Access</h2>
+                <h2 className="text-2xl font-bold text-white mb-2">Cognitive Assessment</h2>
                 <p className="text-sm text-slate-400">
-                  Unlock the exclusive members-only interactive experience and discover your Tech Persona.
+                  Take the interactive test to uncover your innate cognitive profile. Results will be emailed to you.
                 </p>
               </div>
 
@@ -140,7 +140,7 @@ export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignu
                   disabled={loading}
                   className="w-full mt-4 rounded-xl bg-cyan-500 py-3 text-sm font-bold text-slate-900 hover:bg-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? 'Unlocking...' : 'Unlock VIP Access'}
+                  {loading ? 'Starting...' : 'Start Assessment'}
                 </button>
               </form>
             </div>
