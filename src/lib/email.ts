@@ -1,8 +1,8 @@
 import emailjs from '@emailjs/browser';
 
-const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
 
 export const sendPersonaEmail = async (name: string, email: string, persona: string, description: string) => {
   if (!publicKey || !serviceId || !templateId || publicKey === 'your_public_key_here') {
