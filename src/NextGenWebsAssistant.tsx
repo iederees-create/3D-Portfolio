@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bot, ExternalLink, MessageCircle, Send, Sparkles, X, Mic, MicOff } from 'lucide-react';
+import { Bot, ExternalLink, Send, Sparkles, X, Mic, MicOff } from 'lucide-react';
 import { answerLocally } from './utils/localAssistantEngine';
 
 type ChatMessage = {
