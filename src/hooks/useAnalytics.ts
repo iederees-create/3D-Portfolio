@@ -17,7 +17,6 @@ export function useAnalytics() {
 
   useEffect(() => {
     const sessionId = getSessionId();
-    const startTime = Date.now();
 
     // Log the page view immediately
     const logPageView = async () => {

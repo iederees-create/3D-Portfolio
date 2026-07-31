@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Suspense } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier';
 import { Environment, useKeyboardControls, KeyboardControls } from '@react-three/drei';
