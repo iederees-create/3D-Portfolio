@@ -1,6 +1,6 @@
 import { useState, useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier';
+import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier';
 import { Environment, useKeyboardControls, KeyboardControls } from '@react-three/drei';
 import { X, Trophy } from 'lucide-react';
 import { supabase } from '../lib/supabase';
@@ -42,28 +42,33 @@ function Player({ onImpulse }: { onImpulse: () => void }) {
 
 function Blocks({ onBlockHit }: { onBlockHit: () => void }) {
   const count = 15;
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
+  const blocks = Array.from({ length: count }, (_, i) => {
     const row = Math.floor((-1 + Math.sqrt(1 + 8 * i)) / 2);
     const offset = i - (row * (row + 1)) / 2;
-    positions[i * 3] = offset * 1.1 - row * 0.55;
-    positions[i * 3 + 1] = row * 1.1 + 0.5;
-    positions[i * 3 + 2] = -5;
-  }
+    return {
+      key: `block-${i}`,
+      position: [offset * 1.1 - row * 0.55, row * 1.1 + 0.5, -5] as [number, number, number],
+    };
+  });
 
   return (
-    <InstancedRigidBodies 
-      positions={positions} 
-      colliders="cuboid" 
-      restitution={0.2} 
-      friction={0.8}
-      onCollisionEnter={onBlockHit}
-    >
-      <instancedMesh args={[undefined, undefined, count]} castShadow receiveShadow>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="#f59e0b" />
-      </instancedMesh>
-    </InstancedRigidBodies>
+    <>
+      {blocks.map((block) => (
+        <RigidBody 
+          key={block.key}
+          position={block.position} 
+          colliders="cuboid" 
+          restitution={0.2} 
+          friction={0.8}
+          onCollisionEnter={onBlockHit}
+        >
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color="#f59e0b" />
+          </mesh>
+        </RigidBody>
+      ))}
+    </>
   );
 }
 
