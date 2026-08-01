@@ -17,19 +17,63 @@ computing gzip size...
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 9.44s[39m
-[31merror during build:
-Error: 
-  Configure "workbox.maximumFileSizeToCacheInBytes" to change the limit: the default value is 2 MiB.
-  Check https://vite-pwa-org.netlify.app/guide/faq.html#missing-assets-from-sw-precache-manifest for more information.
-  Assets exceeding the limit:
-  - assets/index-B4vVn2Sr.js is 4.31 MB, and won't be precached.
+[32m✓ built in 9.11s[39m
 
-    at logWorkboxResult (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite-plugin-pwa/dist/chunk-5JSAQONO.js:44:13)
-    at generateServiceWorker (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite-plugin-pwa/dist/index.js:353:3)
-    at async _generateSW (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite-plugin-pwa/dist/index.js:486:5)
-    at async Object.handler (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite-plugin-pwa/dist/index.js:644:13)
-    at async PluginDriver.hookParallel (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:22930:17)
-    at async Object.close (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:23951:13)
-    at async build (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:65732:17)
-    at async CAC.<anonymous> (file:///home/runner/work/3D-Portfolio/3D-Portfolio/node_modules/vite/dist/node/cli.js:829:5)[39m
+[36mPWA v0.20.5[39m
+mode      [35mgenerateSW[39m
+precache  [32m6 entries[39m [2m(4273.36 KiB)[22m
+files generated
+  [2mdist/sw.js[22m
+  [2mdist/workbox-9c191d2f.js[22m
+Processing projects...
+Generated: work/hydro-clean-ct-exterior-cleaning-website-template/
+Generated: work/qualified-lead-research-and-prospecting-blueprint/
+Generated: work/supportforge-ai-assistant/
+Generated: work/trading-affiliate-website-template-deriv-partner-affiliate-launchpad/
+Generated: work/insightforge-business-analytics-studio/
+Generated: work/bank-desert-analysis-student-lab/
+Generated: work/raversus-clinical-portal/
+Generated: work/tiling-contractor-website-template/
+Generated: work/construction-website-template/
+Generated: work/precision-laser-website-template/
+Generated: work/claude-code-solar-lead-generation-template/
+Generated: work/pest-control-website-template/
+Generated: work/vitality-wellness-website-template/
+Generated: work/summit-painting-ct/
+Generated: work/amore-nails-ct/
+Generated: work/pixel-perfect-hair/
+Generated: work/zen-skin-studio-website-template/
+Generated: work/acme-plumbing-claremont/
+Generated: work/window-wizards-ct/
+Generated: work/first-choice-construction/
+Generated: work/creator-hub-pro-template/
+Generated: work/aura-signs/
+Generated: work/fluent-path-tutoring/
+Processing articles...
+Generated: blog/exterior-cleaning-website-quote-planner/
+Generated: blog/how-qualified-lead-research-works/
+Generated: blog/about-nextgenwebs-web-developer-cape-town/
+Generated: blog/amore-nails-ct-website/
+Generated: blog/construction-company-website-design-cape-town/
+Generated: blog/creator-hub-digital-portfolio-template/
+Generated: blog/insightforge-business-analytics-studio/
+Generated: blog/painting-contractor-website-design/
+Generated: blog/pest-control-website-template/
+Generated: blog/pixel-perfect-hair-salon-website/
+Generated: blog/plumbing-website-design-cape-town/
+Generated: blog/raversus-clinical-portal/
+Generated: blog/signage-business-website-design/
+Generated: blog/solar-lead-generation-website-template/
+Generated: blog/tiling-contractor-website-template/
+Generated: blog/vitality-wellness-website-template/
+Generated: blog/window-cleaning-glazing-website-design/
+Generated: blog/zen-skin-studio-website-template/
+Generated: blog/ai-portfolio-assistant/
+Generated: blog/trading-affiliate-website-template/
+Generated: blog/laser-cutting-website-quote-planner/
+Generated: blog/construction-website-quote-planner/
+Generated: blog/bank-desert-analysis-python-census-google-places/
+Generated: blog/why-educational-businesses-need-custom-learning-hubs/
+Generating 404.html...
+Generating sitemap.xml...
+Meta tag and sitemap generation complete!
