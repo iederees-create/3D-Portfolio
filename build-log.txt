@@ -1,0 +1,6 @@
+
+> devworkspace-portfolio@1.0.0 build
+> tsc && vite build && node generate_meta_tags.js
+
+src/components/MiniGame.tsx(56,7): error TS2322: Type '{ children: Element; positions: Float32Array<ArrayBuffer>; colliders: "cuboid"; restitution: number; friction: number; onCollisionEnter: () => void; }' is not assignable to type 'IntrinsicAttributes & Omit<InstancedRigidBodiesProps & RefAttributes<(RigidBody | null)[] | null>, "ref"> & { ...; }'.
+  Property 'positions' does not exist on type 'IntrinsicAttributes & Omit<InstancedRigidBodiesProps & RefAttributes<(RigidBody | null)[] | null>, "ref"> & { ...; }'. Did you mean 'position'?
