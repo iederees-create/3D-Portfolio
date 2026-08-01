@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -28,17 +28,18 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps > install-log.txt 2>&1 || true
 
       - name: Build
         run: |
           npm run build > build-log.txt 2>&1 || true
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add build-log.txt
-          git commit -m "chore: add build log" || true
-          git push || true
+          git add build-log.txt install-log.txt
+          git commit -m "chore: add build logs" || true
+          git push origin HEAD:main || true
           if grep -q "error" build-log.txt; then exit 1; fi
+          if grep -q "ERR!" install-log.txt; then exit 1; fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
