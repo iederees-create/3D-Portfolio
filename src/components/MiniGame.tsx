@@ -2,7 +2,6 @@ import { useState, useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier';
 import { Environment, useKeyboardControls, KeyboardControls } from '@react-three/drei';
-import * as THREE from 'three';
 import { X, Trophy } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useMember } from '../contexts/MemberContext';
@@ -15,7 +14,7 @@ function Player({ onImpulse }: { onImpulse: () => void }) {
 
   useFrame(() => {
     if (!body.current) return;
-    const { forward, backward, left, right } = get();
+    const { forward, backward, left, right } = get() as any;
     const impulseStrength = 0.5;
     const impulse = { x: 0, y: 0, z: 0 };
     let moved = false;
@@ -43,11 +42,14 @@ function Player({ onImpulse }: { onImpulse: () => void }) {
 
 function Blocks({ onBlockHit }: { onBlockHit: () => void }) {
   const count = 15;
-  const positions = Array.from({ length: count }, (_, i) => {
+  const positions = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
     const row = Math.floor((-1 + Math.sqrt(1 + 8 * i)) / 2);
     const offset = i - (row * (row + 1)) / 2;
-    return [offset * 1.1 - row * 0.55, row * 1.1 + 0.5, -5] as [number, number, number];
-  });
+    positions[i * 3] = offset * 1.1 - row * 0.55;
+    positions[i * 3 + 1] = row * 1.1 + 0.5;
+    positions[i * 3 + 2] = -5;
+  }
 
   return (
     <InstancedRigidBodies 
