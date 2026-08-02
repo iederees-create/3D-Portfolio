@@ -73,7 +73,7 @@ function TransitionMaterial() {
 export default function WebGLTransitionOverlay() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[9998]">
-      <Canvas orthographic camera={{ position: [0, 0, 1], zoom: 1 }}>
+      <Canvas orthographic camera={{ position: [0, 0, 1], zoom: 1 }} style={{ pointerEvents: 'none' }}>
         <mesh>
           <planeGeometry args={[window.innerWidth, window.innerHeight]} />
           <TransitionMaterial />

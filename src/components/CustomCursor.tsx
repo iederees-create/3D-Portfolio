@@ -76,7 +76,7 @@ export default function CustomCursor() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999]" style={{ mixBlendMode: 'difference' }}>
-      <Canvas camera={{ position: [0, 0, 5] }}>
+      <Canvas camera={{ position: [0, 0, 5] }} style={{ pointerEvents: 'none' }}>
         <ambientLight intensity={0.5} />
         <CursorMesh isHovering={isHovering} />
       </Canvas>
