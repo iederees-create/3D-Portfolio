@@ -2,7 +2,7 @@ npm warn deprecated source-map@0.8.0-beta.0: The work that was done in this beta
 npm warn deprecated glob@11.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 npm warn deprecated three-mesh-bvh@0.7.8: Deprecated due to three.js version incompatibility. Please use v0.8.0, instead.
 
-added 507 packages, and audited 508 packages in 8s
+added 507 packages, and audited 508 packages in 7s
 
 117 packages are looking for funding
   run `npm fund` for details
