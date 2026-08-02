@@ -124,12 +124,12 @@ export default function MemberSignup({ isOpen, onClose, onSuccess }: MemberSignu
                     required
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all appearance-none"
                   >
-                    <option value="" disabled>Select your role...</option>
-                    <option value="founder">Founder / CEO</option>
-                    <option value="developer">Developer</option>
-                    <option value="designer">Designer</option>
-                    <option value="marketer">Marketer</option>
-                    <option value="other">Other</option>
+                    <option value="" disabled className="bg-slate-900 text-white">Select your role...</option>
+                    <option value="founder" className="bg-slate-900 text-white">Founder / CEO</option>
+                    <option value="developer" className="bg-slate-900 text-white">Developer</option>
+                    <option value="designer" className="bg-slate-900 text-white">Designer</option>
+                    <option value="marketer" className="bg-slate-900 text-white">Marketer</option>
+                    <option value="other" className="bg-slate-900 text-white">Other</option>
                   </select>
                 </div>
 
