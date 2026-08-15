@@ -275,6 +275,8 @@ function Footer() {
   );
 }
 
+import AdminDashboard from './pages/AdminDashboard';
+
 // ─── Animated Routes wrapper ──────────────────────────────────────────────────
 function AnimatedRoutes() {
   const location = useLocation();
@@ -290,6 +292,7 @@ function AnimatedRoutes() {
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
         <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
+        <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );
