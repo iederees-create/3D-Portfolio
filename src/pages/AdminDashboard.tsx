@@ -1,205 +1,261 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '../lib/supabase';
-import { RefreshCw, Users, Mail, Activity, AlertCircle } from 'lucide-react';
+import { RefreshCw, Activity, Database, AlertCircle, Clock, Users, ArrowUpRight } from 'lucide-react';
+
+const TABLES = [
+  'page_views',
+  'deriv_subscribers',
+  'members',
+  'admin_lead_overview',
+  'campaign_leads',
+  'campaigns',
+  'customer_cases',
+  'email_events',
+  'inbound_leads',
+  'installations',
+  'lead_activities',
+  'lead_requirements',
+  'leads',
+  'onboarding_items',
+  'pipeline_summary',
+  'profiles',
+  'quote_workflows',
+  'quotes',
+  'sales_tasks',
+  'scraped_leads',
+  'submission_rate_limits',
+  'support_requests',
+  'web_events'
+];
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<'deriv' | 'members' | 'analytics'>('deriv');
-  const [derivLeads, setDerivLeads] = useState<any[]>([]);
-  const [members, setMembers] = useState<any[]>([]);
-  const [pageViews, setPageViews] = useState<any[]>([]);
+  const [activeTable, setActiveTable] = useState('page_views');
+  const [tableData, setTableData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = async (tableName: string) => {
     setLoading(true);
     setError(null);
     try {
-      // Fetch Deriv Subscribers
-      const { data: derivData, error: derivError } = await supabase
-        .from('deriv_subscribers')
+      // Order by created_at if possible, otherwise just limit
+      const { data, error: fetchError } = await supabase
+        .from(tableName)
         .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
+        .order('created_at', { ascending: false, nullsFirst: false })
+        .limit(100)
+        .catch(async () => {
+           // Fallback if created_at doesn't exist on this table
+           return await supabase.from(tableName).select('*').limit(100);
+        });
 
-      if (derivError) throw new Error(`Deriv Error: ${derivError.message}`);
-      setDerivLeads(derivData || []);
-
-      // Fetch NextGenWebs VIP Members
-      const { data: membersData, error: membersError } = await supabase
-        .from('members')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
-
-      if (membersError) throw new Error(`Members Error: ${membersError.message}`);
-      setMembers(membersData || []);
-
-      // Fetch Page Views
-      const { data: viewsData, error: viewsError } = await supabase
-        .from('page_views')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
-
-      if (viewsError) throw new Error(`Analytics Error: ${viewsError.message}`);
-      setPageViews(viewsData || []);
-
+      if (fetchError) {
+        // Retry without order if the first try failed due to missing created_at column
+        if (fetchError.code === '42703') {
+           const { data: fallbackData, error: fallbackError } = await supabase.from(tableName).select('*').limit(100);
+           if (fallbackError) throw fallbackError;
+           setTableData(fallbackData || []);
+        } else {
+           throw fetchError;
+        }
+      } else {
+        setTableData(data || []);
+      }
     } catch (err: any) {
       setError(err.message || 'Failed to fetch data. Check your RLS policies in Supabase.');
+      setTableData([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(activeTable);
+  }, [activeTable]);
+
+  // Derive columns for generic table view
+  const columns = useMemo(() => {
+    if (tableData.length === 0) return [];
+    return Object.keys(tableData[0]);
+  }, [tableData]);
+
+  // Analytics Calculations
+  const analyticsMetrics = useMemo(() => {
+    if (activeTable !== 'page_views' || tableData.length === 0) return null;
+    
+    const totalViews = tableData.length;
+    const viewsWithTime = tableData.filter(v => v.time_spent_seconds && v.time_spent_seconds > 0);
+    const avgTime = viewsWithTime.length 
+      ? Math.round(viewsWithTime.reduce((acc, curr) => acc + curr.time_spent_seconds, 0) / viewsWithTime.length) 
+      : 0;
+
+    const referrers: Record<string, number> = {};
+    tableData.forEach(v => {
+      if (v.referrer) {
+        let domain = v.referrer;
+        try { domain = new URL(v.referrer).hostname; } catch(e){}
+        referrers[domain] = (referrers[domain] || 0) + 1;
+      }
+    });
+    
+    let topReferrer = 'Direct / None';
+    let topRefC = 0;
+    Object.entries(referrers).forEach(([ref, count]) => {
+      if (count > topRefC) { topReferrer = ref; topRefC = count; }
+    });
+
+    return { totalViews, avgTime, topReferrer };
+  }, [activeTable, tableData]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 pt-24 pb-12 px-6">
-      <div className="max-w-6xl mx-auto">
-        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-200 pt-24 pb-12 flex flex-col md:flex-row">
+      {/* Sidebar Navigation */}
+      <div className="w-full md:w-64 shrink-0 bg-black/40 border-r border-white/5 p-4 md:min-h-[calc(100vh-6rem)] overflow-y-auto">
+        <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 px-2">Your Database</h2>
+        <nav className="flex flex-col gap-1">
+          {TABLES.map(table => (
+            <button
+              key={table}
+              onClick={() => setActiveTable(table)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-left ${
+                activeTable === table 
+                ? 'bg-cyan-500/20 text-cyan-400 font-medium' 
+                : 'text-slate-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {table === 'page_views' ? <Activity size={14} /> : <Database size={14} />}
+              <span className="truncate">{table.replace(/_/g, ' ')}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 p-6 overflow-hidden flex flex-col max-h-[calc(100vh-6rem)]">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 shrink-0">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">Data Command Center</h1>
-            <p className="text-slate-400">Manage all your Supabase data across projects in one place.</p>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2 capitalize">
+              {activeTable.replace(/_/g, ' ')}
+            </h1>
           </div>
           <button 
-            onClick={fetchData}
+            onClick={() => fetchData(activeTable)}
             disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors w-fit"
+            className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors w-fit"
           >
-            <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
-            Refresh Data
+            <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+            Refresh
           </button>
         </header>
 
         {error && (
-          <div className="mb-8 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-start gap-3 text-red-400">
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-start gap-3 text-red-400 shrink-0">
             <AlertCircle size={20} className="shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold">Error loading data</p>
+              <p className="font-semibold">Access Denied</p>
               <p className="text-sm">{error}</p>
-              <p className="text-sm mt-2">Note: You may need to enable SELECT permissions (Row Level Security) for these tables in Supabase so the dashboard can read them.</p>
+              <p className="text-sm mt-2 font-medium">To view this table, you need to run the Master SQL Script in your Supabase dashboard to grant SELECT permissions.</p>
             </div>
           </div>
         )}
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          <button 
-            onClick={() => setActiveTab('deriv')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-colors ${activeTab === 'deriv' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' : 'bg-surface-elevated text-slate-400 hover:text-white'}`}
-          >
-            <Mail size={16} />
-            Deriv Affiliate Leads ({derivLeads.length})
-          </button>
-          <button 
-            onClick={() => setActiveTab('members')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-colors ${activeTab === 'members' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-surface-elevated text-slate-400 hover:text-white'}`}
-          >
-            <Users size={16} />
-            Portfolio VIP Members ({members.length})
-          </button>
-          <button 
-            onClick={() => setActiveTab('analytics')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-colors ${activeTab === 'analytics' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : 'bg-surface-elevated text-slate-400 hover:text-white'}`}
-          >
-            <Activity size={16} />
-            Recent Analytics ({pageViews.length})
-          </button>
-        </div>
+        {/* Custom Analytics View */}
+        {activeTable === 'page_views' && !error && analyticsMetrics && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 shrink-0">
+            <div className="bg-surface-elevated border border-white/5 p-4 rounded-xl">
+              <div className="flex items-center gap-2 text-slate-400 mb-1"><Users size={16}/> Total Recent Views</div>
+              <div className="text-2xl font-bold text-white">{analyticsMetrics.totalViews}</div>
+            </div>
+            <div className="bg-surface-elevated border border-white/5 p-4 rounded-xl">
+              <div className="flex items-center gap-2 text-slate-400 mb-1"><Clock size={16}/> Avg. Time Spent</div>
+              <div className="text-2xl font-bold text-emerald-400">{analyticsMetrics.avgTime}s</div>
+            </div>
+            <div className="bg-surface-elevated border border-white/5 p-4 rounded-xl">
+              <div className="flex items-center gap-2 text-slate-400 mb-1"><ArrowUpRight size={16}/> Top Referrer</div>
+              <div className="text-lg font-bold text-cyan-400 truncate">{analyticsMetrics.topReferrer}</div>
+            </div>
+          </div>
+        )}
 
-        {/* Data Tables */}
-        <div className="bg-surface-elevated border border-white/5 rounded-2xl overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-black/40 border-b border-white/5 text-slate-400">
+        {/* Table View */}
+        <div className="bg-surface-elevated border border-white/5 rounded-2xl overflow-hidden flex-1 flex flex-col min-h-0">
+          <div className="overflow-auto flex-1">
+            <table className="w-full text-left text-sm whitespace-nowrap">
+              <thead className="bg-black/40 border-b border-white/5 text-slate-400 sticky top-0 z-10 backdrop-blur-md">
                 <tr>
-                  {activeTab === 'deriv' && (
+                  {activeTable === 'page_views' ? (
                     <>
-                      <th className="px-6 py-4 font-semibold">Email</th>
-                      <th className="px-6 py-4 font-semibold">Joined At</th>
-                      <th className="px-6 py-4 font-semibold text-right">Source Project</th>
+                      <th className="px-6 py-4 font-semibold">Path & Date</th>
+                      <th className="px-6 py-4 font-semibold">Time Spent</th>
+                      <th className="px-6 py-4 font-semibold">Referrer</th>
+                      <th className="px-6 py-4 font-semibold">Device / Screen</th>
+                      <th className="px-6 py-4 font-semibold">UTM Source</th>
                     </>
-                  )}
-                  {activeTab === 'members' && (
-                    <>
-                      <th className="px-6 py-4 font-semibold">Email</th>
-                      <th className="px-6 py-4 font-semibold">Joined At</th>
-                      <th className="px-6 py-4 font-semibold">Assessment Score</th>
-                      <th className="px-6 py-4 font-semibold text-right">Source Project</th>
-                    </>
-                  )}
-                  {activeTab === 'analytics' && (
-                    <>
-                      <th className="px-6 py-4 font-semibold">Path</th>
-                      <th className="px-6 py-4 font-semibold">Timestamp</th>
-                      <th className="px-6 py-4 font-semibold">Session ID</th>
-                      <th className="px-6 py-4 font-semibold text-right">Source Project</th>
-                    </>
+                  ) : (
+                    columns.map(col => (
+                      <th key={col} className="px-6 py-4 font-semibold capitalize">{col.replace(/_/g, ' ')}</th>
+                    ))
                   )}
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {loading ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
+                    <td colSpan={10} className="px-6 py-12 text-center text-slate-500">
                       <RefreshCw size={24} className="animate-spin mx-auto mb-3" />
-                      Loading your data...
+                      Loading table data...
                     </td>
                   </tr>
+                ) : tableData.length === 0 && !error ? (
+                  <tr>
+                    <td colSpan={10} className="px-6 py-12 text-center text-slate-500">
+                      No data found in this table.
+                    </td>
+                  </tr>
+                ) : activeTable === 'page_views' ? (
+                  tableData.map((row) => (
+                    <tr key={row.id} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-3">
+                        <div className="font-medium text-white">{row.path}</div>
+                        <div className="text-xs text-slate-500">{new Date(row.created_at).toLocaleString()}</div>
+                      </td>
+                      <td className="px-6 py-3">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${row.time_spent_seconds > 30 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-500/10 text-slate-400'}`}>
+                          {row.time_spent_seconds || 0}s
+                        </span>
+                      </td>
+                      <td className="px-6 py-3 text-slate-400 truncate max-w-[200px]">{row.referrer || 'Direct'}</td>
+                      <td className="px-6 py-3 text-slate-400 text-xs">{row.screen_resolution || 'Unknown'}<br/><span className="text-slate-600">{row.browser_language}</span></td>
+                      <td className="px-6 py-3">
+                        {row.utm_source ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-500/10 text-purple-400">
+                            {row.utm_source}
+                          </span>
+                        ) : (
+                          <span className="text-slate-600">-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))
                 ) : (
-                  <>
-                    {/* Deriv Leads Table */}
-                    {activeTab === 'deriv' && derivLeads.map((lead) => (
-                      <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="px-6 py-4 font-medium text-white">{lead.email}</td>
-                        <td className="px-6 py-4 text-slate-400">{new Date(lead.created_at).toLocaleString()}</td>
-                        <td className="px-6 py-4 text-right">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-400">
-                            Deriv Affiliate Site
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                    {activeTab === 'deriv' && derivLeads.length === 0 && (
-                      <tr><td colSpan={3} className="px-6 py-8 text-center text-slate-500">No leads found yet.</td></tr>
-                    )}
-
-                    {/* Members Table */}
-                    {activeTab === 'members' && members.map((member) => (
-                      <tr key={member.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="px-6 py-4 font-medium text-white">{member.email}</td>
-                        <td className="px-6 py-4 text-slate-400">{new Date(member.created_at).toLocaleString()}</td>
-                        <td className="px-6 py-4 text-slate-300">{member.score ? `${member.score}%` : 'N/A'}</td>
-                        <td className="px-6 py-4 text-right">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400">
-                            3D Portfolio
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                    {activeTab === 'members' && members.length === 0 && (
-                      <tr><td colSpan={4} className="px-6 py-8 text-center text-slate-500">No VIP members found yet.</td></tr>
-                    )}
-
-                    {/* Analytics Table */}
-                    {activeTab === 'analytics' && pageViews.map((view) => (
-                      <tr key={view.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="px-6 py-4 font-medium text-white">{view.path}</td>
-                        <td className="px-6 py-4 text-slate-400">{new Date(view.created_at).toLocaleString()}</td>
-                        <td className="px-6 py-4 text-slate-500 font-mono text-xs">{view.session_id}</td>
-                        <td className="px-6 py-4 text-right">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400">
-                            3D Portfolio
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                    {activeTab === 'analytics' && pageViews.length === 0 && (
-                      <tr><td colSpan={4} className="px-6 py-8 text-center text-slate-500">No analytics data found yet.</td></tr>
-                    )}
-                  </>
+                  tableData.map((row, i) => (
+                    <tr key={row.id || i} className="hover:bg-white/[0.02] transition-colors">
+                      {columns.map(col => {
+                        const val = row[col];
+                        let displayVal = val;
+                        if (val === null) displayVal = <span className="text-slate-600 italic">null</span>;
+                        else if (typeof val === 'boolean') displayVal = <span className={`px-2 py-0.5 rounded text-xs ${val ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>{val.toString()}</span>;
+                        else if (typeof val === 'object') displayVal = <span className="text-slate-500 text-xs font-mono">{JSON.stringify(val).substring(0, 30)}...</span>;
+                        else if (String(val).length > 50) displayVal = String(val).substring(0, 50) + '...';
+                        
+                        return (
+                          <td key={col} className="px-6 py-3 text-slate-300 max-w-[300px] truncate">
+                            {displayVal}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))
                 )}
               </tbody>
             </table>
