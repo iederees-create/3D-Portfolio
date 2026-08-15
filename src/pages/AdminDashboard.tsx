@@ -38,7 +38,7 @@ export default function AdminDashboard() {
       const { data: viewsData, error: viewsError } = await supabase
         .from('page_views')
         .select('*')
-        .order('timestamp', { ascending: false })
+        .order('created_at', { ascending: false })
         .limit(100);
 
       if (viewsError) throw new Error(`Analytics Error: ${viewsError.message}`);
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
                     {activeTab === 'analytics' && pageViews.map((view) => (
                       <tr key={view.id} className="hover:bg-white/[0.02] transition-colors">
                         <td className="px-6 py-4 font-medium text-white">{view.path}</td>
-                        <td className="px-6 py-4 text-slate-400">{new Date(view.timestamp).toLocaleString()}</td>
+                        <td className="px-6 py-4 text-slate-400">{new Date(view.created_at).toLocaleString()}</td>
                         <td className="px-6 py-4 text-slate-500 font-mono text-xs">{view.session_id}</td>
                         <td className="px-6 py-4 text-right">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400">
