@@ -34,6 +34,47 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // New states for tracking unseen records
+  const [tableCounts, setTableCounts] = useState<Record<string, number>>({});
+  const [lastViewed, setLastViewed] = useState<Record<string, number>>(() => {
+    try {
+      const stored = localStorage.getItem('adminDashboardLastViewed');
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  // Fetch counts for all tables on mount to show badges
+  useEffect(() => {
+    const fetchAllCounts = async () => {
+      const newCounts: Record<string, number> = {};
+      await Promise.all(
+        TABLES.map(async (table) => {
+          try {
+            const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });
+            newCounts[table] = count || 0;
+          } catch (e) {
+            newCounts[table] = 0;
+          }
+        })
+      );
+      setTableCounts(newCounts);
+    };
+    fetchAllCounts();
+  }, []);
+
+  // Update last viewed when switching tabs or when counts load
+  useEffect(() => {
+    if (tableCounts[activeTable] !== undefined) {
+      setLastViewed(prev => {
+        const next = { ...prev, [activeTable]: tableCounts[activeTable] };
+        localStorage.setItem('adminDashboardLastViewed', JSON.stringify(next));
+        return next;
+      });
+    }
+  }, [activeTable, tableCounts]);
+
   const fetchData = async (tableName: string) => {
     setLoading(true);
     setError(null);
@@ -109,20 +150,33 @@ export default function AdminDashboard() {
       <div className="w-full md:w-64 shrink-0 bg-black/40 border-r border-white/5 p-4 md:min-h-[calc(100vh-6rem)] overflow-y-auto">
         <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 px-2">Your Database</h2>
         <nav className="flex flex-col gap-1">
-          {TABLES.map(table => (
-            <button
-              key={table}
-              onClick={() => setActiveTable(table)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-left ${
-                activeTable === table 
-                ? 'bg-cyan-500/20 text-cyan-400 font-medium' 
-                : 'text-slate-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              {table === 'page_views' ? <Activity size={14} /> : <Database size={14} />}
-              <span className="truncate">{table.replace(/_/g, ' ')}</span>
-            </button>
-          ))}
+          {TABLES.map(table => {
+            const currentCount = tableCounts[table] || 0;
+            const viewedCount = lastViewed[table] || 0;
+            const unseen = Math.max(0, currentCount - viewedCount);
+
+            return (
+              <button
+                key={table}
+                onClick={() => setActiveTable(table)}
+                className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors text-left ${
+                  activeTable === table 
+                  ? 'bg-cyan-500/20 text-cyan-400 font-medium' 
+                  : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-2 truncate">
+                  {table === 'page_views' ? <Activity size={14} className="shrink-0" /> : <Database size={14} className="shrink-0" />}
+                  <span className="truncate">{table.replace(/_/g, ' ')}</span>
+                </div>
+                {unseen > 0 && activeTable !== table && (
+                  <span className="bg-cyan-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full shrink-0">
+                    {unseen > 99 ? '99+' : unseen}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </nav>
       </div>
 
