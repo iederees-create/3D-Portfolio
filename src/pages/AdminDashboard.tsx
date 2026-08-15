@@ -39,25 +39,21 @@ export default function AdminDashboard() {
     setError(null);
     try {
       // Order by created_at if possible, otherwise just limit
-      const { data, error: fetchError } = await supabase
+      let { data, error: fetchError } = await supabase
         .from(tableName)
         .select('*')
         .order('created_at', { ascending: false, nullsFirst: false })
-        .limit(100)
-        .catch(async () => {
-           // Fallback if created_at doesn't exist on this table
-           return await supabase.from(tableName).select('*').limit(100);
-        });
+        .limit(100);
+
+      if (fetchError && fetchError.code === '42703') {
+         // Fallback if created_at doesn't exist on this table
+         const fallbackRes = await supabase.from(tableName).select('*').limit(100);
+         data = fallbackRes.data;
+         fetchError = fallbackRes.error;
+      }
 
       if (fetchError) {
-        // Retry without order if the first try failed due to missing created_at column
-        if (fetchError.code === '42703') {
-           const { data: fallbackData, error: fallbackError } = await supabase.from(tableName).select('*').limit(100);
-           if (fallbackError) throw fallbackError;
-           setTableData(fallbackData || []);
-        } else {
-           throw fetchError;
-        }
+         throw fetchError;
       } else {
         setTableData(data || []);
       }
