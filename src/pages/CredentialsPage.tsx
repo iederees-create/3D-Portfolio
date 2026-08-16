@@ -91,6 +91,12 @@ const tools = [
 
 const education = [
   {
+    qualification: 'Hands-On Introduction: Data Engineering',
+    institution: 'LinkedIn Learning',
+    period: 'August 2026',
+    note: 'A 1 hour 33 minute course covering data engineering fundamentals, ETL/ELT concepts and pipeline design — completed alongside building the InsightForge Apache Airflow ETL pipeline feature.',
+  },
+  {
     qualification: 'Ongoing Self-Directed Web Development',
     institution: 'freeCodeCamp · The Odin Project · MDN · YouTube',
     period: '2022 – Present',

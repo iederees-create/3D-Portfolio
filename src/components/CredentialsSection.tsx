@@ -42,6 +42,17 @@ const certificates: Certificate[] = [
     pdfUrl: `${import.meta.env.BASE_URL}certificates/data-science-python-certificate.pdf`,
     skills: ['Python programming', 'Data manipulation with Pandas', 'Data visualisation', 'Introductory machine learning'],
   },
+  {
+    title: 'Hands-On Introduction: Data Engineering',
+    institution: 'LinkedIn Learning',
+    courseDates: 'Completed 16 August 2026',
+    certifiedDate: 'Certified 16 August 2026',
+    estimatedHours: '1 hour 33 minutes',
+    thumbnail: `${import.meta.env.BASE_URL}certificates/data-engineering-certificate-thumb.webp`,
+    thumbnailAlt: 'Hands-On Introduction: Data Engineering certificate from LinkedIn Learning',
+    pdfUrl: `${import.meta.env.BASE_URL}certificates/data-engineering-certificate.pdf`,
+    skills: ['Data engineering fundamentals', 'ETL/ELT concepts', 'Data pipeline design'],
+  },
 ]
 
 const courseProjects: CourseProject[] = [
