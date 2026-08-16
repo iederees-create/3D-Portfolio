@@ -11,6 +11,7 @@ import AmoreNailsCtWebsiteContent from './amore-nails-ct-website';
 import ConstructionCompanyWebsiteDesignCapeTownContent from './construction-company-website-design-cape-town';
 import CreatorHubDigitalPortfolioTemplateContent from './creator-hub-digital-portfolio-template';
 import InsightforgeBusinessAnalyticsStudioContent from './insightforge-business-analytics-studio';
+import InsightforgeAirflowDataPipelineContent from './insightforge-airflow-data-pipeline';
 import PaintingContractorWebsiteDesignContent from './painting-contractor-website-design';
 import PestControlWebsiteTemplateContent from './pest-control-website-template';
 import PixelPerfectHairSalonWebsiteContent from './pixel-perfect-hair-salon-website';
@@ -136,7 +137,21 @@ export const articles: ArticleMeta[] = [
     tags: ['Case Study', 'Web Design', 'NextGenWebs'],
     readingTimeMinutes: 17,
     // No cover image
-    relatedSlugs: [],
+    relatedSlugs: ['insightforge-airflow-data-pipeline'],
+  },
+  {
+    slug: 'insightforge-airflow-data-pipeline',
+    title: 'InsightForge Evolves: From CSV Analytics Dashboard to an Automated Data Pipeline',
+    excerpt: 'A follow-up to the original InsightForge case study: how an optional Apache Airflow ETL pipeline was designed, built, and verified on top of the existing privacy-first analytics dashboard — DAG design, idempotency, data-quality automation, and real, measured results.',
+    datePublished: '2026-08-16',
+    dateModified: '2026-08-16',
+    author: 'Iederees Francis',
+    category: 'Case Study',
+    tags: ['Case Study', 'Apache Airflow', 'Data Engineering', 'Python', 'NextGenWebs'],
+    readingTimeMinutes: 14,
+    coverImage: `${import.meta.env.BASE_URL}projects/insightforge/11-pipeline-dashboard-output.webp`,
+    coverImageAlt: 'InsightForge Business Performance Dashboard loaded with real output from the new Apache Airflow ETL pipeline',
+    relatedSlugs: ['insightforge-business-analytics-studio'],
   },
   {
     slug: 'painting-contractor-website-design',
@@ -372,6 +387,7 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'construction-company-website-design-cape-town': ConstructionCompanyWebsiteDesignCapeTownContent,
   'creator-hub-digital-portfolio-template': CreatorHubDigitalPortfolioTemplateContent,
   'insightforge-business-analytics-studio': InsightforgeBusinessAnalyticsStudioContent,
+  'insightforge-airflow-data-pipeline': InsightforgeAirflowDataPipelineContent,
   'painting-contractor-website-design': PaintingContractorWebsiteDesignContent,
   'pest-control-website-template': PestControlWebsiteTemplateContent,
   'pixel-perfect-hair-salon-website': PixelPerfectHairSalonWebsiteContent,
