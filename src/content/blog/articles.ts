@@ -23,6 +23,7 @@ import VitalityWellnessWebsiteTemplateContent from './vitality-wellness-website-
 import WindowCleaningGlazingWebsiteDesignContent from './window-cleaning-glazing-website-design';
 import ZenSkinStudioContent from './zen-skin-studio-website-template';
 import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-works';
+import AIDevelopments3DWeb2026Content from './ai-developments-3d-web-2026';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -30,6 +31,18 @@ import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'ai-developments-3d-web-2026',
+    title: 'The AI That Builds (and Lives Inside) 3D Websites: What Actually Changed in 2026',
+    excerpt: 'How multimodal models, world models, and AI agents are reshaping Three.js and interactive 3D web experiences — and what it actually means for client projects in 2026.',
+    datePublished: '2026-08-16',
+    dateModified: '2026-08-16',
+    author: 'Iedrees Francis',
+    category: 'Tech / AI & Web',
+    tags: ['AI', 'Three.js', 'Web Development', 'Generative AI', '3D Web', 'Agents'],
+    readingTimeMinutes: 8,
+    relatedSlugs: ['construction-website-quote-planner', 'bank-desert-analysis-python-census-google-places'],
+  },
   {
     slug: 'exterior-cleaning-website-quote-planner',
     title: 'How to Build an Exterior Cleaning Website That Turns Visitors Into Better Quote Requests',
@@ -373,6 +386,7 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'ai-portfolio-assistant': AiPortfolioAssistantContent,
   'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
   'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
+  'ai-developments-3d-web-2026': AIDevelopments3DWeb2026Content,
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
   'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
