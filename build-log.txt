@@ -4,24 +4,24 @@
 
 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
 transforming...
-[32m✓[39m 2639 modules transformed.
+[32m✓[39m 2642 modules transformed.
 rendering chunks...
 computing gzip size...
 [2mdist/[22m[32mregisterSW.js              [39m[1m[2m    0.16 kB[22m[1m[22m
 [2mdist/[22m[32mmanifest.webmanifest       [39m[1m[2m    0.36 kB[22m[1m[22m
-[2mdist/[22m[32mindex.html                 [39m[1m[2m    2.79 kB[22m[1m[22m[2m │ gzip:     1.34 kB[22m
+[2mdist/[22m[32mindex.html                 [39m[1m[2m    2.79 kB[22m[1m[22m[2m │ gzip:     1.35 kB[22m
 [2mdist/[22m[2massets/[22m[35mindex-DhN4aB7E.css  [39m[1m[2m   59.63 kB[22m[1m[22m[2m │ gzip:    11.36 kB[22m
-[2mdist/[22m[2massets/[22m[36mindex-BqnqYNot.js   [39m[1m[33m4,358.44 kB[39m[22m[2m │ gzip: 1,420.17 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-CS87Oa9Q.js   [39m[1m[33m4,374.58 kB[39m[22m[2m │ gzip: 1,424.80 kB[22m
 [33m
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 9.87s[39m
+[32m✓ built in 9.72s[39m
 
 [36mPWA v0.20.5[39m
 mode      [35mgenerateSW[39m
-precache  [32m6 entries[39m [2m(4320.67 KiB)[22m
+precache  [32m6 entries[39m [2m(4336.48 KiB)[22m
 files generated
   [2mdist/sw.js[22m
   [2mdist/workbox-9c191d2f.js[22m
@@ -49,6 +49,9 @@ Generated: work/first-choice-construction/
 Generated: work/creator-hub-pro-template/
 Generated: work/aura-signs/
 Generated: work/fluent-path-tutoring/
+Generated: work/trade-business-quote-and-estimate-calculator/
+Generated: work/etsy-seller-seo-and-listing-optimization-toolkit/
+Generated: work/digital-guest-welcome-guide/
 Processing articles...
 Generated: blog/ai-developments-3d-web-2026/
 Generated: blog/exterior-cleaning-website-quote-planner/
@@ -76,6 +79,9 @@ Generated: blog/laser-cutting-website-quote-planner/
 Generated: blog/construction-website-quote-planner/
 Generated: blog/bank-desert-analysis-python-census-google-places/
 Generated: blog/why-educational-businesses-need-custom-learning-hubs/
+Generated: blog/trade-business-quote-calculator/
+Generated: blog/etsy-seller-seo-toolkit/
+Generated: blog/digital-guest-welcome-guide/
 Generating 404.html...
 Generating sitemap.xml...
 Meta tag and sitemap generation complete!
