@@ -1,4 +1,7 @@
 import type { ArticleContentComponent, ArticleMeta } from './types';
+import TradeBusinessQuoteCalculatorContent from './trade-business-quote-calculator';
+import EtsySellerSeoToolkitContent from './etsy-seller-seo-toolkit';
+import DigitalGuestWelcomeGuideContent from './digital-guest-welcome-guide';
 import ExteriorCleaningWebsiteQuotePlannerContent from './exterior-cleaning-website-quote-planner';
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
@@ -377,9 +380,54 @@ export const articles: ArticleMeta[] = [
     // rather than borrowing an unrelated project's image.
     relatedSlugs: ['bank-desert-analysis-python-census-google-places'],
   },
+  {
+    slug: 'trade-business-quote-calculator',
+    title: 'Why Trade Businesses Need Quote Formulas, Not Another PDF Template',
+    excerpt: 'Pest control, tiling, laser cutting, exterior cleaning and construction businesses all rebuild the same quote by hand. Here is why the Trade Business Quote & Estimate Calculator uses real spreadsheet formulas instead of a static layout — and a real bug caught while testing it.',
+    datePublished: '2026-08-25',
+    dateModified: '2026-08-25',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Business Tools',
+    tags: ['Excel', 'Google Sheets', 'Trade Business', 'Quote Template', 'Digital Product'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}projects/trade-quote-calculator/01-cover.png`,
+    coverImageAlt: 'Trade Business Quote & Estimate Calculator cover graphic',
+    relatedSlugs: ['etsy-seller-seo-toolkit', 'digital-guest-welcome-guide'],
+  },
+  {
+    slug: 'etsy-seller-seo-toolkit',
+    title: "What Etsy's Title and Tag Limits Actually Are (And How to Stop Guessing)",
+    excerpt: 'Etsy titles cap at 140 characters and tags at 20 — but checking a real draft against those limits by eye is unreliable. Why the Etsy Seller SEO & Listing-Optimization Toolkit is a working spreadsheet instead of a static checklist.',
+    datePublished: '2026-08-25',
+    dateModified: '2026-08-25',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Business Tools',
+    tags: ['Etsy SEO', 'Excel', 'Google Sheets', 'Keyword Research', 'Digital Product'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}projects/etsy-seller-seo-toolkit/01-cover.png`,
+    coverImageAlt: 'Etsy Seller SEO & Listing-Optimization Toolkit cover graphic',
+    relatedSlugs: ['trade-business-quote-calculator', 'digital-guest-welcome-guide'],
+  },
+  {
+    slug: 'digital-guest-welcome-guide',
+    title: "Why Your Airbnb Welcome Book Should Be a Real Website, Not a PDF",
+    excerpt: 'Most digital Airbnb welcome guides on Etsy are Canva templates exported to a PDF pretending to be interactive. The Digital Guest Welcome Guide is real, deployable HTML/CSS/JS instead — here is what that actually buys a host, and one privacy detail worth knowing.',
+    datePublished: '2026-08-25',
+    dateModified: '2026-08-25',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Short-Term Rental',
+    tags: ['Airbnb', 'Short-Term Rental', 'Website Template', 'Accessibility', 'Digital Product'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}projects/guest-welcome-guide/01-cover.png`,
+    coverImageAlt: 'Digital Guest Welcome Guide cover graphic',
+    relatedSlugs: ['trade-business-quote-calculator', 'etsy-seller-seo-toolkit'],
+  },
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'trade-business-quote-calculator': TradeBusinessQuoteCalculatorContent,
+  'etsy-seller-seo-toolkit': EtsySellerSeoToolkitContent,
+  'digital-guest-welcome-guide': DigitalGuestWelcomeGuideContent,
   'exterior-cleaning-website-quote-planner': ExteriorCleaningWebsiteQuotePlannerContent,
   'how-qualified-lead-research-works': HowQualifiedLeadResearchWorksContent,
   'about-nextgenwebs-web-developer-cape-town': AboutNextGenWebsContent,

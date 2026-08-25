@@ -924,6 +924,90 @@ export const projects: Project[] = [
     // etsyUrl removed - see PORTFOLIO-ETSY-LINK-AUDIT.md
     ...projectMedia('fluent-path', 'Fluent Path Tutoring'),
   },
+  {
+    title: 'Trade Business Quote & Estimate Calculator',
+    category: 'Data',
+    description: 'A working Excel and Google Sheets workbook for trade and home-service businesses, with one pre-built tab per trade (pest control, tiling, laser cutting, exterior cleaning, construction) and live formulas that calculate Subtotal, Discount, Tax and TOTAL DUE automatically.',
+    tags: ['Excel', 'Google Sheets', 'Formulas', 'Trade Business', 'Digital Product'],
+    liveUrl: 'https://iederees-create.github.io/trade-quote-estimate-calculator/',
+    // No etsyUrl - Etsy draft creation is currently blocked by an invalid API key on the live shop (see docs/CATALOGUE_AUDIT_2026-08-25.md). Do not add a placeholder link - see PORTFOLIO-ETSY-LINK-AUDIT.md.
+    coverImage: `${import.meta.env.BASE_URL}projects/trade-quote-calculator/01-cover.png`,
+    mediaAlt: 'Trade Business Quote & Estimate Calculator workbook showing a real Pest Control quote tab with automatically calculated totals',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/trade-quote-calculator/01-cover.png`,
+      `${import.meta.env.BASE_URL}projects/trade-quote-calculator/02-pest-control-real.png`,
+      `${import.meta.env.BASE_URL}projects/trade-quote-calculator/03-construction-real.png`,
+      `${import.meta.env.BASE_URL}projects/trade-quote-calculator/04-how-it-works.png`,
+    ],
+    galleryImageAlts: [
+      'Trade Business Quote & Estimate Calculator cover graphic',
+      'Real Pest Control quote tab with itemized line items and calculated totals',
+      'Real Construction & Renovation quote tab with itemized line items and calculated totals',
+      'How it works: four steps from opening the workbook to exporting a client-ready PDF quote',
+    ],
+    features: [
+      'One tab per trade with real example pricing',
+      'Automatic Subtotal, Discount %, Tax %, Travel Fee and Deposit Due calculations',
+      'Category dropdown and duplicate-safe line-item structure',
+      'Works in Excel, Google Sheets, LibreOffice Calc and Apple Numbers',
+      'Blank Custom Trade tab for any other service business',
+    ],
+  },
+  {
+    title: 'Etsy Seller SEO & Listing-Optimization Toolkit',
+    category: 'Data',
+    description: 'A working spreadsheet toolkit that checks Etsy listing titles and tags against Etsy\'s real character limits, flags duplicate tags automatically, ranks keyword research by a calculated priority score, and produces one live listing-readiness score out of 100.',
+    tags: ['Excel', 'Google Sheets', 'Formulas', 'Etsy SEO', 'Digital Product'],
+    liveUrl: 'https://iederees-create.github.io/etsy-seller-seo-toolkit/',
+    // No etsyUrl - Etsy draft creation is currently blocked by an invalid API key on the live shop (see docs/CATALOGUE_AUDIT_2026-08-25.md). Do not add a placeholder link - see PORTFOLIO-ETSY-LINK-AUDIT.md.
+    coverImage: `${import.meta.env.BASE_URL}projects/etsy-seller-seo-toolkit/01-cover.png`,
+    mediaAlt: 'Etsy Seller SEO & Listing-Optimization Toolkit showing the Title & Tag Checker catching an over-length tag and duplicate tags',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/etsy-seller-seo-toolkit/01-cover.png`,
+      `${import.meta.env.BASE_URL}projects/etsy-seller-seo-toolkit/02-title-tag-checker-real.png`,
+      `${import.meta.env.BASE_URL}projects/etsy-seller-seo-toolkit/03-scorecard-real.png`,
+    ],
+    galleryImageAlts: [
+      'Etsy Seller SEO & Listing-Optimization Toolkit cover graphic',
+      'Real Title & Tag Checker tab flagging an over-length tag and duplicate tags in red',
+      'Real Listing Readiness Scorecard showing a live score of 95 out of 100',
+    ],
+    features: [
+      'Live character-count checks against Etsy\'s title and tag limits',
+      'Automatic duplicate-tag detection',
+      'Keyword Research Tracker with a calculated priority score',
+      '11-item weighted Listing Readiness Scorecard',
+    ],
+  },
+  {
+    title: 'Digital Guest Welcome Guide',
+    category: 'Service',
+    description: 'A real, deployable website template for Airbnb/VRBO and short-term-rental hosts - not a Canva PDF. One mobile-friendly page covers check-in/check-out, WiFi, house rules, local recommendations, emergency contacts and an accessible FAQ accordion, fully rebrandable through a single config file.',
+    tags: ['HTML/CSS/JS', 'Accessibility', 'Static Site', 'Short-Term Rental', 'Digital Product'],
+    liveUrl: 'https://iederees-create.github.io/airbnb-guest-welcome-guide-template/',
+    // No etsyUrl - Etsy draft creation is currently blocked by an invalid API key on the live shop (see docs/CATALOGUE_AUDIT_2026-08-25.md). Do not add a placeholder link - see PORTFOLIO-ETSY-LINK-AUDIT.md.
+    coverImage: `${import.meta.env.BASE_URL}projects/guest-welcome-guide/01-cover.png`,
+    mediaAlt: 'Digital Guest Welcome Guide showing the real mobile check-in page for The Harbourview Cottage demo property',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/guest-welcome-guide/01-cover.png`,
+      `${import.meta.env.BASE_URL}projects/guest-welcome-guide/02-real-mobile-view.png`,
+      `${import.meta.env.BASE_URL}projects/guest-welcome-guide/03-real-local-guide-view.png`,
+      `${import.meta.env.BASE_URL}projects/guest-welcome-guide/04-real-faq.png`,
+    ],
+    galleryImageAlts: [
+      'Digital Guest Welcome Guide cover graphic',
+      'Real mobile check-in page for the demo property',
+      'Real desktop view of local recommendations and emergency contacts',
+      'Real FAQ accordion expanded, showing an answered guest question',
+    ],
+    features: [
+      'Single site-config.js file for full rebranding',
+      'Check-in/check-out, WiFi, house rules, local guide, emergency contacts and FAQ sections',
+      'Keyboard-accessible native FAQ accordion',
+      'Mobile-first, deploys free to GitHub Pages, Netlify, Vercel or Cloudflare Pages',
+      'QR-code ready once deployed',
+    ],
+  },
 ];
 
 const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data', 'Marketing / Finance / Affiliate Funnel'];
