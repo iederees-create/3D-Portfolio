@@ -33,6 +33,7 @@ function buildWALink(source: string, interest: string, name: string, extra: stri
 type BotStep = 'name' | 'interest' | 'extra' | 'done';
 
 const INTERESTS = [
+  '🤖 AI assistant / business automation',
   '🌐 Custom website build',
   '🎨 Website template',
   '📊 Dashboard / data product',

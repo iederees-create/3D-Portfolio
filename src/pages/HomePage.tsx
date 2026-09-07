@@ -25,6 +25,7 @@ import {
 import { useRef, useState } from 'react';
 import MagneticButton from '../components/MagneticButton';
 import SEO from '../components/SEO';
+import AIServiceCTA from '../components/AIServiceCTA';
 import { articles } from '../content/blog/articles';
 import { PROFILE_IMAGE_URL, PROFILE_NAME } from '../lib/site';
 import { projectSlug, projects } from './WorkPage';
@@ -480,6 +481,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="px-6 max-w-7xl mx-auto"><AIServiceCTA source="homepage" /></div>
       <section id="interactive-tools" className="px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
