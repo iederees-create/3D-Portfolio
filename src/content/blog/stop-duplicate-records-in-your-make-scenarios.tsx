@@ -36,7 +36,7 @@ export default function StopDuplicateRecordsInYourMakeScenariosContent() {
             <strong className="text-white">The Router:</strong> Add a Make "Router" module after the search. A router splits your automation into multiple paths based on conditions.
           </li>
           <li>
-            <strong className="text-white">Path A (Record Exists):</strong> Set a filter on the first path: `Total number of bundles (from the Search module) > 0`. On this path, place an "Update Record" module. You will update the existing record with any new information.
+            <strong className="text-white">Path A (Record Exists):</strong> Set a filter on the first path: `Total number of bundles (from the Search module) &gt; 0`. On this path, place an "Update Record" module. You will update the existing record with any new information.
           </li>
           <li>
             <strong className="text-white">Path B (New Record):</strong> Set a filter on the second path: `Total number of bundles = 0`. On this path, place your "Create a Row" module.

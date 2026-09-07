@@ -80,9 +80,9 @@ export default function SystemeIoWelcomeSequence() {
 
       <h2>Setting This Up in Systeme.io</h2>
       <ol>
-        <li><strong>Create a Tag:</strong> Go to Contacts > Tags and create a new tag like "New Subscriber".</li>
-        <li><strong>Build a Campaign:</strong> Go to Emails > Campaigns and create a new campaign named "Welcome Sequence". Add your 5 emails here, setting the delays (e.g., 1 day apart).</li>
-        <li><strong>Set Up the Automation Rule:</strong> Go to Automations > Rules. Set the trigger to "Funnel step form subscribed" (select your opt-in page). Add two actions: "Add a tag" (choose your new tag) and "Subscribe to campaign" (choose your Welcome Sequence).</li>
+        <li><strong>Create a Tag:</strong> Go to Contacts &gt; Tags and create a new tag like "New Subscriber".</li>
+        <li><strong>Build a Campaign:</strong> Go to Emails &gt; Campaigns and create a new campaign named "Welcome Sequence". Add your 5 emails here, setting the delays (e.g., 1 day apart).</li>
+        <li><strong>Set Up the Automation Rule:</strong> Go to Automations &gt; Rules. Set the trigger to "Funnel step form subscribed" (select your opt-in page). Add two actions: "Add a tag" (choose your new tag) and "Subscribe to campaign" (choose your Welcome Sequence).</li>
       </ol>
 
       <p>

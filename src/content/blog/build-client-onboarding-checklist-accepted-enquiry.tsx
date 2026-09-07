@@ -31,7 +31,7 @@ export default function BuildClientOnboardingChecklistAcceptedEnquiryContent() {
             <strong className="text-white">The Trigger (CRM):</strong> Set your first module to watch for updated records in your CRM. Add a filter between the first and second module: only proceed if `Status` equals `Closed Won`.
           </li>
           <li>
-            <strong className="text-white">Create the Project (Project Management):</strong> Add a module for your task manager (e.g., Asana "Create a Project"). Name it dynamically using the client's name from step 1 (e.g., `Onboarding: {{Client Name}}`).
+            <strong className="text-white">Create the Project (Project Management):</strong> Add a module for your task manager (e.g., Asana "Create a Project"). Name it dynamically using the client's name from step 1 (e.g., `Onboarding: {"{{Client Name}}"}`).
           </li>
           <li>
             <strong className="text-white">Populate Tasks (Iterator & Modules):</strong> You can use a Make Iterator or predefined templates in your task manager to create tasks like "Send Welcome Email", "Draft Invoice", and "Create Shared Google Drive Folder."

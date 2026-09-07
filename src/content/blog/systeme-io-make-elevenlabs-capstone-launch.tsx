@@ -51,7 +51,7 @@ export default function SystemeIoMakeElevenlabsCapstoneLaunch() {
         <li>Create a new funnel in Systeme.io and select "Sell a Product".</li>
         <li>Design your Sales Page highlighting the benefits of your custom audio product.</li>
         <li>Set up your Order Form. Connect your payment gateway (Stripe or PayPal).</li>
-        <li>Under <strong>Automation Rules</strong> for the Order Form, set a rule: <em>When a sale occurs -> Send a Webhook</em>.</li>
+        <li>Under <strong>Automation Rules</strong> for the Order Form, set a rule: <em>When a sale occurs -&gt; Send a Webhook</em>.</li>
       </ol>
       <p>
         Wait, where do we send the webhook? That leads us to Step 3.
