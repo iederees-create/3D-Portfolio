@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import ErrorBoundary from './ErrorBoundary';
 import { MeshDistortMaterial, Sphere, Environment, Float } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing';
 import * as THREE from 'three';
@@ -80,9 +81,11 @@ function LiquidBlob() {
 export default function HeroBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-80">
-      <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
-        <LiquidBlob />
-      </Canvas>
+      <ErrorBoundary fallback={null}>
+        <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
+          <LiquidBlob />
+        </Canvas>
+      </ErrorBoundary>
     </div>
   );
 }

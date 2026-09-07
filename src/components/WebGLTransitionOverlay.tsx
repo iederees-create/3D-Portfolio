@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
+import ErrorBoundary from './ErrorBoundary';
 import * as THREE from 'three';
 
 const vertexShader = `
@@ -73,12 +74,14 @@ function TransitionMaterial() {
 export default function WebGLTransitionOverlay() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[9998]">
-      <Canvas orthographic camera={{ position: [0, 0, 1], zoom: 1 }} style={{ pointerEvents: 'none' }}>
-        <mesh>
-          <planeGeometry args={[window.innerWidth, window.innerHeight]} />
-          <TransitionMaterial />
-        </mesh>
-      </Canvas>
+      <ErrorBoundary fallback={null}>
+        <Canvas orthographic camera={{ position: [0, 0, 1], zoom: 1 }} style={{ pointerEvents: 'none' }}>
+          <mesh>
+            <planeGeometry args={[window.innerWidth, window.innerHeight]} />
+            <TransitionMaterial />
+          </mesh>
+        </Canvas>
+      </ErrorBoundary>
     </div>
   );
 }

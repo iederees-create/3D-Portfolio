@@ -1,5 +1,6 @@
 import { useState, useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import ErrorBoundary from './ErrorBoundary';
 import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier';
 import { Environment, useKeyboardControls, KeyboardControls } from '@react-three/drei';
 import { X, Trophy } from 'lucide-react';
@@ -178,33 +179,35 @@ export default function MiniGame({ onClose }: { onClose: () => void }) {
           { name: 'right', keys: ['ArrowRight', 'd', 'D'] },
         ]}
       >
-        <Canvas shadows camera={{ position: [0, 5, 12], fov: 50 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 10]} castShadow intensity={1.5} shadow-mapSize={1024} />
-          
-          <Suspense fallback={null}>
-            <Physics gravity={[0, -9.81, 0]}>
-              <Player onImpulse={() => impulseCount.current++} />
-              <Blocks onBlockHit={() => blockHits.current++} />
-              
-              {/* Floor */}
-              <RigidBody type="fixed" position={[0, -0.5, 0]} restitution={0.5} friction={1}>
-                <mesh receiveShadow>
-                  <boxGeometry args={[30, 1, 30]} />
-                  <meshStandardMaterial color="#1e293b" />
-                </mesh>
-              </RigidBody>
-              
-              {/* Invisible Walls */}
-              <RigidBody type="fixed" position={[0, 5, -15]}><CuboidCollider args={[15, 10, 1]} /></RigidBody>
-              <RigidBody type="fixed" position={[0, 5, 15]}><CuboidCollider args={[15, 10, 1]} /></RigidBody>
-              <RigidBody type="fixed" position={[-15, 5, 0]}><CuboidCollider args={[1, 10, 15]} /></RigidBody>
-              <RigidBody type="fixed" position={[15, 5, 0]}><CuboidCollider args={[1, 10, 15]} /></RigidBody>
-            </Physics>
-          </Suspense>
-          
-          <Environment preset="city" />
-        </Canvas>
+        <ErrorBoundary fallback={null}>
+          <Canvas shadows camera={{ position: [0, 5, 12], fov: 50 }}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 10]} castShadow intensity={1.5} shadow-mapSize={1024} />
+            
+            <Suspense fallback={null}>
+              <Physics gravity={[0, -9.81, 0]}>
+                <Player onImpulse={() => impulseCount.current++} />
+                <Blocks onBlockHit={() => blockHits.current++} />
+                
+                {/* Floor */}
+                <RigidBody type="fixed" position={[0, -0.5, 0]} restitution={0.5} friction={1}>
+                  <mesh receiveShadow>
+                    <boxGeometry args={[30, 1, 30]} />
+                    <meshStandardMaterial color="#1e293b" />
+                  </mesh>
+                </RigidBody>
+                
+                {/* Invisible Walls */}
+                <RigidBody type="fixed" position={[0, 5, -15]}><CuboidCollider args={[15, 10, 1]} /></RigidBody>
+                <RigidBody type="fixed" position={[0, 5, 15]}><CuboidCollider args={[15, 10, 1]} /></RigidBody>
+                <RigidBody type="fixed" position={[-15, 5, 0]}><CuboidCollider args={[1, 10, 15]} /></RigidBody>
+                <RigidBody type="fixed" position={[15, 5, 0]}><CuboidCollider args={[1, 10, 15]} /></RigidBody>
+              </Physics>
+            </Suspense>
+            
+            <Environment preset="city" />
+          </Canvas>
+        </ErrorBoundary>
       </KeyboardControls>
     </div>
   );

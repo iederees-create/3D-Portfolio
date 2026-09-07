@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Physics, RigidBody } from '@react-three/rapier';
+import ErrorBoundary from './ErrorBoundary';
 import { Html } from '@react-three/drei';
 import { Suspense, useMemo } from 'react';
 import * as THREE from 'three';
@@ -104,15 +105,17 @@ export default function PhysicsSkills() {
         <p className="text-[10px] text-slate-500 mt-1">Interactive 3D Physics</p>
       </div>
       
-      <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-        <ambientLight intensity={1} />
-        <Suspense fallback={null}>
-          <Physics gravity={[0, -9.81, 0]}>
-            {skillElements}
-            <Boundaries />
-          </Physics>
-        </Suspense>
-      </Canvas>
+      <ErrorBoundary fallback={null}>
+        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+          <ambientLight intensity={1} />
+          <Suspense fallback={null}>
+            <Physics gravity={[0, -9.81, 0]}>
+              {skillElements}
+              <Boundaries />
+            </Physics>
+          </Suspense>
+        </Canvas>
+      </ErrorBoundary>
       
       {/* Gradient fade at bottom to blend with background if needed */}
       <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-surface to-transparent pointer-events-none opacity-50" />
