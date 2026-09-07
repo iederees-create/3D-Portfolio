@@ -28,6 +28,36 @@ import WindowCleaningGlazingWebsiteDesignContent from './window-cleaning-glazing
 import ZenSkinStudioContent from './zen-skin-studio-website-template';
 import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-works';
 import AIDevelopments3DWeb2026Content from './ai-developments-3d-web-2026';
+import SystemeIoSimpleSalesFunnelFirstDigitalProductContent from './systeme-io-simple-sales-funnel-first-digital-product';
+import SystemeIoLeadMagnetFromPortfolioProjectContent from './systeme-io-lead-magnet-from-portfolio-project';
+import SystemeIoFiveEmailWelcomeSequenceContent from './systeme-io-five-email-welcome-sequence';
+import SystemeIoLandingPageFreelanceServiceContent from './systeme-io-landing-page-freelance-service';
+import SystemeIoDeliverDigitalDownloadContent from './systeme-io-deliver-digital-download';
+import SystemeIoDesignMiniCourseContent from './systeme-io-design-mini-course';
+import SystemeIoTagSubscribersByInterestContent from './systeme-io-tag-subscribers-by-interest';
+import SystemeIoTroubleshootFunnelConversionsContent from './systeme-io-troubleshoot-funnel-conversions';
+import SystemeIoPortfolioPageVsSalesFunnelContent from './systeme-io-portfolio-page-vs-sales-funnel';
+import SystemeIoMakeElevenlabsCapstoneLaunchContent from './systeme-io-make-elevenlabs-capstone-launch';
+import SendWebsiteEnquiriesStructuredLeadTrackerContent from './send-website-enquiries-structured-lead-tracker';
+import BuildClientOnboardingChecklistAcceptedEnquiryContent from './build-client-onboarding-checklist-accepted-enquiry';
+import TurnMeetingNotesIntoTasksForHumanReviewContent from './turn-meeting-notes-into-tasks-for-human-review';
+import CreateWeeklyContentPlanningDigestContent from './create-weekly-content-planning-digest';
+import AutomateDigitalProductFeedbackRequestContent from './automate-digital-product-feedback-request';
+import ConnectWebsiteFormToMakeWithWebhookContent from './connect-website-form-to-make-with-webhook';
+import StopDuplicateRecordsInYourMakeScenariosContent from './stop-duplicate-records-in-your-make-scenarios';
+import WhatHappensWhenAutomationFailsContent from './what-happens-when-automation-fails';
+import EstimateMakeUsageBeforeYouAutomateContent from './estimate-make-usage-before-you-automate';
+import WhichBusinessTaskShouldYouAutomateFirstContent from './which-business-task-should-you-automate-first';
+import CreateVoiceover30SecondProductDemoContent from './create-voiceover-30-second-product-demo';
+import FixRoboticSoundingAiNarrationContent from './fix-robotic-sounding-ai-narration';
+import PronunciationProblemsAiVoiceoversContent from './pronunciation-problems-ai-voiceovers';
+import TurnBlogPostIntoShortVideoScriptsContent from './turn-blog-post-into-short-video-scripts';
+import MakeNarratedWalkthroughWebsitePortfolioContent from './make-narrated-walkthrough-website-portfolio';
+import PrepareVoiceoverBriefFreelancerContent from './prepare-voiceover-brief-freelancer';
+import AddNarrationDigitalProductTutorialContent from './add-narration-digital-product-tutorial';
+import LocalizeProductExplainerAiAudioContent from './localize-product-explainer-ai-audio';
+import ChooseElevenlabsPlanActualWorkloadContent from './choose-elevenlabs-plan-actual-workload';
+import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voiceover-guide';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -35,6 +65,366 @@ import AIDevelopments3DWeb2026Content from './ai-developments-3d-web-2026';
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'systeme-io-simple-sales-funnel-first-digital-product',
+    title: 'Build a Simple Sales Funnel for Your First Digital Product',
+    excerpt: 'Learn how to build an automated, simple sales funnel for your first digital product for free using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Marketing',
+    tags: ['Sales Funnels', 'Systeme.io', 'Digital Products', 'Marketing Automation'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-lead-magnet-from-portfolio-project',
+    title: 'Create a Useful Lead Magnet from an Existing Portfolio Project',
+    excerpt: 'Learn how to repurpose your existing portfolio projects into high-converting lead magnets and build an automated capture funnel for free using systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Marketing',
+    tags: ['Lead Generation', 'systeme.io', 'Portfolio', 'Marketing Funnel'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-five-email-welcome-sequence',
+    title: 'How to Write a High-Converting Five-Email Welcome Sequence in Systeme.io',
+    excerpt: 'Learn the exact 5-day email sequence you need to turn strangers into loyal customers and how to automate it for free using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Email Marketing',
+    tags: ['Systeme.io', 'Email Marketing', 'Welcome Sequence', 'Marketing Automation'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-landing-page-freelance-service',
+    title: 'How to Build a High-Converting Landing Page for Your Freelance Service',
+    excerpt: 'Learn how to build a high-converting landing page for your freelance business for free using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Marketing',
+    tags: ['Freelance', 'Landing Page', 'Systeme.io', 'Marketing'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-deliver-digital-download',
+    title: 'How to Automate Delivering a Digital Download After Purchase in Systeme.io',
+    excerpt: 'Learn how to easily set up automated delivery for your digital products like eBooks or templates using Systeme.io\'s free plan.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'E-commerce',
+    tags: ['Systeme.io', 'Automation', 'Digital Downloads', 'E-commerce', 'Passive Income'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-design-mini-course',
+    title: 'Design a Mini-Course from Something You Already Know',
+    excerpt: 'Learn how to transform your existing skills into a profitable mini-course. This step-by-step guide covers everything from outlining to launching for free using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'E-learning',
+    tags: ['Course Creation', 'Digital Products', 'Systeme.io', 'Passive Income', 'Marketing'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-tag-subscribers-by-interest',
+    title: 'Tag Subscribers by Interest Without Overcomplicating Your Funnel',
+    excerpt: 'Learn how to easily segment and tag your email subscribers by interest in Systeme.io without building an overly complicated sales funnel.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Email Marketing',
+    tags: ['Systeme.io', 'Email Marketing', 'Sales Funnels', 'Automation'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-troubleshoot-funnel-conversions',
+    title: 'Troubleshoot a Funnel That Gets Visits but Few Signups',
+    excerpt: 'Getting traffic to your funnel but no signups? Learn how to diagnose and fix a leaky funnel by checking ad scent, reducing friction, and optimizing for mobile.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Marketing',
+    tags: ['systeme-io', 'funnel', 'conversion', 'marketing', 'troubleshooting'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-portfolio-page-vs-sales-funnel',
+    title: 'Choose Between a Portfolio Page and a Dedicated Sales Funnel',
+    excerpt: 'Discover why you might be losing clients with just a traditional portfolio page and learn how a dedicated sales funnel can skyrocket your conversions using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Web Design',
+    tags: ['Sales Funnels', 'Web Design', 'Freelancing', 'Systeme.io', 'Marketing'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'systeme-io-make-elevenlabs-capstone-launch',
+    title: 'Launch a Digital Product with Systeme.io, Make and ElevenLabs (Capstone)',
+    excerpt: 'A comprehensive capstone guide to building, marketing, and delivering an AI-generated digital product using Systeme.io, Make, and ElevenLabs.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'NextGenWebs',
+    category: 'Marketing',
+    tags: ['Systeme.io', 'Make.com', 'ElevenLabs', 'Automation', 'Digital Products'],
+    readingTimeMinutes: 7,
+    relatedSlugs: []
+  },
+  {
+    slug: 'send-website-enquiries-structured-lead-tracker',
+    title: 'Send Website Enquiries to a Structured Lead Tracker',
+    excerpt: 'Stop copying and pasting leads from your inbox. Learn how to automate website enquiries directly into a structured database using Make.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Lead Generation', 'Productivity'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'build-client-onboarding-checklist-accepted-enquiry',
+    title: 'Build a Client-Onboarding Checklist from an Accepted Enquiry',
+    excerpt: 'Automatically spin up a standard onboarding checklist in Asana or Trello the moment a client is marked as won in your CRM.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Client Onboarding', 'CRM'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'turn-meeting-notes-into-tasks-for-human-review',
+    title: 'Turn Meeting Notes into Tasks for Human Review',
+    excerpt: 'Use AI and Make to extract action items from meeting transcripts and create tasks automatically, ready for your review.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'AI', 'Project Management'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'create-weekly-content-planning-digest',
+    title: 'Create a Weekly Content-Planning Digest',
+    excerpt: 'Never run out of ideas again. Automatically aggregate industry news and your backlog into a weekly Slack digest using Make.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Content Marketing',
+    tags: ['Make', 'Content Strategy', 'Productivity'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'automate-digital-product-feedback-request',
+    title: 'Automate a Digital-Product Feedback Request',
+    excerpt: 'Timing is everything. Connect your payment processor to your email tool via Make to perfectly time automated review requests.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Ecommerce', 'Digital Products'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'connect-website-form-to-make-with-webhook',
+    title: 'Connect a Website Form to Make with a Webhook',
+    excerpt: 'Ditch slow polling. Learn why webhooks are the fastest way to trigger automations and how to set them up for free in Make.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Web Development',
+    tags: ['Make', 'Webhooks', 'NoCode'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'stop-duplicate-records-in-your-make-scenarios',
+    title: 'Stop Duplicate Records in Your Make Scenarios',
+    excerpt: 'Learn the "Search and Route" pattern to prevent your Make scenarios from creating duplicate entries in your spreadsheets and CRM.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Data Management', 'Best Practices'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'what-happens-when-automation-fails',
+    title: 'What Happens When an Automation Fails?',
+    excerpt: 'Don\'t lose data when an API goes down. Discover how to use error handlers and incomplete executions in Make to build fail-safe scenarios.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Error Handling', 'Tech Tips'],
+    readingTimeMinutes: 5,
+    relatedSlugs: []
+  },
+  {
+    slug: 'estimate-make-usage-before-you-automate',
+    title: 'Estimate Make Usage Before You Automate',
+    excerpt: 'Stop guessing your costs. Learn the exact formula for calculating operations and credits in Make before you build your next scenario.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'Pricing', 'Operations'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'which-business-task-should-you-automate-first',
+    title: 'Which Business Task Should You Automate First?',
+    excerpt: 'Don\'t automate everything at once. Use our interactive priority worksheet to find the highest-impact bottleneck to automate first.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Business Strategy',
+    tags: ['Make', 'Automation Matrix', 'Productivity'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'create-voiceover-30-second-product-demo',
+    title: 'Create a Voiceover for a 30-Second Product Demo',
+    excerpt: 'Learn the exact workflow to script and generate a professional, perfectly-paced AI voiceover for a 30-second product demo using the 75-word rule.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'AI Audio',
+    tags: ['elevenlabs', 'voiceover', 'product-demo', 'video-marketing'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'fix-robotic-sounding-ai-narration',
+    title: 'Fix Robotic-Sounding AI Narration',
+    excerpt: 'Stop your AI voiceovers from sounding flat and breathless. Discover how to use punctuation to force natural pauses, breathing, and emotional shifts.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'AI Audio',
+    tags: ['elevenlabs', 'voiceover', 'prompting', 'audio-editing'],
+    readingTimeMinutes: 3,
+    relatedSlugs: []
+  },
+  {
+    slug: 'pronunciation-problems-ai-voiceovers',
+    title: 'Pronunciation Problems in AI Voiceovers: Names, Acronyms and Brand Terms',
+    excerpt: 'Does the AI keep butchering your brand name? Learn how to use phonetic spelling and pronunciation dictionaries to guarantee perfect reads every time.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'AI Audio',
+    tags: ['elevenlabs', 'voiceover', 'pronunciation', 'content-creation'],
+    readingTimeMinutes: 3,
+    relatedSlugs: []
+  },
+  {
+    slug: 'turn-blog-post-into-short-video-scripts',
+    title: 'Turn One Blog Post into Three Short Video Scripts',
+    excerpt: 'Don\'t let your written content go to waste. Learn how to extract 60-second video scripts from your blog posts and voice them with AI for TikTok and Reels.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Content Strategy',
+    tags: ['elevenlabs', 'repurposing', 'short-form-video', 'marketing'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'make-narrated-walkthrough-website-portfolio',
+    title: 'Make a Narrated Walkthrough of Your Website or Portfolio',
+    excerpt: 'Sending a link isn\'t enough. Learn how to script and record a 2-minute narrated walkthrough of your portfolio to win more clients.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Freelancing',
+    tags: ['elevenlabs', 'portfolio', 'web-design', 'client-acquisition'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'prepare-voiceover-brief-freelancer',
+    title: 'Prepare a Voiceover Brief a Freelancer Can Actually Use',
+    excerpt: 'Stop asking voice actors to just \'sound professional\'. Learn the 4-part brief template that guarantees you get the right tone from humans and AI alike.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Video Production',
+    tags: ['elevenlabs', 'voiceover', 'freelance', 'production'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'add-narration-digital-product-tutorial',
+    title: 'Add Narration to a Digital-Product Tutorial',
+    excerpt: 'Silent tutorials frustrate users. Learn the \'See-Say\' principle and the easiest workflow for adding professional AI narration to your digital product guides.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Product Management',
+    tags: ['elevenlabs', 'tutorials', 'customer-success', 'saas'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'localize-product-explainer-ai-audio',
+    title: 'Localize a Product Explainer with AI Audio',
+    excerpt: 'Reach a global audience by localizing your product explainer into 70+ languages in an afternoon. Learn the workflow for translating and syncing AI audio.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Growth Marketing',
+    tags: ['elevenlabs', 'localization', 'global', 'video-marketing'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'choose-elevenlabs-plan-actual-workload',
+    title: 'Choose an ElevenLabs Plan for Your Actual Workload',
+    excerpt: 'Confused by ElevenLabs pricing? Discover which plan you actually need for your content volume, and avoid violating commercial use rights.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'AI Audio',
+    tags: ['elevenlabs', 'pricing', 'commercial-rights', 'software'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
+  {
+    slug: 'human-recording-or-ai-voiceover-guide',
+    title: 'Human Recording or AI Voiceover? A Practical Decision Guide',
+    excerpt: 'Stop guessing between human voice actors and AI generators. Use this practical framework to choose the right audio solution for your specific project.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Video Production',
+    tags: ['elevenlabs', 'voiceover', 'production', 'ai-vs-human'],
+    readingTimeMinutes: 4,
+    relatedSlugs: []
+  },
   {
     slug: 'ai-developments-3d-web-2026',
     title: 'The AI That Builds (and Lives Inside) 3D Websites: What Actually Changed in 2026',
@@ -425,6 +815,36 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'systeme-io-simple-sales-funnel-first-digital-product': SystemeIoSimpleSalesFunnelFirstDigitalProductContent,
+  'systeme-io-lead-magnet-from-portfolio-project': SystemeIoLeadMagnetFromPortfolioProjectContent,
+  'systeme-io-five-email-welcome-sequence': SystemeIoFiveEmailWelcomeSequenceContent,
+  'systeme-io-landing-page-freelance-service': SystemeIoLandingPageFreelanceServiceContent,
+  'systeme-io-deliver-digital-download': SystemeIoDeliverDigitalDownloadContent,
+  'systeme-io-design-mini-course': SystemeIoDesignMiniCourseContent,
+  'systeme-io-tag-subscribers-by-interest': SystemeIoTagSubscribersByInterestContent,
+  'systeme-io-troubleshoot-funnel-conversions': SystemeIoTroubleshootFunnelConversionsContent,
+  'systeme-io-portfolio-page-vs-sales-funnel': SystemeIoPortfolioPageVsSalesFunnelContent,
+  'systeme-io-make-elevenlabs-capstone-launch': SystemeIoMakeElevenlabsCapstoneLaunchContent,
+  'send-website-enquiries-structured-lead-tracker': SendWebsiteEnquiriesStructuredLeadTrackerContent,
+  'build-client-onboarding-checklist-accepted-enquiry': BuildClientOnboardingChecklistAcceptedEnquiryContent,
+  'turn-meeting-notes-into-tasks-for-human-review': TurnMeetingNotesIntoTasksForHumanReviewContent,
+  'create-weekly-content-planning-digest': CreateWeeklyContentPlanningDigestContent,
+  'automate-digital-product-feedback-request': AutomateDigitalProductFeedbackRequestContent,
+  'connect-website-form-to-make-with-webhook': ConnectWebsiteFormToMakeWithWebhookContent,
+  'stop-duplicate-records-in-your-make-scenarios': StopDuplicateRecordsInYourMakeScenariosContent,
+  'what-happens-when-automation-fails': WhatHappensWhenAutomationFailsContent,
+  'estimate-make-usage-before-you-automate': EstimateMakeUsageBeforeYouAutomateContent,
+  'which-business-task-should-you-automate-first': WhichBusinessTaskShouldYouAutomateFirstContent,
+  'create-voiceover-30-second-product-demo': CreateVoiceover30SecondProductDemoContent,
+  'fix-robotic-sounding-ai-narration': FixRoboticSoundingAiNarrationContent,
+  'pronunciation-problems-ai-voiceovers': PronunciationProblemsAiVoiceoversContent,
+  'turn-blog-post-into-short-video-scripts': TurnBlogPostIntoShortVideoScriptsContent,
+  'make-narrated-walkthrough-website-portfolio': MakeNarratedWalkthroughWebsitePortfolioContent,
+  'prepare-voiceover-brief-freelancer': PrepareVoiceoverBriefFreelancerContent,
+  'add-narration-digital-product-tutorial': AddNarrationDigitalProductTutorialContent,
+  'localize-product-explainer-ai-audio': LocalizeProductExplainerAiAudioContent,
+  'choose-elevenlabs-plan-actual-workload': ChooseElevenlabsPlanActualWorkloadContent,
+  'human-recording-or-ai-voiceover-guide': HumanRecordingOrAiVoiceoverGuideContent,
   'trade-business-quote-calculator': TradeBusinessQuoteCalculatorContent,
   'etsy-seller-seo-toolkit': EtsySellerSeoToolkitContent,
   'digital-guest-welcome-guide': DigitalGuestWelcomeGuideContent,
