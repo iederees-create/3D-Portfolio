@@ -4,24 +4,24 @@
 
 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
 transforming...
-[32m✓[39m 2678 modules transformed.
+[32m✓[39m 2682 modules transformed.
 rendering chunks...
 computing gzip size...
 [2mdist/[22m[32mregisterSW.js              [39m[1m[2m    0.16 kB[22m[1m[22m
 [2mdist/[22m[32mmanifest.webmanifest       [39m[1m[2m    0.36 kB[22m[1m[22m
 [2mdist/[22m[32mindex.html                 [39m[1m[2m    2.79 kB[22m[1m[22m[2m │ gzip:     1.34 kB[22m
-[2mdist/[22m[2massets/[22m[35mindex-CCVcWg8E.css  [39m[1m[2m   61.81 kB[22m[1m[22m[2m │ gzip:    11.65 kB[22m
-[2mdist/[22m[2massets/[22m[36mindex-YnFY8SKb.js   [39m[1m[33m4,532.55 kB[39m[22m[2m │ gzip: 1,465.62 kB[22m
+[2mdist/[22m[2massets/[22m[35mindex-B6tMwzoI.css  [39m[1m[2m   61.99 kB[22m[1m[22m[2m │ gzip:    11.67 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-W-CURH7W.js   [39m[1m[33m4,548.94 kB[39m[22m[2m │ gzip: 1,470.74 kB[22m
 [33m
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 10.04s[39m
+[32m✓ built in 9.68s[39m
 
 [36mPWA v0.20.5[39m
 mode      [35mgenerateSW[39m
-precache  [32m6 entries[39m [2m(4492.97 KiB)[22m
+precache  [32m6 entries[39m [2m(4509.17 KiB)[22m
 files generated
   [2mdist/sw.js[22m
   [2mdist/workbox-9c191d2f.js[22m
@@ -53,6 +53,10 @@ Generated: work/trade-business-quote-and-estimate-calculator/
 Generated: work/etsy-seller-seo-and-listing-optimization-toolkit/
 Generated: work/digital-guest-welcome-guide/
 Processing articles...
+Generated: blog/maia-by-make-conversational-automation/
+Generated: blog/elevenlabs-cli-ai-voice-developer-workflow/
+Generated: blog/ai-in-trading-start-with-better-journal/
+Generated: blog/ai-tutorial-to-email-audience-learning-journey/
 Generated: blog/what-this-desk-will-never-claim/
 Generated: blog/pause-after-three-losses/
 Generated: blog/why-the-ea-download-is-gated/
