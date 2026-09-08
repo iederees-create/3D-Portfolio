@@ -10,7 +10,7 @@ const CHECKLIST_ITEMS = [
   { id: 'unsubscribe', category: 'Legal', text: 'Emails contain a working unsubscribe link' },
 ];
 
-export function FunnelLaunchChecklist() {
+export default function FunnelLaunchChecklist() {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
 
   const toggleItem = (id: string) => {

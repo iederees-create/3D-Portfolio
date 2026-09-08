@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type Rating = 1 | 2 | 3 | 4 | 5;
 
-export function AutomationPriorityWorksheet() {
+export default function AutomationPriorityWorksheet() {
   const [frequency, setFrequency] = useState<Rating>(3);
   const [effort, setEffort] = useState<Rating>(3);
   const [errorRisk, setErrorRisk] = useState<Rating>(3);

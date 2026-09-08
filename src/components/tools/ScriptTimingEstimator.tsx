@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function ScriptTimingEstimator() {
+export default function ScriptTimingEstimator() {
   const [wordCount, setWordCount] = useState(150);
   const [wpm, setWpm] = useState(150); // average speaking rate
 
