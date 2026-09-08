@@ -116,7 +116,7 @@ for (let i = 1; i < projectBlocks.length; i++) {
 // 2. Process Articles
 console.log('Processing articles...');
 const articlesContent = fs.readFileSync(path.join(__dirname, 'src/content/blog/articles.ts'), 'utf8');
-const articleBlocks = articlesContent.split('{\n    slug:');
+const articleBlocks = articlesContent.split(/\{\s*slug:/);
 
 for (let i = 1; i < articleBlocks.length; i++) {
   const block = articleBlocks[i];
