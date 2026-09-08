@@ -4,24 +4,24 @@
 
 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
 transforming...
-[32m✓[39m 2677 modules transformed.
+[32m✓[39m 2678 modules transformed.
 rendering chunks...
 computing gzip size...
 [2mdist/[22m[32mregisterSW.js              [39m[1m[2m    0.16 kB[22m[1m[22m
 [2mdist/[22m[32mmanifest.webmanifest       [39m[1m[2m    0.36 kB[22m[1m[22m
 [2mdist/[22m[32mindex.html                 [39m[1m[2m    2.79 kB[22m[1m[22m[2m │ gzip:     1.34 kB[22m
 [2mdist/[22m[2massets/[22m[35mindex-CCVcWg8E.css  [39m[1m[2m   61.81 kB[22m[1m[22m[2m │ gzip:    11.65 kB[22m
-[2mdist/[22m[2massets/[22m[36mindex-DkhtCQWS.js   [39m[1m[33m4,520.03 kB[39m[22m[2m │ gzip: 1,461.96 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-YnFY8SKb.js   [39m[1m[33m4,532.55 kB[39m[22m[2m │ gzip: 1,465.62 kB[22m
 [33m
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 9.07s[39m
+[32m✓ built in 10.04s[39m
 
 [36mPWA v0.20.5[39m
 mode      [35mgenerateSW[39m
-precache  [32m6 entries[39m [2m(4480.72 KiB)[22m
+precache  [32m6 entries[39m [2m(4492.97 KiB)[22m
 files generated
   [2mdist/sw.js[22m
   [2mdist/workbox-9c191d2f.js[22m
@@ -53,6 +53,16 @@ Generated: work/trade-business-quote-and-estimate-calculator/
 Generated: work/etsy-seller-seo-and-listing-optimization-toolkit/
 Generated: work/digital-guest-welcome-guide/
 Processing articles...
+Generated: blog/what-this-desk-will-never-claim/
+Generated: blog/pause-after-three-losses/
+Generated: blog/why-the-ea-download-is-gated/
+Generated: blog/how-to-add-an-ea-to-deriv-mt5/
+Generated: blog/how-to-watch-the-apex-practice-run/
+Generated: blog/demo-funds-are-not-cash/
+Generated: blog/spike-fade-mean-reversion-on-v75/
+Generated: blog/why-54-percent-is-not-an-edge/
+Generated: blog/volatility-75-one-second-is-not-a-salary/
+Generated: blog/live-deriv-demo-instead-of-a-signal-room/
 Generated: blog/systeme-io-simple-sales-funnel-first-digital-product/
 Generated: blog/systeme-io-lead-magnet-from-portfolio-project/
 Generated: blog/systeme-io-five-email-welcome-sequence/
