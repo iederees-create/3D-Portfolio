@@ -59,6 +59,11 @@ import AutomateDigitalProductFeedbackRequestContent from './automate-digital-pro
 import ConnectWebsiteFormToMakeWithWebhookContent from './connect-website-form-to-make-with-webhook';
 import StopDuplicateRecordsInYourMakeScenariosContent from './stop-duplicate-records-in-your-make-scenarios';
 import WhatHappensWhenAutomationFailsContent from './what-happens-when-automation-fails';
+
+import MaiaByMakeConversationalAutomationContent from './maia-by-make-conversational-automation';
+import ElevenlabsCliAiVoiceDeveloperWorkflowContent from './elevenlabs-cli-ai-voice-developer-workflow';
+import AiInTradingStartWithBetterJournalContent from './ai-in-trading-start-with-better-journal';
+import AiTutorialToEmailAudienceLearningJourneyContent from './ai-tutorial-to-email-audience-learning-journey';
 import EstimateMakeUsageBeforeYouAutomateContent from './estimate-make-usage-before-you-automate';
 import WhichBusinessTaskShouldYouAutomateFirstContent from './which-business-task-should-you-automate-first';
 import CreateVoiceover30SecondProductDemoContent from './create-voiceover-30-second-product-demo';
@@ -78,6 +83,62 @@ import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voi
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'maia-by-make-conversational-automation',
+    title: 'Maia by Make: What Conversational Automation Means for Small Businesses',
+    excerpt: 'Make has officially launched Maia, a conversational AI co-worker. Discover what it actually means for small businesses looking to automate their workflows without hiring a developer.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Automation',
+    tags: ['Make', 'AI', 'Automation', 'Small Business'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}media/blog/maia_make_automation.jpg`,
+    coverImageAlt: 'Maia by Make visual automation illustration',
+    relatedSlugs: []
+  },
+  {
+    slug: 'elevenlabs-cli-ai-voice-developer-workflow',
+    title: 'ElevenLabs’ CLI Update: Why AI Voice Is Becoming a Developer Workflow',
+    excerpt: 'With the official release of the ElevenLabs CLI v1.0.0, AI audio generation is moving from web dashboards to programmatic developer workflows and autonomous agents.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Development',
+    tags: ['ElevenLabs', 'CLI', 'AI Audio', 'Development'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}media/blog/elevenlabs_cli_workflow.jpg`,
+    coverImageAlt: 'ElevenLabs CLI developer workflow illustration',
+    relatedSlugs: []
+  },
+  {
+    slug: 'ai-in-trading-start-with-better-journal',
+    title: 'AI in Trading: Start With a Better Journal, Not a Profit Prediction',
+    excerpt: 'Why treating AI as a market-predicting crystal ball is dangerous, and how real traders use AI to analyze their trading journals and improve discipline.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Trading',
+    tags: ['Trading', 'AI', 'Journaling', 'Deriv'],
+    readingTimeMinutes: 5,
+    coverImage: `${import.meta.env.BASE_URL}media/blog/ai_trading_journal.jpg`,
+    coverImageAlt: 'AI trading journal and analytics dashboard illustration',
+    relatedSlugs: ['trading-affiliate-website-template']
+  },
+  {
+    slug: 'ai-tutorial-to-email-audience-learning-journey',
+    title: 'From AI Tutorial to Email Audience: Build a Useful Learning Journey',
+    excerpt: 'Don\'t let one-off tutorial traffic go to waste. Learn how to convert readers into an engaged audience with an automated email learning journey using Systeme.io.',
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    author: 'Iedrees Francis',
+    category: 'Marketing',
+    tags: ['Email Marketing', 'Audience Building', 'Systeme.io', 'Tutorials'],
+    readingTimeMinutes: 4,
+    coverImage: `${import.meta.env.BASE_URL}media/blog/ai_tutorial_email_audience.jpg`,
+    coverImageAlt: 'Email learning journey and audience building illustration',
+    relatedSlugs: []
+  },
   {
     slug: 'what-this-desk-will-never-claim',
     title: 'What This Deriv Partner Desk Will Never Claim',
@@ -948,6 +1009,10 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'maia-by-make-conversational-automation': MaiaByMakeConversationalAutomationContent,
+  'elevenlabs-cli-ai-voice-developer-workflow': ElevenlabsCliAiVoiceDeveloperWorkflowContent,
+  'ai-in-trading-start-with-better-journal': AiInTradingStartWithBetterJournalContent,
+  'ai-tutorial-to-email-audience-learning-journey': AiTutorialToEmailAudienceLearningJourneyContent,
   'what-this-desk-will-never-claim': WhatThisDeskWillNeverClaim,
   'pause-after-three-losses': PauseAfterThreeLosses,
   'why-the-ea-download-is-gated': WhyTheDownloadIsGated,
