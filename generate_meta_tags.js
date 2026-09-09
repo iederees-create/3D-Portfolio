@@ -48,7 +48,7 @@ function generateHtml(urlPath, title, description, image) {
   `;
 
   // Inject meta tags before </head>
-  return baseHtml.replace('</head>', metaTags + '\n  </head>');
+  return baseHtml.replace(/<title>[\s\S]*?<\/title>/i, '').replace('</head>', metaTags + `\n    <link rel="canonical" href="${fullUrl}" />\n  </head>`);
 }
 
 function ensureDirectoryExistence(filePath) {
@@ -67,10 +67,15 @@ const sitemapUrls = [
   'about/',
   'blog/',
   'contact/',
+  'services/ai-automation/',
   'credentials/'
 ];
 
 // 1. Process Projects
+const aiServicePath = path.join(distDir, 'services/ai-automation/index.html');
+ensureDirectoryExistence(aiServicePath);
+fs.writeFileSync(aiServicePath, generateHtml('services/ai-automation/', 'AI Assistants & Business Automation | NextGenWebs', 'Custom website assistants and practical workflow automation. Build your project brief and request a tailored quote.', 'projects/insightforge/cover.webp'));
+
 console.log('Processing projects...');
 const workPageContent = fs.readFileSync(path.join(__dirname, 'src/pages/WorkPage.tsx'), 'utf8');
 
