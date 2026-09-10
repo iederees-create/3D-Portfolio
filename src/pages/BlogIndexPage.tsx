@@ -79,7 +79,7 @@ export default function BlogIndexPage() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-5" onClick={(e) => e.preventDefault()}>
+                <div className="mt-5" onClick={(e) => e.stopPropagation()}>
                    <ShareWidget 
                      url={`${SITE_URL}blog/${article.slug}/`} 
                      title={article.title} 

@@ -40,11 +40,11 @@ function generateHtml(urlPath, title, description, image) {
     <meta property="og:description" content="${description}" />
     ${imageUrl ? `<meta property="og:image" content="${imageUrl}" />` : ''}
     
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="${fullUrl}" />
-    <meta property="twitter:title" content="${title}" />
-    <meta property="twitter:description" content="${description}" />
-    ${imageUrl ? `<meta property="twitter:image" content="${imageUrl}" />` : ''}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="${fullUrl}" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}" />` : ''}
   `;
 
   // Inject meta tags before </head>

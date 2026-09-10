@@ -27,12 +27,16 @@ export default function ShareWidget({ url, title, text, className = '', label = 
     }
   };
 
+  const shareMessage = text 
+    ? `Check out this insightful article: ${title}\n\n"${text}"` 
+    : `Check out this insightful article: ${title}`;
+
   const handleNativeShare = async () => {
     if (!canNativeShare) return;
     try {
       await navigator.share({
         title,
-        text: text || title,
+        text: shareMessage,
         url,
       });
     } catch (e) {
@@ -40,8 +44,8 @@ export default function ShareWidget({ url, title, text, className = '', label = 
     }
   };
 
-  const waText = encodeURIComponent(`${title} - ${url}`);
-  const twText = encodeURIComponent(title);
+  const waText = encodeURIComponent(`${shareMessage}\n\n${url}`);
+  const twText = encodeURIComponent(shareMessage);
   const encodedUrl = encodeURIComponent(url);
 
   return (
