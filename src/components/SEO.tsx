@@ -48,10 +48,15 @@ export default function SEO({
       {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
 
       <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
+      <meta property="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
+      <meta property="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+      <meta property="twitter:image" content={ogImage} />
       <meta name="twitter:site" content="@nextgenwebdevs" />
+      <meta property="twitter:site" content="@nextgenwebdevs" />
 
       {children}
     </Helmet>
