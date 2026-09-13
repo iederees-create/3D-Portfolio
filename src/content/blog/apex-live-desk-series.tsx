@@ -79,7 +79,7 @@ export function HowToWatchTheRun() {
   return (
     <Article>
       <H id="watch">How to watch without signing up</H>
-      <P>Go to the lab page. You do not need a VIP login to see the run. You will see the latest price, finished trades, won/lost, the demo wallet, and a weekly recap.</P>
+      <P>Go to the lab page. You do not need a VIP login to see the run. You will see six RSI dials, a 15-market scan grid, finished trades, the demo wallet, and a weekly recap. The numbers in the grid are RSI, not price.</P>
       <P>If you want your own practice account, use the partner link <A href={LINK}>{LINK}</A> and referral code 28EX72Q47LR4. I may earn a commission if you later qualify as a client. You keep the public board either way.</P>
       <P><A href={LAB}>Live practice run</A>.</P>
     </Article>

@@ -35,7 +35,7 @@ function buildEmailLink(projectTitle: string) {
 const articleByProjectTitle: Record<string, string> = {
   'Qualified Lead Research and Prospecting Blueprint': 'how-qualified-lead-research-works',
   'SupportForge AI Assistant': 'ai-portfolio-assistant',
-  'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'trading-affiliate-website-template',
+  'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'apex-rsi-eclipse-live-practice-desk',
   'InsightForge Business Analytics Studio': 'insightforge-business-analytics-studio',
   'Bank Desert Analysis Student Lab': 'bank-desert-analysis-python-census-google-places',
   'RAVERSUS Clinical Portal': 'raversus-clinical-portal',

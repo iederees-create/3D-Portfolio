@@ -8,6 +8,7 @@ import BankDesertAnalysisContent from './bank-desert-analysis-python-census-goog
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
 import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
 import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
+import ApexRsiEclipseLivePracticeDeskContent from './apex-rsi-eclipse-live-practice-desk';
 import AiPortfolioAssistantContent from './ai-portfolio-assistant';
 import AboutNextGenWebsContent from './about-nextgenwebs-web-developer-cape-town';
 import AmoreNailsCtWebsiteContent from './amore-nails-ct-website';
@@ -83,6 +84,20 @@ import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voi
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'apex-rsi-eclipse-live-practice-desk',
+    title: 'Apex RSI Eclipse: A Public Deriv Desk Across 15 Markets and Six Charts',
+    excerpt: 'The trading-affiliate showcase was still describing last month’s board. Here is the current live practice desk: RSI 20/80, fifteen volatility indices, 5-minute through daily, demo funds only.',
+    datePublished: '2026-09-13',
+    dateModified: '2026-09-13',
+    author: 'Iedrees Francis',
+    category: 'Trading / Build Log',
+    tags: ['Deriv', 'RSI', 'Demo', 'Affiliate', 'Build Log', 'Data Visualisation'],
+    readingTimeMinutes: 16,
+    coverImage: `${import.meta.env.BASE_URL}projects/trading-affiliate/rsi-eclipse-cover.svg`,
+    coverImageAlt: 'Apex RSI Eclipse live practice desk with six timeframe gauges and a volatility scan grid',
+    relatedSlugs: ['trading-affiliate-website-template', 'live-deriv-demo-instead-of-a-signal-room', 'why-54-percent-is-not-an-edge'],
+  },
   {
     slug: 'maia-by-make-conversational-automation',
     title: 'Maia by Make: What Conversational Automation Means for Small Businesses',
@@ -906,7 +921,7 @@ export const articles: ArticleMeta[] = [
     category: 'Case Study / Affiliate Marketing',
     tags: ['Case Study', 'Affiliate Marketing', 'Trading Education', 'Compliance Copy', 'React', 'TypeScript'],
     readingTimeMinutes: 14,
-    relatedSlugs: ['construction-website-quote-planner', 'laser-cutting-website-quote-planner'],
+    relatedSlugs: ['apex-rsi-eclipse-live-practice-desk', 'construction-website-quote-planner', 'laser-cutting-website-quote-planner'],
   },
   {
     slug: 'laser-cutting-website-quote-planner',
@@ -1076,6 +1091,7 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'window-cleaning-glazing-website-design': WindowCleaningGlazingWebsiteDesignContent,
   'zen-skin-studio-website-template': ZenSkinStudioContent,
   'ai-portfolio-assistant': AiPortfolioAssistantContent,
+  'apex-rsi-eclipse-live-practice-desk': ApexRsiEclipseLivePracticeDeskContent,
   'trading-affiliate-website-template': TradingAffiliateWebsiteTemplateContent,
   'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
   'ai-developments-3d-web-2026': AIDevelopments3DWeb2026Content,
