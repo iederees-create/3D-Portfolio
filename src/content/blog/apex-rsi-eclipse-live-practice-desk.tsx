@@ -47,7 +47,7 @@ const sections = [
     body: [
       'The scan list is Volatility 10, 15, 25, 30, 50, 75, 90, 100, 150 and 250 on the 1-second variants, plus standard Volatility 10, 25, 50, 75 and 100. Boom, Crash and Step stay off. Spike and step products have a different shape. A 20/80 fade that is reasonable on a volatility index is not automatically reasonable on a market built around discontinuous jumps.',
       'One global contract is the risk rule and the readability rule. If two cells go teal together, the walk order decides and everything else waits. A board with six open tickets would look busy and teach the wrong lesson.',
-      'Stake is 0.35 demo dollars. No martingale. No size-up after a loss. After three consecutive losses the run pauses. That pause is part of the product. It is the behaviour I want people to copy before they ever think about live money.',
+      'Stake is $1 demo. No martingale. No size-up after a loss. After three consecutive losses the run pauses. That pause is part of the product. It is the behaviour I want people to copy before they ever think about live money.',
     ],
   },
   {
