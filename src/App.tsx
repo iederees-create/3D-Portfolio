@@ -21,6 +21,7 @@ import AboutPage from './pages/AboutPage';
 import BlogIndexPage from './pages/BlogIndexPage';
 import ArticlePage from './pages/ArticlePage';
 import ContactPage from './pages/ContactPage';
+import AIServicesPage from './pages/AIServicesPage';
 import CredentialsPage from './pages/CredentialsPage';
 import ProjectPage from './pages/ProjectPage';
 import LeadResearchProjectPage from './pages/projects/LeadResearchProjectPage';
@@ -45,6 +46,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 const navLinks = [
   { to: '/',             label: 'Home' },
   { to: '/work',         label: 'Work' },
+  { to: '/services/ai-automation', label: 'AI Services' },
   { to: '/about',        label: 'About' },
   { to: '/blog',         label: 'Blog' },
   { to: '/credentials',  label: 'Credentials' },
@@ -291,6 +293,7 @@ function AnimatedRoutes() {
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
+        <Route path="/services/ai-automation" element={<PageWrapper><AIServicesPage /></PageWrapper>} />
         <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
         <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
       </Routes>

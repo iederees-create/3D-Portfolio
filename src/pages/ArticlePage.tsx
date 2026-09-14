@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import ArticleLayout from '../components/blog/ArticleLayout';
 import SEO from '../components/SEO';
+import AIServiceCTA from '../components/AIServiceCTA';
 import { articleContentMap, getArticleBySlug } from '../content/blog/articles';
 
 /**
@@ -35,6 +36,7 @@ export default function ArticlePage() {
   return (
     <ArticleLayout meta={meta}>
       <Content />
+      {/\b(ai|automation|assistant)\b/i.test(`${meta.title} ${meta.tags.join(' ')}`) && <AIServiceCTA source={`blog-${slug}`} />}
     </ArticleLayout>
   );
 }
