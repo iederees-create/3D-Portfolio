@@ -33,6 +33,7 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'PromoPilot Retail Promotion Kit': 'turn-product-catalogue-into-retail-promotions',
   'Qualified Lead Research and Prospecting Blueprint': 'how-qualified-lead-research-works',
   'SupportForge AI Assistant': 'ai-portfolio-assistant',
   'Trading Affiliate Website Template / Deriv Partner Affiliate Launchpad': 'apex-rsi-eclipse-live-practice-desk',

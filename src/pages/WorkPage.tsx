@@ -257,6 +257,26 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 export const projects: Project[] = [
 
   {
+    title: 'PromoPilot Retail Promotion Kit',
+    category: 'AI / Web App / Support Automation',
+    description: 'A local-first retail promotion studio concept for independent shops, cafes, salons and small retailers. The supplied brief describes a product catalogue, reusable layouts and multi-format exports; the source is unavailable in this checkout, so the app, exports and offline behavior have not been independently verified.',
+    tags: ['Retail Promotions', 'Product Catalogue', 'CSV Workflow', 'Local-first App', 'Prototype', 'Verification Pending'],
+    liveUrl: import.meta.env.BASE_URL + 'work/promopilot-retail-promotion-kit/',
+    mediaAlt: 'PromoPilot project status card; no application screenshot is available for verification',
+    toolBadge: 'Prototype · release verification pending',
+    toolHighlight: 'Transparency note: the supplied source revision was not found in local project storage or accessible GitHub repositories. This page records the brief and validation still required; it is not a tested software listing or public demo.',
+    features: [
+      'Audience from supplied brief: independent shops, cafes, salons and small retailers.',
+      'Documented concept: enter or import product details once, then prepare poster, social and screen promotions.',
+      'The brief specifies local browser storage; backups and device/profile boundaries must be verified.',
+      'The brief specifies PNG, print, short video and offline-player outputs; none are certified here.',
+      'Known constraints include no Canva API, accounts, cloud sync, payment processing or remote screen management.',
+      'Not a commissioned Upwork client project. No customer, sales, savings or performance results are claimed.',
+      'Next step: recover source revision 1467cff350f7a5e50d1134878b95c52107c22ab9 and run release acceptance tests before sale.',
+    ],
+  },
+
+  {
     title: 'Hydro Clean CT Exterior Cleaning Website Template',
     category: 'Service',
     description: 'A responsive exterior cleaning website template with a configurable service request planner for pressure washing, roof cleaning, gutter cleaning, paving, solar panel cleaning, and exterior property maintenance businesses.',

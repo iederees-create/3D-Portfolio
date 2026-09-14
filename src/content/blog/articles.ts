@@ -28,6 +28,7 @@ import VitalityWellnessWebsiteTemplateContent from './vitality-wellness-website-
 import WindowCleaningGlazingWebsiteDesignContent from './window-cleaning-glazing-website-design';
 import ZenSkinStudioContent from './zen-skin-studio-website-template';
 import HowQualifiedLeadResearchWorksContent from './how-qualified-lead-research-works';
+import PromoPilotRetailPromotionWorkflowContent from './promopilot-retail-promotion-workflow';
 import AIDevelopments3DWeb2026Content from './ai-developments-3d-web-2026';
 import {
   LiveDemoInsteadOfSignals,
@@ -84,6 +85,18 @@ import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voi
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'turn-product-catalogue-into-retail-promotions',
+    title: 'How to Turn a Product Catalogue Into Retail Posters, Social Content and Digital Signage',
+    excerpt: 'A practical workflow for preparing one shop offer for print, social and screens—with a fictional cafe example, accessibility checks and an honest look at the PromoPilot prototype.',
+    datePublished: '2026-09-14',
+    dateModified: '2026-09-14',
+    author: 'Iederees Francis',
+    category: 'Small Business / Product Workflow',
+    tags: ['Retail Marketing', 'Promotion Posters', 'Digital Signage', 'Small Business', 'PromoPilot'],
+    readingTimeMinutes: 18,
+    relatedSlugs: ['etsy-seller-seo-toolkit', 'systeme-io-deliver-digital-download', 'which-business-task-should-you-automate-first'],
+  },
   {
     slug: 'apex-rsi-eclipse-live-practice-desk',
     title: 'Apex RSI Eclipse: A Public Deriv Desk Across 15 Markets and Six Charts',
@@ -1024,6 +1037,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'turn-product-catalogue-into-retail-promotions': PromoPilotRetailPromotionWorkflowContent,
   'maia-by-make-conversational-automation': MaiaByMakeConversationalAutomationContent,
   'elevenlabs-cli-ai-voice-developer-workflow': ElevenlabsCliAiVoiceDeveloperWorkflowContent,
   'ai-in-trading-start-with-better-journal': AiInTradingStartWithBetterJournalContent,
