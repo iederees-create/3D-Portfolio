@@ -1,6 +1,7 @@
 import type { ArticleContentComponent, ArticleMeta } from './types';
 import TradeBusinessQuoteCalculatorContent from './trade-business-quote-calculator';
 import EtsySellerSeoToolkitContent from './etsy-seller-seo-toolkit';
+import BookingLinkToLandingPageContent from './booking-link-to-landing-page';
 import DigitalGuestWelcomeGuideContent from './digital-guest-welcome-guide';
 import ExteriorCleaningWebsiteQuotePlannerContent from './exterior-cleaning-website-quote-planner';
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
@@ -1034,6 +1035,20 @@ export const articles: ArticleMeta[] = [
     coverImageAlt: 'Digital Guest Welcome Guide cover graphic',
     relatedSlugs: ['trade-business-quote-calculator', 'etsy-seller-seo-toolkit'],
   },
+  {
+    slug: 'booking-link-to-landing-page',
+    title: 'How to Turn Your Booking Link Into a Professional Business Landing Page',
+    excerpt: 'A bare Calendly or Square Appointments link asks customers to book blind — no services, no prices, no proof it is a real business. A worked example, a mobile layout guide, and a real tutorial for turning that link into a proper landing page.',
+    datePublished: '2026-09-14',
+    dateModified: '2026-09-14',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Business Tools',
+    tags: ['Booking', 'Landing Page', 'Small Business', 'Accessibility', 'Digital Product'],
+    readingTimeMinutes: 12,
+    coverImage: `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/01-cover.png`,
+    coverImageAlt: 'Booking Landing Page Kit barber/salon demo page cover',
+    relatedSlugs: ['etsy-seller-seo-toolkit', 'digital-guest-welcome-guide', 'trade-business-quote-calculator'],
+  },
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
@@ -1112,6 +1127,7 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
   'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
+  'booking-link-to-landing-page': BookingLinkToLandingPageContent,
 };
 
 export function getArticleBySlug(slug: string): ArticleMeta | undefined {

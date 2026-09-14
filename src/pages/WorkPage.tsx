@@ -1042,6 +1042,52 @@ export const projects: Project[] = [
       'QR-code ready once deployed',
     ],
   },
+  {
+    title: 'Booking Landing Page Kit',
+    category: 'Service',
+    description: 'A reusable landing-page kit that turns an existing booking link (Calendly, Square Appointments, Acuity, SimplyBook.me and similar) into a real, mobile-friendly page - built after seeing the same request in a freelance job post. Three variants (barber/salon, consultant/coach, local service) share one render engine, plus an in-browser customiser that previews live and downloads a finished, self-contained page. No account, install, or booking backend of its own.',
+    tags: ['HTML/CSS/JS', 'Accessibility', 'Static Site', 'Booking', 'Digital Product'],
+    liveUrl: 'https://iederees-create.github.io/booking-landing-page-kit/',
+    // No etsyUrl - listing exists only as an unpublished Etsy draft pending owner review. See PORTFOLIO-ETSY-LINK-AUDIT.md.
+    coverImage: `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/01-cover.png`,
+    mediaAlt: 'Booking Landing Page Kit barber/salon demo page showing the booking button, services and pricing',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/01-cover.png`,
+      `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/02-mobile-real.png`,
+      `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/03-customiser-real.png`,
+      `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/04-coach-variant-real.png`,
+      `${import.meta.env.BASE_URL}projects/booking-landing-page-kit/05-service-variant-real.png`,
+    ],
+    galleryImageAlts: [
+      'Barber/salon variant, desktop view, with demo-business banner clearly labeled',
+      'Real mobile view showing the sticky bottom booking button',
+      'The in-browser customiser: live form on the left, live preview on the right',
+      'Consultant/coach variant with a different accent colour and copy',
+      'Local appointment-based service variant',
+    ],
+    features: [
+      'Three variants sharing one shared render engine (single source of truth)',
+      'In-browser customiser: live preview, no install or account, downloads one self-contained index.html',
+      'Booking URL validated - the booking button auto-disables with an on-page warning if the link is missing or invalid',
+      'All customiser input is HTML-escaped in the generated file (tested against script-injection input)',
+      'Mobile-first with a sticky booking button, keyboard-accessible FAQ accordion, automatic button-contrast against the chosen accent colour',
+    ],
+    caseStudy: {
+      methodology: 'Started from a real Upwork brief asking for a simple page to make an existing company booking link easy to use. Rather than build one client site, the brief was generalised into a reusable kit: one shared render function (escaping + URL validation + markup) consumed by both a Node build script (for the three demo variants) and an in-browser customiser, so the buyer-facing tool and the demo pages can never drift out of sync.',
+      toolsUsed: ['HTML', 'CSS', 'Vanilla JavaScript', 'Node.js', 'Puppeteer (verification only)', 'GitHub Pages'],
+      technicalChallenge: {
+        title: 'Proving "mobile-friendly" instead of just claiming it',
+        body: 'An early responsive check using Chrome\'s --window-size CLI flag produced screenshots that looked broken on narrow viewports. Rather than "fix" a bug that turned out not to exist, the render was re-tested with a real CDP-driven viewport (Puppeteer\'s setViewport), which confirmed the page had zero horizontal overflow (scrollWidth === innerWidth) at a true 390px width - the CLI flag itself was silently rendering wider and cropping the screenshot. The header was still simplified afterward (redundant CTA hidden on small screens in favour of the existing sticky bottom bar) as a genuine UX improvement, not a fix for a bug that never existed.',
+      },
+      privacyDesign: 'The customiser runs entirely client-side - nothing a buyer types is uploaded anywhere. Every field is HTML-escaped before being written into the generated page (verified with script-tag and event-handler injection payloads), and only https/http/mailto/tel URLs are ever written into an href.',
+      testResults: [
+        'XSS payloads in business name and service fields render as inert text in the generated page, not executable markup',
+        'javascript: URLs in the booking-link field are rejected by the validator and the booking button renders disabled with guidance',
+        'Zero horizontal overflow confirmed at a true 390px mobile viewport via Puppeteer, plus a working keyboard-accessible FAQ accordion',
+        'A fresh unzip of the exact buyer-facing package loads and runs with zero console errors, independent of any developer account or environment',
+      ],
+    },
+  },
 ];
 
 const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data', 'Marketing / Finance / Affiliate Funnel'];
