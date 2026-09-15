@@ -1043,6 +1043,33 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'Cleaning Business Instant Quote Kit',
+    category: 'Service',
+    description: 'A self-contained, offline-ready instant quote calculator for residential cleaning businesses. A pure pricing engine (documented six-step calculation order, 20 assertions across 7 independently hand-calculated test cases) drives a responsive form: room-based or floor-area pricing, service-type and frequency discounts, a minimum-charge floor, optional extras, travel fee and tax, all reconciling exactly to the total. Local Business Setup for branding and rates, with validated JSON export/import - no server, login or subscription.',
+    tags: ['HTML/CSS/JS', 'Accessibility', 'Static Site', 'Pricing Engine', 'Digital Product'],
+    liveUrl: 'https://iederees-create.github.io/cleaning-business-instant-quote-calculator/',
+    // No etsyUrl yet - Etsy draft for the separate DIY buyer package has not been created in this session. See PORTFOLIO-ETSY-LINK-AUDIT.md.
+    coverImage: `${import.meta.env.BASE_URL}projects/cleaning-business-quote-calculator/01-cover.jpg`,
+    mediaAlt: 'Cleaning Business Instant Quote Kit showing the Get a Quote tab with an itemised estimate breakdown',
+    galleryImages: [
+      `${import.meta.env.BASE_URL}projects/cleaning-business-quote-calculator/01-cover.jpg`,
+      `${import.meta.env.BASE_URL}projects/cleaning-business-quote-calculator/02-business-setup.jpg`,
+      `${import.meta.env.BASE_URL}projects/cleaning-business-quote-calculator/03-itemized-estimate.jpg`,
+    ],
+    galleryImageAlts: [
+      'Get a Quote tab showing service type, frequency and property size fields',
+      'Business Setup tab showing branding and room-based or floor-area pricing mode',
+      'Itemised estimate breakdown for a deep clean with travel fee and tax',
+    ],
+    features: [
+      'Pure pricing engine with a documented six-step calculation order',
+      'Room-based or floor-area pricing, never both for the same quote',
+      'Frequency discounts applied to labour only, never to extras or travel',
+      'Local Business Setup with validated JSON export/import, no account required',
+      'Fully offline-capable: opens from index.html with no build step',
+    ],
+  },
+  {
     title: 'Booking Landing Page Kit',
     category: 'Service',
     description: 'A reusable landing-page kit that turns an existing booking link (Calendly, Square Appointments, Acuity, SimplyBook.me and similar) into a real, mobile-friendly page - built after seeing the same request in a freelance job post. Three variants (barber/salon, consultant/coach, local service) share one render engine, plus an in-browser customiser that previews live and downloads a finished, self-contained page. No account, install, or booking backend of its own.',
