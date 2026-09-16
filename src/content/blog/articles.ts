@@ -79,6 +79,7 @@ import AddNarrationDigitalProductTutorialContent from './add-narration-digital-p
 import LocalizeProductExplainerAiAudioContent from './localize-product-explainer-ai-audio';
 import ChooseElevenlabsPlanActualWorkloadContent from './choose-elevenlabs-plan-actual-workload';
 import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voiceover-guide';
+import RepairJobsPartsInvoicesContent from './how-to-organise-repair-jobs-spare-parts-and-invoices';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -86,6 +87,7 @@ import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voi
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  { slug: 'how-to-organise-repair-jobs-spare-parts-and-invoices', title: 'How to Organise Repair Jobs, Spare Parts and Invoices Without Complicated Software', excerpt: 'A practical workflow for appliance repair businesses: job references, explicit stock movements, estimates, invoice snapshots and a short end-of-day review.', datePublished: '2026-09-16', dateModified: '2026-09-16', author: 'Iederees Francis', category: 'Small Business / Repair Workflow', tags: ['Repair Business', 'Job Tracker', 'Parts Inventory', 'Invoices', 'Excel'], readingTimeMinutes: 12, coverImage: import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/blog-hero.png', coverImageAlt: 'Repair Business Job and Parts Tracker dashboard with fictional repair records', relatedSlugs: ['trade-business-quote-calculator', 'send-website-enquiries-structured-lead-tracker', 'systeme-io-deliver-digital-download'] },
   {
     slug: 'turn-product-catalogue-into-retail-promotions',
     title: 'How to Turn a Product Catalogue Into Retail Posters, Social Content and Digital Signage',
@@ -1052,6 +1054,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'how-to-organise-repair-jobs-spare-parts-and-invoices': RepairJobsPartsInvoicesContent,
   'turn-product-catalogue-into-retail-promotions': PromoPilotRetailPromotionWorkflowContent,
   'maia-by-make-conversational-automation': MaiaByMakeConversationalAutomationContent,
   'elevenlabs-cli-ai-voice-developer-workflow': ElevenlabsCliAiVoiceDeveloperWorkflowContent,

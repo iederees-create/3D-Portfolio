@@ -256,6 +256,55 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 
 export const projects: Project[] = [
 
+  { title: 'Repair Business Job & Parts Tracker', category: 'Data', description: 'A focused job-to-invoice workflow for independent appliance repair technicians, with explicit stock movements and a fictional-data interactive demo.', tags: ['Repair Business', 'Job Tracker', 'Parts Inventory', 'Excel', 'Invoice Workflow'], liveUrl: import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/', coverImage: import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/project-card.png', videoPoster: import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/video-poster.png', mediaAlt: 'Repair Business Job and Parts Tracker dashboard with fictional repair jobs', galleryImages: [import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/dashboard-desktop.png', import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/dashboard-mobile.png', import.meta.env.BASE_URL + 'projects/repair-business-job-parts-tracker/invoice-sample.png'], galleryImageAlts: ['Repair tracker desktop dashboard', 'Repair tracker mobile job register', 'Sample invoice preview marked SAMPLE'], featured: true, toolBadge: 'Job-to-Invoice Demo', toolHighlight: 'Fictional local state demonstrates job status, explicit part issue movements, invoice snapshots and print output. The downloadable kit is separate.', features: ['Job register with diagnosis and status workflow', 'Parts catalogue with explicit stock ledger', 'Estimate versus invoice distinction', 'Protected Excel formulas and validation', 'Import/export and backup guidance', 'Accessible reset and print controls'] },
+  {
+    title: 'First-Time Homeowner Organiser Kit',
+    category: 'Data',
+    description: 'A beginner-friendly Excel organiser for household spending, recurring maintenance, warranties, belongings and improvement projects, paired with a separate local-first interactive portfolio demonstration.',
+    tags: ['Excel', 'Home Budget', 'Maintenance', 'Warranty Tracker', 'Inventory', 'Accessible Demo'],
+    liveUrl: import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/',
+    coverImage: import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/project-card.png',
+    previewVideoMp4: import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/portfolio-preview.mp4',
+    videoPoster: import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/video-poster.png',
+    mediaAlt: 'First-Time Homeowner Organiser Kit Home at a Glance dashboard with fictional household figures',
+    galleryImages: [
+      import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/dashboard-desktop.png',
+      import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/dashboard-mobile.png',
+      import.meta.env.BASE_URL + 'projects/first-time-homeowner-organiser-kit/spreadsheet-dashboard.png',
+    ],
+    galleryImageAlts: [
+      'Desktop Home at a Glance interactive demo with monthly spending and maintenance cards',
+      'Mobile Home at a Glance interactive demo showing the attention summary and dashboard metrics',
+      'Finished spreadsheet Home Dashboard with fictional Cedar Lane sample data',
+    ],
+    featured: true,
+    toolBadge: 'Local-first Home at a Glance Demo',
+    toolHighlight: 'The public demo runs without login, database or paid API and saves optional fictional edits only in the visitor browser. It is separate from the paid spreadsheet download.',
+    features: [
+      'Nine core sheets with clearly marked inputs and protected formula cells',
+      'Date-based monthly and annual household spending summaries',
+      'Maintenance recurrence tested at month-end and leap-year boundaries',
+      'Explicit lifetime, unknown, missing and fixed-date warranty states',
+      'Purchase cost separated from manual replacement estimates',
+      'Project costs separated from household transactions to prevent double-counting',
+      'Blank customer version and clearly labelled fictional example',
+      'Optional moving checklist and renovation planner in the Complete Bundle',
+      'Interactive browser demo with editing, filters, clear, reset and local save',
+    ],
+    caseStudy: {
+      methodology: 'Mapped the recurring questions a new homeowner asks into separate source tables and one monthly attention layer. The workbook and web demonstration use the same fictional Cedar Lane control totals.',
+      toolsUsed: ['Excel-compatible XLSX', 'LibreOffice Calc', 'Python / openpyxl', 'React', 'TypeScript', 'Tailwind CSS', 'localStorage', 'FFmpeg'],
+      technicalChallenge: { title: 'Reliable dates without universal schedules', body: 'Calendar-month recurrence handles month ends and leap days, while explicit warranty states prevent unknown dates from creating false alerts. Notes point owners to property-specific manufacturer and professional guidance.' },
+      privacyDesign: 'The public demo contains fictional data and saves only on request in browser localStorage. Nothing is uploaded, and buyers are warned not to store addresses, access codes, identity numbers, payment credentials or confidential documents.',
+      testResults: [
+        '57 independent workbook checks passed after LibreOffice recalculation',
+        'September sample spending reconciles to 2,236 with 964 remaining',
+        'Month-end and leap-year recurrence boundaries pass',
+        'Native Google Sheets validation is pending and is not advertised as verified',
+      ],
+    },
+  },
+
   {
     title: 'PromoPilot Retail Promotion Kit',
     category: 'AI / Web App / Support Automation',
