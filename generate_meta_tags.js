@@ -31,8 +31,8 @@ function generateHtml(urlPath, title, description, image) {
   // Create the meta tags block
   const metaTags = `
     <!-- Dynamic Open Graph Tags -->
-    <title>${title}</title>
     <meta name="description" content="${description}" />
+    <link rel="canonical" href="${fullUrl}" />
     
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${fullUrl}" />
@@ -51,8 +51,12 @@ function generateHtml(urlPath, title, description, image) {
     ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}" />\n    <meta property="twitter:image" content="${imageUrl}" />` : ''}
   `;
 
-  // Inject meta tags before </head>
-  return baseHtml.replace('</head>', metaTags + '\n  </head>');
+  // Replace the one static fallback title, then inject route metadata.
+  const routeHtml = baseHtml.replace(
+    '<title>NextGenWebs — Premium Web Design for Local Businesses</title>',
+    `<title>${title}</title>`,
+  );
+  return routeHtml.replace('</head>', metaTags + '\n  </head>');
 }
 
 function ensureDirectoryExistence(filePath) {
@@ -71,8 +75,15 @@ const sitemapUrls = [
   'about/',
   'blog/',
   'contact/',
-  'credentials/'
+  'credentials/',
+  'services/qa-operations-review/'
 ];
+
+const servicePath = 'services/qa-operations-review/';
+const serviceHtml = generateHtml(servicePath, 'QA & Operations Review Service | NextGenWebs', 'Evidence-led website QA, workflow reviews, data-quality checks, SOP documentation, defect tracking, release readiness and operational reporting.', 'projects/qa-operations/cover.svg');
+const serviceOutPath = path.join(distDir, 'services', 'qa-operations-review', 'index.html');
+ensureDirectoryExistence(serviceOutPath);
+fs.writeFileSync(serviceOutPath, serviceHtml);
 
 // 1. Process Projects
 console.log('Processing projects...');

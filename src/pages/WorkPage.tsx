@@ -257,6 +257,27 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 export const projects: Project[] = [
 
   {
+    title: 'QA & Operations Review Case-Study Collection',
+    category: 'Service',
+    description: 'An evidence-led service and companion portfolio collection showing website and workflow QA, data-quality checks, SOP documentation, release readiness, defect tracking, retesting and operational reporting templates across eight distinct demonstration contexts.',
+    tags: ['Quality Assurance', 'Operations', 'Data Quality', 'SOPs', 'Release Readiness', 'Issue Tracking'],
+    liveUrl: import.meta.env.BASE_URL + 'services/qa-operations-review/',
+    featured: true,
+    coverImage: import.meta.env.BASE_URL + 'projects/qa-operations/cover.svg',
+    mediaAlt: 'QA and Operations Review scorecard, checklist and issue register graphic',
+    toolBadge: 'Evidence-led QA & operations service',
+    toolHighlight: 'Concrete deliverables include scoped test plans, weighted scorecards, expected and actual results, evidence-state labels, issue registers, SOPs, retest records and downloadable operational templates.',
+    features: [
+      'Website, workflow and keyboard/responsive QA',
+      'Data completeness, validation, duplicate and reconciliation checks',
+      'SOP and process-flow documentation',
+      'Release-readiness, defect tracking and retesting',
+      'Operational scorecards and proposed measurement plans',
+      'Companion collection labels all work as demonstrations and preserves attribution boundaries',
+    ],
+  },
+
+  {
     title: 'PromoPilot Retail Promotion Kit',
     category: 'AI / Web App / Support Automation',
     description: 'A local-first retail promotion studio concept for independent shops, cafes, salons and small retailers. The supplied brief describes a product catalogue, reusable layouts and multi-format exports; the source is unavailable in this checkout, so the app, exports and offline behavior have not been independently verified.',
