@@ -259,7 +259,7 @@ export const projects: Project[] = [
   {
     title: 'QA & Operations Review Case-Study Collection',
     category: 'Service',
-    description: 'An evidence-led service and companion portfolio collection showing website and workflow QA, data-quality checks, SOP documentation, release readiness, defect tracking, retesting and operational reporting templates across eight distinct demonstration contexts.',
+    description: 'An evidence-led NextGenWebs service with a companion demonstration collection. Shafeeqah Francis reviewed and approved the 18 September 2026 findings, assessments and recommendations. Technical checks remain NextGenWebs/Codex. Later code fixes are implemented by NextGenWebs and stay pending her sign-off until an approved pack is recorded. Demonstration context only; no conversion, revenue, employment or client-engagement claims.',
     tags: ['Quality Assurance', 'Operations', 'Data Quality', 'SOPs', 'Release Readiness', 'Issue Tracking'],
     liveUrl: import.meta.env.BASE_URL + 'services/qa-operations-review/',
     featured: true,
@@ -274,6 +274,7 @@ export const projects: Project[] = [
       'Release-readiness, defect tracking and retesting',
       'Operational scorecards and proposed measurement plans',
       'Companion collection labels all work as demonstrations and preserves attribution boundaries',
+      'Shafeeqah reviewed and approved the 18 Sep 2026 findings; later NextGenWebs code fixes await her pack sign-off',
     ],
   },
 

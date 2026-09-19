@@ -7,6 +7,9 @@
 export const SITE_ORIGIN = 'https://iederees-create.github.io';
 export const SITE_BASE_PATH = '/3D-Portfolio/';
 export const SITE_URL = `${SITE_ORIGIN}${SITE_BASE_PATH}`;
+/** GitHub Pages admin route. Must be on the Supabase Auth redirect allow-list; keep Exchange-Line URLs. */
+export const ADMIN_DASHBOARD_PATH = 'admin-dashboard';
+export const ADMIN_DASHBOARD_URL = `${SITE_URL}${ADMIN_DASHBOARD_PATH}`;
 export const SITE_NAME = 'NextGenWebs';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}projects/insightforge/cover.webp`;
 
