@@ -90,7 +90,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: 'evidence-led-qa-operations-review',
     title: 'How to Run an Evidence-Led QA and Operations Review',
-    excerpt: 'A practical process for defining scope, writing expected results, separating verified findings from examples, tracking defects, documenting SOPs and planning meaningful measurements.',
+    excerpt: 'A practical process for defining scope, writing expected results, separating verified findings from examples, tracking defects, documenting SOPs and planning meaningful measurements. Includes the 18 September 2026 demonstration attribution and Shafeeqah Francis review boundary.',
     datePublished: '2026-09-19',
     dateModified: '2026-09-19',
     author: 'Iedrees Francis',
