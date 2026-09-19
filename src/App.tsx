@@ -24,6 +24,7 @@ import ContactPage from './pages/ContactPage';
 import CredentialsPage from './pages/CredentialsPage';
 import ProjectPage from './pages/ProjectPage';
 import LeadResearchProjectPage from './pages/projects/LeadResearchProjectPage';
+import QAOperationsReviewPage from './pages/services/QAOperationsReviewPage';
 
 // ─── Animated page wrapper ────────────────────────────────────────────────────
 function PageWrapper({ children }: { children: React.ReactNode }) {
@@ -287,6 +288,7 @@ function AnimatedRoutes() {
         <Route path="/work" element={<PageWrapper><WorkPage /></PageWrapper>} />
         <Route path="/work/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
         <Route path="/projects/qualified-lead-research" element={<PageWrapper><LeadResearchProjectPage /></PageWrapper>} />
+        <Route path="/services/qa-operations-review" element={<PageWrapper><QAOperationsReviewPage /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />

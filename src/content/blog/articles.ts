@@ -79,6 +79,7 @@ import AddNarrationDigitalProductTutorialContent from './add-narration-digital-p
 import LocalizeProductExplainerAiAudioContent from './localize-product-explainer-ai-audio';
 import ChooseElevenlabsPlanActualWorkloadContent from './choose-elevenlabs-plan-actual-workload';
 import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voiceover-guide';
+import EvidenceLedQAOperationsReviewContent from './evidence-led-qa-operations-review';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -86,6 +87,20 @@ import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voi
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'evidence-led-qa-operations-review',
+    title: 'How to Run an Evidence-Led QA and Operations Review',
+    excerpt: 'A practical process for defining scope, writing expected results, separating verified findings from examples, tracking defects, documenting SOPs and planning meaningful measurements.',
+    datePublished: '2026-09-19',
+    dateModified: '2026-09-19',
+    author: 'Iedrees Francis',
+    category: 'Quality Assurance / Operations',
+    tags: ['Quality Assurance', 'Operations', 'Data Quality', 'SOP', 'Release Readiness'],
+    readingTimeMinutes: 9,
+    coverImage: `${import.meta.env.BASE_URL}projects/qa-operations/cover.svg`,
+    coverImageAlt: 'QA and Operations Review scorecard, checklist and issue register',
+    relatedSlugs: ['send-website-enquiries-structured-lead-tracker', 'stop-duplicate-records-in-your-make-scenarios', 'what-happens-when-automation-fails'],
+  },
   {
     slug: 'turn-product-catalogue-into-retail-promotions',
     title: 'How to Turn a Product Catalogue Into Retail Posters, Social Content and Digital Signage',
@@ -1052,6 +1067,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'evidence-led-qa-operations-review': EvidenceLedQAOperationsReviewContent,
   'turn-product-catalogue-into-retail-promotions': PromoPilotRetailPromotionWorkflowContent,
   'maia-by-make-conversational-automation': MaiaByMakeConversationalAutomationContent,
   'elevenlabs-cli-ai-voice-developer-workflow': ElevenlabsCliAiVoiceDeveloperWorkflowContent,

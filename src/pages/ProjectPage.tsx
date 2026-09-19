@@ -33,6 +33,7 @@ function buildEmailLink(projectTitle: string) {
 
 // ─── Article map ──────────────────────────────────────────
 const articleByProjectTitle: Record<string, string> = {
+  'QA & Operations Review Case-Study Collection': 'evidence-led-qa-operations-review',
   'PromoPilot Retail Promotion Kit': 'turn-product-catalogue-into-retail-promotions',
   'Qualified Lead Research and Prospecting Blueprint': 'how-qualified-lead-research-works',
   'SupportForge AI Assistant': 'ai-portfolio-assistant',
