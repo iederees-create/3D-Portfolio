@@ -51,3 +51,19 @@ No new `etsyUrl` values were added anywhere, including for Bank Desert Analysis 
 After any listing is manually published on Etsy, add its exact public listing URL to the
 matching portfolio project's `etsyUrl` field before considering that product's release
 complete. Never link the shop root or a draft URL as a purchase link.
+
+## Follow-up — 2026-09-16
+
+Re-checked live Etsy state via Francis Listing Manager's authenticated `/api/etsy/listings`
+(Etsy API mode: Live, Connected: Yes, Shop: NextGenWebs, `state` read directly from Etsy, not
+from local cache). Three projects that were correctly unlinked above now have a real, active,
+publicly-purchasable listing and their `etsyUrl` was added in `src/pages/WorkPage.tsx`:
+
+| Project | Etsy listing id | State | etsyUrl added |
+|---|---|---|---|
+| Trade Business Quote & Estimate Calculator | 4565932701 | active | `https://www.etsy.com/listing/4565932701/trade-business-quote-estimate-calculator` |
+| Cleaning Business Instant Quote Kit | 4575649514 | active | `https://www.etsy.com/listing/4575649514/cleaning-business-quote-calculator-kit` |
+| Booking Landing Page Kit | 4575621298 | active | `https://www.etsy.com/listing/4575621298/booking-landing-page-website-template` |
+
+All other "no etsyUrl" entries from the original audit were left untouched - not re-verified
+in this pass, still pending their own publish decision.

@@ -7,6 +7,7 @@ import ExteriorCleaningWebsiteQuotePlannerContent from './exterior-cleaning-webs
 import WhyEducationalBusinessesNeedCustomLearningHubsContent from './why-educational-businesses-need-custom-learning-hubs';
 import BankDesertAnalysisContent from './bank-desert-analysis-python-census-google-places';
 import ConstructionWebsiteQuotePlannerContent from './construction-website-quote-planner';
+import CleaningBusinessQuoteCalculatorContent from './cleaning-business-quote-calculator';
 import LaserCuttingWebsiteQuotePlannerContent from './laser-cutting-website-quote-planner';
 import TradingAffiliateWebsiteTemplateContent from './trading-affiliate-website-template';
 import ApexRsiEclipseLivePracticeDeskContent from './apex-rsi-eclipse-live-practice-desk';
@@ -978,7 +979,21 @@ export const articles: ArticleMeta[] = [
     readingTimeMinutes: 6,
     coverImage: `${import.meta.env.BASE_URL}projects/southern-suburbs-builders/cover.webp`,
     coverImageAlt: 'Southern Suburbs Builders website template homepage with the Renovation Scope & Budget Planner',
-    relatedSlugs: ['bank-desert-analysis-python-census-google-places'],
+    relatedSlugs: ['bank-desert-analysis-python-census-google-places', 'cleaning-business-quote-calculator'],
+  },
+  {
+    slug: 'cleaning-business-quote-calculator',
+    title: 'How to Build a Cleaning Quote Calculator for Your Website',
+    excerpt: 'Why a vague "contact us for a quote" line loses fast-comparing visitors, and how a six-step pricing engine turns bedrooms, bathrooms, service type and frequency into an instant, itemised, independently-tested estimate.',
+    datePublished: '2026-09-15',
+    dateModified: '2026-09-15',
+    author: 'Iedrees Francis',
+    category: 'Case Study / Home Services',
+    tags: ['Case Study', 'Cleaning Business', 'Quote Calculator', 'JavaScript', 'Small Business Tools'],
+    readingTimeMinutes: 9,
+    coverImage: `${import.meta.env.BASE_URL}projects/cleaning-business-quote-calculator/01-cover.jpg`,
+    coverImageAlt: 'Cleaning Business Instant Quote Kit showing the Get a Quote tab with service type, frequency and property size fields',
+    relatedSlugs: ['construction-website-quote-planner', 'laser-cutting-website-quote-planner'],
   },
   {
     slug: 'bank-desert-analysis-python-census-google-places',
@@ -1141,6 +1156,7 @@ export const articleContentMap: Record<string, ArticleContentComponent> = {
   'laser-cutting-website-quote-planner': LaserCuttingWebsiteQuotePlannerContent,
   'ai-developments-3d-web-2026': AIDevelopments3DWeb2026Content,
   'construction-website-quote-planner': ConstructionWebsiteQuotePlannerContent,
+  'cleaning-business-quote-calculator': CleaningBusinessQuoteCalculatorContent,
   'bank-desert-analysis-python-census-google-places': BankDesertAnalysisContent,
   'why-educational-businesses-need-custom-learning-hubs': WhyEducationalBusinessesNeedCustomLearningHubsContent,
   'booking-link-to-landing-page': BookingLinkToLandingPageContent,
