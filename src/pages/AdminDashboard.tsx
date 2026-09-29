@@ -4,6 +4,7 @@ import { Activity, AlertCircle, Clock, Database, RefreshCw, Shield, Users, Arrow
 import { supabase } from '../lib/supabase';
 import { currentAdminSession } from '../lib/shafeeqahAdmin';
 import ShafeeqahPortfolioPanel from './admin/ShafeeqahPortfolioPanel';
+import RunwayPanel from './admin/RunwayPanel';
 
 const TABLES = [
   'page_views',
@@ -32,6 +33,7 @@ const TABLES = [
 ];
 
 const SF_PANEL_VIEW = 'shafeeqah';
+const RUNWAY_PANEL_VIEW = 'runway';
 
 export default function AdminDashboard() {
   const [activeTable, setActiveTable] = useState<string>(SF_PANEL_VIEW);
@@ -92,7 +94,7 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (activeTable === SF_PANEL_VIEW) return;
+    if (activeTable === SF_PANEL_VIEW || activeTable === RUNWAY_PANEL_VIEW) return;
     if (tableCounts[activeTable] !== undefined) {
       setLastViewed((prev) => {
         const next = { ...prev, [activeTable]: tableCounts[activeTable] };
@@ -129,7 +131,7 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    if (activeTable === SF_PANEL_VIEW) {
+    if (activeTable === SF_PANEL_VIEW || activeTable === RUNWAY_PANEL_VIEW) {
       setTableData([]);
       setError(null);
       setLoading(false);
@@ -192,6 +194,16 @@ export default function AdminDashboard() {
           Portfolio queue
         </button>
 
+        <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 px-2">Runway</h2>
+        <button
+          type="button"
+          onClick={() => setActiveTable(RUNWAY_PANEL_VIEW)}
+          className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left mb-4 ${activeTable === RUNWAY_PANEL_VIEW ? 'bg-fuchsia-500/20 text-fuchsia-300 font-medium' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+        >
+          <Users size={14} className="shrink-0" />
+          Talent & companies
+        </button>
+
         <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 px-2">Your Database</h2>
         <nav className="flex flex-col gap-1">
           {TABLES.map((table) => {
@@ -224,7 +236,9 @@ export default function AdminDashboard() {
         </nav>
       </div>
 
-      {activeTable === SF_PANEL_VIEW ? (
+      {activeTable === RUNWAY_PANEL_VIEW ? (
+        <RunwayPanel user={user} isAdmin={isSfAdmin} authLoading={authLoading} membershipError={membershipError} />
+      ) : activeTable === SF_PANEL_VIEW ? (
         <ShafeeqahPortfolioPanel
           user={user}
           isAdmin={isSfAdmin}
