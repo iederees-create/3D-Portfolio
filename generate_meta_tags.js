@@ -170,10 +170,28 @@ for (let i = 1; i < articleBlocks.length; i++) {
   }
 }
 
-// 3. Create 404.html for GitHub Pages fallback
-console.log('Generating 404.html...');
-const notFoundHtml = baseHtml.replace('<title>', '<title>Page Not Found | NextGenWebs</title>\n    <!-- 404 Fallback -->\n    <title>');
-fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
+// 3. Generate entry pages for routes that must work when opened directly.
+// The misspelled path is retained as a legacy URL and React redirects it to
+// the canonical dashboard route.
+console.log('Generating admin dashboard entry pages...');
+const adminDashboardHtml = generateHtml(
+  'admin-dashboard/',
+  'Admin Dashboard | NextGenWebs',
+  'NextGenWebs admin dashboard.',
+  ''
+);
+
+for (const route of ['admin-dashboard', 'admin-dashbourd']) {
+  const outPath = path.join(distDir, route, 'index.html');
+  ensureDirectoryExistence(outPath);
+  fs.writeFileSync(outPath, adminDashboardHtml);
+}
+
+// Vite copies public/404.html into dist. Preserve that redirect page: it
+// encodes unknown client-side routes so index.html can restore them before
+// React Router mounts.
+console.log('Preserving GitHub Pages SPA fallback...');
+fs.copyFileSync(path.join(__dirname, 'public', '404.html'), path.join(distDir, '404.html'));
 
 // 4. Generate sitemap.xml
 console.log('Generating sitemap.xml...');

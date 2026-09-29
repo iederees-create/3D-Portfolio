@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react';
-import { Routes, Route, NavLink, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, NavLink, Link, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, ShoppingBag, Sparkles, Twitter, Instagram, X, Youtube, Facebook, User } from 'lucide-react';
 
@@ -295,6 +295,7 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
         <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
         <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
+        <Route path="/admin-dashbourd" element={<Navigate to="/admin-dashboard" replace />} />
       </Routes>
     </AnimatePresence>
   );
