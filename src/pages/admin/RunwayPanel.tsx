@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
-import { Building2, ExternalLink, Image as ImageIcon, RefreshCw, Users } from 'lucide-react';
+import { Activity, Building2, Clock, ExternalLink, Image as ImageIcon, RefreshCw, Users } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 type Props = { user: User | null; isAdmin: boolean; authLoading: boolean; membershipError: string | null };
 type Account = { user_id:string; account_type:'talent'|'agency'; display_name:string|null; company_name:string|null; created_at:string };
 type Talent = { id:string; user_id:string; full_name:string; preferred_name:string|null; email:string|null; whatsapp:string|null; city:string|null; categories:string[]|null; portfolio_url:string|null; photo_url:string|null; listed:boolean; created_at:string };
 type Media = { id:string; talent_id:string; media_type:string; title:string|null; url:string; caption:string|null; created_at:string };
+type RunwayEvent = { id:number; created_at:string; session_id:string; event_name:string; page_path:string; target:string|null; referrer:string|null; duration_seconds:number|null; utm_source:string|null; metadata:Record<string, unknown>|null };
 
 export default function RunwayPanel({ user, isAdmin, authLoading, membershipError }: Props) {
   const [accounts,setAccounts]=useState<Account[]>([]);
@@ -14,6 +15,7 @@ export default function RunwayPanel({ user, isAdmin, authLoading, membershipErro
   const [media,setMedia]=useState<Media[]>([]);
   const [briefs,setBriefs]=useState<any[]>([]);
   const [bookings,setBookings]=useState<any[]>([]);
+  const [events,setEvents]=useState<RunwayEvent[]>([]);
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState<string|null>(null);
   const [filter,setFilter]=useState<'all'|'talent'|'agency'>('all');
@@ -27,6 +29,7 @@ export default function RunwayPanel({ user, isAdmin, authLoading, membershipErro
       supabase.from('runway_media').select('*').order('created_at',{ascending:false}),
       supabase.from('runway_briefs').select('*').order('created_at',{ascending:false}),
       supabase.from('runway_bookings').select('*').order('created_at',{ascending:false}),
+      supabase.from('runway_events').select('*').order('created_at',{ascending:false}).limit(250),
     ]);
     const failed=results.find(r=>r.error);
     if(failed?.error){ setError(failed.error.message); setLoading(false); return; }
@@ -34,6 +37,7 @@ export default function RunwayPanel({ user, isAdmin, authLoading, membershipErro
     setTalent((results[1].data||[]) as Talent[]);
     setMedia((results[2].data||[]) as Media[]);
     setBriefs(results[3].data||[]); setBookings(results[4].data||[]);
+    setEvents((results[5].data||[]) as RunwayEvent[]);
     setLoading(false);
   };
   useEffect(()=>{ load(); },[user?.id,isAdmin]);
@@ -47,6 +51,18 @@ export default function RunwayPanel({ user, isAdmin, authLoading, membershipErro
   const shown=accounts.filter(a=>filter==='all'||a.account_type===filter);
   const agencies=accounts.filter(a=>a.account_type==='agency');
   const talentAccounts=accounts.filter(a=>a.account_type==='talent');
+  const activityMetrics=useMemo(()=>{
+    const views=events.filter(event=>event.event_name==='page_view');
+    const exits=events.filter(event=>event.event_name==='page_exit' && event.duration_seconds !== null);
+    const uniqueVisitors=new Set(views.map(event=>event.session_id)).size;
+    const avgTime=exits.length ? Math.round(exits.reduce((sum,event)=>sum+(event.duration_seconds||0),0)/exits.length) : 0;
+    const dayAgo=Date.now()-24*60*60*1000;
+    const last24Hours=events.filter(event=>new Date(event.created_at).getTime()>=dayAgo).length;
+    const paths=new Map<string,number>();
+    views.forEach(event=>paths.set(event.page_path,(paths.get(event.page_path)||0)+1));
+    const topPath=[...paths.entries()].sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+    return { views:views.length, uniqueVisitors, avgTime, last24Hours, topPath };
+  },[events]);
 
   if(authLoading) return <div className="flex-1 p-8 text-slate-400">Checking admin access…</div>;
   if(!user || !isAdmin) return <div className="flex-1 p-8"><div className="max-w-2xl rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 text-amber-200"><b>Runway admin access required.</b><p className="mt-2 text-sm text-slate-400">{membershipError || 'Sign in with an account listed in sf_site_admins to view private talent and company records.'}</p></div></div>;
@@ -54,12 +70,22 @@ export default function RunwayPanel({ user, isAdmin, authLoading, membershipErro
   return <div className="flex-1 p-6 overflow-auto">
     <header className="flex flex-wrap items-center justify-between gap-4 mb-6">
       <div><p className="text-xs uppercase tracking-[.25em] text-fuchsia-300">Runway</p><h1 className="text-2xl font-bold text-white">Talent & company CRM</h1><p className="text-sm text-slate-500 mt-1">Signups, profiles, associated media, briefs and booking activity.</p></div>
+      <a href="https://iederees-create.github.io/runway/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-fuchsia-500/15 text-fuchsia-200 hover:bg-fuchsia-500/25">Open live site <ExternalLink size={14}/></a>
       <button onClick={load} disabled={loading} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15"><RefreshCw size={14} className={loading?'animate-spin':''}/>Refresh</button>
     </header>
     {error && <div className="mb-5 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300">{error}</div>}
     <div className="grid grid-cols-2 xl:grid-cols-5 gap-3 mb-6">
       {[[talentAccounts.length,'Talent',Users],[agencies.length,'Companies',Building2],[media.length,'Media',ImageIcon],[briefs.length,'Briefs',Building2],[bookings.length,'Bookings',Users]].map(([n,label,Icon]:any)=><div key={label} className="rounded-xl border border-white/5 bg-white/[.03] p-4"><Icon size={16} className="text-fuchsia-300 mb-2"/><div className="text-2xl font-bold text-white">{n}</div><div className="text-xs text-slate-500">{label}</div></div>)}
     </div>
+    <section className="mb-6 rounded-2xl border border-fuchsia-500/15 bg-fuchsia-500/[.035] p-4">
+      <div className="mb-4 flex items-center justify-between gap-3"><div><p className="text-xs uppercase tracking-[.2em] text-fuchsia-300">Live-site activity</p><h2 className="text-lg font-semibold text-white">Runway analytics</h2></div><span className="text-xs text-slate-500">Latest {events.length} events</span></div>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+        {[[activityMetrics.views,'Recent page views',Activity],[activityMetrics.uniqueVisitors,'Recent sessions',Users],[activityMetrics.avgTime+'s','Avg. time',Clock],[activityMetrics.last24Hours,'Events · 24h',Activity],[activityMetrics.topPath,'Top page',ExternalLink]].map(([value,label,Icon]:any)=><div key={label} className="rounded-xl border border-white/5 bg-black/20 p-3"><Icon size={15} className="mb-2 text-fuchsia-300"/><div className="truncate text-xl font-bold text-white">{value}</div><div className="text-xs text-slate-500">{label}</div></div>)}
+      </div>
+      <div className="mt-4 overflow-x-auto rounded-xl border border-white/5">
+        <table className="w-full min-w-[680px] text-left text-xs"><thead className="bg-black/30 text-slate-500"><tr><th className="px-3 py-2">Time</th><th className="px-3 py-2">Event</th><th className="px-3 py-2">Page</th><th className="px-3 py-2">Target / source</th></tr></thead><tbody className="divide-y divide-white/5">{events.slice(0,12).map(event=><tr key={event.id}><td className="px-3 py-2 text-slate-500">{new Date(event.created_at).toLocaleString()}</td><td className="px-3 py-2 text-fuchsia-200">{event.event_name.replace(/_/g,' ')}</td><td className="px-3 py-2 text-slate-300">{event.page_path}</td><td className="max-w-[260px] truncate px-3 py-2 text-slate-500">{event.target||event.referrer||event.utm_source||'—'}</td></tr>)}</tbody></table>
+      </div>
+    </section>
     <div className="flex gap-2 mb-4">{(['all','talent','agency'] as const).map(x=><button key={x} onClick={()=>setFilter(x)} className={`px-3 py-1.5 rounded-full text-xs capitalize ${filter===x?'bg-fuchsia-500 text-white':'bg-white/5 text-slate-400'}`}>{x==='agency'?'companies':x}</button>)}</div>
     <div className="grid gap-4">
       {shown.map(a=>{
