@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { Routes, Route, NavLink, Link, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, ShoppingBag, Sparkles, Twitter, Instagram, X, Youtube, Facebook, User } from 'lucide-react';
+import { Menu, Twitter, Instagram, X, Youtube } from 'lucide-react';
 
 import NextGenWebsAssistant from './NextGenWebsAssistant';
 import ThemePicker from './components/ThemePicker';
@@ -46,13 +46,11 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 const navLinks = [
   { to: '/',             label: 'Home' },
   { to: '/work',         label: 'Work' },
-  { to: '/about',        label: 'About' },
-  { to: '/blog',         label: 'Blog' },
   { to: '/credentials',  label: 'Credentials' },
+  { to: '/contact',      label: 'Contact' },
 ];
 
 function Navbar() {
-  const { memberId, openVIPModal } = useMember();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuId = useId();
@@ -90,8 +88,9 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
 
         {/* Logo — same mark as favicon.svg */}
-        <Link to="/" className="flex items-center gap-3 min-w-0 shrink-0" aria-label="NextGenWebs home">
-          <BrandLogo />
+        <Link to="/" className="flex items-center gap-3 min-w-0 shrink-0" aria-label="Iederees Francis — home">
+          <BrandLogo showWordmark={false} />
+          <span className="font-bold text-sm tracking-wide text-white whitespace-nowrap">Iederees Francis</span>
         </Link>
 
         {/* Desktop nav — only when there is real room (lg+) */}
@@ -114,51 +113,14 @@ function Navbar() {
 
         {/* Desktop / tablet actions */}
         <div className="flex items-center justify-end gap-2 sm:gap-3 shrink-0">
-          <div className="hidden xl:flex items-center gap-3 mr-1 border-r border-white/10 pr-4">
-            <a href="https://x.com/nextgenwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="X / Twitter"><Twitter size={16} /></a>
-            <a href="https://instagram.com/nextgenerationwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="Instagram"><Instagram size={16} /></a>
-            <a href="https://youtube.com/channel/uc3cd_ossaxmwdtvfvxgxwgw" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="YouTube"><Youtube size={16} /></a>
-            <a href="https://www.facebook.com/profile.php?id=61590665101851" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="Facebook personal" title="Facebook (Personal Profile)">
-              <User size={16} />
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61590630038201" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-[#1877F2] transition-colors" aria-label="NextGenWebs Facebook page" title="Facebook (Business Page)">
-              <Facebook size={16} />
-            </a>
-            <a href="https://www.linkedin.com/in/iederees-francis-936717392/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-          </div>
-
           <ThemePicker />
-
-          <a
-            href="https://nextgenwebs.etsy.com"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden lg:inline-flex text-xs font-semibold tracking-wide text-slate-300 hover:text-white transition-colors whitespace-nowrap"
-          >
-            Templates
-          </a>
 
           <Link
             to="/contact"
             className="hidden sm:inline-flex px-4 lg:px-6 py-2 lg:py-2.5 bg-white text-black text-xs font-bold tracking-wide rounded-full hover:bg-slate-200 transition-colors whitespace-nowrap"
           >
-            Contact
+            Get a free quote
           </Link>
-
-          {!memberId ? (
-            <button
-              onClick={openVIPModal}
-              className="hidden lg:inline-flex px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-bold tracking-wide rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] transition-all whitespace-nowrap"
-            >
-              Take Assessment
-            </button>
-          ) : (
-            <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-cyan-400 text-xs font-bold tracking-wide rounded-full border border-cyan-400/30 whitespace-nowrap">
-              <Sparkles size={14} /> VIP Member
-            </div>
-          )}
 
           {/* Hamburger — mobile + mid desktop when nav links are hidden */}
           <button
@@ -215,22 +177,12 @@ function Navbar() {
                   </NavLink>
                 ))}
 
-                <a
-                  href="https://nextgenwebs.etsy.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 text-sm font-semibold tracking-wide text-slate-300 hover:bg-white/5 hover:text-white transition-colors"
-                >
-                  Templates
-                </a>
-
                 <Link
                   to="/contact"
                   onClick={() => setMenuOpen(false)}
                   className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-4 py-3 text-xs font-bold tracking-wide text-black hover:bg-slate-200 transition-colors"
                 >
-                  Contact
+                  Get a free quote
                 </Link>
               </div>
             </motion.nav>
@@ -243,34 +195,29 @@ function Navbar() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
+  const linkClass = 'text-slate-400 hover:text-white transition-colors text-sm';
   return (
     <footer className="border-t border-white/5 py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <Sparkles size={13} className="text-primary-400" />
-          <span className="font-bold text-sm text-white uppercase tracking-widest">NextGenWebs</span>
+        <div className="text-center md:text-left">
+          <p className="font-bold text-sm text-white tracking-wide">Iederees Francis</p>
+          <p className="text-xs text-slate-500 mt-1">Freelance web developer · Cape Town &amp; remote</p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-6">
-          <a href="https://x.com/nextgenwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm"><Twitter size={16} /> X.com</a>
-          <a href="https://instagram.com/nextgenerationwebdevs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm"><Instagram size={16} /> Instagram</a>
-          <a href="https://youtube.com/channel/uc3cd_ossaxmwdtvfvxgxwgw" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm"><Youtube size={16} /> YouTube</a>
-          <a href="https://www.facebook.com/profile.php?id=61590665101851" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
-            <User size={16} />
-            Personal Profile
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61590630038201" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
-            <Facebook size={16} />
-            NextGenWebs Page
-          </a>
-          <a href="https://www.linkedin.com/in/iederees-francis-936717392/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://nextgenwebs.etsy.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm"><ShoppingBag size={16} /> Etsy Shop</a>
-        </div>
+        <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <a href="mailto:iedereesfrancis@gmail.com" className={linkClass}>Email</a>
+          <a href="https://www.linkedin.com/in/iederees-francis-936717392/" target="_blank" rel="noreferrer" className={linkClass}>LinkedIn</a>
+          <Link to="/about" className={linkClass}>About</Link>
+          <Link to="/blog" className={linkClass}>Blog</Link>
+          <a href="https://nextgenwebs.etsy.com" target="_blank" rel="noreferrer" className={linkClass}>Templates (Etsy)</a>
+        </nav>
 
-        <p className="text-xs text-slate-600">© 2026 NextGenWebs · Premium Web Design</p>
+        <div className="flex items-center gap-4">
+          <a href="https://x.com/nextgenwebdevs" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-white transition-colors" aria-label="X / Twitter"><Twitter size={16} /></a>
+          <a href="https://instagram.com/nextgenerationwebdevs" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-white transition-colors" aria-label="Instagram"><Instagram size={16} /></a>
+          <a href="https://youtube.com/channel/uc3cd_ossaxmwdtvfvxgxwgw" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-white transition-colors" aria-label="YouTube"><Youtube size={16} /></a>
+          <p className="text-xs text-slate-600">© 2026 Iederees Francis · NextGenWebs</p>
+        </div>
       </div>
     </footer>
   );
