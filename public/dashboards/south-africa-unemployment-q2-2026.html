@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>South Africa Unemployment, Q2 2026 – Interactive dashboard | Iederees Francis</title>
+<meta name="description" content="Sample interactive dashboard of South Africa's unemployment, Q2 2026, built from the Stats SA Quarterly Labour Force Survey (P0211): provinces, age groups, education and industries.">
+<meta name="theme-color" content="#0F172A">
+<meta property="og:title" content="South Africa Unemployment, Q2 2026 – interactive dashboard">
+<meta property="og:description" content="Sample data visualisation built from the Stats SA QLFS Q2 2026 release. By Iederees Francis, freelance web developer in Cape Town.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/3D-Portfolio/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F172A;--bg2:#0b0f19;--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.10);
+  --tx:#e2e8f0;--mut:#94a3b8;--dim:#64748b;--coral:#E58A6A;--coral2:#D47A6A;--violet:#c084fc;--sky:#7dd3fc;
+  --good:#34d399;--bad:#f87171;--radius:18px;
+  --font:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--tx);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:radial-gradient(900px 500px at 85% -10%,rgba(212,122,106,.16),transparent 60%),radial-gradient(700px 420px at -5% 10%,rgba(192,132,252,.10),transparent 60%)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+/* top bar */
+.top{position:sticky;top:0;z-index:30;background:rgba(15,23,42,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--tx);padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.back:hover{background:var(--panel2)}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.primary{background:#fff;color:#000}.btn.primary:hover{background:#e2e8f0}
+.btn.ghost{background:var(--panel);border-color:var(--line);color:var(--tx)}.btn.ghost:hover{background:var(--panel2)}
+.top .btn{padding:8px 16px}
+/* hero */
+.hero{padding:44px 0 18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:10px 0 12px;font-weight:800;letter-spacing:-.02em}
+h1 span{background:linear-gradient(135deg,#E58A6A,#DE826A 50%,#c084fc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{color:var(--mut);max-width:760px;font-size:17px;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.badge{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut)}
+.badge.sample{border-color:rgba(229,138,106,.45);color:var(--coral);background:rgba(229,138,106,.08)}
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-width:0}
+.card h2{font-size:19px;margin:0 0 4px;font-weight:700}
+.card .sub{color:var(--mut);font-size:13.5px;margin:0 0 14px}
+.grid{display:grid;gap:18px;margin-top:18px}
+.g2{grid-template-columns:1.25fr 1fr}.g2b{grid-template-columns:1fr 1fr}
+@media(max-width:940px){.g2,.g2b{grid-template-columns:1fr}}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+@media(max-width:940px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.kpis{gap:10px}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.kpi:hover{transform:translateY(-2px);border-color:rgba(229,138,106,.5)}
+.kpi.hero-kpi{background:linear-gradient(160deg,rgba(229,138,106,.16),rgba(192,132,252,.07));border-color:rgba(229,138,106,.4)}
+.kpi .l{font-size:12.5px;color:var(--mut);margin:0 0 6px;min-height:2.6em}
+.kpi .v{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1}
+.kpi .d{margin-top:8px;font-size:12.5px;font-family:var(--mono);color:var(--mut)}
+.up-bad,.down-bad{color:var(--bad)}.down-good,.up-good{color:var(--good)}.flat{color:var(--mut)}
+/* controls */
+.ctrl{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--mut);transition:all .15s}
+.chip:hover{color:var(--tx);background:var(--panel2)}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#fff;color:#000;border-color:#fff;font-weight:600}
+.chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.ctrl-label{font-size:12px;color:var(--dim);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;align-self:center;margin-right:4px}
+/* charts */
+svg text{font-family:var(--font)}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--mut);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:9px}
+.brow{display:grid;grid-template-columns:minmax(92px,170px) 1fr 54px;align-items:center;gap:10px;cursor:default;border-radius:10px;padding:3px 6px;margin:0 -6px;transition:background .15s,opacity .2s}
+.brow:hover,.brow:focus-visible{background:var(--panel2)}
+.brow .bl{font-size:13.5px;color:var(--tx);line-height:1.2;overflow-wrap:anywhere}
+.brow .bv{font-family:var(--mono);font-size:13px;text-align:right}
+.btrack{position:relative;height:16px;background:rgba(255,255,255,.04);border-radius:6px}
+.bfill,.bprev{position:absolute;top:0;height:100%;border-radius:6px}
+.bfill{background:linear-gradient(90deg,var(--coral2),var(--coral))}
+.bfill.neg{background:linear-gradient(270deg,#6ee7b7,#34d399)}
+.bfill.violet{background:linear-gradient(90deg,#9b6dd6,var(--violet))}
+.bprev{top:auto;bottom:-5px;height:4px;background:rgba(148,163,184,.55)}
+.bzero{position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.35)}
+.bref{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed rgba(255,255,255,.55)}
+.brow.dim{opacity:.68}
+.brow.sel{background:rgba(229,138,106,.12);outline:1px solid rgba(229,138,106,.5)}
+.bfill{animation:grow .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.reflabel{font-size:12px;color:var(--mut);margin-top:10px;display:flex;align-items:center;gap:8px}
+.reflabel i{display:inline-block;width:0;height:12px;border-left:2px dashed rgba(255,255,255,.55)}
+/* age columns */
+.cols{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;height:270px;align-items:end;padding-top:20px}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;border-radius:12px;padding:0 2px;cursor:default}
+.col:hover,.col:focus-visible{background:var(--panel2)}
+.col .bb{display:flex;align-items:flex-end;gap:5px;flex:1;width:100%;justify-content:center}
+.col .b{width:min(34px,38%);border-radius:8px 8px 3px 3px;position:relative;transform-origin:bottom;animation:growy .7s cubic-bezier(.2,.8,.2,1) both}
+.col .b.cur{background:linear-gradient(0deg,var(--coral2),var(--coral))}
+.col .b.cmp{background:rgba(148,163,184,.45)}
+.col .b em{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-style:normal;font-size:12px;font-family:var(--mono);white-space:nowrap}
+.col .b.cmp em{color:var(--mut)}
+.col .cl{font-size:12.5px;color:var(--mut);margin-top:8px;text-align:center}
+@keyframes growy{from{transform:scaleY(0)}}
+/* detail panel */
+.detail h3{margin:0;font-size:22px}
+.dstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.dstat{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.dstat b{display:block;font-size:20px;font-weight:700}.dstat span{font-size:12px;color:var(--mut)}
+@media(max-width:420px){.dstats{grid-template-columns:repeat(2,1fr)}}
+.empty{color:var(--mut);font-size:14px;border:1px dashed var(--line);border-radius:12px;padding:16px}
+/* table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th,td{padding:10px 12px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#131c31;z-index:1}
+thead th{background:#111a2f;font-weight:600;color:var(--mut);font-size:12.5px;border-bottom:1px solid var(--line);padding:0}
+thead th button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:6px;width:100%;padding:11px 12px;color:var(--mut);font-size:12.5px;font-weight:600}
+thead th:first-child button{justify-content:flex-start}
+thead th button:hover,thead th button:focus-visible{color:var(--tx)}
+thead th[aria-sort] button{color:var(--tx)}
+.arr{opacity:.35;font-size:10px}th[aria-sort] .arr{opacity:1;color:var(--coral)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.05)}
+tbody tr:hover td{background:rgba(255,255,255,.04)}tbody tr:hover th.rowh{background:#18223a!important}
+tbody tr.sel td{background:rgba(229,138,106,.12)}tbody tr.sel th.rowh{background:#2a2237!important}
+td{font-family:var(--mono);font-size:13px}td:first-child{font-family:var(--font);font-size:14px;color:var(--tx)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.small-btn{border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--tx)}
+.small-btn:hover{background:var(--panel2)}
+/* takeaways */
+.take{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.take{grid-template-columns:1fr}}
+.take li{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 16px;font-size:14.5px;border-left:3px solid var(--coral)}
+/* cta + footer */
+.cta{margin-top:26px;border-radius:24px;padding:34px;background:linear-gradient(135deg,rgba(229,138,106,.18),rgba(192,132,252,.10));border:1px solid rgba(229,138,106,.35);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.cta h2{margin:0 0 6px;font-size:clamp(22px,3vw,30px)}.cta p{margin:0;color:var(--mut);max-width:560px}
+.cta .row{display:flex;flex-wrap:wrap;gap:10px}
+.source{margin:26px 0 8px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:18px}
+.source p{margin:0 0 8px}.source a{color:var(--coral)}
+.source .note{color:var(--dim)}
+footer{padding:10px 0 40px;font-size:13px;color:var(--dim)}
+/* tooltip */
+#tip{position:fixed;z-index:100;pointer-events:none;background:#0b1220;border:1px solid rgba(229,138,106,.5);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;box-shadow:0 12px 30px rgba(0,0,0,.5);max-width:260px}
+#tip[hidden]{display:none}#tip b{color:#fff}#tip .k{color:var(--mut)}#tip .m{font-family:var(--mono)}
+.noscript{padding:20px;color:var(--bad)}
+@media(max-width:560px){.wrap{padding:0 14px}.card{padding:16px}.cta{padding:22px}.brow{grid-template-columns:minmax(78px,110px) 1fr 46px}.top .btn.ghost{display:none}.back{font-size:13px;padding:7px 12px}}
+@media(max-width:560px){.cols{gap:4px}.col .b{width:min(28px,40%)}.col .b em{font-size:11px}.col .b.cmp em{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="back" href="/3D-Portfolio/">&larr; Back to portfolio</a>
+  <div style="display:flex;gap:8px">
+    <a class="btn ghost" href="mailto:iedereesfrancis@gmail.com?subject=Dashboard%20project%20enquiry">Hire me</a>
+    <a class="btn primary" href="/3D-Portfolio/contact">Get a free quote</a>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Sample data dashboard &middot; Stats SA QLFS</div>
+    <h1>South Africa <span>Unemployment</span>, Q2 2026</h1>
+    <p class="lede">The official unemployment rate was <strong>33.6%</strong> in the second quarter of 2026, up 0.9 of a percentage point from Q1. Explore it by province, age group, education level and industry.</p>
+    <div class="badges">
+      <span class="badge sample">Sample visualisation</span>
+      <span class="badge">Source: Stats SA &middot; QLFS Q2: 2026 (P0211) &middot; released 11 Aug 2026</span>
+      <span class="badge">Working-age population (15&ndash;64)</span>
+    </div>
+  </header>
+  <noscript><p class="noscript">This dashboard needs JavaScript to draw its charts.</p></noscript>
+
+  <section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+  <section class="grid g2">
+    <div class="card">
+      <h2>Unemployment rate over time</h2>
+      <p class="sub">Official rate (strict definition), Q2 2018 &ndash; Q2 2026. Hover or tap the chart to read a quarter.</p>
+      <div class="ctrl" id="trendCtl" role="group" aria-label="Chart series and range">
+        <button class="chip" data-s="national" aria-pressed="true"><span class="dot" style="background:#E58A6A"></span>South Africa</button>
+        <button class="chip" data-s="women" aria-pressed="false"><span class="dot" style="background:#c084fc"></span>Women</button>
+        <button class="chip" data-s="men" aria-pressed="false"><span class="dot" style="background:#7dd3fc"></span>Men</button>
+        <span class="ctrl-label" style="margin-left:8px">Range</span>
+        <button class="chip" data-r="all" aria-pressed="true">Since 2018</button>
+        <button class="chip" data-r="3y" aria-pressed="false">Last 3 years</button>
+      </div>
+      <div class="chart" id="trend" role="img" aria-label="Line chart of the South African unemployment rate by quarter"></div>
+    </div>
+    <div class="card" id="whoCard">
+      <h2>Who is affected</h2>
+      <p class="sub">Official unemployment rate, Q2 2026.</p>
+      <div class="ctrl" id="whoTabs" role="tablist" aria-label="Group type">
+        <button class="chip" role="tab" data-t="edu" aria-selected="true">Education</button>
+        <button class="chip" role="tab" data-t="pop" aria-selected="false">Population group</button>
+        <button class="chip" role="tab" data-t="sex" aria-selected="false">Sex</button>
+        <button class="chip" id="whoCmp" aria-pressed="true" style="margin-left:auto">Compare Q1 2026</button>
+      </div>
+      <div class="bars" id="whoBars"></div>
+      <div class="reflabel" id="whoNote"></div>
+      <h3 style="margin:22px 0 4px;font-size:15px">Youth versus the national rate</h3>
+      <p class="sub" style="margin-bottom:10px">Two different youth measures from Stats SA.</p>
+      <div class="bars" id="youthBars"></div>
+    </div>
+  </section>
+
+  <section class="grid g2b">
+    <div class="card">
+      <h2>Provinces</h2>
+      <p class="sub">Select a province to highlight it and see its detail. The dashed line marks the national figure.</p>
+      <div class="ctrl" id="provSel" role="group" aria-label="Choose province"></div>
+      <div class="ctrl" id="provMetric" role="group" aria-label="Province metric">
+        <span class="ctrl-label">Metric</span>
+        <button class="chip" data-m="rate" aria-pressed="true">Unemployment rate</button>
+        <button class="chip" data-m="qq" aria-pressed="false">Change vs Q1 2026</button>
+        <button class="chip" data-m="yy" aria-pressed="false">Change vs Q2 2025</button>
+        <button class="chip" data-m="lu3" aria-pressed="false">Expanded rate</button>
+      </div>
+      <div class="bars" id="provBars"></div>
+      <div class="reflabel" id="provNote"></div>
+    </div>
+    <div class="card detail" id="provDetail" aria-live="polite"></div>
+  </section>
+
+  <section class="grid g2b">
+    <div class="card">
+      <h2>Age groups</h2>
+      <p class="sub">Young people carry the heaviest burden of unemployment.</p>
+      <div class="ctrl" id="ageCtl" role="group" aria-label="Age chart options">
+        <button class="chip" data-m="lu1" aria-pressed="true">Official rate</button>
+        <button class="chip" data-m="lu3" aria-pressed="false">Expanded rate</button>
+        <span class="ctrl-label" style="margin-left:8px">Compare</span>
+        <button class="chip" data-c="q1" aria-pressed="true">Q1 2026</button>
+        <button class="chip" data-c="y1" aria-pressed="false">Q2 2025</button>
+        <button class="chip" data-c="none" aria-pressed="false">Off</button>
+      </div>
+      <div class="cols" id="ageCols"></div>
+      <div class="legend" id="ageLegend"></div>
+    </div>
+    <div class="card">
+      <h2>Where jobs moved</h2>
+      <p class="sub">Change in employment by industry (thousands of jobs).</p>
+      <div class="ctrl" id="indCtl" role="group" aria-label="Industry period">
+        <button class="chip" data-p="qq" aria-pressed="true">vs Q1 2026</button>
+        <button class="chip" data-p="yy" aria-pressed="false">vs Q2 2025</button>
+      </div>
+      <div class="bars" id="indBars"></div>
+      <div class="reflabel"><span>Green = jobs gained &middot; Orange = jobs lost</span></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Key takeaways</h2>
+      <p class="sub">Generated directly from the figures on this page.</p>
+      <ul class="take" id="take"></ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Data table</h2>
+      <p class="sub">Click a column heading to sort. Selected province is highlighted.</p>
+      <div class="tabs">
+        <div class="ctrl" id="tblTabs" role="tablist" aria-label="Table" style="margin:0">
+          <button class="chip" role="tab" data-t="prov" aria-selected="true">Provinces</button>
+          <button class="chip" role="tab" data-t="age" aria-selected="false">Age groups</button>
+          <button class="chip" role="tab" data-t="ind" aria-selected="false">Industries</button>
+        </div>
+        <button class="small-btn" id="csv" type="button">Download CSV</button>
+      </div>
+      <div class="tablewrap"><table id="tbl"></table></div>
+    </div>
+  </section>
+
+  <section class="cta" aria-label="Contact">
+    <div>
+      <h2>Need a dashboard like this for your business?</h2>
+      <p>I build clear, interactive reports from spreadsheets and CSV exports so the numbers are easy to act on. Based in Cape Town, working with clients anywhere.</p>
+    </div>
+    <div class="row">
+      <a class="btn primary" href="/3D-Portfolio/contact">Get a free quote</a>
+      <a class="btn ghost" href="mailto:iedereesfrancis@gmail.com?subject=Dashboard%20project%20enquiry">Hire me</a>
+      <a class="btn ghost" href="/3D-Portfolio/work">See more work</a>
+    </div>
+  </section>
+
+  <section class="source" aria-label="Source and notes">
+    <p><strong>Source:</strong> Statistics South Africa (Stats SA), <em>Quarterly Labour Force Survey (QLFS), Quarter 2: 2026</em>, Statistical release P0211, released 11 August 2026 (<a href="https://www.statssa.gov.za/publications/P0211/P02112ndQuarter2026.pdf" target="_blank" rel="noopener">full report</a> &middot; <a href="https://www.statssa.gov.za/publications/P0211/Media%20Release%20QLFS%20Q2%202026.pdf" target="_blank" rel="noopener">media release</a>). Figures were transcribed from the report's summary tables, provincial, age-group, industry and population-group tables, and its Figure 4a (education) and Figure 7 (trend) data; youth (15&ndash;34) and its change come from the media release.</p>
+    <p class="note"><strong>Sample visualisation.</strong> This dashboard is a demonstration of my data-visualisation work. It is not an official Stats SA product; please refer to Stats SA for the authoritative figures. &ldquo;Official rate&rdquo; = LU1 (strict definition). &ldquo;Expanded rate&rdquo; = LU3, unemployed plus the potential labour force. Age rates for 15&ndash;24 (62.8%) and 15&ndash;34 (47.4%) are different measures. Percentage-point changes are as published by Stats SA.</p>
+  </section>
+</main>
+<footer><div class="wrap">&copy; 2026 Iederees Francis &middot; Freelance web developer, Cape Town &middot; <a href="/3D-Portfolio/">Portfolio</a></div></footer>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+(function(){
+'use strict';
+/* ───────── Data (Stats SA QLFS Q2: 2026, P0211) ───────── */
+var NAT={q2_25:33.2,q3_25:31.9,q4_25:31.4,q1_26:32.7,q2_26:33.6,lu3:43.8,lu3_q1:43.7,lu3_25:43.0,emp:16739,lfpr:59.6,abs:39.6};
+// Figure 7 data table: unemployment rate by sex, Q2 2018 – Q2 2026 (33 quarters)
+var TREND={
+  national:[27.2,27.5,27.1,27.6,29.0,29.1,29.1,30.1,23.3,30.8,32.5,32.6,34.4,34.9,35.3,34.5,33.9,32.9,32.7,32.9,32.6,31.9,32.1,32.9,33.5,32.1,31.9,32.9,33.2,31.9,31.4,32.7,33.6],
+  women:[29.5,29.4,29.5,29.3,31.3,30.9,31.3,32.4,24.8,32.3,34.3,34.0,36.8,37.3,38.2,36.4,35.5,35.1,35.5,35.4,35.7,34.0,34.4,35.2,35.8,34.4,33.9,35.5,35.9,35.1,34.6,36.4,37.5],
+  men:[25.3,25.9,25.1,26.1,27.1,27.7,27.2,28.3,22.1,29.6,31.0,31.4,32.4,32.9,32.8,33.0,32.6,31.0,30.4,30.7,30.0,30.1,30.1,31.0,31.5,30.1,30.1,30.7,31.0,29.3,28.8,29.6,30.3]
+};
+var TLABELS=(function(){var out=[],q=2,y=2018;for(var i=0;i<33;i++){out.push('Q'+q+' '+y);q++;if(q>4){q=1;y++;}}return out;})();
+var QL5=['Q2 2025','Q3 2025','Q4 2025','Q1 2026','Q2 2026'];
+// Provinces: UR Q2'25..Q2'26 (Table 2.3), published changes + LU3 (Table E), employed ('000, Table D), LFPR (page 9 map)
+var PROV=[
+ {id:'WC',n:'Western Cape',ur:[21.1,19.7,18.1,19.6,19.5],qq:-0.1,yy:-1.6,lu3:26.1,emp:2835,lfpr:67.8,abs:54.6},
+ {id:'EC',n:'Eastern Cape',ur:[39.5,41.2,42.5,44.6,47.5],qq:2.9,yy:8.0,lu3:54.1,emp:1346,lfpr:55.1,abs:28.9},
+ {id:'NC',n:'Northern Cape',ur:[32.7,31.2,27.1,30.4,28.7],qq:-1.7,yy:-4.0,lu3:47.1,emp:309,lfpr:51.0,abs:36.3},
+ {id:'FS',n:'Free State',ur:[38.5,36.2,37.2,37.8,37.3],qq:-0.5,yy:-1.2,lu3:44.0,emp:769,lfpr:63.1,abs:39.6},
+ {id:'KZN',n:'KwaZulu-Natal',ur:[33.4,31.7,32.3,31.2,32.5],qq:1.3,yy:-0.9,lu3:47.8,emp:2725,lfpr:51.6,abs:34.8},
+ {id:'NW',n:'North West',ur:[40.1,38.1,35.1,35.3,38.1],qq:2.8,yy:-2.0,lu3:56.0,emp:878,lfpr:49.5,abs:30.6},
+ {id:'GP',n:'Gauteng',ur:[33.8,33.1,33.0,34.1,34.6],qq:0.5,yy:0.8,lu3:40.5,emp:5094,lfpr:67.2,abs:43.9},
+ {id:'MP',n:'Mpumalanga',ur:[34.0,34.0,32.3,36.3,36.6],qq:0.3,yy:2.6,lu3:48.3,emp:1270,lfpr:61.7,abs:39.1},
+ {id:'LP',n:'Limpopo',ur:[35.0,29.8,28.2,31.7,32.0],qq:0.3,yy:-3.0,lu3:46.7,emp:1512,lfpr:53.9,abs:36.6}
+];
+var LU3_PREV={WC:[27.0,24.8],EC:[47.7,54.4],NC:[47.0,47.0],FS:[43.8,44.3],KZN:[47.9,47.2],NW:[54.7,54.8],GP:[39.2,40.6],MP:[48.4,49.6],LP:[47.7,47.0]}; // [Q2 2025, Q1 2026]
+// Age groups (Table 2.2): LU1 & LU3 for Q2'25,Q3'25,Q4'25,Q1'26,Q2'26; unemployed/employed '000 and LFPR for Q2'26
+var AGE=[
+ {n:'15–24',lu1:[62.2,58.5,57.0,60.9,62.8],lu3:[71.8,69.3,68.3,71.9,72.4],qq:1.9,yy:0.6,un:1764,em:1044,lfpr:27.1},
+ {n:'25–34',lu1:[40.5,38.4,39.2,40.6,41.8],lu3:[49.5,48.2,49.1,50.7,51.1],qq:1.2,yy:1.3,un:3233,em:4508,lfpr:72.9},
+ {n:'35–44',lu1:[28.7,27.8,27.4,28.6,29.2],lu3:[37.4,37.1,37.0,38.2,38.6],qq:0.6,yy:0.5,un:2134,em:5175,lfpr:77.5},
+ {n:'45–54',lu1:[21.4,21.0,20.4,20.3,20.5],lu3:[30.7,30.9,31.0,31.4,30.3],qq:0.2,yy:-0.9,un:1088,em:4223,lfpr:73.5},
+ {n:'55–64',lu1:[12.8,13.0,11.2,12.6,12.8],lu3:[22.2,22.2,21.3,22.1,22.0],qq:0.2,yy:0.0,un:263,em:1789,lfpr:43.9}
+];
+// Employment by industry ('000, Table B): Q2'25, Q1'26, Q2'26, published qtr & year changes
+var IND=[
+ {n:'Agriculture',a:906,b:960,c:944,qq:-15,yy:39},{n:'Mining',a:434,b:476,c:450,qq:-26,yy:16},
+ {n:'Manufacturing',a:1672,b:1587,c:1571,qq:-15,yy:-100},{n:'Utilities',a:139,b:113,c:103,qq:-10,yy:-36},
+ {n:'Construction',a:1259,b:1314,c:1354,qq:39,yy:94},{n:'Trade',a:3315,b:3320,c:3389,qq:70,yy:74},
+ {n:'Transport',a:1115,b:1111,c:1108,qq:-2,yy:-7},{n:'Finance',a:2983,b:2939,c:2950,qq:11,yy:-33},
+ {n:'Community & social services',a:3872,b:3828,c:3771,qq:-57,yy:-101},{n:'Private households',a:1106,b:1101,c:1092,qq:-9,yy:-14}
+];
+// Unemployment rate by group: Q2 2026 and Q1 2026 (Figure 4a; Table 2; Table 2.1)
+var WHO={
+ edu:{items:[{n:'Less than matric',v:39.2,p:37.6},{n:'Matric',v:36.0,p:35.7},{n:'Other tertiary',v:24.0,p:22.2},{n:'Graduates',v:12.4,p:12.2}],note:'Source: QLFS report, education chart (Figure 4a).'},
+ pop:{items:[{n:'Black African',v:37.6,p:36.4},{n:'Coloured',v:23.5,p:23.9},{n:'Indian/Asian',v:14.7,p:13.6},{n:'White',v:9.1,p:9.2}],note:'Source: QLFS report, population-group table.'},
+ sex:{items:[{n:'Women',v:37.5,p:36.4},{n:'Men',v:30.3,p:29.6}],note:'Source: QLFS report, sex series (Figure 7).'}
+};
+
+/* ───────── Helpers ───────── */
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function f1(v){return v.toFixed(1)}
+function sgn(v,u){var s=v>0?'+':(v<0?'−':'');return s+Math.abs(v).toFixed(1)+(u||'')}
+function sgnI(v){return (v>0?'+':(v<0?'−':''))+Math.abs(v).toLocaleString('en-ZA').replace(/\s/g,' ')}
+function fmtK(v){return v.toLocaleString('en-ZA').replace(/\u00a0/g,' ')}
+function round1(v){return Math.round(v*10)/10}
+function setPressed(group,attr,val){$$('[data-'+attr+']',group).forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset[attr]===val))})}
+var natUR=NAT.q2_26;
+
+/* tooltip */
+var tip=$('#tip');
+function placeTip(x,y){var w=tip.offsetWidth,h=tip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;var l=x+16,t=y+16;if(l+w>vw-8)l=x-w-16;if(l<8)l=8;if(t+h>vh-8)t=y-h-16;if(t<8)t=8;tip.style.left=l+'px';tip.style.top=t+'px'}
+function moveTip(e){var t=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(!t){tip.hidden=true;return}tip.innerHTML=t.getAttribute('data-tip');tip.hidden=false;placeTip(e.clientX,e.clientY)}
+document.addEventListener('pointermove',moveTip);document.addEventListener('pointerdown',moveTip);
+document.addEventListener('pointerleave',function(){tip.hidden=true});
+window.addEventListener('scroll',function(){tip.hidden=true},{passive:true});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(!t||e.target.tagName==='rect')return;tip.innerHTML=t.getAttribute('data-tip');tip.hidden=false;var r=t.getBoundingClientRect();placeTip(r.left+r.width/2-20,r.top+r.height/2-10)});
+document.addEventListener('focusout',function(){tip.hidden=true});
+
+/* ───────── KPI cards ───────── */
+(function(){
+  var up=NAT.q2_26-NAT.q1_26;
+  var cards=[
+    {l:'Official unemployment rate',v:'33.6%',d:'▲ 0.9 pp vs Q1 2026',c:'up-bad',hero:1,t:'Q2 2025: 33.2% · Q1 2026: 32.7% · Q2 2026: 33.6%. Up 0.4 pp year on year.'},
+    {l:'Unemployed persons',v:'8.48M',d:'▲ 345k vs Q1 2026',c:'up-bad',t:'8 481 000 unemployed, up 345 000 on Q1 2026 and 114 000 on Q2 2025.'},
+    {l:'Employed persons',v:'16.74M',d:'▼ 16k vs Q1 2026',c:'down-bad',t:'16 739 000 employed, down 16 000 on Q1 2026 and 68 000 on Q2 2025.'},
+    {l:'Expanded rate (unemployed + potential labour force)',v:'43.8%',d:'▲ 0.1 pp vs Q1 2026',c:'up-bad',t:'LU3: includes discouraged and other available job-seekers. Q2 2025: 43.0%.'},
+    {l:'Youth unemployment, ages 15–24',v:'62.8%',d:'▲ 1.9 pp vs Q1 2026',c:'up-bad',t:'LU1 for 15–24 years. Q1 2026: 60.9% · Q2 2025: 62.2%.'},
+    {l:'Youth unemployment, ages 15–34',v:'47.4%',d:'▲ 1.5 pp vs Q1 2026',c:'up-bad',t:'Stats SA media release: 5.0 million unemployed youth (15–34), rate 47.4%.'},
+    {l:'Labour force participation rate',v:'59.6%',d:'▲ 0.6 pp vs Q1 2026',c:'flat',t:'Absorption rate (employed / population): 39.6%, down 0.1 pp.'},
+    {l:'Youth not in employment, education or training (15–24)',v:'36.4%',d:'▲ 1.2 pp vs Q2 2025',c:'up-bad',t:'NEET rate for about 10.4 million young people aged 15–24.'}
+  ];
+  $('#kpis').innerHTML=cards.map(function(k){return '<div class="kpi'+(k.hero?' hero-kpi':'')+'" tabindex="0" data-tip="'+esc('<b>'+k.l+'</b><br><span class=k>'+k.t+'</span>')+'"><p class="l">'+k.l+'</p><div class="v">'+k.v+'</div><div class="d '+k.c+'">'+k.d+'</div></div>'}).join('');
+})();
+
+/* ───────── Line chart ───────── */
+function niceStep(raw){var p=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/p;return (n<=1?1:n<=2?2:n<=5?5:10)*p}
+function drawLine(host,cfg){
+  var W=Math.max(host.clientWidth,260),H=cfg.height||(W<520?250:330),m={l:40,r:16,t:16,b:30};
+  var iw=W-m.l-m.r,ih=H-m.t-m.b,n=cfg.labels.length;
+  var vals=[];cfg.series.forEach(function(s){s.values.forEach(function(v){if(v!=null)vals.push(v)})});
+  var step=niceStep((Math.max.apply(null,vals)-Math.min.apply(null,vals)+2)/4);
+  var lo=Math.floor((Math.min.apply(null,vals)-0.5)/step)*step,hi=Math.ceil((Math.max.apply(null,vals)+0.5)/step)*step;
+  var x=function(i){return m.l+(n===1?iw/2:i*iw/(n-1))},y=function(v){return m.t+ih-(v-lo)/(hi-lo)*ih};
+  var g='',id='g'+Math.random().toString(36).slice(2,7);
+  for(var t=lo;t<=hi+1e-9;t+=step){g+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(t)+'" y2="'+y(t)+'" stroke="rgba(255,255,255,.07)"/><text x="'+(m.l-8)+'" y="'+(y(t)+4)+'" text-anchor="end" fill="#64748b" font-size="11">'+Math.round(t*10)/10+'%</text>'}
+  var k=Math.max(1,Math.ceil(n/Math.max(2,Math.floor(iw/62))));
+  for(var i=n-1;i>=0;i-=k){var lab=cfg.labels[i];g+='<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="'+(i===n-1&&k>1?'end':'middle')+'" fill="#64748b" font-size="11">'+esc(cfg.short?cfg.short(lab):lab)+'</text>'}
+  var defs='<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+cfg.series[0].color+'" stop-opacity=".30"/><stop offset="1" stop-color="'+cfg.series[0].color+'" stop-opacity="0"/></linearGradient></defs>';
+  var paths='';
+  cfg.series.forEach(function(s,si){
+    var d='';s.values.forEach(function(v,i){if(v==null)return;d+=(d?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)});
+    if(si===0&&!cfg.noArea){var first=s.values.findIndex(function(v){return v!=null});paths+='<path d="'+d+'L'+x(n-1)+' '+y(lo)+'L'+x(first)+' '+y(lo)+'Z" fill="url(#'+id+')"/>'}
+    paths+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"'+(s.dash?' stroke-dasharray="5 5"':'')+'/>';
+    var last=s.values.length-1;while(last>0&&s.values[last]==null)last--;
+    paths+='<circle cx="'+x(last)+'" cy="'+y(s.values[last])+'" r="4.5" fill="'+s.color+'" stroke="#0F172A" stroke-width="2"/>';
+    var below=last>0&&s.values[last-1]!=null&&s.values[last-1]>s.values[last];paths+='<text x="'+(x(last)-8)+'" y="'+(y(s.values[last])+(below?20:-10))+'" text-anchor="end" fill="'+s.color+'" font-size="12.5" font-weight="700">'+f1(s.values[last])+'%</text>';
+  });
+  host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" aria-hidden="true">'+defs+g+paths+'<line class="hl" x1="0" x2="0" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="rgba(255,255,255,.45)" stroke-dasharray="3 4" style="display:none"/><g class="hd"></g><rect class="ov" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent" data-tip=""/></svg>';
+  var svg=$('svg',host),ov=$('.ov',svg),hl=$('.hl',svg),hd=$('.hd',svg);
+  function at(e){var r=svg.getBoundingClientRect(),px=(e.clientX-r.left)*(W/r.width);var i=Math.round((px-m.l)/iw*(n-1));i=Math.max(0,Math.min(n-1,i));
+    hl.style.display='';hl.setAttribute('x1',x(i));hl.setAttribute('x2',x(i));
+    hd.innerHTML=cfg.series.map(function(s){return s.values[i]==null?'':'<circle cx="'+x(i)+'" cy="'+y(s.values[i])+'" r="5" fill="'+s.color+'" stroke="#fff" stroke-width="1.5"/>'}).join('');
+    var h='<b>'+esc(cfg.labels[i])+'</b>';cfg.series.forEach(function(s){if(s.values[i]!=null)h+='<br><span style="color:'+s.color+'">●</span> <span class=k>'+esc(s.name)+':</span> <span class=m>'+f1(s.values[i])+'%</span>'});
+    ov.setAttribute('data-tip',h)}
+  ov.addEventListener('pointermove',at);ov.addEventListener('pointerdown',at);
+  ov.addEventListener('pointerleave',function(){hl.style.display='none';hd.innerHTML=''});
+  host.setAttribute('aria-label',cfg.aria||'Line chart');
+}
+
+/* ───────── Trend card ───────── */
+var trendState={s:{national:true,women:false,men:false},r:'all'};
+var SERIES={national:{name:'South Africa',color:'#E58A6A'},women:{name:'Women',color:'#c084fc'},men:{name:'Men',color:'#7dd3fc'}};
+function drawTrend(){
+  var from=trendState.r==='3y'?TLABELS.length-13:0;
+  var keys=Object.keys(trendState.s).filter(function(k){return trendState.s[k]});
+  if(!keys.length){trendState.s.national=true;keys=['national'];$('#trendCtl [data-s=national]').setAttribute('aria-pressed','true')}
+  var series=keys.map(function(k){return {name:SERIES[k].name,color:SERIES[k].color,values:TREND[k].slice(from)}});
+  drawLine($('#trend'),{labels:TLABELS.slice(from),series:series,short:function(l){return l.replace(/ 20(\d\d)/," ’$1")},aria:'Line chart of the unemployment rate by quarter, '+TLABELS[from]+' to Q2 2026. Latest South Africa rate 33.6%.'});
+}
+$('#trendCtl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.s){trendState.s[b.dataset.s]=!trendState.s[b.dataset.s];b.setAttribute('aria-pressed',String(trendState.s[b.dataset.s]))}
+  if(b.dataset.r){trendState.r=b.dataset.r;setPressed(this,'r',b.dataset.r)}
+  drawTrend()});
+
+/* ───────── Generic horizontal bars ───────── */
+function renderBars(host,items,o){
+  o=o||{};
+  var all=items.map(function(i){return i.v}).concat(o.cmp?items.map(function(i){return i.p}).filter(function(v){return v!=null}):[]);
+  var mn=Math.min(0,Math.min.apply(null,all)),mx=Math.max(0,Math.max.apply(null,all));
+  if(o.ref!=null){mx=Math.max(mx,o.ref);mn=Math.min(mn,o.ref)}
+  var span=(mx-mn)||1;mx=mx+span*0.04;if(mn<0)mn=mn-span*0.04;span=mx-mn;
+  var pos=function(v){return (v-mn)/span*100};
+  host.innerHTML=items.map(function(it,idx){
+    var l=pos(Math.min(0,it.v)),w=Math.abs(it.v)/span*100,neg=it.v<0&&o.negGood;
+    var fill='<i class="bfill'+(neg?' neg':(o.cls?' '+o.cls:''))+'" style="left:'+l+'%;width:'+w+'%;transform-origin:'+(it.v<0?'right':'left')+';animation-delay:'+(idx*35)+'ms"></i>';
+    var prev='';if(o.cmp&&it.p!=null){prev='<i class="bprev" style="left:'+pos(Math.min(0,it.p))+'%;width:'+(Math.abs(it.p)/span*100)+'%"></i>'}
+    var zero=mn<0?'<i class="bzero" style="left:'+pos(0)+'%"></i>':'';
+    var ref=o.ref!=null?'<i class="bref" style="left:'+pos(o.ref)+'%"></i>':'';
+    var cls='brow'+(o.sel&&o.sel===it.id?' sel':(o.sel?' dim':''));
+    return '<div class="'+cls+'" '+(it.id?'data-id="'+esc(it.id)+'" ':'')+'tabindex="0" role="'+(it.id?'button':'img')+'" aria-label="'+esc(it.n+': '+o.fmt(it.v))+'" data-tip="'+esc(it.tip||('<b>'+it.n+'</b><br>'+o.fmt(it.v)))+'"><span class="bl">'+esc(it.n)+'</span><div class="btrack">'+zero+prev+fill+ref+'</div><span class="bv">'+o.fmt(it.v)+'</span></div>'
+  }).join('');
+}
+
+/* ───────── Who is affected ───────── */
+var whoState={t:'edu',cmp:true};
+function drawYouth(){renderBars($('#youthBars'),[
+  {n:'Ages 15–24',v:62.8,tip:'<b>Ages 15–24</b><br><span class=k>Official rate:</span> <span class=m>62.8%</span><br><span class=k>Q1 2026:</span> <span class=m>60.9%</span>'},
+  {n:'Youth 15–34',v:47.4,tip:'<b>Youth (15–34)</b><br><span class=k>Official rate:</span> <span class=m>47.4%</span><br><span class=k>5.0 million unemployed</span>'},
+  {n:'All ages 15–64',v:33.6,tip:'<b>South Africa, ages 15–64</b><br><span class=m>33.6%</span>'}
+ ],{fmt:function(v){return f1(v)+'%'},cls:'violet'})}
+function drawWho(){
+  var d=WHO[whoState.t];
+  renderBars($('#whoBars'),d.items.map(function(i){return {n:i.n,v:i.v,p:i.p,tip:'<b>'+i.n+'</b><br><span class=k>Q2 2026:</span> <span class=m>'+f1(i.v)+'%</span><br><span class=k>Q1 2026:</span> <span class=m>'+f1(i.p)+'%</span><br><span class=k>Change:</span> <span class=m>'+sgn(round1(i.v-i.p),' pp')+'</span>'}}),{fmt:function(v){return f1(v)+'%'},cmp:whoState.cmp,ref:natUR});
+  $('#whoNote').innerHTML='<i></i><span>National rate 33.6% · '+(whoState.cmp?'grey line = Q1 2026 · ':'')+d.note+'</span>';
+}
+$('#whoTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.t){whoState.t=b.dataset.t;$$('[data-t]',this).forEach(function(x){x.setAttribute('aria-selected',String(x===b))})}
+  if(b.id==='whoCmp'){whoState.cmp=!whoState.cmp;b.setAttribute('aria-pressed',String(whoState.cmp))}
+  drawWho()});
+
+/* ───────── Provinces ───────── */
+var provState={sel:'WC',m:'rate'};
+function provVal(p,m){return m==='rate'?p.ur[4]:m==='qq'?p.qq:m==='yy'?p.yy:p.lu3}
+function drawProvChips(){
+  var h='<button class="chip" data-p="" aria-pressed="'+(provState.sel===null)+'">All provinces</button>';
+  PROV.forEach(function(p){h+='<button class="chip" data-p="'+p.id+'" aria-pressed="'+(provState.sel===p.id)+'">'+esc(p.n)+'</button>'});
+  $('#provSel').innerHTML=h;
+}
+function drawProvBars(){
+  var m=provState.m,fmt=m==='rate'||m==='lu3'?function(v){return f1(v)+'%'}:function(v){return sgn(v,' pp')};
+  var items=PROV.map(function(p){
+    var lu3p=LU3_PREV[p.id];
+    var tip='<b>'+p.n+'</b><br><span class=k>Unemployment rate:</span> <span class=m>'+f1(p.ur[4])+'%</span><br><span class=k>vs Q1 2026:</span> <span class=m>'+sgn(p.qq,' pp')+'</span> <span class=k>('+f1(p.ur[3])+'%)</span><br><span class=k>vs Q2 2025:</span> <span class=m>'+sgn(p.yy,' pp')+'</span> <span class=k>('+f1(p.ur[0])+'%)</span><br><span class=k>Expanded rate:</span> <span class=m>'+f1(p.lu3)+'%</span><br><span class=k>Click to select</span>';
+    return {id:p.id,n:p.n,v:provVal(p,m),p:m==='rate'?p.ur[3]:(m==='lu3'?lu3p[1]:null),tip:tip};
+  }).sort(function(a,b){return b.v-a.v});
+  var cmp=(m==='rate'||m==='lu3');
+  renderBars($('#provBars'),items,{fmt:fmt,ref:m==='rate'?natUR:(m==='lu3'?NAT.lu3:undefined),sel:provState.sel,cmp:cmp,negGood:m==='qq'||m==='yy'});
+  $('#provNote').innerHTML=(m==='rate'?'<i></i><span>National rate 33.6% · grey line = Q1 2026</span>':m==='lu3'?'<i></i><span>National expanded rate 43.8% · grey line = Q1 2026</span>':'<span>Percentage-point change as published by Stats SA. Green = rate fell, orange = rate rose.</span>');
+}
+function drawProvDetail(){
+  var host=$('#provDetail'),p=PROV.filter(function(x){return x.id===provState.sel})[0];
+  if(!p){host.innerHTML='<h2>Province detail</h2><p class="sub">Pick a province to compare it with South Africa.</p><div class="empty">Select a province from the chips or click a bar. You will see its rate, quarterly trend, expanded rate and employment.</div><div class="dstats" style="margin-top:14px"><div class="dstat"><b>47.5%</b><span>Highest: Eastern Cape</span></div><div class="dstat"><b>19.5%</b><span>Lowest: Western Cape</span></div><div class="dstat"><b>33.6%</b><span>South Africa</span></div></div>';return}
+  var dq=p.qq,dy=p.yy;
+  host.innerHTML='<h2>Province detail</h2><h3>'+esc(p.n)+'</h3><p class="sub" style="margin-top:4px">Official unemployment rate, last five quarters, against South Africa.</p>'+
+   '<div class="dstats"><div class="dstat"><b>'+f1(p.ur[4])+'%</b><span>Q2 2026 rate</span></div>'+
+   '<div class="dstat"><b class="'+(dq>0?'up-bad':dq<0?'down-good':'flat')+'">'+sgn(dq,' pp')+'</b><span>vs Q1 2026</span></div>'+
+   '<div class="dstat"><b class="'+(dy>0?'up-bad':dy<0?'down-good':'flat')+'">'+sgn(dy,' pp')+'</b><span>vs Q2 2025</span></div>'+
+   '<div class="dstat"><b>'+f1(p.lu3)+'%</b><span>Expanded rate</span></div>'+
+   '<div class="dstat"><b>'+fmtK(p.emp)+'k</b><span>Employed</span></div>'+
+   '<div class="dstat"><b>'+f1(p.lfpr)+'%</b><span>Participation rate</span></div></div>'+
+   '<div class="chart" id="provTrend" role="img"></div><div class="legend"><span><i style="background:#E58A6A"></i>'+esc(p.n)+'</span><span><i style="background:#94a3b8"></i>South Africa</span></div>';
+  drawLine($('#provTrend'),{labels:QL5,height:230,noArea:false,short:function(l){return l.replace(/ 20(\d\d)/," ’$1")},aria:'Line chart of the '+p.n+' unemployment rate over five quarters, latest '+f1(p.ur[4])+'%',
+    series:[{name:p.n,color:'#E58A6A',values:p.ur},{name:'South Africa',color:'#94a3b8',dash:true,values:[NAT.q2_25,NAT.q3_25,NAT.q4_25,NAT.q1_26,NAT.q2_26]}]});
+}
+function selectProv(id){provState.sel=id||null;drawProvChips();drawProvBars();drawProvDetail();drawTable()}
+$('#provSel').addEventListener('click',function(e){var b=e.target.closest('button');if(b)selectProv(b.dataset.p)});
+$('#provBars').addEventListener('click',function(e){var r=e.target.closest('.brow');if(r)selectProv(provState.sel===r.dataset.id?null:r.dataset.id)});
+$('#provBars').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){var r=e.target.closest('.brow');if(r){e.preventDefault();selectProv(provState.sel===r.dataset.id?null:r.dataset.id)}}});
+$('#provMetric').addEventListener('click',function(e){var b=e.target.closest('button');if(!b||!b.dataset.m)return;provState.m=b.dataset.m;setPressed(this,'m',b.dataset.m);drawProvBars()});
+
+/* ───────── Age columns ───────── */
+var ageState={m:'lu1',c:'q1'};
+function drawAge(){
+  var k=ageState.m,idxCmp=ageState.c==='q1'?3:(ageState.c==='y1'?0:null);
+  var max=Math.max.apply(null,AGE.map(function(a){return Math.max(a[k][4],idxCmp!=null?a[k][idxCmp]:0)}));
+  var top=Math.ceil((max+4)/10)*10;
+  $('#ageCols').innerHTML=AGE.map(function(a,i){
+    var cur=a[k][4],cmp=idxCmp!=null?a[k][idxCmp]:null;
+    var tip='<b>Ages '+a.n+'</b><br><span class=k>Q2 2026 '+(k==='lu1'?'official':'expanded')+' rate:</span> <span class=m>'+f1(cur)+'%</span><br><span class=k>Q1 2026:</span> <span class=m>'+f1(a[k][3])+'%</span><br><span class=k>Q2 2025:</span> <span class=m>'+f1(a[k][0])+'%</span>'+(k==='lu1'?'<br><span class=k>Unemployed:</span> <span class=m>'+fmtK(a.un)+'k</span><br><span class=k>Employed:</span> <span class=m>'+fmtK(a.em)+'k</span>':'')+'<br><span class=k>Participation rate:</span> <span class=m>'+f1(a.lfpr)+'%</span>';
+    return '<div class="col" tabindex="0" role="img" aria-label="Ages '+a.n+': '+f1(cur)+'%" data-tip="'+esc(tip)+'"><div class="bb">'+
+      (cmp!=null?'<div class="b cmp" style="height:'+(cmp/top*100)+'%;animation-delay:'+(i*50)+'ms"><em>'+f1(cmp)+'</em></div>':'')+
+      '<div class="b cur" style="height:'+(cur/top*100)+'%;animation-delay:'+(i*50)+'ms"><em>'+f1(cur)+'%</em></div></div><div class="cl">'+a.n+'</div></div>'}).join('');
+  $('#ageLegend').innerHTML='<span><i style="background:#E58A6A"></i>Q2 2026</span>'+(idxCmp!=null?'<span><i style="background:rgba(148,163,184,.6)"></i>'+(ageState.c==='q1'?'Q1 2026':'Q2 2025')+'</span>':'')+'<span>'+(k==='lu1'?'Official (strict) rate':'Expanded rate (LU3)')+'</span>';
+}
+$('#ageCtl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.m){ageState.m=b.dataset.m;setPressed(this,'m',b.dataset.m)}
+  if(b.dataset.c){ageState.c=b.dataset.c;setPressed(this,'c',b.dataset.c)}
+  drawAge()});
+
+/* ───────── Industries ───────── */
+var indState={p:'qq'};
+function drawInd(){
+  var k=indState.p;
+  var items=IND.map(function(i){return {n:i.n,v:i[k],tip:'<b>'+i.n+'</b><br><span class=k>Employed Q2 2026:</span> <span class=m>'+fmtK(i.c)+'k</span><br><span class=k>vs Q1 2026:</span> <span class=m>'+sgnI(i.qq)+'k</span><br><span class=k>vs Q2 2025:</span> <span class=m>'+sgnI(i.yy)+'k</span>'}}).sort(function(a,b){return b.v-a.v});
+  renderBars($('#indBars'),items,{fmt:function(v){return sgnI(v)+'k'},negGood:false});
+  // gains green, losses coral: swap classes
+  $$('.bfill',$('#indBars')).forEach(function(el,i){if(items[i].v>=0)el.classList.add('neg');});
+}
+$('#indCtl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;indState.p=b.dataset.p;setPressed(this,'p',b.dataset.p);drawInd()});
+
+/* ───────── Takeaways (derived from the data above) ───────── */
+(function(){
+  var hi=PROV.slice().sort(function(a,b){return b.ur[4]-a.ur[4]})[0],lo=PROV.slice().sort(function(a,b){return a.ur[4]-b.ur[4]})[0];
+  var qqMax=PROV.slice().sort(function(a,b){return b.qq-a.qq})[0],yyMax=PROV.slice().sort(function(a,b){return b.yy-a.yy})[0],yyMin=PROV.slice().sort(function(a,b){return a.yy-b.yy})[0];
+  var gain=IND.slice().sort(function(a,b){return b.qq-a.qq})[0],loss=IND.slice().sort(function(a,b){return a.qq-b.qq})[0];
+  var li=[
+    '<b>'+hi.n+'</b> has the highest provincial rate at <b>'+f1(hi.ur[4])+'%</b> ('+sgn(hi.yy,' pp')+' year on year); <b>'+lo.n+'</b> has the lowest at <b>'+f1(lo.ur[4])+'%</b>.',
+    'The biggest rise since Q1 2026 was in <b>'+qqMax.n+'</b> ('+sgn(qqMax.qq,' pp')+'). Year on year, <b>'+yyMax.n+'</b> rose most ('+sgn(yyMax.yy,' pp')+') and <b>'+yyMin.n+'</b> fell most ('+sgn(yyMin.yy,' pp')+').',
+    'Ages 15–24 recorded <b>62.8%</b> unemployment and ages 15–34 <b>47.4%</b>, compared with 20.5% for ages 45–54.',
+    'Education matters: <b>39.2%</b> for people without matric, <b>12.4%</b> for graduates.',
+    'Employment rose most in <b>'+gain.n+'</b> ('+sgnI(gain.qq)+'k) and fell most in <b>'+loss.n+'</b> ('+sgnI(loss.qq)+'k) since Q1 2026.',
+    'Women\'s rate (<b>37.5%</b>) is 7.2 pp above men\'s (<b>30.3%</b>); the expanded rate across South Africa is <b>43.8%</b>.'
+  ];
+  $('#take').innerHTML=li.map(function(t){return '<li>'+t+'</li>'}).join('');
+})();
+
+/* ───────── Sortable table ───────── */
+var tblState={t:'prov',key:null,dir:'desc'};
+var TBL={
+ prov:{cols:[{k:'n',l:'Province',s:'str'},{k:'a',l:'Q2 2025',f:f1,u:'%'},{k:'b',l:'Q1 2026',f:f1,u:'%'},{k:'c',l:'Q2 2026',f:f1,u:'%'},{k:'qq',l:'Δ qtr (pp)',f:function(v){return sgn(v)}},{k:'yy',l:'Δ year (pp)',f:function(v){return sgn(v)}},{k:'lu3',l:'Expanded rate',f:f1,u:'%'},{k:'emp',l:'Employed (’000)',f:fmtK},{k:'lfpr',l:'Participation',f:f1,u:'%'}],def:'c',
+   rows:function(){return PROV.map(function(p){return {id:p.id,n:p.n,a:p.ur[0],b:p.ur[3],c:p.ur[4],qq:p.qq,yy:p.yy,lu3:p.lu3,emp:p.emp,lfpr:p.lfpr}}).concat([{id:'ZA',n:'South Africa',a:NAT.q2_25,b:NAT.q1_26,c:NAT.q2_26,qq:0.9,yy:0.4,lu3:NAT.lu3,emp:NAT.emp,lfpr:NAT.lfpr,total:1}])}},
+ age:{cols:[{k:'n',l:'Age group',s:'str'},{k:'a',l:'Q2 2025',f:f1,u:'%'},{k:'b',l:'Q1 2026',f:f1,u:'%'},{k:'c',l:'Q2 2026',f:f1,u:'%'},{k:'qq',l:'Δ qtr (pp)',f:function(v){return sgn(v)}},{k:'yy',l:'Δ year (pp)',f:function(v){return sgn(v)}},{k:'lu3',l:'Expanded rate',f:f1,u:'%'},{k:'un',l:'Unemployed (’000)',f:fmtK},{k:'em',l:'Employed (’000)',f:fmtK}],def:'c',
+   rows:function(){return AGE.map(function(a){return {n:a.n,a:a.lu1[0],b:a.lu1[3],c:a.lu1[4],qq:a.qq,yy:a.yy,lu3:a.lu3[4],un:a.un,em:a.em}})}},
+ ind:{cols:[{k:'n',l:'Industry',s:'str'},{k:'a',l:'Q2 2025 (’000)',f:fmtK},{k:'b',l:'Q1 2026 (’000)',f:fmtK},{k:'c',l:'Q2 2026 (’000)',f:fmtK},{k:'qq',l:'Δ qtr (’000)',f:sgnI},{k:'yy',l:'Δ year (’000)',f:sgnI}],def:'c',
+   rows:function(){return IND.map(function(i){return {n:i.n,a:i.a,b:i.b,c:i.c,qq:i.qq,yy:i.yy}})}}
+};
+function currentRows(){var cfg=TBL[tblState.t],rows=cfg.rows(),key=tblState.key||cfg.def,col=cfg.cols.filter(function(c){return c.k===key})[0],dir=tblState.dir==='asc'?1:-1;
+  rows.sort(function(a,b){var x=a[key],y=b[key];if(a.total)return 1;if(b.total)return -1;return (col.s==='str'?String(x).localeCompare(String(y)):(x-y))*dir});return rows}
+function drawTable(){
+  var cfg=TBL[tblState.t],rows=currentRows(),key=tblState.key||cfg.def;
+  var head='<thead><tr>'+cfg.cols.map(function(c){var on=c.k===key;return '<th scope="col"'+(on?' aria-sort="'+(tblState.dir==='asc'?'ascending':'descending')+'"':'')+'><button type="button" data-k="'+c.k+'">'+c.l+' <span class="arr">'+(on?(tblState.dir==='asc'?'▲':'▼'):'↕')+'</span></button></th>'}).join('')+'</tr></thead>';
+  var body='<tbody>'+rows.map(function(r){return '<tr'+(r.id&&r.id===provState.sel?' class="sel"':'')+'>'+cfg.cols.map(function(c,i){var v=r[c.k];var s=c.s==='str'?esc(v):c.f(v)+(c.u||'');var cls='';if(c.k==='qq'||c.k==='yy'){if(tblState.t==='ind')cls=v>0?' class="down-good"':v<0?' class="up-bad"':'';else cls=v>0?' class="up-bad"':v<0?' class="down-good"':''}
+      return i===0?'<th scope="row" style="text-align:left;font-weight:'+(r.total?700:500)+'" class="rowh">'+s+'</th>':'<td'+cls+'>'+s+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
+  $('#tbl').innerHTML=head+body;
+  $$('th.rowh',$('#tbl')).forEach(function(th){th.style.position='sticky';th.style.left='0';th.style.background='#131c31';th.style.zIndex='1';th.style.padding='10px 12px'});
+}
+$('#tbl').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(!b)return;var k=b.dataset.k,cur=tblState.key||TBL[tblState.t].def;
+  if(k===cur)tblState.dir=tblState.dir==='asc'?'desc':'asc';else{tblState.key=k;tblState.dir=k==='n'?'asc':'desc'}drawTable()});
+$('#tblTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tblState={t:b.dataset.t,key:null,dir:'desc'};$$('[data-t]',this).forEach(function(x){x.setAttribute('aria-selected',String(x===b))});drawTable()});
+$('#csv').addEventListener('click',function(){
+  var cfg=TBL[tblState.t],rows=currentRows();
+  var lines=[cfg.cols.map(function(c){return '"'+c.l.replace(/"/g,'""')+'"'}).join(',')].concat(rows.map(function(r){return cfg.cols.map(function(c){var v=r[c.k];return c.s==='str'?'"'+String(v).replace(/"/g,'""')+'"':v}).join(',')}));
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'}));a.download='sa-unemployment-q2-2026-'+tblState.t+'.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+
+/* ───────── Init ───────── */
+drawTrend();drawWho();drawYouth();drawProvChips();drawProvBars();drawProvDetail();drawAge();drawInd();drawTable();
+var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){drawTrend();if(provState.sel)drawProvDetail()},150)});
+})();
+</script>
+</body>
+</html>

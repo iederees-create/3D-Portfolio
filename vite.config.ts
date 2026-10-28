@@ -26,7 +26,11 @@ export default defineConfig({
         ]
       },
       workbox: {
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024 // 6 MiB limit to accommodate 3D libraries
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6 MiB limit to accommodate 3D libraries
+        // The standalone dashboards under /dashboards/ are real static HTML files: keep them out of the
+        // precache and make sure the SPA navigation fallback never swaps them for index.html.
+        globIgnores: ['dashboards/**'],
+        navigateFallbackDenylist: [/\/dashboards\//]
       }
     })
   ],

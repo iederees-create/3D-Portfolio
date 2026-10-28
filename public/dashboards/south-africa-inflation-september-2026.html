@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>South Africa Inflation, September 2026 – Interactive dashboard | Iederees Francis</title>
+<meta name="description" content="Sample interactive dashboard of South Africa's consumer price inflation, September 2026, built from the Stats SA CPI release (P0141): categories, contributions, provinces and trends.">
+<meta name="theme-color" content="#0F172A">
+<meta property="og:title" content="South Africa Inflation, September 2026 – interactive dashboard">
+<meta property="og:description" content="Sample data visualisation built from the Stats SA CPI September 2026 release. By Iederees Francis, freelance web developer in Cape Town.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/3D-Portfolio/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F172A;--bg2:#0b0f19;--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.10);
+  --tx:#e2e8f0;--mut:#94a3b8;--dim:#64748b;--coral:#E58A6A;--coral2:#D47A6A;--violet:#c084fc;--sky:#7dd3fc;
+  --good:#34d399;--bad:#f87171;--radius:18px;
+  --font:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--tx);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:radial-gradient(900px 500px at 85% -10%,rgba(212,122,106,.16),transparent 60%),radial-gradient(700px 420px at -5% 10%,rgba(192,132,252,.10),transparent 60%)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+/* top bar */
+.top{position:sticky;top:0;z-index:30;background:rgba(15,23,42,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--tx);padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.back:hover{background:var(--panel2)}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.primary{background:#fff;color:#000}.btn.primary:hover{background:#e2e8f0}
+.btn.ghost{background:var(--panel);border-color:var(--line);color:var(--tx)}.btn.ghost:hover{background:var(--panel2)}
+.top .btn{padding:8px 16px}
+/* hero */
+.hero{padding:44px 0 18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:10px 0 12px;font-weight:800;letter-spacing:-.02em}
+h1 span{background:linear-gradient(135deg,#E58A6A,#DE826A 50%,#c084fc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{color:var(--mut);max-width:760px;font-size:17px;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.badge{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut)}
+.badge.sample{border-color:rgba(229,138,106,.45);color:var(--coral);background:rgba(229,138,106,.08)}
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-width:0}
+.card h2{font-size:19px;margin:0 0 4px;font-weight:700}
+.card .sub{color:var(--mut);font-size:13.5px;margin:0 0 14px}
+.grid{display:grid;gap:18px;margin-top:18px}
+.g2{grid-template-columns:1.25fr 1fr}.g2b{grid-template-columns:1fr 1fr}
+@media(max-width:940px){.g2,.g2b{grid-template-columns:1fr}}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+@media(max-width:940px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.kpis{gap:10px}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.kpi:hover{transform:translateY(-2px);border-color:rgba(229,138,106,.5)}
+.kpi.hero-kpi{background:linear-gradient(160deg,rgba(229,138,106,.16),rgba(192,132,252,.07));border-color:rgba(229,138,106,.4)}
+.kpi .l{font-size:12.5px;color:var(--mut);margin:0 0 6px;min-height:2.6em}
+.kpi .v{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1}
+.kpi .d{margin-top:8px;font-size:12.5px;font-family:var(--mono);color:var(--mut)}
+.up-bad,.down-bad{color:var(--bad)}.down-good,.up-good{color:var(--good)}.flat{color:var(--mut)}
+/* controls */
+.ctrl{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--mut);transition:all .15s}
+.chip:hover{color:var(--tx);background:var(--panel2)}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#fff;color:#000;border-color:#fff;font-weight:600}
+.chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.ctrl-label{font-size:12px;color:var(--dim);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;align-self:center;margin-right:4px}
+/* charts */
+svg text{font-family:var(--font)}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--mut);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:9px}
+.brow{display:grid;grid-template-columns:minmax(92px,170px) 1fr 54px;align-items:center;gap:10px;cursor:default;border-radius:10px;padding:3px 6px;margin:0 -6px;transition:background .15s,opacity .2s}
+.brow:hover,.brow:focus-visible{background:var(--panel2)}
+.brow .bl{font-size:13.5px;color:var(--tx);line-height:1.2;overflow-wrap:anywhere}
+.brow .bv{font-family:var(--mono);font-size:13px;text-align:right}
+.btrack{position:relative;height:16px;background:rgba(255,255,255,.04);border-radius:6px}
+.bfill,.bprev{position:absolute;top:0;height:100%;border-radius:6px}
+.bfill{background:linear-gradient(90deg,var(--coral2),var(--coral))}
+.bfill.neg{background:linear-gradient(270deg,#6ee7b7,#34d399)}
+.bfill.violet{background:linear-gradient(90deg,#9b6dd6,var(--violet))}
+.bprev{top:auto;bottom:-5px;height:4px;background:rgba(148,163,184,.55)}
+.bzero{position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.35)}
+.bref{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed rgba(255,255,255,.55)}
+.brow.dim{opacity:.68}
+.brow.sel{background:rgba(229,138,106,.12);outline:1px solid rgba(229,138,106,.5)}
+.bfill{animation:grow .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.reflabel{font-size:12px;color:var(--mut);margin-top:10px;display:flex;align-items:center;gap:8px}
+.reflabel i{display:inline-block;width:0;height:12px;border-left:2px dashed rgba(255,255,255,.55)}
+/* age columns */
+.cols{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;height:270px;align-items:end;padding-top:20px}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;border-radius:12px;padding:0 2px;cursor:default}
+.col:hover,.col:focus-visible{background:var(--panel2)}
+.col .bb{display:flex;align-items:flex-end;gap:5px;flex:1;width:100%;justify-content:center}
+.col .b{width:min(34px,38%);border-radius:8px 8px 3px 3px;position:relative;transform-origin:bottom;animation:growy .7s cubic-bezier(.2,.8,.2,1) both}
+.col .b.cur{background:linear-gradient(0deg,var(--coral2),var(--coral))}
+.col .b.cmp{background:rgba(148,163,184,.45)}
+.col .b em{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-style:normal;font-size:12px;font-family:var(--mono);white-space:nowrap}
+.col .b.cmp em{color:var(--mut)}
+.col .cl{font-size:12.5px;color:var(--mut);margin-top:8px;text-align:center}
+@keyframes growy{from{transform:scaleY(0)}}
+/* detail panel */
+.detail h3{margin:0;font-size:22px}
+.dstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.dstat{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.dstat b{display:block;font-size:20px;font-weight:700}.dstat span{font-size:12px;color:var(--mut)}
+@media(max-width:420px){.dstats{grid-template-columns:repeat(2,1fr)}}
+.empty{color:var(--mut);font-size:14px;border:1px dashed var(--line);border-radius:12px;padding:16px}
+/* table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th,td{padding:10px 12px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#131c31;z-index:1}
+thead th{background:#111a2f;font-weight:600;color:var(--mut);font-size:12.5px;border-bottom:1px solid var(--line);padding:0}
+thead th button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:6px;width:100%;padding:11px 12px;color:var(--mut);font-size:12.5px;font-weight:600}
+thead th:first-child button{justify-content:flex-start}
+thead th button:hover,thead th button:focus-visible{color:var(--tx)}
+thead th[aria-sort] button{color:var(--tx)}
+.arr{opacity:.35;font-size:10px}th[aria-sort] .arr{opacity:1;color:var(--coral)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.05)}
+tbody tr:hover td{background:rgba(255,255,255,.04)}tbody tr:hover th.rowh{background:#18223a!important}
+tbody tr.sel td{background:rgba(229,138,106,.12)}tbody tr.sel th.rowh{background:#2a2237!important}
+td{font-family:var(--mono);font-size:13px}td:first-child{font-family:var(--font);font-size:14px;color:var(--tx)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.small-btn{border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--tx)}
+.small-btn:hover{background:var(--panel2)}
+/* takeaways */
+.take{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.take{grid-template-columns:1fr}}
+.take li{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 16px;font-size:14.5px;border-left:3px solid var(--coral)}
+/* cta + footer */
+.cta{margin-top:26px;border-radius:24px;padding:34px;background:linear-gradient(135deg,rgba(229,138,106,.18),rgba(192,132,252,.10));border:1px solid rgba(229,138,106,.35);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.cta h2{margin:0 0 6px;font-size:clamp(22px,3vw,30px)}.cta p{margin:0;color:var(--mut);max-width:560px}
+.cta .row{display:flex;flex-wrap:wrap;gap:10px}
+.source{margin:26px 0 8px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:18px}
+.source p{margin:0 0 8px}.source a{color:var(--coral)}
+.source .note{color:var(--dim)}
+footer{padding:10px 0 40px;font-size:13px;color:var(--dim)}
+/* tooltip */
+#tip{position:fixed;z-index:100;pointer-events:none;background:#0b1220;border:1px solid rgba(229,138,106,.5);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;box-shadow:0 12px 30px rgba(0,0,0,.5);max-width:260px}
+#tip[hidden]{display:none}#tip b{color:#fff}#tip .k{color:var(--mut)}#tip .m{font-family:var(--mono)}
+.noscript{padding:20px;color:var(--bad)}
+@media(max-width:560px){.wrap{padding:0 14px}.card{padding:16px}.cta{padding:22px}.brow{grid-template-columns:minmax(78px,110px) 1fr 46px}.top .btn.ghost{display:none}.back{font-size:13px;padding:7px 12px}}
+@media(max-width:560px){.cols{gap:4px}.col .b{width:min(28px,40%)}.col .b em{font-size:11px}.col .b.cmp em{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.take li{border-left-color:var(--violet)}
+.gtabs{display:flex;flex-wrap:wrap;gap:6px}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="back" href="/3D-Portfolio/">&larr; Back to portfolio</a>
+  <div style="display:flex;gap:8px">
+    <a class="btn ghost" href="mailto:iedereesfrancis@gmail.com?subject=Dashboard%20project%20enquiry">Hire me</a>
+    <a class="btn primary" href="/3D-Portfolio/contact">Get a free quote</a>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Sample data dashboard &middot; Stats SA CPI</div>
+    <h1>South Africa <span>Inflation</span>, September 2026</h1>
+    <p class="lede">Annual consumer price inflation was <strong>4.5%</strong> in September 2026, up from 4.4% in August, with prices up <strong>0.4%</strong> on the month. <strong>Transport</strong> was the biggest driver, adding 1.5 percentage points. Explore it by category, province and over time.</p>
+    <div class="badges">
+      <span class="badge sample">Sample visualisation</span>
+      <span class="badge">Source: Stats SA &middot; CPI September 2026 (P0141) &middot; released 21 Oct 2026</span>
+      <span class="badge">Headline CPI, all urban areas</span>
+    </div>
+  </header>
+  <noscript><p class="noscript">This dashboard needs JavaScript to draw its charts.</p></noscript>
+
+  <section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+  <section class="grid g2">
+    <div class="card">
+      <h2>Headline inflation over time</h2>
+      <p class="sub">Annual (year-on-year) CPI inflation by month. Hover or tap the chart to read a month.</p>
+      <div class="ctrl" id="trendCtl" role="group" aria-label="Chart view">
+        <span class="ctrl-label">View</span>
+        <button class="chip" data-v="line:all" aria-pressed="true">Since 2022</button>
+        <button class="chip" data-v="line:24" aria-pressed="false">Last 24 months</button>
+        <button class="chip" data-v="years" aria-pressed="false">Compare years</button>
+      </div>
+      <div class="ctrl" id="yearCtl" role="group" aria-label="Years to compare" hidden></div>
+      <div class="chart" id="trend" role="img" aria-label="Line chart of South African headline CPI inflation by month"></div>
+      <div class="legend" id="trendNote"></div>
+      <h3 style="margin:20px 0 4px;font-size:15px">Annual average inflation</h3>
+      <p class="sub" style="margin-bottom:10px">Stats SA annual averages (Table B2).</p>
+      <div class="bars" id="avgBars"></div>
+    </div>
+    <div class="card">
+      <h2>What is driving prices?</h2>
+      <p class="sub">Click a category to see what is inside it.</p>
+      <div class="ctrl" id="catMetric" role="group" aria-label="Category metric">
+        <button class="chip" data-m="c" aria-pressed="true">Contribution (pp)</button>
+        <button class="chip" data-m="a" aria-pressed="false">Annual rate</button>
+        <button class="chip" data-m="m" aria-pressed="false">Monthly change</button>
+        <button class="chip" data-m="w" aria-pressed="false">Basket weight</button>
+        <button class="chip" id="catCmp" aria-pressed="true" style="margin-left:auto">Compare Aug 2026</button>
+      </div>
+      <div class="bars" id="catBars"></div>
+      <div class="reflabel" id="catNote"></div>
+    </div>
+  </section>
+
+  <section class="grid g2b">
+    <div class="card detail" id="catDetail" aria-live="polite"></div>
+    <div class="card">
+      <h2>Prices across South Africa</h2>
+      <p class="sub">Annual CPI inflation, September 2026. The dashed line is headline inflation (4.5%).</p>
+      <div class="ctrl" id="geoTabs" role="tablist" aria-label="Breakdown">
+        <button class="chip" role="tab" data-t="prov" aria-selected="true">Provinces</button>
+        <button class="chip" role="tab" data-t="dec" aria-selected="false">Expenditure deciles</button>
+        <button class="chip" role="tab" data-t="idx" aria-selected="false">Other indices</button>
+      </div>
+      <div class="bars" id="geoBars"></div>
+      <div class="reflabel" id="geoNote"></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Key takeaways</h2>
+      <p class="sub">Generated directly from the figures on this page.</p>
+      <ul class="take" id="take"></ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Data table</h2>
+      <p class="sub">Click a column heading to sort. Selected category is highlighted.</p>
+      <div class="tabs">
+        <div class="ctrl" id="tblTabs" role="tablist" aria-label="Table" style="margin:0">
+          <button class="chip" role="tab" data-t="grp" aria-selected="true">Categories</button>
+          <button class="chip" role="tab" data-t="sub" aria-selected="false">Sub-categories</button>
+          <button class="chip" role="tab" data-t="prov" aria-selected="false">Provinces</button>
+        </div>
+        <button class="small-btn" id="csv" type="button">Download CSV</button>
+      </div>
+      <div class="tablewrap"><table id="tbl"></table></div>
+    </div>
+  </section>
+
+  <section class="cta" aria-label="Contact">
+    <div>
+      <h2>Need a dashboard like this for your business?</h2>
+      <p>I build clear, interactive reports from spreadsheets and CSV exports so the numbers are easy to act on. Based in Cape Town, working with clients anywhere.</p>
+    </div>
+    <div class="row">
+      <a class="btn primary" href="/3D-Portfolio/contact">Get a free quote</a>
+      <a class="btn ghost" href="mailto:iedereesfrancis@gmail.com?subject=Dashboard%20project%20enquiry">Hire me</a>
+      <a class="btn ghost" href="/3D-Portfolio/work">See more work</a>
+    </div>
+  </section>
+
+  <section class="source" aria-label="Source and notes">
+    <p><strong>Source:</strong> Statistics South Africa (Stats SA), <em>Consumer Price Index (CPI), September 2026</em>, Statistical release P0141, released 21 October 2026 (<a href="https://www.statssa.gov.za/publications/P0141/P0141September2026.pdf" target="_blank" rel="noopener">full release</a>). Figures were transcribed from the release's Tables A, B2, C, D and E.</p>
+    <p class="note"><strong>Sample visualisation.</strong> This dashboard is a demonstration of my data-visualisation work. It is not an official Stats SA product; please refer to Stats SA for the authoritative figures. Headline CPI refers to all urban areas; Stats SA reports the CPI for the total country at 4.4% and for rural areas at 3.1%. &ldquo;Contribution&rdquo; is in percentage points of the annual rate. Table C does not list clothing and footwear or furnishings separately, so they have no contribution figure here. &ldquo;Expenditure decile&rdquo; is Stats SA&rsquo;s CPI per expenditure decile. Monthly changes are September 2026 versus August 2026.</p>
+  </section>
+</main>
+<footer><div class="wrap">&copy; 2026 Iederees Francis &middot; Freelance web developer, Cape Town &middot; <a href="/3D-Portfolio/">Portfolio</a></div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script>
+(function(){
+'use strict';
+
+/* ───────── Data (Stats SA CPI September 2026, P0141) ───────── */
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// Table B2: headline CPI year-on-year rates
+var HEAD={
+ 2022:[5.7,5.7,5.9,5.9,6.5,7.4,7.8,7.6,7.5,7.6,7.4,7.2],
+ 2023:[6.9,7.0,7.1,6.8,6.3,5.4,4.7,4.8,5.4,5.9,5.5,5.1],
+ 2024:[5.3,5.6,5.3,5.2,5.2,5.1,4.6,4.4,3.8,2.8,2.9,3.0],
+ 2025:[3.2,3.2,2.7,2.8,2.8,3.0,3.5,3.3,3.4,3.6,3.5,3.6],
+ 2026:[3.5,3.0,3.1,4.0,4.5,5.0,4.3,4.4,4.5]
+};
+var AVG={2022:6.9,2023:6.0,2024:4.4,2025:3.2};
+var YCOL={2022:'#64748b',2023:'#7dd3fc',2024:'#c084fc',2025:'#34d399',2026:'#E58A6A'};
+var TL=[],TV=[];Object.keys(HEAD).forEach(function(y){HEAD[y].forEach(function(v,i){TL.push(MONTHS[i]+' '+y);TV.push(v)})});
+var HEADLINE=4.5;
+// Table E (groups) + Table C (contribution to annual rate, pp: Sep / Aug)
+var GROUPS=[
+ {id:'food',n:'Food & non-alcoholic beverages',w:18.23,a:1.2,m:-0.1,c:0.2,c0:0.2},
+ {id:'alc',n:'Alcohol & tobacco',w:4.64,a:3.6,m:0.1,c:0.2,c0:0.2},
+ {id:'clo',n:'Clothing & footwear',w:3.90,a:1.2,m:0.2,c:null,c0:null},
+ {id:'hou',n:'Housing & utilities',w:24.10,a:5.2,m:0.5,c:1.3,c0:1.3},
+ {id:'fur',n:'Furnishings & household equipment',w:3.33,a:1.2,m:0.4,c:null,c0:null},
+ {id:'hea',n:'Health',w:1.78,a:3.2,m:0.1,c:0.1,c0:0.1},
+ {id:'tra',n:'Transport',w:13.89,a:10.8,m:2.0,c:1.5,c0:1.2},
+ {id:'inf',n:'Information & communication',w:5.47,a:2.1,m:0.0,c:0.1,c0:0.1},
+ {id:'rec',n:'Recreation, sport & culture',w:2.94,a:3.2,m:0.5,c:0.1,c0:0.1},
+ {id:'edu',n:'Education services',w:2.41,a:5.4,m:0.0,c:0.1,c0:0.1},
+ {id:'res',n:'Restaurants & accommodation',w:6.12,a:4.4,m:-0.4,c:0.3,c0:0.3},
+ {id:'ins',n:'Insurance & financial services',w:10.41,a:5.4,m:-0.3,c:0.6,c0:0.6},
+ {id:'per',n:'Personal care & misc. services',w:2.78,a:2.6,m:0.1,c:0.1,c0:0.1}
+];
+var RESIDUAL={n:'Residual',c:-0.1,c0:0.1};
+// Table E sub-categories: [name, weight, annual %, monthly %]
+var SUBS={
+ food:[['Cereal products',4.14,-1.9,0.3],['Meat',5.10,0.7,-0.3],['Fish & other seafood',0.43,8.0,0.8],['Milk, dairy & eggs',1.83,2.4,-0.1],['Oils & fats',0.82,3.0,0.4],['Fruits & nuts',0.62,-4.8,0.1],['Vegetables',1.74,3.5,-1.6],['Sugar, confectionery & desserts',0.92,1.5,-0.1],['Other food',1.24,4.0,0.3],['Non-alcoholic beverages',1.39,4.5,-0.1]],
+ alc:[['Spirits & liqueurs',0.77,0.8,-0.6],['Wine',0.97,1.9,0.3],['Beer',1.77,4.9,0.2],['Tobacco',1.13,4.7,0.4]],
+ clo:[['Clothing',2.85,1.2,0.2],['Footwear',1.05,0.9,0.1]],
+ hou:[['Actual rentals for housing',4.37,3.9,0.8],['Owners’ equivalent rent',11.16,3.8,0.9],['Maintenance & repair',0.64,4.9,0.0],['Water supply & misc. services',3.83,7.4,0.2],['Electricity, gas & other fuels',4.10,7.9,0.0]],
+ fur:[['Furniture, furnishings & carpets',0.53,-1.8,-0.3],['Household textiles, appliances & equipment',0.97,-2.5,-0.4],['Routine household maintenance goods & services',1.83,3.9,0.9]],
+ hea:[['Medicines & health products',0.90,1.8,0.1],['Health services',0.88,4.6,0.1]],
+ tra:[['Purchase of vehicles',5.61,0.9,0.1],['Operation of personal transport equipment',5.28,20.8,4.6],['↳ of which fuel',3.80,27.9,6.2],['Passenger transport services',2.91,12.3,0.6],['Transport services of goods',0.09,6.8,2.6]],
+ inf:[['Information & communication equipment',0.94,-4.8,0.0],['Information & communication services',4.53,3.4,0.0]],
+ rec:[['Recreational goods',0.78,0.3,0.2],['Recreational & cultural services',1.85,4.7,0.4],['Newspapers, books & stationery',0.25,-0.3,1.4],['Package holidays',0.06,5.0,3.4]],
+ edu:[['Primary & secondary',1.41,6.2,0.0],['Tertiary',1.00,4.2,0.0]],
+ res:[['Restaurants (catering services)',4.75,5.7,0.4],['Accommodation services',1.37,0.0,-2.5]],
+ ins:[['Insurance',8.41,5.6,-0.4],['Financial services',2.00,4.8,0.0]],
+ per:[['Personal care',1.40,0.9,0.3],['Other services',1.38,4.4,0.0]]
+};
+// Table A: provinces (annual %, monthly %, weight), expenditure deciles, other indices
+var PROV=[['Western Cape',5.5,0.5,18.06],['Eastern Cape',4.7,0.6,7.65],['Northern Cape',4.0,0.4,1.82],['Free State',4.5,0.5,4.14],['KwaZulu-Natal',4.0,0.3,14.58],['North West',4.1,0.6,5.38],['Gauteng',4.3,0.4,35.87],['Mpumalanga',4.0,0.4,6.41],['Limpopo',3.0,0.2,6.09]];
+var DEC=[[3.3,0.3,0.71],[3.1,0.2,1.31],[3.2,0.3,1.85],[3.5,0.4,2.54],[3.6,0.4,3.30],[3.8,0.4,4.42],[3.9,0.4,6.23],[4.3,0.4,8.89],[4.7,0.5,15.03],[4.8,0.4,55.72]];
+var IDX=[['Administered prices',13.0,1.9,12.90],['Non-durable goods',5.6,0.6,34.87],['Excl. food & non-alc. beverages',5.3,0.6,81.77],['Services',4.9,0.3,51.63],['Pensioners',4.7,0.4,null],['All goods',4.1,0.6,48.37],['Excl. food, fuel & energy',4.0,0.2,74.53],['Total country (headline, all areas)',4.4,0.4,100.0],['Excl. administered prices',3.3,0.2,87.10],['Trimmed mean',3.2,0.2,null],['Rural areas',3.1,0.3,11.44],['Semi-durable goods',0.5,0.0,5.84],['Durable goods',-0.3,0.0,7.66]];
+/* ───────── Helpers ───────── */
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function f1(v){return v.toFixed(1)}
+function sgn(v,u){var s=v>0?'+':(v<0?'−':'');return s+Math.abs(v).toFixed(1)+(u||'')}
+function sgnI(v){return (v>0?'+':(v<0?'−':''))+Math.abs(v).toLocaleString('en-ZA').replace(/\s/g,' ')}
+function fmtK(v){return v.toLocaleString('en-ZA').replace(/\u00a0/g,' ')}
+function round1(v){return Math.round(v*10)/10}
+function setPressed(group,attr,val){$$('[data-'+attr+']',group).forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset[attr]===val))})}
+
+/* tooltip */
+var tip=$('#tip');
+function placeTip(x,y){var w=tip.offsetWidth,h=tip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;var l=x+16,t=y+16;if(l+w>vw-8)l=x-w-16;if(l<8)l=8;if(t+h>vh-8)t=y-h-16;if(t<8)t=8;tip.style.left=l+'px';tip.style.top=t+'px'}
+function moveTip(e){var t=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(!t){tip.hidden=true;return}tip.innerHTML=t.getAttribute('data-tip');tip.hidden=false;placeTip(e.clientX,e.clientY)}
+document.addEventListener('pointermove',moveTip);document.addEventListener('pointerdown',moveTip);
+document.addEventListener('pointerleave',function(){tip.hidden=true});
+window.addEventListener('scroll',function(){tip.hidden=true},{passive:true});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(!t||e.target.tagName==='rect')return;tip.innerHTML=t.getAttribute('data-tip');tip.hidden=false;var r=t.getBoundingClientRect();placeTip(r.left+r.width/2-20,r.top+r.height/2-10)});
+document.addEventListener('focusout',function(){tip.hidden=true});
+
+/* ───────── Line chart ───────── */
+function niceStep(raw){var p=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/p;return (n<=1?1:n<=2?2:n<=5?5:10)*p}
+function drawLine(host,cfg){
+  var W=Math.max(host.clientWidth,260),H=cfg.height||(W<520?250:330),m={l:40,r:16,t:16,b:30};
+  var iw=W-m.l-m.r,ih=H-m.t-m.b,n=cfg.labels.length;
+  var vals=[];cfg.series.forEach(function(s){s.values.forEach(function(v){if(v!=null)vals.push(v)})});
+  var step=niceStep((Math.max.apply(null,vals)-Math.min.apply(null,vals)+2)/4);
+  var lo=Math.floor((Math.min.apply(null,vals)-0.5)/step)*step,hi=Math.ceil((Math.max.apply(null,vals)+0.5)/step)*step;
+  var x=function(i){return m.l+(n===1?iw/2:i*iw/(n-1))},y=function(v){return m.t+ih-(v-lo)/(hi-lo)*ih};
+  var g='',id='g'+Math.random().toString(36).slice(2,7);
+  for(var t=lo;t<=hi+1e-9;t+=step){g+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(t)+'" y2="'+y(t)+'" stroke="rgba(255,255,255,.07)"/><text x="'+(m.l-8)+'" y="'+(y(t)+4)+'" text-anchor="end" fill="#64748b" font-size="11">'+Math.round(t*10)/10+'%</text>'}
+  var k=Math.max(1,Math.ceil(n/Math.max(2,Math.floor(iw/62))));
+  for(var i=n-1;i>=0;i-=k){var lab=cfg.labels[i];g+='<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="'+(i===n-1&&k>1?'end':'middle')+'" fill="#64748b" font-size="11">'+esc(cfg.short?cfg.short(lab):lab)+'</text>'}
+  var defs='<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+cfg.series[0].color+'" stop-opacity=".30"/><stop offset="1" stop-color="'+cfg.series[0].color+'" stop-opacity="0"/></linearGradient></defs>';
+  var paths='';
+  cfg.series.forEach(function(s,si){
+    var d='';s.values.forEach(function(v,i){if(v==null)return;d+=(d?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)});
+    if(si===0&&!cfg.noArea){var first=s.values.findIndex(function(v){return v!=null});paths+='<path d="'+d+'L'+x(n-1)+' '+y(lo)+'L'+x(first)+' '+y(lo)+'Z" fill="url(#'+id+')"/>'}
+    paths+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"'+(s.dash?' stroke-dasharray="5 5"':'')+'/>';
+    var last=s.values.length-1;while(last>0&&s.values[last]==null)last--;
+    paths+='<circle cx="'+x(last)+'" cy="'+y(s.values[last])+'" r="4.5" fill="'+s.color+'" stroke="#0F172A" stroke-width="2"/>';
+    var below=last>0&&s.values[last-1]!=null&&s.values[last-1]>s.values[last];paths+='<text x="'+(x(last)-8)+'" y="'+(y(s.values[last])+(below?20:-10))+'" text-anchor="end" fill="'+s.color+'" font-size="12.5" font-weight="700">'+f1(s.values[last])+'%</text>';
+  });
+  host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" aria-hidden="true">'+defs+g+paths+'<line class="hl" x1="0" x2="0" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="rgba(255,255,255,.45)" stroke-dasharray="3 4" style="display:none"/><g class="hd"></g><rect class="ov" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent" data-tip=""/></svg>';
+  var svg=$('svg',host),ov=$('.ov',svg),hl=$('.hl',svg),hd=$('.hd',svg);
+  function at(e){var r=svg.getBoundingClientRect(),px=(e.clientX-r.left)*(W/r.width);var i=Math.round((px-m.l)/iw*(n-1));i=Math.max(0,Math.min(n-1,i));
+    hl.style.display='';hl.setAttribute('x1',x(i));hl.setAttribute('x2',x(i));
+    hd.innerHTML=cfg.series.map(function(s){return s.values[i]==null?'':'<circle cx="'+x(i)+'" cy="'+y(s.values[i])+'" r="5" fill="'+s.color+'" stroke="#fff" stroke-width="1.5"/>'}).join('');
+    var h='<b>'+esc(cfg.labels[i])+'</b>';cfg.series.forEach(function(s){if(s.values[i]!=null)h+='<br><span style="color:'+s.color+'">●</span> <span class=k>'+esc(s.name)+':</span> <span class=m>'+f1(s.values[i])+'%</span>'});
+    ov.setAttribute('data-tip',h)}
+  ov.addEventListener('pointermove',at);ov.addEventListener('pointerdown',at);
+  ov.addEventListener('pointerleave',function(){hl.style.display='none';hd.innerHTML=''});
+  host.setAttribute('aria-label',cfg.aria||'Line chart');
+}
+
+/* ───────── Generic horizontal bars ───────── */
+function renderBars(host,items,o){
+  o=o||{};
+  var all=items.map(function(i){return i.v}).concat(o.cmp?items.map(function(i){return i.p}).filter(function(v){return v!=null}):[]);
+  var mn=Math.min(0,Math.min.apply(null,all)),mx=Math.max(0,Math.max.apply(null,all));
+  if(o.ref!=null){mx=Math.max(mx,o.ref);mn=Math.min(mn,o.ref)}
+  var span=(mx-mn)||1;mx=mx+span*0.04;if(mn<0)mn=mn-span*0.04;span=mx-mn;
+  var pos=function(v){return (v-mn)/span*100};
+  host.innerHTML=items.map(function(it,idx){
+    var l=pos(Math.min(0,it.v)),w=Math.abs(it.v)/span*100,neg=it.v<0&&o.negGood;
+    var fill='<i class="bfill'+(neg?' neg':(o.cls?' '+o.cls:''))+'" style="left:'+l+'%;width:'+w+'%;transform-origin:'+(it.v<0?'right':'left')+';animation-delay:'+(idx*35)+'ms"></i>';
+    var prev='';if(o.cmp&&it.p!=null){prev='<i class="bprev" style="left:'+pos(Math.min(0,it.p))+'%;width:'+(Math.abs(it.p)/span*100)+'%"></i>'}
+    var zero=mn<0?'<i class="bzero" style="left:'+pos(0)+'%"></i>':'';
+    var ref=o.ref!=null?'<i class="bref" style="left:'+pos(o.ref)+'%"></i>':'';
+    var cls='brow'+(o.sel&&o.sel===it.id?' sel':(o.sel?' dim':''));
+    return '<div class="'+cls+'" '+(it.id?'data-id="'+esc(it.id)+'" ':'')+'tabindex="0" role="'+(it.id?'button':'img')+'" aria-label="'+esc(it.n+': '+o.fmt(it.v))+'" data-tip="'+esc(it.tip||('<b>'+it.n+'</b><br>'+o.fmt(it.v)))+'"><span class="bl">'+esc(it.n)+'</span><div class="btrack">'+zero+prev+fill+ref+'</div><span class="bv">'+o.fmt(it.v)+'</span></div>'
+  }).join('');
+}
+
+
+/* ───────── KPI cards ───────── */
+(function(){
+  var cards=[
+    {l:'Headline CPI inflation (annual)',v:'4.5%',d:'▲ 0.1 pp vs Aug 2026',c:'up-bad',hero:1,t:'All urban areas. August 2026: 4.4%. July 2026: 4.3%. September 2025: 3.4%.'},
+    {l:'Monthly change in CPI',v:'+0.4%',d:'Sep vs Aug 2026',c:'flat',t:'Transport contributed 0.3 pp and housing and utilities 0.1 pp of the 0.4% monthly rise.'},
+    {l:'Transport: contribution to annual rate',v:'1.5 pp',d:'▲ from 1.2 pp in Aug',c:'up-bad',t:'Transport is the largest contributor to annual inflation, ahead of housing and utilities (1.3 pp) and insurance and financial services (0.6 pp).'},
+    {l:'Transport prices (annual)',v:'10.8%',d:'+2.0% on the month',c:'up-bad',t:'Basket weight 13.89%. Operation of personal transport equipment 20.8%; passenger transport services 12.3%.'},
+    {l:'Fuel prices (annual)',v:'27.9%',d:'+6.2% on the month',c:'up-bad',t:'Fuel has a 3.80% basket weight and sits inside the transport group.'},
+    {l:'Goods inflation',v:'4.1%',d:'▲ from 3.3% in Aug',c:'up-bad',t:'CPI for all goods, annual rate. Non-durable goods 5.6%, semi-durable 0.5%, durable −0.3%.'},
+    {l:'Services inflation',v:'4.9%',d:'▼ from 5.1% in Aug',c:'down-good',t:'CPI for services, annual rate.'},
+    {l:'Excluding food, fuel & energy',v:'4.0%',d:'Annual rate, Sep 2026',c:'flat',t:'CPI excluding food and non-alcoholic beverages, fuel and energy (74.53% of the basket). The trimmed mean was 3.2%.'}
+  ];
+  $('#kpis').innerHTML=cards.map(function(k){return '<div class="kpi'+(k.hero?' hero-kpi':'')+'" tabindex="0" data-tip="'+esc('<b>'+k.l+'</b><br><span class=k>'+k.t+'</span>')+'"><p class="l">'+k.l+'</p><div class="v">'+k.v+'</div><div class="d '+k.c+'">'+k.d+'</div></div>'}).join('');
+})();
+
+/* ───────── Trend ───────── */
+var tr={mode:'line',range:'all',years:{2023:true,2024:true,2025:true,2026:true,2022:false}};
+function drawYearChips(){
+  $('#yearCtl').innerHTML='<span class="ctrl-label">Years</span>'+[2022,2023,2024,2025,2026].map(function(y){return '<button class="chip" data-y="'+y+'" aria-pressed="'+tr.years[y]+'"><span class="dot" style="background:'+YCOL[y]+'"></span>'+y+'</button>'}).join('');
+}
+function drawTrend(){
+  var host=$('#trend'),note=$('#trendNote');
+  if(tr.mode==='line'){
+    var from=tr.range==='24'?TL.length-24:0;
+    drawLine(host,{labels:TL.slice(from),series:[{name:'Headline CPI inflation',color:'#E58A6A',values:TV.slice(from)}],short:function(l){return l.replace(/ 20(\d\d)/," ’$1")},aria:'Line chart of headline CPI inflation by month, '+TL[from]+' to Sep 2026. Latest 4.5%.'});
+    note.innerHTML='<span>Latest: Sep 2026 = 4.5% (Aug 4.4%, Jul 4.3%)</span>';
+  }else{
+    var ys=Object.keys(tr.years).filter(function(y){return tr.years[y]}).sort();
+    if(!ys.length){tr.years[2026]=true;ys=['2026'];drawYearChips()}
+    drawLine(host,{labels:MONTHS.map(function(m){return m}),noArea:true,series:ys.map(function(y){return {name:y,color:YCOL[y],values:MONTHS.map(function(m,i){return HEAD[y][i]==null?null:HEAD[y][i]})}}),aria:'Line chart comparing monthly headline CPI inflation across years'});
+    note.innerHTML='<span>Each line is one calendar year, month by month.</span>';
+  }
+}
+$('#trendCtl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var v=b.dataset.v.split(':');tr.mode=v[0];if(v[1])tr.range=v[1];
+  $$('[data-v]',this).forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});$('#yearCtl').hidden=tr.mode!=='years';drawTrend()});
+$('#yearCtl').addEventListener('click',function(e){var b=e.target.closest('button[data-y]');if(!b)return;tr.years[b.dataset.y]=!tr.years[b.dataset.y];b.setAttribute('aria-pressed',String(tr.years[b.dataset.y]));drawTrend()});
+
+/* ───────── Categories ───────── */
+var cat={m:'c',cmp:true,sel:'tra'};
+var MLAB={c:'Contribution to the annual rate (percentage points)',a:'Annual inflation rate',m:'Monthly change',w:'Weight in the CPI basket'};
+function groupTip(g){return '<b>'+g.n+'</b><br><span class=k>Annual rate:</span> <span class=m>'+f1(g.a)+'%</span><br><span class=k>Monthly change:</span> <span class=m>'+sgn(g.m,'%')+'</span><br><span class=k>Basket weight:</span> <span class=m>'+g.w.toFixed(2)+'%</span><br><span class=k>Contribution (Sep / Aug):</span> <span class=m>'+(g.c==null?'n/a':f1(g.c)+' / '+f1(g.c0)+' pp')+'</span><br><span class=k>Click for sub-categories</span>'}
+function drawCats(){
+  var m=cat.m,items=[];
+  GROUPS.forEach(function(g){var v=m==='c'?g.c:m==='a'?g.a:m==='m'?g.m:g.w;if(v==null)return;items.push({id:g.id,n:g.n,v:v,p:m==='c'?g.c0:null,tip:groupTip(g)})});
+  if(m==='c')items.push({id:'',n:RESIDUAL.n,v:RESIDUAL.c,p:RESIDUAL.c0,tip:'<b>Residual</b><br><span class=k>Sep 2026:</span> <span class=m>'+sgn(RESIDUAL.c,' pp')+'</span><br><span class=k>Aug 2026:</span> <span class=m>'+sgn(RESIDUAL.c0,' pp')+'</span>'});
+  items.sort(function(a,b){return b.v-a.v});
+  var fmt=m==='c'?function(v){return (v<0?'−':'')+Math.abs(v).toFixed(1)}:m==='m'?function(v){return sgn(v,'%')}:function(v){return (m==='w'?v.toFixed(1):f1(v))+'%'};
+  renderBars($('#catBars'),items,{fmt:fmt,cmp:m==='c'&&cat.cmp,sel:cat.sel,negGood:m!=='w',ref:m==='a'?HEADLINE:undefined});
+  $('#catNote').innerHTML=(m==='c'?'<span>Contributions add up to the 4.5% headline rate. '+(cat.cmp?'Grey line = August 2026. ':'')+'Clothing and furnishings are not listed separately in Table C.</span>':m==='a'?'<i></i><span>Dashed line = headline inflation of 4.5%.</span>':m==='m'?'<span>September 2026 versus August 2026. Green = prices fell.</span>':'<span>Share of the CPI basket, in percent. The 13 groups add up to 100%.</span>');
+  $('#catCmp').style.visibility=m==='c'?'visible':'hidden';
+}
+function selectCat(id){if(!id)return;cat.sel=cat.sel===id?cat.sel:id;drawCats();drawCatDetail();drawTable()}
+$('#catMetric').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.id==='catCmp'){cat.cmp=!cat.cmp;b.setAttribute('aria-pressed',String(cat.cmp))}else if(b.dataset.m){cat.m=b.dataset.m;setPressed(this,'m',b.dataset.m)}drawCats()});
+$('#catBars').addEventListener('click',function(e){var r=e.target.closest('.brow');if(r&&r.dataset.id)selectCat(r.dataset.id)});
+$('#catBars').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){var r=e.target.closest('.brow');if(r&&r.dataset.id){e.preventDefault();selectCat(r.dataset.id)}}});
+
+function drawCatDetail(){
+  var g=GROUPS.filter(function(x){return x.id===cat.sel})[0],host=$('#catDetail');
+  var chips=GROUPS.map(function(x){return '<button class="chip" data-id="'+x.id+'" aria-pressed="'+(x.id===g.id)+'">'+esc(x.n.replace(' & non-alcoholic beverages',' & NAB').replace(' & household equipment','').replace(' services','').replace('Personal care & misc.','Personal care'))+'</button>'}).join('');
+  var items=SUBS[g.id].map(function(s){return {n:s[0],v:s[2],tip:'<b>'+s[0]+'</b><br><span class=k>Annual rate:</span> <span class=m>'+f1(s[2])+'%</span><br><span class=k>Monthly change:</span> <span class=m>'+sgn(s[3],'%')+'</span><br><span class=k>Basket weight:</span> <span class=m>'+s[1].toFixed(2)+'%</span>'}});
+  host.innerHTML='<h2>Category detail</h2><h3>'+esc(g.n)+'</h3><div class="ctrl" id="catChips" role="group" aria-label="Choose category" style="margin:12px 0">'+chips+'</div>'+
+   '<div class="dstats"><div class="dstat"><b>'+f1(g.a)+'%</b><span>Annual rate</span></div>'+
+   '<div class="dstat"><b class="'+(g.m>0?'up-bad':g.m<0?'down-good':'flat')+'">'+sgn(g.m,'%')+'</b><span>Monthly change</span></div>'+
+   '<div class="dstat"><b>'+g.w.toFixed(2)+'%</b><span>Basket weight</span></div>'+
+   '<div class="dstat"><b>'+(g.c==null?'n/a':f1(g.c)+' pp')+'</b><span>Contribution (Sep)</span></div>'+
+   '<div class="dstat"><b>'+(g.c0==null?'n/a':f1(g.c0)+' pp')+'</b><span>Contribution (Aug)</span></div>'+
+   '<div class="dstat"><b>'+SUBS[g.id].length+'</b><span>Sub-categories</span></div></div>'+
+   '<p class="sub" style="margin:4px 0 10px">Annual inflation by sub-category. Dashed line = headline 4.5%.</p><div class="bars" id="subBars"></div>';
+  renderBars($('#subBars'),items,{fmt:function(v){return (v<0?'−':'')+Math.abs(v).toFixed(1)+'%'},ref:HEADLINE,negGood:true});
+}
+$('#catDetail').addEventListener('click',function(e){var b=e.target.closest('button[data-id]');if(b)selectCat(b.dataset.id)});
+
+/* ───────── Geography ───────── */
+var geo={t:'prov'};
+function drawGeo(){
+  var rows,note;
+  if(geo.t==='prov'){rows=PROV.map(function(p){return {n:p[0],v:p[1],tip:'<b>'+p[0]+'</b><br><span class=k>Annual:</span> <span class=m>'+f1(p[1])+'%</span><br><span class=k>Monthly:</span> <span class=m>'+sgn(p[2],'%')+'</span><br><span class=k>CPI weight:</span> <span class=m>'+p[3].toFixed(2)+'%</span>'}});note='CPI per province. Weight = province share of the national CPI.'}
+  else if(geo.t==='dec'){rows=DEC.map(function(d,i){return {n:'Decile '+(i+1),v:d[0],tip:'<b>Expenditure decile '+(i+1)+'</b><br><span class=k>Annual:</span> <span class=m>'+f1(d[0])+'%</span><br><span class=k>Monthly:</span> <span class=m>'+sgn(d[1],'%')+'</span><br><span class=k>Weight:</span> <span class=m>'+d[2].toFixed(2)+'%</span>'}});note='CPI per expenditure decile (Stats SA). Decile 10 carries 55.7% of the CPI weight.'}
+  else{rows=IDX.map(function(d){return {n:d[0],v:d[1],tip:'<b>'+d[0]+'</b><br><span class=k>Annual:</span> <span class=m>'+(d[1]<0?'−':'')+Math.abs(d[1]).toFixed(1)+'%</span><br><span class=k>Monthly:</span> <span class=m>'+sgn(d[2],'%')+'</span>'+(d[3]!=null?'<br><span class=k>Weight:</span> <span class=m>'+d[3].toFixed(2)+'%</span>':'')}});note='Selected analytical and special indices from Stats SA Table A.'}
+  if(geo.t!=='dec')rows.sort(function(a,b){return b.v-a.v});
+  renderBars($('#geoBars'),rows,{fmt:function(v){return (v<0?'−':'')+Math.abs(v).toFixed(1)+'%'},ref:HEADLINE,negGood:true});
+  $('#geoNote').innerHTML='<i></i><span>'+note+'</span>';
+}
+$('#geoTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;geo.t=b.dataset.t;$$('[data-t]',this).forEach(function(x){x.setAttribute('aria-selected',String(x===b))});drawGeo()});
+
+/* ───────── Takeaways ───────── */
+(function(){
+  var g=function(id){return GROUPS.filter(function(x){return x.id===id})[0]};
+  var hiP=PROV.slice().sort(function(a,b){return b[1]-a[1]})[0],loP=PROV.slice().sort(function(a,b){return a[1]-b[1]})[0];
+  var li=[
+   'Headline inflation was <b>4.5%</b> in September 2026, up from 4.4% in August. Prices rose <b>0.4%</b> month on month.',
+   '<b>Transport</b> (10.8% annual) added <b>1.5 pp</b>, up from 1.2 pp in August, with fuel up <b>27.9%</b> on the year and <b>6.2%</b> on the month.',
+   'Housing and utilities added <b>1.3 pp</b> (5.2% annual) and insurance and financial services <b>0.6 pp</b> (5.4%).',
+   'Food and non-alcoholic beverages rose just <b>1.2%</b> on the year and fell 0.1% on the month, contributing 0.2 pp.',
+   'Goods inflation rose to <b>4.1%</b> from 3.3%, while services eased to <b>4.9%</b> from 5.1%.',
+   '<b>'+hiP[0]+'</b> had the highest provincial rate at <b>'+f1(hiP[1])+'%</b> and <b>'+loP[0]+'</b> the lowest at <b>'+f1(loP[1])+'%</b>. The top expenditure decile saw 4.8% against 3.3% for decile 1.'
+  ];
+  $('#take').innerHTML=li.map(function(t){return '<li>'+t+'</li>'}).join('');
+})();
+
+/* ───────── Sortable table ───────── */
+var tblState={t:'grp',key:null,dir:'desc'};
+var pct=function(v){return v==null?'–':(v<0?'−':'')+Math.abs(v).toFixed(1)+'%'};
+var TBL={
+ grp:{cols:[{k:'n',l:'Category',s:'str'},{k:'w',l:'Basket weight',f:function(v){return v.toFixed(2)+'%'}},{k:'a',l:'Annual rate',f:pct},{k:'m',l:'Monthly change',f:function(v){return sgn(v,'%')}},{k:'c',l:'Contribution Sep (pp)',f:function(v){return v==null?'–':(v<0?'−':'')+Math.abs(v).toFixed(1)}},{k:'c0',l:'Contribution Aug (pp)',f:function(v){return v==null?'–':(v<0?'−':'')+Math.abs(v).toFixed(1)}}],def:'a',
+   rows:function(){return GROUPS.map(function(g){return {id:g.id,n:g.n,w:g.w,a:g.a,m:g.m,c:g.c,c0:g.c0}})}},
+ sub:{cols:[{k:'n',l:'Sub-category',s:'str'},{k:'g',l:'Category',s:'str'},{k:'w',l:'Basket weight',f:function(v){return v.toFixed(2)+'%'}},{k:'a',l:'Annual rate',f:pct},{k:'m',l:'Monthly change',f:function(v){return sgn(v,'%')}}],def:'a',
+   rows:function(){var out=[];GROUPS.forEach(function(g){SUBS[g.id].forEach(function(s){out.push({id:g.id,n:s[0],g:g.n,w:s[1],a:s[2],m:s[3]})})});return out}},
+ prov:{cols:[{k:'n',l:'Province',s:'str'},{k:'w',l:'CPI weight',f:function(v){return v.toFixed(2)+'%'}},{k:'a',l:'Annual rate',f:pct},{k:'m',l:'Monthly change',f:function(v){return sgn(v,'%')}}],def:'a',
+   rows:function(){return PROV.map(function(p){return {n:p[0],w:p[3],a:p[1],m:p[2]}})}}
+};
+function currentRows(){var cfg=TBL[tblState.t],rows=cfg.rows(),key=tblState.key||cfg.def,col=cfg.cols.filter(function(c){return c.k===key})[0],dir=tblState.dir==='asc'?1:-1;
+  rows.sort(function(a,b){var x=a[key],y=b[key];if(x==null)return 1;if(y==null)return -1;return (col.s==='str'?String(x).localeCompare(String(y)):(x-y))*dir});return rows}
+function drawTable(){
+  var cfg=TBL[tblState.t],rows=currentRows(),key=tblState.key||cfg.def;
+  var head='<thead><tr>'+cfg.cols.map(function(c){var on=c.k===key;return '<th scope="col"'+(on?' aria-sort="'+(tblState.dir==='asc'?'ascending':'descending')+'"':'')+'><button type="button" data-k="'+c.k+'">'+c.l+' <span class="arr">'+(on?(tblState.dir==='asc'?'▲':'▼'):'↕')+'</span></button></th>'}).join('')+'</tr></thead>';
+  var body='<tbody>'+rows.map(function(r){return '<tr'+(r.id&&r.id===cat.sel&&tblState.t!=='prov'?' class="sel"':'')+'>'+cfg.cols.map(function(c,i){var v=r[c.k];var s=c.s==='str'?esc(v):c.f(v);var cls='';if((c.k==='m'||c.k==='a')&&v!=null){cls=v>0?' class="up-bad"':v<0?' class="down-good"':''}if(c.k==='a'||c.k==='m'){}
+      return i===0?'<th scope="row" class="rowh" style="text-align:left;font-weight:500;position:sticky;left:0;background:#131c31;z-index:1;padding:10px 12px">'+s+'</th>':'<td'+(c.s==='str'?' style="text-align:right;font-family:var(--font)"':'')+cls+'>'+s+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
+  $('#tbl').innerHTML=head+body;
+}
+$('#tbl').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(!b)return;var k=b.dataset.k,cur=tblState.key||TBL[tblState.t].def;
+  if(k===cur)tblState.dir=tblState.dir==='asc'?'desc':'asc';else{tblState.key=k;tblState.dir=(k==='n'||k==='g')?'asc':'desc'}drawTable()});
+$('#tblTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tblState={t:b.dataset.t,key:null,dir:'desc'};$$('[data-t]',this).forEach(function(x){x.setAttribute('aria-selected',String(x===b))});drawTable()});
+$('#csv').addEventListener('click',function(){
+  var cfg=TBL[tblState.t],rows=currentRows();
+  var lines=[cfg.cols.map(function(c){return '"'+c.l.replace(/"/g,'""')+'"'}).join(',')].concat(rows.map(function(r){return cfg.cols.map(function(c){var v=r[c.k];return c.s==='str'?'"'+String(v).replace(/"/g,'""')+'"':(v==null?'':v)}).join(',')}));
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'}));a.download='sa-inflation-sep-2026-'+tblState.t+'.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+
+/* ───────── Init ───────── */
+drawYearChips();drawTrend();renderBars($('#avgBars'),[2022,2023,2024,2025].map(function(y){return {n:String(y),v:AVG[y]}}),{fmt:function(v){return f1(v)+'%'},cls:'violet'});drawCats();drawCatDetail();drawGeo();drawTable();
+var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(drawTrend,150)});
+})();
+</script>
+</body>
+</html>
