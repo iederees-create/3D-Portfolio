@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node generate_meta_tags.js",
+    "build": "tsc && vite build && node generate_meta_tags.js && node scripts/decode-social.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
