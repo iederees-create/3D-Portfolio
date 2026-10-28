@@ -4,7 +4,7 @@
 
 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
 transforming...
-[32m✓[39m 2704 modules transformed.
+[32m✓[39m 2705 modules transformed.
 rendering chunks...
 [1m[33m[plugin:vite:reporter][39m[22m [33m[plugin vite:reporter] 
 (!) /home/runner/work/3D-Portfolio/3D-Portfolio/src/pages/WorkPage.tsx is dynamically imported by /home/runner/work/3D-Portfolio/3D-Portfolio/src/App.tsx but also statically imported by /home/runner/work/3D-Portfolio/3D-Portfolio/src/pages/CredentialsPage.tsx, /home/runner/work/3D-Portfolio/3D-Portfolio/src/pages/HomePage.tsx, /home/runner/work/3D-Portfolio/3D-Portfolio/src/pages/ProjectPage.tsx, dynamic import will not move module into another chunk.
@@ -13,53 +13,53 @@ computing gzip size...
 [2mdist/[22m[32mregisterSW.js                               [39m[1m[2m    0.16 kB[22m[1m[22m
 [2mdist/[22m[32mmanifest.webmanifest                        [39m[1m[2m    0.36 kB[22m[1m[22m
 [2mdist/[22m[32mindex.html                                  [39m[1m[2m    2.79 kB[22m[1m[22m[2m │ gzip:   1.34 kB[22m
-[2mdist/[22m[2massets/[22m[35mindex-Bhmwy5xu.css                   [39m[1m[2m   68.35 kB[22m[1m[22m[2m │ gzip:  12.89 kB[22m
-[2mdist/[22m[2massets/[22m[36mconstants--w1CZQjO.js                [39m[1m[2m    0.11 kB[22m[1m[22m[2m │ gzip:   0.13 kB[22m
+[2mdist/[22m[2massets/[22m[35mindex-8YazAAR1.css                   [39m[1m[2m   68.62 kB[22m[1m[22m[2m │ gzip:  12.89 kB[22m
+[2mdist/[22m[2massets/[22m[36mconstants-QMFdZ109.js                [39m[1m[2m    0.11 kB[22m[1m[22m[2m │ gzip:   0.13 kB[22m
 [2mdist/[22m[2massets/[22m[36mextends-CF3RwP-h.js                  [39m[1m[2m    0.23 kB[22m[1m[22m[2m │ gzip:   0.19 kB[22m
-[2mdist/[22m[2massets/[22m[36mcircle-check-C4VS0Rgw.js             [39m[1m[2m    0.34 kB[22m[1m[22m[2m │ gzip:   0.27 kB[22m
-[2mdist/[22m[2massets/[22m[36mclock-BOQfabgK.js                    [39m[1m[2m    0.35 kB[22m[1m[22m[2m │ gzip:   0.27 kB[22m
-[2mdist/[22m[2massets/[22m[36mterminal-Bg0vtDcd.js                 [39m[1m[2m    0.36 kB[22m[1m[22m[2m │ gzip:   0.28 kB[22m
-[2mdist/[22m[2massets/[22m[36mlock-BnalY6VC.js                     [39m[1m[2m    0.38 kB[22m[1m[22m[2m │ gzip:   0.29 kB[22m
-[2mdist/[22m[2massets/[22m[36mtarget-BFdxTX1d.js                   [39m[1m[2m    0.39 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
-[2mdist/[22m[2massets/[22m[36museThemeAccent-BOcdonpb.js           [39m[1m[2m    0.40 kB[22m[1m[22m[2m │ gzip:   0.28 kB[22m
-[2mdist/[22m[2massets/[22m[36mcalendar-BIHGhR6k.js                 [39m[1m[2m    0.43 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
-[2mdist/[22m[2massets/[22m[36mdownload-G8EuPz68.js                 [39m[1m[2m    0.43 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
-[2mdist/[22m[2massets/[22m[36mvolume-2-B63s3a1J.js                 [39m[1m[2m    0.44 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
-[2mdist/[22m[2massets/[22m[36mclipboard-check-BRVqsjcH.js          [39m[1m[2m    0.47 kB[22m[1m[22m[2m │ gzip:   0.33 kB[22m
-[2mdist/[22m[2massets/[22m[36musers-BIS7DkKZ.js                    [39m[1m[2m    0.47 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
-[2mdist/[22m[2massets/[22m[36mrefresh-cw-Bl1sGSxN.js               [39m[1m[2m    0.85 kB[22m[1m[22m[2m │ gzip:   0.42 kB[22m
-[2mdist/[22m[2massets/[22m[36mFloat-Bw0RkQVX.js                    [39m[1m[2m    0.88 kB[22m[1m[22m[2m │ gzip:   0.52 kB[22m
-[2mdist/[22m[2massets/[22m[36mBackdropParticles-BRKGzWJQ.js        [39m[1m[2m    1.12 kB[22m[1m[22m[2m │ gzip:   0.67 kB[22m
-[2mdist/[22m[2massets/[22m[36mindex-BzICYivg.js                    [39m[1m[2m    2.07 kB[22m[1m[22m[2m │ gzip:   1.06 kB[22m
-[2mdist/[22m[2massets/[22m[36mTerminalEasterEgg-Dopkfti8.js        [39m[1m[2m    2.67 kB[22m[1m[22m[2m │ gzip:   1.33 kB[22m
-[2mdist/[22m[2massets/[22m[36mAudioNarrationPlayer-Dkz6ewrx.js     [39m[1m[2m    2.82 kB[22m[1m[22m[2m │ gzip:   1.20 kB[22m
-[2mdist/[22m[2massets/[22m[36mBlogIndexPage-B4uqqGZ0.js            [39m[1m[2m    3.20 kB[22m[1m[22m[2m │ gzip:   1.30 kB[22m
-[2mdist/[22m[2massets/[22m[36mArticlePage-BWTTaj0P.js              [39m[1m[2m    8.49 kB[22m[1m[22m[2m │ gzip:   2.86 kB[22m
-[2mdist/[22m[2massets/[22m[36mQAOperationsReviewPage-BSctnnWw.js   [39m[1m[2m    9.54 kB[22m[1m[22m[2m │ gzip:   3.41 kB[22m
-[2mdist/[22m[2massets/[22m[36mProjectPage-CTn0qE5W.js              [39m[1m[2m   15.08 kB[22m[1m[22m[2m │ gzip:   4.99 kB[22m
-[2mdist/[22m[2massets/[22m[36mContactPage-Be1Veii6.js              [39m[1m[2m   16.94 kB[22m[1m[22m[2m │ gzip:   4.95 kB[22m
-[2mdist/[22m[2massets/[22m[36mCustomCursor-DaWO5rCH.js             [39m[1m[2m   18.24 kB[22m[1m[22m[2m │ gzip:   5.77 kB[22m
-[2mdist/[22m[2massets/[22m[36mLeadResearchProjectPage-DdIXlIVr.js  [39m[1m[2m   20.50 kB[22m[1m[22m[2m │ gzip:   6.50 kB[22m
-[2mdist/[22m[2massets/[22m[36mHeroScene-DM2jjYX1.js                [39m[1m[2m   24.30 kB[22m[1m[22m[2m │ gzip:   7.58 kB[22m
-[2mdist/[22m[2massets/[22m[36mAboutPage-CcCfv08J.js                [39m[1m[2m   26.96 kB[22m[1m[22m[2m │ gzip:   8.87 kB[22m
-[2mdist/[22m[2massets/[22m[36mCredentialsPage-B66K0ovB.js          [39m[1m[2m   27.69 kB[22m[1m[22m[2m │ gzip:   8.92 kB[22m
-[2mdist/[22m[2massets/[22m[36mAdminDashboard-rhfnFGF7.js           [39m[1m[2m   43.14 kB[22m[1m[22m[2m │ gzip:  11.38 kB[22m
-[2mdist/[22m[2massets/[22m[36mMiniGame-DnRdHUqY.js                 [39m[1m[2m   61.06 kB[22m[1m[22m[2m │ gzip:  22.20 kB[22m
-[2mdist/[22m[2massets/[22m[36mDeviceMockup3D-C-jqHr6Q.js           [39m[1m[2m   69.40 kB[22m[1m[22m[2m │ gzip:  25.01 kB[22m
-[2mdist/[22m[2massets/[22m[36mindex-CHKr0hq9.js                    [39m[1m[33m  711.38 kB[39m[22m[2m │ gzip: 211.42 kB[22m
-[2mdist/[22m[2massets/[22m[36marticles-C178cZhH.js                 [39m[1m[33m  760.30 kB[39m[22m[2m │ gzip: 220.65 kB[22m
-[2mdist/[22m[2massets/[22m[36mreact-three-fiber.esm-C1nwBdTb.js    [39m[1m[33m  813.35 kB[39m[22m[2m │ gzip: 219.83 kB[22m
-[2mdist/[22m[2massets/[22m[36mreact-three-rapier.esm-DlWcmwb2.js   [39m[1m[33m2,082.63 kB[39m[22m[2m │ gzip: 769.37 kB[22m
+[2mdist/[22m[2massets/[22m[36mcircle-check-9ckfMgxy.js             [39m[1m[2m    0.34 kB[22m[1m[22m[2m │ gzip:   0.27 kB[22m
+[2mdist/[22m[2massets/[22m[36mclock-CGegY3oO.js                    [39m[1m[2m    0.35 kB[22m[1m[22m[2m │ gzip:   0.27 kB[22m
+[2mdist/[22m[2massets/[22m[36mterminal-BwXben50.js                 [39m[1m[2m    0.36 kB[22m[1m[22m[2m │ gzip:   0.28 kB[22m
+[2mdist/[22m[2massets/[22m[36mlock-DBOpspVs.js                     [39m[1m[2m    0.38 kB[22m[1m[22m[2m │ gzip:   0.29 kB[22m
+[2mdist/[22m[2massets/[22m[36mtarget-DRxnluXm.js                   [39m[1m[2m    0.39 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
+[2mdist/[22m[2massets/[22m[36museThemeAccent-Xbs3zpTx.js           [39m[1m[2m    0.40 kB[22m[1m[22m[2m │ gzip:   0.28 kB[22m
+[2mdist/[22m[2massets/[22m[36mcalendar-XGBOy6FW.js                 [39m[1m[2m    0.43 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
+[2mdist/[22m[2massets/[22m[36mdownload-DBXagS26.js                 [39m[1m[2m    0.43 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
+[2mdist/[22m[2massets/[22m[36mvolume-2-BFaN6nTS.js                 [39m[1m[2m    0.44 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
+[2mdist/[22m[2massets/[22m[36mclipboard-check-DoFz0_w7.js          [39m[1m[2m    0.47 kB[22m[1m[22m[2m │ gzip:   0.33 kB[22m
+[2mdist/[22m[2massets/[22m[36musers-pPG6da_8.js                    [39m[1m[2m    0.47 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
+[2mdist/[22m[2massets/[22m[36mrefresh-cw-oBO7HrVi.js               [39m[1m[2m    0.85 kB[22m[1m[22m[2m │ gzip:   0.42 kB[22m
+[2mdist/[22m[2massets/[22m[36mFloat-DYBRMxmN.js                    [39m[1m[2m    0.88 kB[22m[1m[22m[2m │ gzip:   0.52 kB[22m
+[2mdist/[22m[2massets/[22m[36mBackdropParticles-CQWezb5J.js        [39m[1m[2m    1.12 kB[22m[1m[22m[2m │ gzip:   0.67 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-zdv9k5CV.js                    [39m[1m[2m    2.07 kB[22m[1m[22m[2m │ gzip:   1.06 kB[22m
+[2mdist/[22m[2massets/[22m[36mTerminalEasterEgg-BuTQId6e.js        [39m[1m[2m    2.67 kB[22m[1m[22m[2m │ gzip:   1.33 kB[22m
+[2mdist/[22m[2massets/[22m[36mAudioNarrationPlayer-DYscqfQK.js     [39m[1m[2m    2.82 kB[22m[1m[22m[2m │ gzip:   1.19 kB[22m
+[2mdist/[22m[2massets/[22m[36mBlogIndexPage-gEBePszc.js            [39m[1m[2m    3.20 kB[22m[1m[22m[2m │ gzip:   1.30 kB[22m
+[2mdist/[22m[2massets/[22m[36mArticlePage-B8Bi4Vbe.js              [39m[1m[2m    8.49 kB[22m[1m[22m[2m │ gzip:   2.86 kB[22m
+[2mdist/[22m[2massets/[22m[36mQAOperationsReviewPage-DpMXqc_4.js   [39m[1m[2m    9.54 kB[22m[1m[22m[2m │ gzip:   3.41 kB[22m
+[2mdist/[22m[2massets/[22m[36mProjectPage-C1Buky3s.js              [39m[1m[2m   15.08 kB[22m[1m[22m[2m │ gzip:   4.99 kB[22m
+[2mdist/[22m[2massets/[22m[36mContactPage-CXA3rgrS.js              [39m[1m[2m   16.94 kB[22m[1m[22m[2m │ gzip:   4.95 kB[22m
+[2mdist/[22m[2massets/[22m[36mCustomCursor-3UCj74Lj.js             [39m[1m[2m   18.24 kB[22m[1m[22m[2m │ gzip:   5.77 kB[22m
+[2mdist/[22m[2massets/[22m[36mLeadResearchProjectPage-DwG0E_1x.js  [39m[1m[2m   20.50 kB[22m[1m[22m[2m │ gzip:   6.50 kB[22m
+[2mdist/[22m[2massets/[22m[36mHeroScene-DFYoSM2Z.js                [39m[1m[2m   24.30 kB[22m[1m[22m[2m │ gzip:   7.58 kB[22m
+[2mdist/[22m[2massets/[22m[36mAboutPage-B7p9m1QR.js                [39m[1m[2m   26.96 kB[22m[1m[22m[2m │ gzip:   8.87 kB[22m
+[2mdist/[22m[2massets/[22m[36mCredentialsPage-BEdr4qzQ.js          [39m[1m[2m   27.75 kB[22m[1m[22m[2m │ gzip:   8.95 kB[22m
+[2mdist/[22m[2massets/[22m[36mAdminDashboard-Ch_ktYyn.js           [39m[1m[2m   43.14 kB[22m[1m[22m[2m │ gzip:  11.37 kB[22m
+[2mdist/[22m[2massets/[22m[36mMiniGame-B03oZP3M.js                 [39m[1m[2m   61.06 kB[22m[1m[22m[2m │ gzip:  22.20 kB[22m
+[2mdist/[22m[2massets/[22m[36mDeviceMockup3D-Bn9b8ulC.js           [39m[1m[2m   69.40 kB[22m[1m[22m[2m │ gzip:  25.01 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-B4skjfyq.js                    [39m[1m[33m  716.60 kB[39m[22m[2m │ gzip: 212.68 kB[22m
+[2mdist/[22m[2massets/[22m[36marticles-gBEfb61S.js                 [39m[1m[33m  760.30 kB[39m[22m[2m │ gzip: 220.64 kB[22m
+[2mdist/[22m[2massets/[22m[36mreact-three-fiber.esm-BPTU42g_.js    [39m[1m[33m  813.35 kB[39m[22m[2m │ gzip: 219.83 kB[22m
+[2mdist/[22m[2massets/[22m[36mreact-three-rapier.esm-BTSh3ldq.js   [39m[1m[33m2,082.63 kB[39m[22m[2m │ gzip: 769.37 kB[22m
 [33m
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 10.55s[39m
+[32m✓ built in 7.39s[39m
 
 [36mPWA v0.20.5[39m
 mode      [35mgenerateSW[39m
-precache  [32m41 entries[39m [2m(4689.87 KiB)[22m
+precache  [32m41 entries[39m [2m(4695.27 KiB)[22m
 files generated
   [2mdist/sw.js[22m
   [2mdist/workbox-9c191d2f.js[22m
