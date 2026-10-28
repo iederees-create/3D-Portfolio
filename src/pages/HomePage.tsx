@@ -12,6 +12,9 @@ import {
   Monitor,
 } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
+import HeroVisual from '../components/HeroVisual';
+import Reveal from '../components/Reveal';
+import TechShowcase from '../components/TechShowcase';
 import SEO from '../components/SEO';
 import {
   PROFILE_IMAGE_ALT,
@@ -99,8 +102,12 @@ export default function HomePage() {
       </SEO>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden px-6 pt-32 pb-16 sm:pt-36 lg:pb-24">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <section className="relative px-6 pt-32 pb-20 sm:pt-36 lg:pb-28">
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -left-40 top-10 h-[28rem] w-[28rem] rounded-full bg-primary-500/10 blur-[110px]" />
+          <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_30%_20%,black,transparent_70%)]" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.35fr_1fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -117,8 +124,8 @@ export default function HomePage() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-300">
               Iederees Francis · Freelance web developer
             </p>
-            <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Websites that turn visitors into customers.
+            <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.04] tracking-[-0.02em] text-white sm:text-5xl lg:text-7xl">
+              Websites that turn visitors into <span className="gradient-text">customers.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-400">
               I build clear, mobile-friendly websites, quote calculators and booking pages for small businesses. Based in Cape Town, working with local businesses in person and with remote clients anywhere.
@@ -150,21 +157,7 @@ export default function HomePage() {
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto w-full max-w-[320px] lg:max-w-[380px]"
-          >
-            <div className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/50">
-              <img
-                src={publicAsset(PROFILE_IMAGE_PATH)}
-                alt={PROFILE_IMAGE_ALT}
-                className="aspect-[4/5] w-full object-cover"
-                loading="eager"
-              />
-            </div>
-          </motion.div>
+          <HeroVisual imageSrc={publicAsset(PROFILE_IMAGE_PATH)} imageAlt={PROFILE_IMAGE_ALT} />
         </div>
       </section>
 
@@ -176,14 +169,16 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Three ways I can help your business.</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
-            {services.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-300">
-                  <Icon size={22} />
+            {services.map(({ icon: Icon, title, text }, i) => (
+              <Reveal key={title} delay={i * 0.08} className="h-full">
+                <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary-400/40 hover:bg-white/[0.06] hover:shadow-xl hover:shadow-black/30 motion-reduce:transform-none">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-500/10 text-primary-300 transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary-500/20 motion-reduce:transform-none">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-400">{text}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400">{text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
           <div className="mt-8">
@@ -207,31 +202,47 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredWork.map((project) => (
+            {featuredWork.map((project, i) => (
+              <Reveal key={project.title} delay={i * 0.07} className="h-full">
               <Link
-                key={project.title}
-                to={`/work/${projectSlug(project)}/`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors hover:bg-white/[0.06]"
+                to={`/work?project=${projectSlug(project)}`}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary-400/40 hover:bg-white/[0.06] hover:shadow-xl hover:shadow-black/30 motion-reduce:transform-none"
               >
                 {project.coverImage && (
-                  <img
-                    src={project.coverImage}
-                    alt={project.mediaAlt ?? `${project.title} cover image`}
-                    className="aspect-video w-full object-cover"
-                    loading="lazy"
-                  />
+                  <div className="overflow-hidden">
+                    <img
+                      src={project.coverImage}
+                      alt={project.mediaAlt ?? `${project.title} cover image`}
+                      className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none"
+                      loading="lazy"
+                    />
+                  </div>
                 )}
                 <div className="flex flex-1 flex-col p-5">
                   <span className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-primary-300">{project.category}</span>
                   <h3 className="text-base font-semibold leading-snug text-white">{project.title}</h3>
                   <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-400">{project.description}</p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white group-hover:text-primary-300">
-                    View project <ArrowRight size={14} />
+                    View case study <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Tech showcase ── */}
+      <section className="px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <div className="mb-10 max-w-2xl">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-300">How I build</p>
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Modern tools, chosen to keep your site fast.</h2>
+            </div>
+            <TechShowcase compact />
+          </Reveal>
         </div>
       </section>
 

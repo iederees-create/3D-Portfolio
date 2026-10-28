@@ -1,43 +1,72 @@
-import { useEffect, useId, useState } from 'react';
+import { Suspense, lazy, useEffect, useId, useState } from 'react';
 import { Routes, Route, NavLink, Link, Navigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import { Menu, Twitter, Instagram, X, Youtube } from 'lucide-react';
 
 import NextGenWebsAssistant from './NextGenWebsAssistant';
 import ThemePicker from './components/ThemePicker';
-import TerminalEasterEgg from './components/TerminalEasterEgg';
 import BrandLogo from './components/BrandLogo';
-import WebGLTransitionOverlay from './components/WebGLTransitionOverlay';
-import CustomCursor from './components/CustomCursor';
 import MemberSignup from './components/MemberSignup';
-import MiniGame from './components/MiniGame';
 import { useMember } from './contexts/MemberContext';
+import { useCan3D, useFinePointer } from './hooks/useCapabilities';
+import ErrorBoundary from './components/ErrorBoundary';
 import { useAnalytics } from './hooks/useAnalytics';
 
-// Pages
+// Pages: Home loads eagerly; every other route is split into its own chunk so the
+// three.js / physics libraries only download where a page actually uses them.
 import HomePage from './pages/HomePage';
-import WorkPage from './pages/WorkPage';
-import AboutPage from './pages/AboutPage';
-import BlogIndexPage from './pages/BlogIndexPage';
-import ArticlePage from './pages/ArticlePage';
-import ContactPage from './pages/ContactPage';
-import CredentialsPage from './pages/CredentialsPage';
-import ProjectPage from './pages/ProjectPage';
-import LeadResearchProjectPage from './pages/projects/LeadResearchProjectPage';
-import QAOperationsReviewPage from './pages/services/QAOperationsReviewPage';
+const WorkPage = lazy(() => import('./pages/WorkPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
+const ArticlePage = lazy(() => import('./pages/ArticlePage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const CredentialsPage = lazy(() => import('./pages/CredentialsPage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const LeadResearchProjectPage = lazy(() => import('./pages/projects/LeadResearchProjectPage'));
+const QAOperationsReviewPage = lazy(() => import('./pages/services/QAOperationsReviewPage'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+
+// Optional chrome that renders WebGL or is only for fun: loaded on demand.
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
+const MiniGame = lazy(() => import('./components/MiniGame'));
+const TerminalEasterEgg = lazy(() => import('./components/TerminalEasterEgg'));
+const BackdropParticles = lazy(() => import('./components/3d/BackdropParticles'));
 
 // ─── Animated page wrapper ────────────────────────────────────────────────────
 function PageWrapper({ children }: { children: React.ReactNode }) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      initial={reduced ? false : { opacity: 0, y: 16, filter: 'blur(6px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      exit={reduced ? undefined : { opacity: 0, y: -8, filter: 'blur(4px)' }}
+      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
   );
+}
+
+/** Thin reading-progress bar under the header. */
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+  return (
+    <motion.div
+      aria-hidden
+      style={{ scaleX }}
+      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-primary-500 via-primary-300 to-white/80"
+    />
+  );
+}
+
+/** Jump to the top on route changes (but let ?project= modals and #hashes keep their place). */
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo({ top: 0, left: 0 });
+  }, [pathname, hash]);
+  return null;
 }
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
@@ -197,7 +226,7 @@ function Navbar() {
 function Footer() {
   const linkClass = 'text-slate-400 hover:text-white transition-colors text-sm';
   return (
-    <footer className="border-t border-white/5 py-12 px-6">
+    <footer className="relative z-10 border-t border-white/5 py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-center md:text-left">
           <p className="font-bold text-sm text-white tracking-wide">Iederees Francis</p>
@@ -223,12 +252,12 @@ function Footer() {
   );
 }
 
-import AdminDashboard from './pages/AdminDashboard';
 
 // ─── Animated Routes wrapper ──────────────────────────────────────────────────
 function AnimatedRoutes() {
   const location = useLocation();
   return (
+    <Suspense fallback={<div className="min-h-[60vh]" aria-busy="true" />}>
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
@@ -245,6 +274,28 @@ function AnimatedRoutes() {
         <Route path="/admin-dashbourd" element={<Navigate to="/admin-dashboard" replace />} />
       </Routes>
     </AnimatePresence>
+    </Suspense>
+  );
+}
+
+// ─── Optional 3D chrome ───────────────────────────────────────────────────────
+// Custom cursor only for mouse users; particle backdrop only on capable desktops.
+// Both are skipped for reduced motion / Data Saver / low-power devices (see useCan3D).
+function Chrome3D({ isHome }: { isHome: boolean }) {
+  const finePointer = useFinePointer();
+  const can3D = useCan3D(1024);
+  const reduced = useReducedMotion();
+  return (
+    <ErrorBoundary fallback={null}>
+      <Suspense fallback={null}>
+        {finePointer && !reduced && <CustomCursor />}
+        {can3D && !isHome && (
+          <div aria-hidden className="pointer-events-none fixed inset-0 z-0 opacity-60">
+            <BackdropParticles />
+          </div>
+        )}
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
@@ -253,6 +304,7 @@ function AnimatedRoutes() {
 // provided by main.tsx, along with HelmetProvider for per-route SEO/meta
 // tags — App only owns the chrome (nav/footer) and route table.
 export default function App() {
+  const location = useLocation();
   const { isVIPModalOpen, openVIPModal, closeVIPModal, loginMember, isAssessmentRunning, stopAssessment } = useMember();
   useAnalytics();
 
@@ -264,14 +316,17 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
-      <CustomCursor />
-      {isAssessmentRunning && <MiniGame onClose={stopAssessment} />}
-      <TerminalEasterEgg />
-      <WebGLTransitionOverlay />
+      <ScrollToTop />
+      <ScrollProgress />
+      <Chrome3D isHome={location.pathname === '/'} />
+      <Suspense fallback={null}>
+        {isAssessmentRunning && <MiniGame onClose={stopAssessment} />}
+        <TerminalEasterEgg />
+      </Suspense>
 
       <Navbar />
 
-      <main>
+      <main className="relative z-10">
         <AnimatedRoutes />
       </main>
 
