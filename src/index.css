@@ -308,3 +308,42 @@ body.konami-active {
   transition: filter 0.5s ease;
 }
 
+
+/* ─── Polish: focus, selection, motion preferences ─────────────────────────── */
+::selection {
+  background: rgb(var(--color-glow-rgb) / 0.35);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  filter: invert(0.8);
+}
+
+/* Respect "reduce motion": no smooth scrolling, no looping or decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ticker-track,
+  .orb-1,
+  .orb-2,
+  .orb-3,
+  .hero-ring {
+    animation: none !important;
+  }
+}
