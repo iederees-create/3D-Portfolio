@@ -55,7 +55,7 @@ computing gzip size...
 - Using dynamic import() to code-split the application
 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
-[32m✓ built in 7.20s[39m
+[32m✓ built in 10.28s[39m
 
 [36mPWA v0.20.5[39m
 mode      [35mgenerateSW[39m
@@ -175,4 +175,4 @@ Generating admin dashboard entry pages...
 Preserving GitHub Pages SPA fallback...
 Generating sitemap.xml...
 Meta tag and sitemap generation complete!
-decode-social: wrote 8 image files to dist/social
+decode-social: wrote 14 image files to dist/social
