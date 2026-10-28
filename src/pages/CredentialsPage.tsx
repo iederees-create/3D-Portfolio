@@ -10,6 +10,7 @@ import MagneticButton from '../components/MagneticButton';
 import Reveal from '../components/Reveal';
 import TechShowcase from '../components/TechShowcase';
 import CertificateExplorer from '../components/CertificateExplorer';
+import DataDashboards from '../components/work/DataDashboards';
 import SEO from '../components/SEO';
 import { certificateCount, certificateGroups } from '../data/certificates';
 import { hireMailto } from '../lib/contact';
@@ -372,6 +373,10 @@ export default function CredentialsPage() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal>
+            <DataDashboards variant="compact" />
+          </Reveal>
         </section>
 
         {/* Education */}

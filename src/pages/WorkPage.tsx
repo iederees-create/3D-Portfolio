@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Layers } from 'lucide-react';
 import SEO from '../components/SEO';
 import WorkExplorer from '../components/work/WorkExplorer';
+import DataDashboards from '../components/work/DataDashboards';
 import { hireMailto } from '../lib/contact';
 import { type ProjectCaseStudy } from '../components/ProjectShowcase';
 
@@ -966,6 +967,8 @@ export default function WorkPage() {
       </motion.div>
 
       <WorkExplorer projects={projects} slugOf={projectSlug} />
+
+      <DataDashboards />
     </section>
   );
 }
