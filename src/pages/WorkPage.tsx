@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, ShoppingBag, Sparkles, Layers, Star, Images } from 'lucide-react';
-import { ProjectMedia } from '../components/ProjectMedia';
-import { ProjectShowcase, type ProjectCaseStudy } from '../components/ProjectShowcase';
-import ShareWidget from '../components/ShareWidget';
-import { SITE_URL, isInternalProjectUrl, toRouterPath } from '../lib/site';
+import { ArrowRight, Layers } from 'lucide-react';
+import SEO from '../components/SEO';
+import WorkExplorer from '../components/work/WorkExplorer';
+import { hireMailto } from '../lib/contact';
+import { type ProjectCaseStudy } from '../components/ProjectShowcase';
 
 export interface Project {
   title: string;
@@ -52,181 +49,6 @@ const catEmoji: Record<string, string> = {
   'Marketing / Finance / Affiliate Funnel': '📈',
   'AI / Web App / Support Automation': '🤖',
 };
-
-// ─── Animated project card ───────────────────────────────────────────────────
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [showcaseOpen, setShowcaseOpen] = useState(false);
-  const hasShowcase = Boolean(project.galleryImages && project.galleryImages.length > 0);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rotX = ((y - cy) / cy) * -6;
-    const rotY = ((x - cx) / cx) * 6;
-    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
-    card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-    card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-  }
-
-  function handleMouseLeave() {
-    if (cardRef.current) {
-      cardRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-    }
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.08, ease: [0.23, 1, 0.32, 1] }}
-    >
-      <div
-        ref={cardRef}
-        className={`glass-card rounded-2xl flex flex-col justify-between ${catClass[project.category]}`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ transition: 'transform 0.18s ease, box-shadow 0.3s ease' }}
-      >
-        <ProjectMedia
-          title={project.title}
-          coverImage={project.coverImage}
-          previewVideoMp4={project.previewVideoMp4}
-          previewVideoWebm={project.previewVideoWebm}
-          videoPoster={project.videoPoster}
-          mediaAlt={project.mediaAlt}
-        />
-
-        {/* Accent top line */}
-        <div className="card-accent-line rounded-t-2xl" />
-
-        <div className="p-6 flex flex-col flex-1">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <span className="cat-icon-bg p-2 rounded-xl text-base">{catEmoji[project.category]}</span>
-              {project.featured && (
-                <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/20">
-                  <Star size={9} fill="currentColor" /> Featured
-                </span>
-              )}
-            </div>
-            <span className={`cat-badge text-[11px] font-semibold px-2.5 py-1 rounded-full`}>
-              {project.category}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-lg font-semibold text-white mb-2 leading-snug">{project.title}</h3>
-          {project.toolBadge && (
-            <span className="inline-flex items-center gap-1 self-start text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-400/10 text-emerald-300 border border-emerald-400/20 mb-3 w-fit">
-              <Sparkles size={9} /> {project.toolBadge}
-            </span>
-          )}
-          <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">{project.description}</p>
-
-          {hasShowcase && (
-            <button
-              type="button"
-              onClick={() => setShowcaseOpen(true)}
-              className="mb-5 inline-flex items-center gap-2 self-start text-xs font-medium text-amber-300 hover:text-amber-200 transition-colors"
-            >
-              <Images size={14} /> View full gallery &amp; preview video
-            </button>
-          )}
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {project.tags.map((tag, i) => (
-              <span key={i} className="tag-mono text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-slate-500 border border-white/5">
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="mb-4">
-             <ShareWidget 
-               url={`${SITE_URL}work/${projectSlug(project)}/`} 
-               title={project.title} 
-               text={project.description} 
-               label="" 
-             />
-          </div>
-
-          {/* Actions */}
-          <div className={`grid ${project.etsyUrl ? 'grid-cols-3' : 'grid-cols-2'} gap-2 pt-4 border-t border-white/5`}>
-            <Link
-              to={`/work/${projectSlug(project)}/`}
-              className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
-              title="Project details"
-            >
-              <Images size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-              <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Details</span>
-            </Link>
-            {isInternalProjectUrl(project.liveUrl) ? (
-              <Link
-                to={toRouterPath(project.liveUrl)}
-                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
-                title="Case Study"
-              >
-                <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-                <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Case Study</span>
-              </Link>
-            ) : (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-all group/btn"
-                title="Live Site"
-              >
-                <Globe size={15} className="text-slate-400 group-hover/btn:text-white transition-colors" />
-                <span className="text-[10px] text-slate-500 group-hover/btn:text-slate-300 transition-colors">Live Site</span>
-              </a>
-            )}
-            {project.etsyUrl && (
-              <a
-                href={project.etsyUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1 py-2.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 transition-all group/btn border border-orange-500/10"
-                title="Buy on Etsy"
-              >
-                <ShoppingBag size={15} className="text-orange-400 group-hover/btn:text-orange-300 transition-colors" />
-                <span className="text-[10px] text-orange-500/70 group-hover/btn:text-orange-300 transition-colors">{project.etsyCtaLabel ?? 'Buy Template'}</span>
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-      {hasShowcase && (
-        <ProjectShowcase
-          isOpen={showcaseOpen}
-          onClose={() => setShowcaseOpen(false)}
-          title={project.title}
-          description={project.description}
-          galleryImages={project.galleryImages ?? []}
-          mediaAlts={project.galleryImageAlts ?? []}
-          previewVideoMp4={project.previewVideoMp4}
-          previewVideoWebm={project.previewVideoWebm}
-          videoPoster={project.videoPoster}
-          features={project.features}
-          toolHighlight={project.toolHighlight}
-          liveUrl={project.liveUrl}
-          etsyUrl={project.etsyUrl}
-          caseStudy={project.caseStudy}
-        />
-      )}
-    </motion.div>
-  );
-}
 
 // ─── Projects data ────────────────────────────────────────────────────────────
 export const projectSlug = (project: Pick<Project, 'title'>) =>
@@ -1112,62 +934,38 @@ export const projects: Project[] = [
   },
 ];
 
-const categories = ['All', 'Service', 'Beauty', 'Education', 'Creative', 'Data', 'Marketing / Finance / Affiliate Funnel'];
-
 export default function WorkPage() {
-  const [filter, setFilter] = useState<string>('All');
-  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
-
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-16 sm:pb-24">
+    <section className="mx-auto max-w-7xl px-4 pb-20 pt-32 sm:px-6 sm:pb-28">
+      <SEO
+        title="Work | Iederees Francis, Freelance Web Developer in Cape Town"
+        description="Selected websites, templates, quote calculators and data tools by Iederees Francis. Filter by type or technology and open any project for its case study."
+        path="work/"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-10"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-10 max-w-3xl"
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/8 text-xs font-medium text-slate-400 mb-4">
-          <Layers size={11} />
-          Portfolio — {projects.length} Projects
+        <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary-300">
+          <Layers size={13} /> Work · {projects.length} projects
+        </p>
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Selected work</h1>
+        <p className="mt-4 text-lg leading-relaxed text-slate-400">
+          Websites, templates, quote calculators and data tools. Filter by type or technology, then open a project for its case study, tech stack and links.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link to="/contact" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-black transition-colors hover:bg-slate-200">
+            Get a free quote <ArrowRight size={15} />
+          </Link>
+          <a href={hireMailto()} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+            Hire me for your project
+          </a>
         </div>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-          Live client websites
-        </h1>
-        <p className="text-slate-400">Click any card to visit the live site, buy the template, or view the source code.</p>
       </motion.div>
 
-      {/* Filter pills */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-              filter === cat
-                ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/25'
-                : 'liquid-glass text-slate-400 hover:text-white'
-            }`}
-          >
-            {cat !== 'All' && catEmoji[cat] + ' '}{cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Cards */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={filter}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filtered.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      <WorkExplorer projects={projects} slugOf={projectSlug} />
     </section>
   );
 }
