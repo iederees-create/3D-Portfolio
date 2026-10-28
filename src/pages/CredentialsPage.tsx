@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   Briefcase, GraduationCap, Code2, Wrench, Award,
-  ArrowUpRight, Download, ChevronRight,
+  ArrowUpRight, Download, ChevronRight, BadgeCheck,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
@@ -110,6 +110,86 @@ const education = [
   },
 ];
 
+// ─── Certificates ─────────────────────────────────────────────────────────────
+// Every entry below is taken from the certificate files themselves (name, issuer,
+// completion/issue date). `url` is only set where the certificate prints a public
+// verification link (edX verified certificates and Udemy certificate URLs).
+// Where a file shows no public link, none is shown.
+
+interface Certificate {
+  name: string;
+  issuer: string;
+  date: string;
+  url?: string;
+}
+
+interface CertificateGroupData {
+  title: string;
+  certificates: Certificate[];
+}
+
+const edx = (id: string) => `https://courses.edx.org/certificates/${id}`;
+const udemy = (id: string) => `https://ude.my/${id}`;
+
+const certificateGroups: CertificateGroupData[] = [
+  {
+    title: 'Web development, data & analytics',
+    certificates: [
+      { name: 'Introduction to Web Development with HTML5, CSS3, and JavaScript (CAD101EN)', issuer: 'IBM · via edX', date: 'Jun 2023', url: edx('26e4ad1d80ee46f899288a1219fe3396') },
+      { name: 'Data Analytics Basics for Everyone (DA0100)', issuer: 'IBM · via edX', date: 'Aug 2023', url: edx('fe73df42b0d84ecd8b77daa75aed4747') },
+      { name: 'Visualizing Data with Python (DV0101EN)', issuer: 'IBM · via edX', date: 'Nov 2023', url: edx('18b10e7cd7f24b90a18d7990b87619f6') },
+      { name: 'Data Analysis (short course)', issuer: 'University of Cape Town · via GetSmarter', date: 'Nov 2021' },
+      { name: 'Data Science with Python (short course)', issuer: 'University of Cape Town · via GetSmarter', date: 'Jun 2022' },
+      { name: 'Power BI Data Dashboards', issuer: 'LinkedIn Learning', date: 'Dec 2023' },
+    ],
+  },
+  {
+    title: 'Marketing & web analytics',
+    certificates: [
+      { name: 'Digital Marketing Analytics (executive program)', issuer: 'MIT', date: 'Jan 2023' },
+      { name: 'Data Monetization Strategy: Creating Value Through Data (executive program)', issuer: 'MIT', date: 'Apr 2024' },
+      { name: 'Google Analytics 4 (GA4) Essential Training', issuer: 'LinkedIn Learning', date: 'Nov 2022' },
+      { name: 'Marketing Tools: Digital Marketing Tools and Services (2020)', issuer: 'LinkedIn Learning', date: 'Dec 2022' },
+    ],
+  },
+  {
+    title: 'AI & ChatGPT',
+    certificates: [
+      { name: 'ChatGPT101: Introduction to ChatGPT', issuer: 'edX', date: 'Jun 2023', url: edx('422f769bebde433fb0a33fe6bea9350f') },
+      { name: 'ChatGPT103: How to Use ChatGPT in Tech/Coding/Data', issuer: 'edX', date: 'Jun 2023', url: edx('94cad45c47084702b8caa2845a4b2034') },
+      { name: 'ChatGPT104: How to Use ChatGPT in Business', issuer: 'edX', date: 'Nov 2023', url: edx('a027c4a4a2c54f7abc4f1072dae99a43') },
+    ],
+  },
+  {
+    title: 'Finance & trading',
+    certificates: [
+      { name: 'Stpcx.1: Introduction to Stock Trading', issuer: 'New York Institute of Finance · via edX', date: 'Jan 2024', url: edx('8babae7181b647a9baea25c44ec62b53') },
+      { name: 'Stpcx.2.0: Technical Analysis and the Skill of Day Trading', issuer: 'New York Institute of Finance · via edX', date: 'Jan 2024', url: edx('8418d11716214a55ab90f767c82b8cec') },
+    ],
+  },
+  {
+    title: 'CRM & reporting',
+    certificates: [
+      { name: 'Learning Salesforce for Admins (2018)', issuer: 'LinkedIn Learning', date: 'Jan 2022' },
+      { name: 'Salesforce: Custom Reports', issuer: 'LinkedIn Learning', date: 'Jan 2022' },
+    ],
+  },
+  {
+    title: 'Project management & leadership',
+    certificates: [
+      { name: 'Practical Project Management for Managers and First Time PMs', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-0f3c2137-cd35-423b-a720-7a9cd75a6c22') },
+      { name: 'Management Skills - Team Leadership Skills Masterclass 2021', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-27df870b-8314-4abe-a31b-5f21fc1891d1') },
+      { name: 'Operations Management', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-e9fd7802-eb49-4860-8f36-5f56611aaf25') },
+      { name: 'Inclusive Leadership (2022)', issuer: 'LinkedIn Learning', date: 'Feb 2023' },
+      { name: 'Handling Workplace Change as an Employee', issuer: 'LinkedIn Learning', date: 'Aug 2023' },
+      { name: 'Developing Your Emotional Intelligence (2017)', issuer: 'LinkedIn Learning', date: 'Jan 2024' },
+      { name: 'Avoiding Burnout', issuer: 'LinkedIn Learning', date: 'Aug 2023' },
+    ],
+  },
+];
+
+const certificateCount = certificateGroups.reduce((total, group) => total + group.certificates.length, 0);
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function SectionLabel({ text }: { text: string }) {
@@ -136,6 +216,38 @@ function SkillBar({ name, level, index }: { name: string; level: number; index: 
           className="h-full rounded-full bg-gradient-to-r from-primary-500 to-primary-300"
         />
       </div>
+    </div>
+  );
+}
+
+function CertificateGroup({ title, certificates }: CertificateGroupData) {
+  return (
+    <div>
+      <h4 className="text-[11px] font-mono uppercase tracking-widest text-primary-400 mb-3">{title}</h4>
+      <ul className="rounded-2xl bg-white/[0.02] border border-white/5 divide-y divide-white/5">
+        {certificates.map((cert) => (
+          <li key={cert.name} className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 px-5 py-4">
+            <div className="min-w-0 flex-1 basis-64">
+              <p className="text-sm font-semibold text-white leading-snug">{cert.name}</p>
+              <p className="text-xs text-slate-500 mt-1">{cert.issuer}</p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-[10px] font-mono text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">{cert.date}</span>
+              {cert.url && (
+                <a
+                  href={cert.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-primary-300 hover:text-white transition-colors"
+                  aria-label={`Verify certificate: ${cert.name}`}
+                >
+                  <BadgeCheck size={13} /> Verify
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -313,6 +425,19 @@ export default function CredentialsPage() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Certificates */}
+            <div className="mt-12">
+              <h3 className="text-lg font-bold text-white tracking-tight">Certificates &amp; short courses</h3>
+              <p className="text-sm text-slate-500 mt-1 mb-8">
+                {certificateCount} completed courses and programs, grouped by topic. &ldquo;Verify&rdquo; opens the certificate on the issuer&rsquo;s site where a public link exists.
+              </p>
+              <div className="space-y-8">
+                {certificateGroups.map((group) => (
+                  <CertificateGroup key={group.title} {...group} />
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
@@ -387,7 +512,7 @@ export default function CredentialsPage() {
               Let's build something<br />worth being proud of.
             </h2>
             <p className="text-slate-400 mb-8 max-w-md mx-auto">
-              Whether you need a custom website, a Etsy template, or strategic digital advice — I'm available.
+              Whether you need a website, a quote calculator or a booking page — I'm available for freelance projects in Cape Town and remotely.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <MagneticButton>
@@ -395,7 +520,7 @@ export default function CredentialsPage() {
                   href="mailto:iedereesfrancis@gmail.com?subject=Enquiry from Portfolio — Credentials page"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-xl"
                 >
-                  Get in touch
+                  Get a free quote
                 </a>
               </MagneticButton>
               <MagneticButton>
