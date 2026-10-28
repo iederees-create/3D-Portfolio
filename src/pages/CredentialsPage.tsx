@@ -1,11 +1,19 @@
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
-  Briefcase, GraduationCap, Code2, Wrench, Award,
-  ArrowUpRight, Download, ChevronRight, BadgeCheck,
+  Briefcase, GraduationCap, Code2, Wrench, Award, BadgeCheck,
+  ArrowUpRight, Download, ChevronRight, MapPin, Globe2, FolderKanban, ScrollText,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
+import Reveal from '../components/Reveal';
+import TechShowcase from '../components/TechShowcase';
+import CertificateExplorer from '../components/CertificateExplorer';
+import SEO from '../components/SEO';
+import { certificateCount, certificateGroups } from '../data/certificates';
+import { hireMailto } from '../lib/contact';
+import { projects } from './WorkPage';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -50,26 +58,14 @@ const experience = [
   },
 ];
 
-const techSkills = [
-  { name: 'HTML & CSS', level: 95 },
-  { name: 'JavaScript (ES6+)', level: 90 },
-  { name: 'React & TypeScript', level: 88 },
-  { name: 'Tailwind CSS', level: 92 },
-  { name: 'Vite & Build Tools', level: 82 },
-  { name: 'Node.js & Express', level: 74 },
-  { name: 'Supabase & SQL', level: 70 },
-  { name: 'Git & GitHub', level: 88 },
-  { name: 'UI/UX Design', level: 80 },
-  { name: 'SEO & Web Performance', level: 85 },
-];
-
-const softSkills = [
-  { name: 'Customer journey mapping', level: 95 },
-  { name: 'Conversion strategy', level: 90 },
-  { name: 'Client communication', level: 95 },
-  { name: 'Sales & persuasion', level: 88 },
-  { name: 'Problem decomposition', level: 85 },
-  { name: 'Self-directed learning', level: 92 },
+/** Business & people skills, shown as tags. The earlier percentage bars could not be verified, so no scores are shown. */
+const businessSkills = [
+  'Customer journey mapping',
+  'Conversion strategy',
+  'Client communication',
+  'Sales & persuasion',
+  'Problem decomposition',
+  'Self-directed learning',
 ];
 
 const tools = [
@@ -110,85 +106,13 @@ const education = [
   },
 ];
 
-// ─── Certificates ─────────────────────────────────────────────────────────────
-// Every entry below is taken from the certificate files themselves (name, issuer,
-// completion/issue date). `url` is only set where the certificate prints a public
-// verification link (edX verified certificates and Udemy certificate URLs).
-// Where a file shows no public link, none is shown.
 
-interface Certificate {
-  name: string;
-  issuer: string;
-  date: string;
-  url?: string;
-}
-
-interface CertificateGroupData {
-  title: string;
-  certificates: Certificate[];
-}
-
-const edx = (id: string) => `https://courses.edx.org/certificates/${id}`;
-const udemy = (id: string) => `https://ude.my/${id}`;
-
-const certificateGroups: CertificateGroupData[] = [
-  {
-    title: 'Web development, data & analytics',
-    certificates: [
-      { name: 'Introduction to Web Development with HTML5, CSS3, and JavaScript (CAD101EN)', issuer: 'IBM · via edX', date: 'Jun 2023', url: edx('26e4ad1d80ee46f899288a1219fe3396') },
-      { name: 'Data Analytics Basics for Everyone (DA0100)', issuer: 'IBM · via edX', date: 'Aug 2023', url: edx('fe73df42b0d84ecd8b77daa75aed4747') },
-      { name: 'Visualizing Data with Python (DV0101EN)', issuer: 'IBM · via edX', date: 'Nov 2023', url: edx('18b10e7cd7f24b90a18d7990b87619f6') },
-      { name: 'Data Analysis (short course)', issuer: 'University of Cape Town · via GetSmarter', date: 'Nov 2021' },
-      { name: 'Data Science with Python (short course)', issuer: 'University of Cape Town · via GetSmarter', date: 'Jun 2022' },
-      { name: 'Power BI Data Dashboards', issuer: 'LinkedIn Learning', date: 'Dec 2023' },
-    ],
-  },
-  {
-    title: 'Marketing & web analytics',
-    certificates: [
-      { name: 'Digital Marketing Analytics (executive program)', issuer: 'MIT', date: 'Jan 2023' },
-      { name: 'Data Monetization Strategy: Creating Value Through Data (executive program)', issuer: 'MIT', date: 'Apr 2024' },
-      { name: 'Google Analytics 4 (GA4) Essential Training', issuer: 'LinkedIn Learning', date: 'Nov 2022' },
-      { name: 'Marketing Tools: Digital Marketing Tools and Services (2020)', issuer: 'LinkedIn Learning', date: 'Dec 2022' },
-    ],
-  },
-  {
-    title: 'AI & ChatGPT',
-    certificates: [
-      { name: 'ChatGPT101: Introduction to ChatGPT', issuer: 'edX', date: 'Jun 2023', url: edx('422f769bebde433fb0a33fe6bea9350f') },
-      { name: 'ChatGPT103: How to Use ChatGPT in Tech/Coding/Data', issuer: 'edX', date: 'Jun 2023', url: edx('94cad45c47084702b8caa2845a4b2034') },
-      { name: 'ChatGPT104: How to Use ChatGPT in Business', issuer: 'edX', date: 'Nov 2023', url: edx('a027c4a4a2c54f7abc4f1072dae99a43') },
-    ],
-  },
-  {
-    title: 'Finance & trading',
-    certificates: [
-      { name: 'Stpcx.1: Introduction to Stock Trading', issuer: 'New York Institute of Finance · via edX', date: 'Jan 2024', url: edx('8babae7181b647a9baea25c44ec62b53') },
-      { name: 'Stpcx.2.0: Technical Analysis and the Skill of Day Trading', issuer: 'New York Institute of Finance · via edX', date: 'Jan 2024', url: edx('8418d11716214a55ab90f767c82b8cec') },
-    ],
-  },
-  {
-    title: 'CRM & reporting',
-    certificates: [
-      { name: 'Learning Salesforce for Admins (2018)', issuer: 'LinkedIn Learning', date: 'Jan 2022' },
-      { name: 'Salesforce: Custom Reports', issuer: 'LinkedIn Learning', date: 'Jan 2022' },
-    ],
-  },
-  {
-    title: 'Project management & leadership',
-    certificates: [
-      { name: 'Practical Project Management for Managers and First Time PMs', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-0f3c2137-cd35-423b-a720-7a9cd75a6c22') },
-      { name: 'Management Skills - Team Leadership Skills Masterclass 2021', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-27df870b-8314-4abe-a31b-5f21fc1891d1') },
-      { name: 'Operations Management', issuer: 'Udemy', date: 'Mar 2021', url: udemy('UC-e9fd7802-eb49-4860-8f36-5f56611aaf25') },
-      { name: 'Inclusive Leadership (2022)', issuer: 'LinkedIn Learning', date: 'Feb 2023' },
-      { name: 'Handling Workplace Change as an Employee', issuer: 'LinkedIn Learning', date: 'Aug 2023' },
-      { name: 'Developing Your Emotional Intelligence (2017)', issuer: 'LinkedIn Learning', date: 'Jan 2024' },
-      { name: 'Avoiding Burnout', issuer: 'LinkedIn Learning', date: 'Aug 2023' },
-    ],
-  },
+const sections = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills & tools' },
+  { id: 'education', label: 'Education' },
+  { id: 'certificates', label: 'Certificates' },
 ];
-
-const certificateCount = certificateGroups.reduce((total, group) => total + group.certificates.length, 0);
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -200,54 +124,14 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-function SkillBar({ name, level, index }: { name: string; level: number; index: number }) {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+function SectionHeading({ icon: Icon, title, text }: { icon: typeof Briefcase; title: string; text?: string }) {
   return (
-    <div ref={ref} className="mb-4">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="text-sm text-slate-300 font-medium">{name}</span>
-        <span className="text-xs text-slate-500 font-mono">{level}%</span>
+    <div className="mb-8">
+      <div className="flex items-center gap-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-500/10 text-primary-300"><Icon size={18} /></span>
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{title}</h2>
       </div>
-      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-primary-500 to-primary-300"
-        />
-      </div>
-    </div>
-  );
-}
-
-function CertificateGroup({ title, certificates }: CertificateGroupData) {
-  return (
-    <div>
-      <h4 className="text-[11px] font-mono uppercase tracking-widest text-primary-400 mb-3">{title}</h4>
-      <ul className="rounded-2xl bg-white/[0.02] border border-white/5 divide-y divide-white/5">
-        {certificates.map((cert) => (
-          <li key={cert.name} className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 px-5 py-4">
-            <div className="min-w-0 flex-1 basis-64">
-              <p className="text-sm font-semibold text-white leading-snug">{cert.name}</p>
-              <p className="text-xs text-slate-500 mt-1">{cert.issuer}</p>
-            </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="text-[10px] font-mono text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">{cert.date}</span>
-              {cert.url && (
-                <a
-                  href={cert.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-primary-300 hover:text-white transition-colors"
-                  aria-label={`Verify certificate: ${cert.name}`}
-                >
-                  <BadgeCheck size={13} /> Verify
-                </a>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+      {text && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">{text}</p>}
     </div>
   );
 }
@@ -307,28 +191,66 @@ function ExperienceCard({
 
 // ─── CredentialsPage ──────────────────────────────────────────────────────────
 export default function CredentialsPage() {
-  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const { ref: skillsRef, inView: skillsInView } = useInView({ triggerOnce: true, threshold: 0.05 });
-  const { ref: toolsRef, inView: toolsInView } = useInView({ triggerOnce: true, threshold: 0.05 });
-  const { ref: eduRef, inView: eduInView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const reduced = useReducedMotion();
+  const [active, setActive] = useState(sections[0].id);
+
+  // Highlight the section currently in view in the sticky sub-nav.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.2, 0.5] },
+    );
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const jump = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  };
+
+  const facts = [
+    { icon: FolderKanban, value: String(projects.length), label: 'Projects in the portfolio' },
+    { icon: ScrollText, value: String(certificateCount), label: 'Certificates & short courses' },
+    { icon: Award, value: String(certificateGroups.length), label: 'Learning topics' },
+    { icon: Globe2, value: 'Cape Town + remote', label: 'Where I work' },
+  ];
 
   return (
     <div className="pt-20 pb-24">
+      <SEO
+        title="Credentials | Iederees Francis, Freelance Web Developer in Cape Town"
+        description="Experience, tools and a full list of certificates from IBM, MIT, the University of Cape Town, edX, LinkedIn Learning and more, with verification links where available."
+        path="credentials/"
+      />
+
       {/* ── Hero ── */}
       <section className="relative py-20 px-6 max-w-7xl mx-auto overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-500/6 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/6 rounded-full blur-[120px] pointer-events-none" />
 
         <motion.div
-          ref={heroRef}
-          initial={{ opacity: 0, y: 24 }}
-          animate={heroInView ? { opacity: 1, y: 0 } : {}}
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 max-w-3xl"
         >
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-emerald-300">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            </span>
+            Available for freelance projects
+          </div>
           <SectionLabel text="Credentials" />
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.05] mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-[-0.02em] text-white leading-[1.04] mb-6">
             Experience, skills &amp;<br />
             <span className="text-slate-500">professional background.</span>
           </h1>
@@ -340,200 +262,181 @@ export default function CredentialsPage() {
           <div className="flex flex-wrap gap-4">
             <MagneticButton>
               <Link
-                to="/work"
+                to="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-lg"
               >
-                View My Work <ArrowUpRight size={15} />
+                Get a free quote <ArrowUpRight size={15} />
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link
+                to="/work"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 text-slate-200 font-bold text-sm tracking-wide rounded-full border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                View my work
               </Link>
             </MagneticButton>
             <MagneticButton>
               <a
-                href="mailto:iedereesfrancis@gmail.com?subject=CV Request — NextGenWebs Portfolio"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 text-slate-300 font-bold text-sm tracking-wide rounded-full border border-white/10 hover:bg-white/10 transition-colors"
+                href={hireMailto('CV Request — NextGenWebs Portfolio')}
+                className="inline-flex items-center gap-2 px-6 py-3 text-slate-300 font-semibold text-sm tracking-wide rounded-full hover:text-white transition-colors"
               >
-                <Download size={15} /> Request Full CV
+                <Download size={15} /> Request full CV
               </a>
             </MagneticButton>
           </div>
         </motion.div>
       </section>
 
-      {/* ── Stats strip ── */}
-      <div className="border-y border-white/5 bg-white/[0.01] py-10 px-6 mb-16">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {[
-            { value: '15+', label: 'Projects shipped' },
-            { value: '3+', label: 'Years of experience' },
-            { value: '4', label: 'Industries served' },
-            { value: '100%', label: 'Custom-built sites' },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="text-center"
-            >
-              <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
-              <div className="text-xs text-slate-500 font-medium uppercase tracking-widest">{stat.label}</div>
-            </motion.div>
+      {/* ── Facts strip: every figure is counted from this site's own data ── */}
+      <div className="border-y border-white/5 bg-white/[0.02] py-8 px-6 mb-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {facts.map(({ icon: Icon, value, label }, i) => (
+            <Reveal key={label} delay={i * 0.06}>
+              <div className="flex items-center gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-500/10 text-primary-300"><Icon size={20} /></span>
+                <div>
+                  <div className="text-xl font-bold text-white sm:text-2xl">{value}</div>
+                  <div className="text-xs text-slate-500">{label}</div>
+                </div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
 
-      {/* ── Main grid ── */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      {/* ── Sticky sub-navigation ── */}
+      <nav aria-label="Page sections" className="sticky top-[60px] z-30 mb-14 border-b border-white/5 bg-surface/80 backdrop-blur-xl">
+        <ul className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 py-2.5">
+          {sections.map((s) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                onClick={jump(s.id)}
+                aria-current={active === s.id ? 'true' : undefined}
+                className={`block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${active === s.id ? 'bg-white text-black' : 'text-slate-400 hover:text-white'}`}
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-        {/* LEFT — Experience + Education */}
-        <div className="lg:col-span-7 space-y-20">
-
-          {/* Experience */}
-          <div>
-            <div className="flex items-center gap-3 mb-10">
-              <Briefcase size={18} className="text-primary-400" />
-              <h2 className="text-xl font-bold text-white tracking-tight">Work Experience</h2>
-            </div>
-            <div>
-              {experience.map((exp, i) => (
-                <ExperienceCard key={exp.role} {...exp} index={i} />
-              ))}
-            </div>
+      <div className="max-w-7xl mx-auto px-6 space-y-24">
+        {/* Experience */}
+        <section id="experience" className="scroll-mt-32">
+          <SectionHeading icon={Briefcase} title="Work experience" />
+          <div className="max-w-4xl">
+            {experience.map((exp, i) => (
+              <ExperienceCard key={exp.role} {...exp} index={i} />
+            ))}
           </div>
+        </section>
 
-          {/* Education */}
-          <div ref={eduRef}>
-            <div className="flex items-center gap-3 mb-8">
-              <GraduationCap size={18} className="text-primary-400" />
-              <h2 className="text-xl font-bold text-white tracking-tight">Education &amp; Learning</h2>
-            </div>
-            <div className="space-y-4">
-              {education.map((edu, i) => (
-                <motion.div
-                  key={edu.qualification}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={eduInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
-                  className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-                    <h3 className="text-white font-bold text-sm">{edu.qualification}</h3>
-                    <span className="text-[10px] font-mono text-slate-500 bg-white/5 px-2 py-0.5 rounded-full flex-shrink-0">{edu.period}</span>
+        {/* Skills & tools */}
+        <section id="skills" className="scroll-mt-32">
+          <SectionHeading icon={Code2} title="Skills & tools" text="What I build with, grouped by job. No made-up percentages: this is simply the toolkit I use." />
+          <TechShowcase />
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-2">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-5">
+                <Award size={18} className="text-primary-400" />
+                <h3 className="text-lg font-bold text-white tracking-tight">Business &amp; people skills</h3>
+              </div>
+              <ul className="flex flex-wrap gap-2.5">
+                {businessSkills.map((skill) => (
+                  <li key={skill} className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-primary-400/50 hover:bg-primary-500/10">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <div className="flex items-center gap-3 mb-5">
+                <Wrench size={18} className="text-primary-400" />
+                <h3 className="text-lg font-bold text-white tracking-tight">Tools &amp; platforms</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tools.map((tool) => (
+                  <div
+                    key={tool.name}
+                    className="group flex flex-col items-start px-3 py-2 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] hover:border-primary-500/30 transition-all cursor-default"
+                  >
+                    <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">{tool.name}</span>
+                    <span className="text-[9px] text-slate-600 mt-0.5 font-mono uppercase tracking-wide">{tool.category}</span>
                   </div>
-                  <p className="text-primary-400 text-xs font-medium mb-3">{edu.institution}</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">{edu.note}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Certificates */}
-            <div className="mt-12">
-              <h3 className="text-lg font-bold text-white tracking-tight">Certificates &amp; short courses</h3>
-              <p className="text-sm text-slate-500 mt-1 mb-8">
-                {certificateCount} completed courses and programs, grouped by topic. &ldquo;Verify&rdquo; opens the certificate on the issuer&rsquo;s site where a public link exists.
-              </p>
-              <div className="space-y-8">
-                {certificateGroups.map((group) => (
-                  <CertificateGroup key={group.title} {...group} />
                 ))}
               </div>
-            </div>
+            </Reveal>
           </div>
+        </section>
 
-        </div>
-
-        {/* RIGHT — Skills + Tools */}
-        <div className="lg:col-span-5 space-y-12">
-
-          {/* Technical Skills */}
-          <div ref={skillsRef}>
-            <div className="flex items-center gap-3 mb-8">
-              <Code2 size={18} className="text-primary-400" />
-              <h2 className="text-xl font-bold text-white tracking-tight">Technical Skills</h2>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-              {techSkills.map((skill, i) => (
-                <SkillBar key={skill.name} name={skill.name} level={skill.level} index={i} />
-              ))}
-            </div>
+        {/* Education */}
+        <section id="education" className="scroll-mt-32">
+          <SectionHeading icon={GraduationCap} title="Education & learning" />
+          <div className="grid gap-4 lg:grid-cols-3">
+            {education.map((edu, i) => (
+              <Reveal key={edu.qualification} delay={i * 0.08} className="h-full">
+                <div className="h-full p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-primary-400/30 transition-colors">
+                  <span className="inline-block text-[10px] font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded-full mb-3">{edu.period}</span>
+                  <h3 className="text-white font-bold text-base leading-snug">{edu.qualification}</h3>
+                  <p className="text-primary-400 text-xs font-medium mt-1.5 mb-3">{edu.institution}</p>
+                  <p className="text-slate-400 text-sm leading-relaxed">{edu.note}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
+        </section>
 
-          {/* Business Skills */}
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <Award size={18} className="text-primary-400" />
-              <h2 className="text-xl font-bold text-white tracking-tight">Business &amp; People Skills</h2>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-              {softSkills.map((skill, i) => (
-                <SkillBar key={skill.name} name={skill.name} level={skill.level} index={i} />
-              ))}
-            </div>
-          </div>
-
-          {/* Tools */}
-          <div ref={toolsRef}>
-            <div className="flex items-center gap-3 mb-8">
-              <Wrench size={18} className="text-primary-400" />
-              <h2 className="text-xl font-bold text-white tracking-tight">Tools &amp; Platforms</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {tools.map((tool, i) => (
-                <motion.div
-                  key={tool.name}
-                  initial={{ opacity: 0, scale: 0.88 }}
-                  animate={toolsInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.35, delay: i * 0.04 }}
-                  className="group flex flex-col items-start px-3 py-2 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] hover:border-primary-500/30 transition-all cursor-default"
-                >
-                  <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">{tool.name}</span>
-                  <span className="text-[9px] text-slate-600 mt-0.5 font-mono uppercase tracking-wide">{tool.category}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-        </div>
+        {/* Certificates */}
+        <section id="certificates" className="scroll-mt-32">
+          <SectionHeading
+            icon={BadgeCheck}
+            title="Certificates & short courses"
+            text={`${certificateCount} completed courses and programs. Search, filter by topic or issuer, and use "Verify" to open the certificate on the issuer's site where a public link exists.`}
+          />
+          <CertificateExplorer />
+        </section>
       </div>
 
       {/* ── Bottom CTA ── */}
       <div className="max-w-7xl mx-auto px-6 mt-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500/15 to-cyan-500/10 border border-white/8 p-10 md:p-14 text-center"
-        >
-          <div className="absolute inset-0 bg-white/[0.02]" />
-          <div className="relative z-10">
-            <p className="text-xs font-mono text-primary-400 uppercase tracking-widest mb-4">Ready to work together?</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-              Let's build something<br />worth being proud of.
-            </h2>
-            <p className="text-slate-400 mb-8 max-w-md mx-auto">
-              Whether you need a website, a quote calculator or a booking page — I'm available for freelance projects in Cape Town and remotely.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <MagneticButton>
-                <a
-                  href="mailto:iedereesfrancis@gmail.com?subject=Enquiry from Portfolio — Credentials page"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-xl"
-                >
-                  Get a free quote
-                </a>
-              </MagneticButton>
-              <MagneticButton>
-                <Link
-                  to="/work"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-bold text-sm tracking-wide rounded-full border border-white/15 hover:bg-white/20 transition-colors"
-                >
-                  See my projects <ArrowUpRight size={14} />
-                </Link>
-              </MagneticButton>
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500/15 to-cyan-500/10 border border-white/8 p-10 md:p-14 text-center">
+            <div className="absolute inset-0 bg-white/[0.02]" />
+            <div className="relative z-10">
+              <p className="text-xs font-mono text-primary-400 uppercase tracking-widest mb-4">Ready to work together?</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                Let's build something<br />worth being proud of.
+              </h2>
+              <p className="text-slate-400 mb-8 max-w-md mx-auto">
+                Whether you need a website, a quote calculator or a booking page — I'm available for freelance projects in Cape Town and remotely.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <MagneticButton>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-slate-200 transition-colors shadow-xl"
+                  >
+                    Get a free quote
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <a
+                    href={hireMailto('Enquiry from Portfolio — Credentials page')}
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-bold text-sm tracking-wide rounded-full border border-white/15 hover:bg-white/20 transition-colors"
+                  >
+                    Hire me
+                  </a>
+                </MagneticButton>
+              </div>
+              <p className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-500"><MapPin size={12} /> Cape Town, South Africa · working remotely worldwide</p>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </div>
   );
