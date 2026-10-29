@@ -30,7 +30,9 @@ export default defineConfig({
         // The standalone dashboards under /dashboards/ are real static HTML files: keep them out of the
         // precache and make sure the SPA navigation fallback never swaps them for index.html.
         globIgnores: ['dashboards/**'],
-        navigateFallbackDenylist: [/\/dashboards\//]
+        // CraftBill has a generated static entry page. Fetch it from the network
+        // rather than serving a cached SPA shell that might predate the project.
+        navigateFallbackDenylist: [/\\/dashboards\\//, /\\/work\\/craftbill-angular-saas\\/?/]
       }
     })
   ],
