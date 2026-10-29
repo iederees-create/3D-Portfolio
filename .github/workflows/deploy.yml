@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
 
       - name: Install dependencies
@@ -41,6 +41,13 @@ jobs:
           git push origin HEAD:main || true
           if grep -q "error" build-log.txt; then exit 1; fi
           if grep -q "ERR!" install-log.txt; then exit 1; fi
+
+      - name: Build CraftBill Angular SaaS
+        run: |
+          npm install --prefix apps/craftbill --no-audit --no-fund
+          npm run build --prefix apps/craftbill
+          mkdir -p dist/craftbill
+          cp -a apps/craftbill/dist/craftbill/browser/. dist/craftbill/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
