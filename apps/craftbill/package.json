@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "ng build --configuration production --base-href /3D-Portfolio/craftbill/"
+    "build": "ng build --configuration production --base-href /3D-Portfolio/craftbill/",
+    "build:render": "node scripts/configure.mjs && ng build --configuration production --base-href /"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

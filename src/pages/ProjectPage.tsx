@@ -212,7 +212,7 @@ export default function ProjectPage() {
             </div>
             {project.status && (
               <span className="mb-3 inline-flex rounded-full border border-sky-400/25 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-200">
-                {project.status} · Public demo pending
+                {project.status} · {project.title === 'CraftBill — Angular SaaS' ? 'Interactive beta available' : 'Public demo pending'}
               </span>
             )}
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">{project.title}</h1>
@@ -233,7 +233,7 @@ export default function ProjectPage() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              {project.status ? (
+              {project.status && project.title !== 'CraftBill — Angular SaaS' ? (
                 <span className="inline-flex items-center gap-2 rounded-xl border border-sky-400/25 bg-sky-400/10 px-4 py-2.5 text-sm font-semibold text-sky-200">
                   Development source prepared · Demo not live
                 </span>
