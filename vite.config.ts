@@ -32,7 +32,7 @@ export default defineConfig({
         globIgnores: ['dashboards/**'],
         // CraftBill has a generated static entry page. Fetch it from the network
         // rather than serving a cached SPA shell that might predate the project.
-        navigateFallbackDenylist: [/\\/dashboards\\//, /\\/work\\/craftbill-angular-saas\\/?/]
+        navigateFallbackDenylist: [/\/dashboards\//, /\/work\/craftbill-angular-saas\/?/]
       }
     })
   ],
