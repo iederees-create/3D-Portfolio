@@ -27,12 +27,13 @@ const makeDoc=(kind:Kind):Doc=>({id:'',kind,client_id:null,number:(kind==='invoi
 const exampleClients:Contact[]=[{id:'demo-1',name:'Lumina Studio',email:'hello@lumina.example',phone:''},{id:'demo-2',name:'Northstar Digital',email:'accounts@northstar.example',phone:''}];
 const exampleDocs:Doc[]=[{...makeDoc('invoice'),id:'demo-invoice-1',client_id:'demo-1',number:'INV-2026-001',title:'Website design',status:'paid',items:[{description:'Website development',quantity:1,unit_price:4800}]},{...makeDoc('invoice'),id:'demo-invoice-2',client_id:'demo-2',number:'INV-2026-002',title:'Monthly content',status:'sent',items:[{description:'Social media content',quantity:1,unit_price:2500}]},{...makeDoc('quote'),id:'demo-quote-1',client_id:'demo-1',number:'QUO-2026-003',title:'Brand refresh proposal',status:'draft',items:[{description:'Brand identity consultation',quantity:1,unit_price:3200}]}];
 @Injectable({providedIn:'root'})class Backend{
- readonly configured=!!(settings.supabaseUrl&&settings.supabasePublishableKey);
+ readonly configured=!location.hostname.endsWith('github.io')&&!!(settings.supabaseUrl&&settings.supabasePublishableKey);
  readonly client:SupabaseClient|null=this.configured?createClient(settings.supabaseUrl,settings.supabasePublishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
 }
 @Component({selector:'app-root',standalone:true,imports:[FormsModule,CommonModule],templateUrl:'./view.html',changeDetection:ChangeDetectionStrategy.OnPush})
 class CraftBill implements OnInit{
  readonly backend=inject(Backend);
+ readonly portfolioDemo=location.hostname.endsWith('github.io');
  readonly page=signal<Page>('home');readonly view=signal<View>('overview');readonly authMode=signal<AuthMode>('signup');
  readonly demo=signal(false);readonly user=signal<User|null>(null);
  readonly clients=signal<Contact[]>([]);readonly docs=signal<Doc[]>([]);
@@ -51,7 +52,7 @@ class CraftBill implements OnInit{
  constructor(){
    this.searchInput.pipe(debounceTime(180),distinctUntilChanged()).subscribe(s=>this.search.set(s));
    this.demo.set(local('demo',false));if(this.demo())this.restoreDemo();
-   this.backend.client?.auth.onAuthStateChange((_event,session)=>this.user.set(session?.user||null));
+   this.backend.client?.auth.onAuthStateChange((event,session)=>{this.user.set(session?.user||null);if(event==='PASSWORD_RECOVERY'){this.authMode.set('update');this.page.set('auth');}});
  }
  async ngOnInit(){
   if(this.demo()){this.page.set('workspace');return;}

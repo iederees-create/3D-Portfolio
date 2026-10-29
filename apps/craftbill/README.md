@@ -10,3 +10,5 @@ For production, configure only the public Supabase project URL and publishable k
 This app is built by GitHub Actions from apps/craftbill and copied into the GitHub Pages dist/craftbill folder. Node 24 is required by Angular 22. The root portfolio site is not converted to Angular.
 
 For development: npm install && npm run build.
+
+GitHub Pages hosts only the educational portfolio demonstration. The production commercial SaaS must be deployed to Render or another host permitted for business use. GitHub Pages is not for operating commercial SaaS. Browser-side Supabase access is intentionally disabled when served on github.io.
