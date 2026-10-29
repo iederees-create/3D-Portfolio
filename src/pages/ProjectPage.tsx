@@ -210,6 +210,11 @@ export default function ProjectPage() {
             <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
               {project.category}
             </div>
+            {project.status && (
+              <span className="mb-3 inline-flex rounded-full border border-sky-400/25 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-200">
+                {project.status} · Public demo pending
+              </span>
+            )}
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">{project.title}</h1>
             <p className="text-slate-400 leading-relaxed mb-6">{project.description}</p>
 
@@ -228,7 +233,11 @@ export default function ProjectPage() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-6">
-              {isInternalProjectUrl(project.liveUrl) ? (
+              {project.status ? (
+                <span className="inline-flex items-center gap-2 rounded-xl border border-sky-400/25 bg-sky-400/10 px-4 py-2.5 text-sm font-semibold text-sky-200">
+                  Development source prepared · Demo not live
+                </span>
+              ) : isInternalProjectUrl(project.liveUrl) ? (
                 <Link to={toRouterPath(project.liveUrl)} className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-black hover:bg-slate-200">
                   <ExternalLink size={16} /> View Case Study
                 </Link>

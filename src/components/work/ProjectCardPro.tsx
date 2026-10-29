@@ -65,6 +65,11 @@ const ProjectCardPro = forwardRef<HTMLDivElement, Props>(function ProjectCardPro
               Open case study <ArrowUpRight size={13} />
             </span>
           </div>
+          {project.status && (
+            <span className="absolute right-3 top-3 rounded-full border border-sky-300/30 bg-slate-950/85 px-2.5 py-1 text-[10px] font-semibold text-sky-200 backdrop-blur">
+              {project.status}
+            </span>
+          )}
           {project.featured && (
             <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-amber-300/30 bg-black/60 px-2.5 py-1 text-[10px] font-semibold text-amber-200 backdrop-blur">
               <Star size={10} fill="currentColor" /> Featured

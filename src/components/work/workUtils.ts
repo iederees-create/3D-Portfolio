@@ -5,6 +5,8 @@ import type { Project } from '../../pages/WorkPage';
  * so aliases are folded into one filter each. Only tags/tools that already exist on a project count.
  */
 const TECH_ALIASES: Record<string, string[]> = {
+  Angular: ['angular', 'angular 22'],
+  RxJS: ['rxjs'],
   React: ['react', 'components', 'component driven'],
   TypeScript: ['typescript'],
   JavaScript: ['javascript', 'html/css/js'],

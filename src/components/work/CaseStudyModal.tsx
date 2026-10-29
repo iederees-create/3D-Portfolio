@@ -264,7 +264,7 @@ export default function CaseStudyModal({ project, slug, onClose, onPrev, onNext 
                   <div>
                     <dt className="text-xs text-slate-500">Delivery</dt>
                     <dd className="font-medium text-white">
-                      {internal ? 'Case study page' : 'Live demo site'}
+                      {project.status ? 'Source project · deployment pending' : internal ? 'Case study page' : 'Live demo site'}
                       {project.etsyUrl ? ' · Template on Etsy' : ''}
                     </dd>
                   </div>

@@ -29,6 +29,8 @@ export interface Project {
   toolBadge?: string;
   /** Optional detailed case-study breakdown shown in the showcase modal. */
   caseStudy?: ProjectCaseStudy;
+  /** Clearly identify projects that are still being built, not deployed. */
+  status?: 'In development';
 }
 
 const catClass: Record<string, string> = {
@@ -78,6 +80,42 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 });
 
 export const projects: Project[] = [
+
+  {
+    title: 'CraftBill — Angular SaaS',
+    category: 'AI / Web App / Support Automation',
+    status: 'In development',
+    description: 'A responsive invoicing and quotation SaaS application built with Angular 22, TypeScript, RxJS and Signals. The starter source includes client records, an interactive local demo, Supabase authentication and database design, and a server-side NOWPayments upgrade flow. Deployment, real account testing and live payments are still pending.',
+    tags: ['Angular', 'Angular 22', 'TypeScript', 'RxJS', 'Angular Signals', 'Supabase', 'PostgreSQL', 'NOWPayments', 'SaaS', 'Row-Level Security'],
+    liveUrl: import.meta.env.BASE_URL + 'work/craftbill-angular-saas/',
+    featured: true,
+    coverImage: import.meta.env.BASE_URL + 'projects/craftbill/cover.svg',
+    mediaAlt: 'Illustrated CraftBill Angular billing workspace concept, not a production screenshot',
+    toolBadge: 'Angular 22 SaaS · October 2026 · In development',
+    toolHighlight: 'Portfolio development project with prepared Angular source, local demo mode, database migration and payment functions. The app has not been deployed to a public domain, the Angular production build has not been run, and the Supabase/NOWPayments integration still needs sandbox testing. The illustration is not a live screenshot.',
+    features: [
+      'Angular standalone components, lazy-loaded workspace routes, Signals and RxJS search',
+      'Email signup, verification, sign-in and password recovery flows implemented in source',
+      'Customer records, quotes, invoice editing, revenue summaries and browser print-to-PDF',
+      'Supabase PostgreSQL schema with owner-scoped Row-Level Security policies',
+      'Freemium invoice limit implemented in the database and a planned Pro upgrade',
+      'NOWPayments checkout and signed webhook functions prepared for sandbox configuration',
+      'Interactive local demo with fictional data; no public deployment or paid transactions yet',
+    ],
+    caseStudy: {
+      methodology: 'Designed and implemented a small-business billing workflow as a dedicated Angular learning and portfolio project. Split the UI into standalone components and services, modelled customer and invoice state in TypeScript, built an offline-friendly demonstration mode, and added a Supabase migration plus server-side payment functions for a later production release.',
+      toolsUsed: ['Angular 22', 'TypeScript', 'RxJS', 'Angular Signals', 'Supabase', 'PostgreSQL', 'NOWPayments', 'SQL', 'HTML & CSS'],
+      technicalChallenge: {
+        title: 'Keeping customer records private and payment upgrades server-controlled',
+        body: 'The design separates browser state from trusted server operations. Database Row-Level Security scopes records to their owners. Invoice limits and Pro access are checked in database/server code rather than trusting client-side flags, while payment signatures are designed to be checked on the webhook endpoint.',
+      },
+      privacyDesign: 'The Angular frontend uses only a Supabase publishable key. Service-role credentials and NOWPayments secrets are reserved for server-side functions. The demonstration mode uses fictional browser-local records. Live authentication, payment callbacks, and multi-user privacy still require end-to-end deployment tests.',
+      testResults: [
+        'Five starter-package source-security checks passed.',
+        'Angular source, SQL migration and NOWPayments edge-function files are present for independent review.',
+      ],
+    },
+  },
 
   {
     title: 'QA & Operations Review Case-Study Collection',

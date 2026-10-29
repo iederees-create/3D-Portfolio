@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="CraftBill Angular SaaS design illustration showing invoices, revenue charts, and client management. Concept preview, not a production screenshot.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071a2e"/><stop offset=".5" stop-color="#0a1024"/><stop offset="1" stop-color="#142338"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#58c3ff"/><stop offset="1" stop-color="#7184ff"/></linearGradient>
+    <linearGradient id="chart" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#38bdf8" stop-opacity=".36"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#000" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1060" cy="65" r="280" fill="#1c76b5" opacity=".12"/>
+  <circle cx="80" cy="635" r="240" fill="#3f4ca5" opacity=".13"/>
+  <g opacity=".16" stroke="#5b87a9" stroke-width=".7">
+    <path d="M0 100H1200 M0 200H1200 M0 300H1200 M0 400H1200 M0 500H1200 M0 600H1200"/>
+    <path d="M100 0V675 M200 0V675 M300 0V675 M400 0V675 M500 0V675 M600 0V675 M700 0V675 M800 0V675 M900 0V675 M1000 0V675 M1100 0V675"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="66" y="56" width="1068" height="564" rx="24" fill="#0c1729" stroke="#29425e" stroke-width="2"/>
+    <rect x="66" y="56" width="232" height="564" rx="24" fill="#0a1220"/>
+    <path d="M298 56V620" stroke="#294057" stroke-width="2"/>
+    <rect x="94" y="88" width="38" height="38" rx="12" fill="url(#blue)"/>
+    <text x="113" y="115" fill="#071b34" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle">C</text>
+    <text x="147" y="116" fill="#f6f9ff" font-family="Arial,sans-serif" font-size="27" font-weight="700">CraftBill</text>
+    <text x="99" y="171" fill="#6990ae" font-family="Arial,sans-serif" font-size="12" letter-spacing="3">WORKSPACE</text>
+    <rect x="90" y="189" width="184" height="43" rx="10" fill="#233d59"/>
+    <rect x="107" y="205" width="13" height="13" rx="3" fill="#6fd0ff"/>
+    <text x="136" y="216" fill="#ecf8ff" font-family="Arial,sans-serif" font-size="16">Overview</text>
+    <g font-family="Arial,sans-serif" font-size="16" fill="#8aabc5">
+      <text x="136" y="270">Clients</text>
+      <text x="136" y="322">Quotes</text>
+      <text x="136" y="374">Invoices</text>
+      <text x="136" y="426">Reports</text>
+      <text x="136" y="478">Settings</text>
+    </g>
+    <g fill="none" stroke="#7496b1" stroke-width="2">
+      <rect x="108" y="254" width="14" height="12" rx="2"/><rect x="108" y="306" width="14" height="12" rx="2"/>
+      <rect x="108" y="358" width="14" height="12" rx="2"/><rect x="108" y="410" width="14" height="12" rx="2"/>
+      <rect x="108" y="462" width="14" height="12" rx="2"/>
+    </g>
+    <text x="332" y="106" fill="#f1f7ff" font-family="Arial,sans-serif" font-size="27" font-weight="700">Business overview</text>
+    <text x="332" y="135" fill="#9ab6c9" font-family="Arial,sans-serif" font-size="15">Manage clients, quotes and invoices in one place</text>
+    <rect x="970" y="84" width="131" height="43" rx="12" fill="url(#blue)"/>
+    <text x="1036" y="110" fill="#072139" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700">+ New invoice</text>
+    <g>
+      <rect x="332" y="173" width="236" height="132" rx="16" fill="#152c43" stroke="#2c4762"/>
+      <rect x="586" y="173" width="236" height="132" rx="16" fill="#152c43" stroke="#2c4762"/>
+      <rect x="840" y="173" width="260" height="132" rx="16" fill="#152c43" stroke="#2c4762"/>
+      <g font-family="Arial,sans-serif">
+        <text x="354" y="209" fill="#a0b8c9" font-size="15">Total invoiced</text>
+        <text x="354" y="258" fill="#f1f8ff" font-size="36" font-weight="700">R 48,200</text>
+        <text x="608" y="209" fill="#a0b8c9" font-size="15">Clients</text>
+        <text x="608" y="258" fill="#f1f8ff" font-size="36" font-weight="700">24</text>
+        <text x="862" y="209" fill="#a0b8c9" font-size="15">Outstanding</text>
+        <text x="862" y="258" fill="#f1f8ff" font-size="36" font-weight="700">R 12,480</text>
+      </g>
+    </g>
+    <rect x="332" y="326" width="480" height="256" rx="16" fill="#12273d" stroke="#2c4762"/>
+    <text x="356" y="361" fill="#eef8ff" font-family="Arial,sans-serif" font-size="19" font-weight="700">Revenue activity</text>
+    <g stroke="#476077" stroke-width="1" opacity=".6"><path d="M357 407H788M357 453H788M357 499H788M357 545H788"/></g>
+    <path d="M357 512 L412 477 L472 493 L531 432 L594 443 L656 384 L720 398 L785 368 L785 544 L357 544Z" fill="url(#chart)"/>
+    <path d="M357 512 L412 477 L472 493 L531 432 L594 443 L656 384 L720 398 L785 368" fill="none" stroke="#59c9ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#68d2ff"><circle cx="531" cy="432" r="5"/><circle cx="656" cy="384" r="5"/><circle cx="785" cy="368" r="5"/></g>
+    <rect x="829" y="326" width="271" height="256" rx="16" fill="#12273d" stroke="#2c4762"/>
+    <text x="852" y="361" fill="#eef8ff" font-family="Arial,sans-serif" font-size="18" font-weight="700">Recent invoices</text>
+    <g font-family="Arial,sans-serif" font-size="14">
+      <text x="852" y="404" fill="#dbeaf7">INV-1042</text><text x="852" y="425" fill="#7592a8">Acme Studio</text>
+      <text x="852" y="474" fill="#dbeaf7">INV-1041</text><text x="852" y="495" fill="#7592a8">Northwind Co.</text>
+      <text x="852" y="546" fill="#dbeaf7">INV-1040</text><text x="852" y="567" fill="#7592a8">Urban Works</text>
+    </g>
+    <g font-family="Arial,sans-serif" font-size="12" font-weight="700">
+      <rect x="1020" y="392" width="61" height="22" rx="11" fill="#0d593e"/><text x="1050" y="407" fill="#90f0ba" text-anchor="middle">Paid</text>
+      <rect x="1005" y="462" width="76" height="22" rx="11" fill="#51441d"/><text x="1043" y="477" fill="#ffe58a" text-anchor="middle">Pending</text>
+      <rect x="1020" y="534" width="61" height="22" rx="11" fill="#0d593e"/><text x="1050" y="549" fill="#90f0ba" text-anchor="middle">Paid</text>
+    </g>
+  </g>
+  <rect x="810" y="633" width="324" height="28" rx="14" fill="#122841" stroke="#3e698a"/>
+  <text x="972" y="652" font-family="Arial,sans-serif" text-anchor="middle" font-size="12" letter-spacing="1" fill="#9ed8fa">ANGULAR 22 • CONCEPT PREVIEW</text>
+</svg>

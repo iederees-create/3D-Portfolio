@@ -16,7 +16,7 @@ export const techGroups: TechGroup[] = [
     id: 'frontend',
     label: 'Front-end',
     blurb: 'Fast, responsive interfaces that work on any phone.',
-    items: ['HTML & CSS', 'JavaScript (ES6+)', 'React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Framer Motion', 'Three.js / React Three Fiber'],
+    items: ['HTML & CSS', 'JavaScript (ES6+)', 'React', 'Angular 22 (project in development)', 'TypeScript', 'Tailwind CSS', 'Vite', 'Framer Motion', 'Three.js / React Three Fiber'],
   },
   {
     id: 'backend',

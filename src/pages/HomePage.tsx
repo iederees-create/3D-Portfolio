@@ -51,7 +51,7 @@ const services = [
 
 /** Four scannable examples. Looked up by title so they stay in sync with WorkPage data. */
 const featuredTitles = [
-  'Tiling Contractor Website Template',
+  'CraftBill — Angular SaaS',
   'Summit Painting CT',
   'Amore Nails CT',
   'InsightForge Business Analytics Studio',
