@@ -1,90 +1,118 @@
 name: Deploy to GitHub Pages
 
+# Only merges to main (or an intentional manual run) publish to GitHub Pages.
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
+# Read-only repository access: the build must never push commits or write logs to main.
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: github-pages-production
   cancel-in-progress: false
 
 jobs:
   build:
+    name: Build and validate website
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - name: Checkout
+      - name: Checkout the exact publishing commit
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "24"
-          cache: "npm"
+          cache: npm
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps > install-log.txt 2>&1 || true
-
-      - name: Build
+      - name: Validate Butterflies Educare source
         run: |
-          npm run build > build-log.txt 2>&1 || true
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add build-log.txt install-log.txt
-          git commit -m "chore: add build logs" || true
-          git push origin HEAD:main || true
-          if grep -q "error" build-log.txt; then exit 1; fi
-          if grep -q "ERR!" install-log.txt; then exit 1; fi
+          node scripts/validate-butterflies.mjs public/butterflies-educare
+          node --check public/butterflies-educare/site.js
+
+      - name: Install portfolio dependencies from lockfile
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+
+      - name: Build portfolio
+        run: npm run build
+
+      - name: Install CraftBill dependencies from lockfile
+        run: npm ci --prefix apps/craftbill --no-audit --no-fund
 
       - name: Build CraftBill Angular SaaS
         run: |
-          npm install --prefix apps/craftbill --no-audit --no-fund
           npm run build --prefix apps/craftbill
-          # Preserve a reproducible npm lockfile for the Angular app.
-          git add apps/craftbill/package-lock.json
-          git commit -m "chore: lock CraftBill npm dependencies" || true
-          git push origin HEAD:main || true
           mkdir -p dist/craftbill
           cp -a apps/craftbill/dist/craftbill/browser/. dist/craftbill/
 
-      # Prevent publishing a placeholder instead of the school's full preview.
-      - name: Validate Butterflies Educare preview
+      - name: Validate the actual Pages artifact
         run: |
-          set -euo pipefail
-          PAGE="dist/butterflies-educare/index.html"
-          test -s "$PAGE" || { echo "::error::Butterflies page is missing"; exit 1; }
-          grep -qi '<!doctype html' "$PAGE" || { echo "::error::Butterflies page is not an HTML document"; exit 1; }
-          grep -q '<title>Butterflies Educare' "$PAGE" || { echo "::error::Butterflies page has lost its title"; exit 1; }
-          grep -qi '</html>' "$PAGE" || { echo "::error::Butterflies page is incomplete"; exit 1; }
-          if [ "$(wc -c < "$PAGE")" -lt 4096 ]; then
-            echo "::error::Butterflies page is unexpectedly small; refusing to deploy"
-            exit 1
-          fi
-          if grep -Eq 'PLACEHOLDER_(AGAIN|WILL_FAIL)' "$PAGE"; then
-            echo "::error::Butterflies placeholder detected; refusing to deploy"
-            exit 1
-          fi
-          test -s dist/butterflies-educare/site.js || { echo "::error::Butterflies script missing"; exit 1; }
-          test -s dist/butterflies-educare/favicon.svg || { echo "::error::Butterflies favicon missing"; exit 1; }
+          node scripts/validate-butterflies.mjs dist/butterflies-educare
+          node --check dist/butterflies-educare/site.js
+          test -s dist/index.html || { echo "::error::Portfolio homepage missing"; exit 1; }
+          test -s dist/craftbill/index.html || { echo "::error::CraftBill homepage missing"; exit 1; }
 
-      - name: Upload artifact
+      - name: Stamp exact publishing revision for live verification
+        run: |
+          printf '%s\n' "$GITHUB_SHA" > dist/butterflies-educare/deploy-version.txt
+          printf '%s\n' "$GITHUB_SHA" > dist/deploy-version.txt
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: ./dist
 
   deploy:
+    name: Deploy GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+      url: https://iederees-create.github.io/3D-Portfolio/
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  verify:
+    name: Verify actual live release
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Confirm live revision, school HTML, script and favicon
+        env:
+          SCHOOL_URL: https://iederees-create.github.io/3D-Portfolio/butterflies-educare
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 20); do
+            version="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "$SCHOOL_URL/deploy-version.txt?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+            if [[ "$version" == "$GITHUB_SHA" ]]; then
+              html="$(curl -fsSL --max-time 20 "$SCHOOL_URL/?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              script="$(curl -fsSL --max-time 20 "$SCHOOL_URL/site.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              favicon="$(curl -fsSL --max-time 20 "$SCHOOL_URL/favicon.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              if [[ "$html" == *"<title>Butterflies Educare"* ]] &&
+                 [[ "$html" == *"</html>"* ]] &&
+                 [[ "$html" == *"site.js"* ]] &&
+                 [[ "$script" == *"be_public_content"* ]] &&
+                 [[ "$favicon" == *"<svg"* ]]; then
+                echo "Confirmed published revision: $GITHUB_SHA"
+                echo "Live site: $SCHOOL_URL/"
+                exit 0
+              fi
+            fi
+            echo "Attempt $attempt: Pages has not yet served the matching release and assets."
+            sleep 10
+          done
+          echo "::error::GitHub Pages did not serve revision $GITHUB_SHA with valid school assets."
+          exit 1
