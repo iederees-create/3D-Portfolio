@@ -39,8 +39,8 @@
     .hero { position: relative; }
     .hero-illustration { position: relative; z-index: 2; }
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .js-animations .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .js-animations .reveal.visible { opacity: 1; transform: translateY(0); }
     .panel, .step, .update-card, .support-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
     .panel:hover, .step:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(25,60,47,0.08); }
     @media (hover: hover) {
@@ -49,7 +49,7 @@
     .floating-flower { position: absolute; pointer-events: none; opacity: 0.7; animation: float 8s ease-in-out infinite; }
     @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .js-animations .reveal { opacity: 1; transform: none; transition: none; }
       .panel:hover, .step:hover { transform: none; }
       .floating-flower { animation: none; }
       #hero-canvas { display: none; }
