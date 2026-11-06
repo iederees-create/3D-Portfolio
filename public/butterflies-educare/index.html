@@ -35,6 +35,39 @@
     h1,h2,h3,p{overflow-wrap:break-word}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
   
+    /* Visible, dependency-free dimensional butterflies above the school illustration. */
+    .hero-art{position:relative;z-index:2}
+    #hero-canvas{z-index:3;opacity:.8}
+    .floating-flower{z-index:4}
+    .butterfly-garden{position:absolute;inset:0;z-index:5;pointer-events:none;perspective:600px;overflow:visible}
+    .bf{position:absolute;display:block;width:86px;height:72px;transform-style:preserve-3d;filter:drop-shadow(0 8px 7px rgba(38,81,62,.2));will-change:transform}
+    .bf-1{left:5%;top:16%;--wing:#f1a98e;--wing-light:#ffdbb5;animation:bf-path-a 10s ease-in-out infinite alternate}
+    .bf-2{right:4%;top:20%;--wing:#f5d17a;--wing-light:#ffe9b4;animation:bf-path-b 12s ease-in-out infinite alternate}
+    .bf-3{left:50%;bottom:12%;--wing:#7faf9a;--wing-light:#c8e5d7;animation:bf-path-c 13s ease-in-out infinite alternate}
+    .bf-wings{position:absolute;inset:0;transform-style:preserve-3d;transform:rotate(-13deg)}
+    .bf-wing{position:absolute;top:10px;width:41px;height:46px;border:1px solid rgba(37,80,61,.12);background:radial-gradient(circle at 58% 37%,var(--wing-light) 0 19%,transparent 20%),linear-gradient(145deg,var(--wing-light),var(--wing));box-shadow:inset 0 1px 9px rgba(255,255,255,.48),inset 0 -4px 8px rgba(30,71,52,.07);backface-visibility:visible}
+    .bf-left{left:2px;border-radius:83% 20% 64% 37%;transform-origin:100% 65%;animation:bf-flap-left .77s ease-in-out infinite alternate}
+    .bf-right{right:2px;border-radius:20% 83% 37% 64%;transform-origin:0 65%;animation:bf-flap-right .77s ease-in-out infinite alternate}
+    .bf-body{position:absolute;left:calc(50% - 4px);top:24px;width:8px;height:36px;background:#315b49;border-radius:8px;box-shadow:0 2px 3px rgba(0,0,0,.1)}
+    .bf-body:before,.bf-body:after{content:"";position:absolute;top:-11px;width:2px;height:15px;background:#315b49;border-radius:3px}
+    .bf-body:before{left:1px;transform:rotate(-27deg);transform-origin:bottom}
+    .bf-body:after{right:1px;transform:rotate(27deg);transform-origin:bottom}
+    @keyframes bf-flap-left{from{transform:rotateY(-24deg) rotate(-7deg)}to{transform:rotateY(68deg) rotate(7deg)}}
+    @keyframes bf-flap-right{from{transform:rotateY(24deg) rotate(7deg)}to{transform:rotateY(-68deg) rotate(-7deg)}}
+    @keyframes bf-path-a{from{transform:translate3d(0,0,15px) rotate(-8deg)}to{transform:translate3d(60px,32px,28px) rotate(13deg)}}
+    @keyframes bf-path-b{from{transform:translate3d(0,0,8px) rotate(8deg)}to{transform:translate3d(-48px,-34px,25px) rotate(-18deg)}}
+    @keyframes bf-path-c{from{transform:translate3d(0,0,10px) rotate(4deg)}to{transform:translate3d(46px,-31px,30px) rotate(18deg)}}
+    @media(max-width:760px){
+      .bf{width:64px;height:54px;transform:scale(.72);transform-origin:center}
+      .bf-wing{width:30px;height:36px;top:8px}
+      .bf-body{height:26px;top:21px}
+      .bf-3{display:none}
+      #hero-canvas{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .bf,.bf-wing{animation:none!important;will-change:auto}
+      .bf-wing{transform:none!important}
+    }
     /* 3D & animation enhancements */
     .hero { position: relative; }
     .hero-illustration { position: relative; z-index: 2; }
@@ -90,6 +123,11 @@
           <div class="floating-flower" style="top:15%; left:10%; font-size:2rem;">✿</div>
           <div class="floating-flower" style="bottom:20%; right:15%; font-size:1.6rem; animation-delay:2s;">❀</div>
           <div class="floating-flower" style="top:40%; right:5%; font-size:1.4rem; animation-delay:4s;">✿</div>
+          <div class="butterfly-garden" aria-hidden="true">
+            <span class="bf bf-1"><span class="bf-wings"><span class="bf-wing bf-left"></span><span class="bf-wing bf-right"></span><span class="bf-body"></span></span></span>
+            <span class="bf bf-2"><span class="bf-wings"><span class="bf-wing bf-left"></span><span class="bf-wing bf-right"></span><span class="bf-body"></span></span></span>
+            <span class="bf bf-3"><span class="bf-wings"><span class="bf-wing bf-left"></span><span class="bf-wing bf-right"></span><span class="bf-body"></span></span></span>
+          </div>
           <canvas id="hero-canvas"></canvas>
           <svg class="hero-art" viewBox="0 0 610 505" role="img" aria-label="Playful illustration of a schoolhouse, trees, a rainbow, and butterflies">
             <rect x="20" y="40" width="570" height="430" rx="190" fill="#E5EEE3"/>
