@@ -29,10 +29,10 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6 MiB limit to accommodate 3D libraries
         // The standalone dashboards under /dashboards/ are real static HTML files: keep them out of the
         // precache and make sure the SPA navigation fallback never swaps them for index.html.
-        globIgnores: ['dashboards/**', 'craftbill/**'],
+        globIgnores: ['dashboards/**', 'craftbill/**', 'butterflies-educare/**'],
         // CraftBill has a generated static entry page. Fetch it from the network
         // rather than serving a cached SPA shell that might predate the project.
-        navigateFallbackDenylist: [/\/dashboards\//, /\/work\/craftbill-angular-saas\/?/, /\/craftbill\//]
+        navigateFallbackDenylist: [/\/dashboards\//, /\/work\/craftbill-angular-saas\/?/, /\/craftbill\//, /\/butterflies-educare\//]
       }
     })
   ],
