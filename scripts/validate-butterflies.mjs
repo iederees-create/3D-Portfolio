@@ -17,6 +17,8 @@ const load = (name) => {
 const html = load('index.html');
 const script = load('site.js');
 const favicon = load('favicon.svg');
+const atmosphereCSS = html.includes('href="./atmosphere.css"') ? load('atmosphere.css') : null;
+const atmosphereJS = html.includes('src="./atmosphere.js"') ? load('atmosphere.js') : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -26,7 +28,9 @@ if (!/<main\b/i.test(html) || !/<\/main\s*>/i.test(html)) problems.push('Main we
 if (/PLACEHOLDER_(?:AGAIN|WILL_FAIL)|^\s*PLACEHOLDER\b/i.test(html)) problems.push('Placeholder content detected');
 if (Buffer.byteLength(script, 'utf8') < 200) problems.push('site.js is missing or truncated');
 if (!/<svg\b/i.test(favicon)) problems.push('favicon.svg is invalid');
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script)) problems.push('Potential secret accidentally included in browser JavaScript');
+if (atmosphereCSS !== null && Buffer.byteLength(atmosphereCSS, 'utf8') < 200) problems.push('atmosphere.css is missing or truncated');
+if (atmosphereJS !== null && Buffer.byteLength(atmosphereJS, 'utf8') < 100) problems.push('atmosphere.js is missing or truncated');
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
