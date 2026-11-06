@@ -26,6 +26,7 @@ jobs:
         run: |
           node scripts/validate-butterflies.mjs public/butterflies-educare
           node --check public/butterflies-educare/site.js
+          node --check public/butterflies-educare/atmosphere.js
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps --no-audit --no-fund
@@ -44,5 +45,6 @@ jobs:
         run: |
           node scripts/validate-butterflies.mjs dist/butterflies-educare
           node --check dist/butterflies-educare/site.js
+          node --check dist/butterflies-educare/atmosphere.js
           test -s dist/index.html
           test -s dist/craftbill/index.html
