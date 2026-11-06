@@ -72,7 +72,7 @@
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isMobile = window.innerWidth < 760 || /Mobi|Android/i.test(navigator.userAgent);
 
-  if (canvas && typeof THREE !== "undefined" && !prefersReduced) {
+  if (canvas && typeof THREE !== "undefined" && !prefersReduced && !isMobile) {
     try { initButterflies(); } catch (err) { console.warn("3D scene unavailable; showing static illustration."); }
   }
 
@@ -243,40 +243,5 @@
     }, 300);
   }
 
-  // Occasional CSS butterflies flying across screen (lightweight)
-  function spawnFlyingButterfly() {
-    if (prefersReduced || isMobile) return;
-    const bf = document.createElement("div");
-    bf.className = "css-butterfly";
-    bf.innerHTML = "\uD83E\uDD8B";
-    bf.style.cssText = `
-      position: fixed; font-size: 1.8rem; pointer-events: none; z-index: 100;
-      left: -50px; top: ${20 + Math.random() * 60}%;
-      animation: flyAcross ${8 + Math.random() * 6}s linear forwards;
-      opacity: 0.8;
-    `;
-    document.body.appendChild(bf);
-    setTimeout(() => bf.remove(), 14000);
-  }
-  // Add keyframes if not present
-  if (!document.getElementById("fly-keyframes")) {
-    const style = document.createElement("style");
-    style.id = "fly-keyframes";
-    style.textContent = `
-      @keyframes flyAcross {
-        0% { transform: translateX(0) translateY(0) rotate(0deg); }
-        25% { transform: translateX(25vw) translateY(-20px) rotate(5deg); }
-        50% { transform: translateX(50vw) translateY(15px) rotate(-3deg); }
-        75% { transform: translateX(75vw) translateY(-10px) rotate(4deg); }
-        100% { transform: translateX(110vw) translateY(0) rotate(0deg); }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-  // Spawn occasionally
-  if (!prefersReduced && !isMobile) {
-    setInterval(spawnFlyingButterfly, 12000 + Math.random() * 8000);
-    setTimeout(spawnFlyingButterfly, 2000);
-  }
-
+  // Butterfly garden is rendered in accessible, dependency-free CSS, even when WebGL is unavailable.
 })();
