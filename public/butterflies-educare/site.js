@@ -42,10 +42,13 @@
       }).catch(() => {/* Keep accurate static preview wording if Supabase is offline. */});
   }
 
+  // Enhance only when JavaScript runs; keep content visible without it.
+  document.documentElement.classList.add("js-animations");
+
   // Scroll reveal animations
   function observeReveals() {
     const reveals = document.querySelectorAll(".reveal:not(.observed)");
-    if (!reveals.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!reveals.length || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       reveals.forEach(el => el.classList.add("visible"));
       return;
     }
@@ -70,7 +73,7 @@
   const isMobile = window.innerWidth < 760 || /Mobi|Android/i.test(navigator.userAgent);
 
   if (canvas && typeof THREE !== "undefined" && !prefersReduced) {
-    initButterflies();
+    try { initButterflies(); } catch (err) { console.warn("3D scene unavailable; showing static illustration."); }
   }
 
   function initButterflies() {
@@ -164,8 +167,12 @@
     }
 
     let time = 0;
+    let rafId = 0;
+    let disposed = false;
     function animate() {
-      requestAnimationFrame(animate);
+      rafId = 0;
+      if (disposed || document.hidden) return;
+      rafId = requestAnimationFrame(animate);
       time += 0.016;
 
       butterflies.forEach((bf, i) => {
@@ -207,12 +214,21 @@
     window.addEventListener("resize", onResize);
     onResize();
 
-    // Cleanup on page hide
+    // Pause rendering when tab is hidden; release WebGL resources when navigating away.
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        // Could pause, but simple for now
-      }
+      if (!disposed && !document.hidden && !rafId) animate();
     });
+    window.addEventListener("pagehide", () => {
+      disposed = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      scene.traverse((object) => {
+        if (object.geometry) object.geometry.dispose();
+        if (object.material) {
+          (Array.isArray(object.material) ? object.material : [object.material]).forEach(m => m.dispose());
+        }
+      });
+      renderer.dispose();
+    }, { once: true });
   }
 
   // Gentle entrance for hero text
