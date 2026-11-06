@@ -1,0 +1,48 @@
+name: Validate website pull requests
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check portfolio and school before merging
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Validate school source and JavaScript
+        run: |
+          node scripts/validate-butterflies.mjs public/butterflies-educare
+          node --check public/butterflies-educare/site.js
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+
+      - name: Build portfolio
+        run: npm run build
+
+      - name: Build CraftBill
+        run: |
+          npm ci --prefix apps/craftbill --no-audit --no-fund
+          npm run build --prefix apps/craftbill
+          mkdir -p dist/craftbill
+          cp -a apps/craftbill/dist/craftbill/browser/. dist/craftbill/
+
+      - name: Validate output
+        run: |
+          node scripts/validate-butterflies.mjs dist/butterflies-educare
+          node --check dist/butterflies-educare/site.js
+          test -s dist/index.html
+          test -s dist/craftbill/index.html
