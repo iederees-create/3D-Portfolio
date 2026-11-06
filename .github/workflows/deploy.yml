@@ -53,6 +53,26 @@ jobs:
           mkdir -p dist/craftbill
           cp -a apps/craftbill/dist/craftbill/browser/. dist/craftbill/
 
+      # Prevent publishing a placeholder instead of the school's full preview.
+      - name: Validate Butterflies Educare preview
+        run: |
+          set -euo pipefail
+          PAGE="dist/butterflies-educare/index.html"
+          test -s "$PAGE" || { echo "::error::Butterflies page is missing"; exit 1; }
+          grep -qi '<!doctype html' "$PAGE" || { echo "::error::Butterflies page is not an HTML document"; exit 1; }
+          grep -q '<title>Butterflies Educare' "$PAGE" || { echo "::error::Butterflies page has lost its title"; exit 1; }
+          grep -qi '</html>' "$PAGE" || { echo "::error::Butterflies page is incomplete"; exit 1; }
+          if [ "$(wc -c < "$PAGE")" -lt 4096 ]; then
+            echo "::error::Butterflies page is unexpectedly small; refusing to deploy"
+            exit 1
+          fi
+          if grep -Eq 'PLACEHOLDER_(AGAIN|WILL_FAIL)' "$PAGE"; then
+            echo "::error::Butterflies placeholder detected; refusing to deploy"
+            exit 1
+          fi
+          test -s dist/butterflies-educare/site.js || { echo "::error::Butterflies script missing"; exit 1; }
+          test -s dist/butterflies-educare/favicon.svg || { echo "::error::Butterflies favicon missing"; exit 1; }
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
