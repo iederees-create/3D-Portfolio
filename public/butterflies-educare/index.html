@@ -34,7 +34,32 @@
     .hero-grid>* , .split>*, .support>* , .grid3>* , .steps>*{min-width:0}
     h1,h2,h3,p{overflow-wrap:break-word}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+  
+    /* 3D & animation enhancements */
+    .hero { position: relative; }
+    .hero-illustration { position: relative; z-index: 2; }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .js-animations .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .js-animations .reveal.visible { opacity: 1; transform: translateY(0); }
+    .panel, .step, .update-card, .support-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .panel:hover, .step:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(25,60,47,0.08); }
+    @media (hover: hover) {
+      .panel:hover, .step:hover { transform: translateY(-8px) scale(1.02); }
+    }
+    .floating-flower { position: absolute; pointer-events: none; opacity: 0.7; animation: float 8s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .js-animations .reveal { opacity: 1; transform: none; transition: none; }
+      .panel:hover, .step:hover { transform: none; }
+      .floating-flower { animation: none; }
+      #hero-canvas { display: none; }
+    }
+    /* Mobile performance */
+    @media (max-width: 760px) {
+      #hero-canvas { opacity: 0.6; }
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to content</a>
@@ -62,6 +87,10 @@
           <div class="hero-note"><span class="tiny-dot" aria-hidden="true"></span> A preview shaped with the school, for families.</div>
         </div>
         <div class="hero-illustration">
+          <div class="floating-flower" style="top:15%; left:10%; font-size:2rem;">✿</div>
+          <div class="floating-flower" style="bottom:20%; right:15%; font-size:1.6rem; animation-delay:2s;">❀</div>
+          <div class="floating-flower" style="top:40%; right:5%; font-size:1.4rem; animation-delay:4s;">✿</div>
+          <canvas id="hero-canvas"></canvas>
           <svg class="hero-art" viewBox="0 0 610 505" role="img" aria-label="Playful illustration of a schoolhouse, trees, a rainbow, and butterflies">
             <rect x="20" y="40" width="570" height="430" rx="190" fill="#E5EEE3"/>
             <circle cx="488" cy="110" r="43" fill="#F6D38D"/>
@@ -90,9 +119,9 @@
       <div class="wrap">
         <div class="section-intro"><span class="eyebrow">A place to belong</span><h2>Everything in one welcoming place.</h2><p>We're preparing an easy-to-use space where parents and the wider community can find school information without searching through messages.</p></div>
         <div class="grid3">
-          <article class="panel"><div class="icon-tile" aria-hidden="true">✿</div><h3>Meet our school</h3><p>Our story, values, learning approach and a closer look at school life — to be added with the principal's guidance.</p><a href="#about" class="small">Discover our story →</a></article>
-          <article class="panel"><div class="icon-tile" aria-hidden="true">▧</div><h3>Parent essentials</h3><p>A central home for enrolment guidance, important notices, calendars and helpful school resources.</p><a href="#parents" class="small">For parents →</a></article>
-          <article class="panel"><div class="icon-tile" aria-hidden="true">♡</div><h3>Growing our community</h3><p>See where parents and local businesses can contribute to approved projects and school initiatives.</p><a href="#community" class="small">Get involved →</a></article>
+          <article class="panel reveal"><div class="icon-tile" aria-hidden="true">✿</div><h3>Meet our school</h3><p>Our story, values, learning approach and a closer look at school life — to be added with the principal's guidance.</p><a href="#about" class="small">Discover our story →</a></article>
+          <article class="panel reveal"><div class="icon-tile" aria-hidden="true">▧</div><h3>Parent essentials</h3><p>A central home for enrolment guidance, important notices, calendars and helpful school resources.</p><a href="#parents" class="small">For parents →</a></article>
+          <article class="panel reveal"><div class="icon-tile" aria-hidden="true">♡</div><h3>Growing our community</h3><p>See where parents and local businesses can contribute to approved projects and school initiatives.</p><a href="#community" class="small">Get involved →</a></article>
         </div>
       </div>
     </section>
@@ -106,10 +135,10 @@
     </div></section>
     <section class="section" id="parents"><div class="wrap">
       <div class="section-intro"><span class="eyebrow">For parents & caregivers</span><h2>Less searching. More connecting.</h2><p>We're designing this area to simplify everyday school communication. These features are proposed and not yet active.</p></div>
-      <div class="steps"><article class="step"><h3>Understand enrolment</h3><p>Clear enrolment steps, age-group information and the documents families need — once confirmed by the school.</p></article><article class="step"><h3>Find what matters</h3><p>Important notices, event dates, downloadable forms and practical resources in one place.</p></article><article class="step"><h3>Keep in touch</h3><p>A straightforward way to reach the school and stay up to date with community news.</p></article></div>
+      <div class="steps"><article class="step reveal"><h3>Understand enrolment</h3><p>Clear enrolment steps, age-group information and the documents families need — once confirmed by the school.</p></article><article class="step reveal"><h3>Find what matters</h3><p>Important notices, event dates, downloadable forms and practical resources in one place.</p></article><article class="step reveal"><h3>Keep in touch</h3><p>A straightforward way to reach the school and stay up to date with community news.</p></article></div>
     </div></section>
     <section class="section section-cream" id="community"><div class="wrap">
-      <div class="support"><div><span class="eyebrow">Stronger together</span><h2>A community that helps children flourish.</h2><p>There are many ways to support a school. We're exploring practical, school-approved opportunities for families, local businesses and volunteers to make a difference.</p><a class="btn btn-light" href="#contact">See how to connect <span aria-hidden="true">↗</span></a></div><div class="support-cards"><div class="support-card"><strong>Community projects</strong><span>School priorities and updates, when confirmed.</span></div><div class="support-card"><strong>Fundraising & sponsorship</strong><span>Potential giving options, subject to approval.</span></div><div class="support-card"><strong>Parent involvement</strong><span>Collaborative ways for families to help.</span></div></div></div>
+      <div class="support"><div><span class="eyebrow">Stronger together</span><h2>A community that helps children flourish.</h2><p>There are many ways to support a school. We're exploring practical, school-approved opportunities for families, local businesses and volunteers to make a difference.</p><a class="btn btn-light" href="#contact">See how to connect <span aria-hidden="true">↗</span></a></div><div class="support-cards"><div class="support-card reveal"><strong>Community projects</strong><span>School priorities and updates, when confirmed.</span></div><div class="support-card reveal"><strong>Fundraising & sponsorship</strong><span>Potential giving options, subject to approval.</span></div><div class="support-card reveal"><strong>Parent involvement</strong><span>Collaborative ways for families to help.</span></div></div></div>
     </div></section>
     <section class="section"><div class="wrap faq">
       <span class="eyebrow" style="display:block;text-align:center">Good to know</span><h2>Questions from families.</h2>
