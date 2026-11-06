@@ -91,6 +91,10 @@
     @media (max-width: 760px) {
       #hero-canvas { opacity: 0.6; }
     }
+    /* Ensure animated WebGL canvas is above the opaque schoolhouse SVG. */
+    .hero-art{position:relative;z-index:2}
+    #hero-canvas{z-index:3;opacity:.8}
+    .butterfly-garden{z-index:5}
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
