@@ -30,3 +30,14 @@
 - **Build failed:** open `Deploy to GitHub Pages` and inspect the Build job logs.
 - **Deploy failed:** inspect the Deploy job; prior GitHub Pages incidents involved `syncing_files` timeouts. Retry only after checking that build assets are valid, and confirm the latest SHA.
 - **Live verification failed:** GitHub may have served an older release, or the HTML/assets were incomplete. Inspect `deploy-version.txt` and the Verify job. Do not mark the release live until the SHA agrees.
+
+## Editing visual effects in Grok without large-file failures
+
+**Important:** The full homepage is about 27 KB. Do not attempt to replace the entire `index.html` via a single generated GitHub connector update. This repeatedly truncated the page to placeholder text.
+
+- Edit `public/butterflies-educare/atmosphere.css` to improve butterfly gradients, animation, shadows, clouds, lighting, mobile styling and reduced-motion fallbacks.
+- Edit `public/butterflies-educare/atmosphere.js` to add small interactive details. Keep each edit small and independently verifiable.
+- Modify `index.html` only when absolutely necessary, and then make the smallest targeted change. Always re-fetch the entire saved file and verify it still begins with `<!doctype html>`, includes the school's title, and contains the closing `</html>` tag. Never send `PLACEHOLDER*` as file content.
+- If the GitHub tool cannot save a complete large file, **stop rather than replacing it with a placeholder**. Use these small linked modules instead, or split larger enhancements across additional small local files.
+- Work from a fresh branch based on `main` after this fix is merged. The older `feature/stunning-butterflies-atmosphere` branch previously contained a truncated page; do not merge its old placeholder commit.
+- Verify PR validation, successful Pages deployment and exact live SHA before claiming anything is published.

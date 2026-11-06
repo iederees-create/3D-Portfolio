@@ -1,0 +1,52 @@
+/* Butterflies Educare: independent, small visual enhancement layer.
+   Grok can extend this file without replacing index.html. */
+.hero-illustration { isolation: isolate; }
+.butterfly-garden { overflow: hidden; border-radius: 48% 48% 42% 46%; }
+.butterfly-garden::before {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 66% 25%, rgba(255,252,215,.52) 0, rgba(255,244,214,.19) 30%, transparent 68%);
+  animation: garden-sunbeam 9s ease-in-out infinite alternate;
+}
+@keyframes garden-sunbeam { from {opacity:.45;transform:scale(.97)} to {opacity:.9;transform:scale(1.045)} }
+.hero-illustration::before {
+  content: "";
+  position: absolute;
+  inset: 7% 11% 17%;
+  border-radius: 50%;
+  background:radial-gradient(ellipse at 55% 40%, rgba(251,240,191,.45), transparent 64%);
+  pointer-events:none;
+}
+.bf-4 {left:23%;top:7%;--wing:#e9829c;--wing-light:#ffe2e5;animation:bf-path-b 9s ease-in-out infinite alternate;animation-delay:-4s}
+.bf-5 {left:78%;top:47%;--wing:#7bb7b1;--wing-light:#d8f8f0;animation:bf-path-a 12s ease-in-out infinite alternate;animation-delay:-7s}
+.bf-6 {left:11%;top:54%;--wing:#f5cb65;--wing-light:#fff0c4;animation:bf-path-c 11s ease-in-out infinite alternate;animation-delay:-5s}
+.bf-7 {left:65%;top:10%;--wing:#9dae84;--wing-light:#e4e8c6;animation:bf-path-b 14s ease-in-out infinite alternate;animation-delay:-9s}
+.bf-8 {left:43%;bottom:15%;--wing:#e7a37c;--wing-light:#ffe5cc;animation:bf-path-a 13s ease-in-out infinite alternate;animation-delay:-3s}
+.bf-4,.bf-5,.bf-6,.bf-7,.bf-8 {width:68px;height:57px;filter:drop-shadow(0 6px 6px rgba(40,83,60,.2))}
+.bf-4 .bf-wing,.bf-5 .bf-wing,.bf-6 .bf-wing,.bf-7 .bf-wing,.bf-8 .bf-wing {width:32px;height:36px;top:10px}
+.bf-4 .bf-body,.bf-5 .bf-body,.bf-6 .bf-body,.bf-7 .bf-body,.bf-8 .bf-body {top:23px;height:27px}
+.bf-4 .bf-wings,.bf-7 .bf-wings {transform:rotate(13deg)}
+.bf-5 .bf-wings,.bf-8 .bf-wings {transform:rotate(-22deg)}
+.bf-6 .bf-wings {transform:rotate(30deg)}
+.garden-cloud {
+  position:absolute;z-index:0;pointer-events:none;
+  width:104px;height:29px;border-radius:100px;
+  background:rgba(255,255,255,.38);filter:blur(4px);
+  animation:cloud-drift 17s ease-in-out infinite alternate;
+}
+.garden-cloud::before,.garden-cloud::after {content:"";position:absolute;border-radius:50%;background:inherit}
+.garden-cloud::before{width:55px;height:55px;left:14px;bottom:4px}
+.garden-cloud::after{width:45px;height:45px;left:50px;bottom:1px}
+.garden-cloud.one{top:13%;left:20%;animation-delay:-5s}
+.garden-cloud.two{top:29%;right:13%;transform:scale(.8);animation-delay:-11s}
+@keyframes cloud-drift{from{translate:-13px 1px;opacity:.4}to{translate:25px -8px;opacity:.8}}
+@media(max-width:760px){
+  .bf-4,.bf-6,.bf-7,.bf-8 {display:none}
+  .bf-5 {left:70%;top:27%;width:58px;height:49px}
+  .garden-cloud {width:70px;height:21px;opacity:.33}
+}
+@media(prefers-reduced-motion:reduce){
+  .butterfly-garden::before,.garden-cloud {animation:none!important}
+}
