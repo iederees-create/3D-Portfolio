@@ -1,0 +1,23 @@
+.be-facts-section{padding:54px 0 74px;background:linear-gradient(149deg,#f7faf3,#e8f2e9);border-top:1px solid #e1eadd;border-bottom:1px solid #e1eadd}
+.be-facts-shell{max-width:1150px;padding:0 26px;margin:0 auto}
+.be-facts-portal{padding:0}
+.be-facts-kicker{text-transform:uppercase;color:#527b62;font-weight:850;letter-spacing:.14em;font-size:.74rem}
+.be-facts-section h2{font:500 clamp(2rem,4vw,3.2rem)/1.13 Georgia,serif;letter-spacing:-.04em;color:#294a3c;margin:12px 0 19px}
+.be-facts-summary{font-size:1rem;color:#526e5d;max-width:770px;margin-bottom:25px;line-height:1.72}
+.be-facts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.be-facts-item{background:#fffdfa;border:1px solid #d9e6d9;border-radius:20px;padding:20px 23px;overflow-wrap:anywhere;min-width:0}
+.be-facts-item strong{display:block;color:#426e52;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+.be-facts-item p,.be-facts-item a{display:block;color:#29483a;font-size:.96rem;line-height:1.65;margin:0;white-space:pre-line}
+.be-facts-item a{text-underline-offset:4px;font-weight:700}
+.be-facts-item a:focus-visible{outline:3px solid #c57954;outline-offset:3px}
+.be-facts-disclaimer{font-size:.79rem;color:#698271;margin-top:17px!important;line-height:1.6}
+.be-footer-privacy,.footer a.be-privacy-link{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.be-privacy-page{margin:auto;max-width:860px;padding:34px 26px 90px;color:#2a4c3b;font:16px/1.75 system-ui,sans-serif}
+.be-privacy-page h1,.be-privacy-page h2{font-family:Georgia,serif;font-weight:500;letter-spacing:-.03em;line-height:1.17}
+.be-privacy-page h1{font-size:clamp(2.35rem,5vw,3.75rem);margin:16px 0 19px}
+.be-privacy-page h2{font-size:1.55rem;margin:36px 0 12px}
+.be-privacy-page p,.be-privacy-page li{color:#566e5e}
+.be-privacy-page ul{padding-left:24px}
+.be-privacy-page a{color:#2a7351}
+.be-privacy-page .note{border-left:4px solid #d6a281;padding:16px 20px;background:#fff8ed;border-radius:0 13px 13px 0}
+@media(max-width:750px){.be-facts-section{padding:37px 0 48px}.be-facts-shell{padding:0 18px}.be-facts-portal{padding:0}.be-facts-grid{grid-template-columns:1fr}.be-facts-item{padding:18px}.be-privacy-page{padding:28px 19px 110px}}
