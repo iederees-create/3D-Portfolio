@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f8f5ed">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./network.css">
+  <title>Parent & Community Network | Butterflies Educare</title>
+  <meta name="description" content="Butterflies Educare's developing parent and community network for news, events, enrolment interest and community support.">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
+  <script src="./network.js" defer></script>
+</head>
+<body class="be-network" data-be-page="portal">
+  <div class="be-ribbon">Butterflies Educare · Development preview · No online school fees or child records</div>
+  <header class="be-topbar">
+    <a class="be-identity" href="./"><span class="be-mark" aria-hidden="true">✿</span><span>Butterflies <strong>Educare</strong><small>Parent & Community Network</small></span></a>
+    <nav class="be-top-actions" aria-label="Network navigation"><a href="./">School website</a><button id="be-sign-in" class="be-plain-btn" type="button" data-be-open-auth>Sign in</button><button id="be-sign-out" class="be-plain-btn" type="button" hidden>Sign out</button></nav>
+  </header>
+  <main class="be-shell">
+    <section class="be-welcome">
+      <div><span class="be-overline">Growing together</span><h1>A closer connection between home and school.</h1><p>A secure space we're developing for parents, caregivers and community supporters. Stay informed, share your interest in events and help the school grow.</p><p class="be-small-note">School services and materials shown here are a preview. Enrolment submissions are requests for information only, not applications or confirmed places.</p></div>
+      <div class="be-welcome-card"><span class="be-welcome-graphic" aria-hidden="true">✿</span><strong>Little steps. Big possibilities.</strong><p>One community, working together for our children.</p></div>
+    </section>
+    <div class="be-message" id="be-status" role="status" aria-live="polite" hidden></div>
+    <section class="be-entry" id="be-guest">
+      <div><span class="be-overline">Your parent space</span><h2>Everything in one welcoming place</h2><p>Create an account to keep track of your own enquiries, school messages, event RSVPs and ways to help. Existing Supabase members may sign in with their usual account.</p><div class="be-inline-actions"><button class="be-btn be-primary" type="button" data-be-open-auth data-be-auth-mode="signup">Create an account</button><button class="be-btn be-secondary" type="button" data-be-open-auth>Sign in</button></div></div>
+      <div class="be-promise"><strong>What you'll be able to do</strong><span>School news and upcoming events</span><span>Enrolment interest enquiries</span><span>Fundraising and volunteering</span><span>Secure messages to school staff</span></div>
+    </section>
+    <section class="be-dashboard" id="be-dashboard" hidden>
+      <div class="be-section-head"><div><span class="be-overline">Your dashboard</span><h2 id="be-greeting">Welcome to your network</h2><p>Only your account activity is shown here. School staff can review submitted enquiries after their accounts are authorised.</p></div><span class="be-chip" id="be-account-role">Parent / supporter</span></div>
+      <div class="be-grid be-quick-grid">
+        <article class="be-stat"><span>Your enrolment enquiries</span><strong id="be-count-enrolment">0</strong></article>
+        <article class="be-stat"><span>Event responses</span><strong id="be-count-rsvp">0</strong></article>
+        <article class="be-stat"><span>Messages sent</span><strong id="be-count-messages">0</strong></article>
+        <article class="be-stat"><span>Community interests</span><strong id="be-count-community">0</strong></article>
+      </div>
+      <div class="be-grid be-work-grid">
+        <article class="be-card"><h3>My account</h3><p>Update how school staff can reach you.</p>
+          <form id="be-profile-form" class="be-form">
+            <label>Display name<input name="display_name" autocomplete="name" minlength="2" maxlength="100" required></label>
+            <label>Contact number (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="25"></label>
+            <label>Preferred communication<select name="preferred_contact"><option value="email">Email</option><option value="phone">Phone</option></select></label>
+            <button class="be-btn be-primary" type="submit">Save profile</button>
+          </form>
+        </article>
+        <article class="be-card"><h3>Enrolment information enquiry</h3><p>Request guidance on enrolment. Please do not send children's names, medical information or identification documents here.</p>
+          <form id="be-enrolment-form" class="be-form">
+            <label>Age group to enquire about<select name="age_group" required><option value="unsure">Not sure</option><option value="0-2">0–2 years</option><option value="3-4">3–4 years</option><option value="5-6">5–6 years</option></select></label>
+            <label>When are you interested?<select name="preferred_start"><option value="unsure">Not sure yet</option><option value="asap">As soon as possible</option><option value="next_term">Next term</option><option value="next_year">Next year</option></select></label>
+            <button class="be-btn be-primary" type="submit">Send enquiry</button>
+          </form>
+        </article>
+        <article class="be-card"><h3>Support a school initiative</h3><p>Offer sponsorship, in-kind resources or fundraising help. Payments are not enabled.</p>
+          <form id="be-sponsor-form" class="be-form">
+            <label>Organisation or supporter name<input name="organisation" required minlength="2" maxlength="150"></label>
+            <label>How would you like to help?<select name="interest"><option value="sponsorship">Business sponsorship</option><option value="in_kind">Donated goods or services</option><option value="fundraising">Fundraising</option><option value="partnership">Community partnership</option></select></label>
+            <button class="be-btn be-primary" type="submit">Offer support</button>
+          </form>
+        </article>
+        <article class="be-card"><h3>Volunteer with us</h3><p>Let the school know which activities interest you.</p>
+          <form id="be-volunteer-form" class="be-form">
+            <label>I can help with<select name="category"><option value="events">School events</option><option value="fundraising">Fundraising</option><option value="communications">Community communication</option><option value="general">General volunteering</option></select></label>
+            <button class="be-btn be-primary" type="submit">Register interest</button>
+          </form>
+        </article>
+        <article class="be-card be-card-wide"><h3>Message the school</h3><p>Send an enquiry for school staff to review. Do not include sensitive information about children.</p>
+          <form id="be-message-form" class="be-form">
+            <label>Subject<input name="subject" required minlength="3" maxlength="120"></label>
+            <label>Your message<textarea name="body" rows="3" minlength="5" maxlength="900" required placeholder="How can we help?"></textarea></label>
+            <button class="be-btn be-primary" type="submit">Send private message</button>
+          </form>
+        </article>
+        <article class="be-card be-card-wide"><h3>My activity</h3><div class="be-activity" id="be-activity-list"><p class="be-muted">No activity yet.</p></div></article>
+      </div>
+    </section>
+    <section class="be-content-section" id="be-news"><div class="be-section-head"><div><span class="be-overline">School news</span><h2>Stay in the loop</h2><p>Only approved school updates appear publicly.</p></div></div><div id="be-news-list" class="be-grid be-public-grid"><div class="be-empty">Updates will appear once the school publishes them.</div></div></section>
+    <section class="be-content-section" id="be-events"><div class="be-section-head"><div><span class="be-overline">Community calendar</span><h2>School events</h2><p>Browse published events and RSVP when signed in.</p></div></div><div id="be-events-list" class="be-grid be-public-grid"><div class="be-empty">School events will appear here once confirmed.</div></div></section>
+    <section class="be-content-section" id="be-fundraising"><div class="be-section-head"><div><span class="be-overline">Make a difference</span><h2>Fundraising and sponsorship</h2><p>Discover approved projects and express your interest in supporting them. No donations or payments are taken through this preview.</p></div></div><div id="be-fundraisers-list" class="be-grid be-public-grid"><div class="be-empty">Fundraising projects will appear when approved by the school.</div></div></section>
+    <section class="be-staff" id="be-staff" hidden>
+      <div class="be-section-head"><div><span class="be-overline">School staff only</span><h2>School management</h2><p>Review enquiries and messages, then publish school-approved news, projects and events.</p></div></div>
+      <div class="be-grid be-work-grid">
+        <article class="be-card"><h3>Post an announcement</h3><form class="be-form" id="be-staff-post">
+          <label>Title<input name="title" required minlength="3" maxlength="140"></label>
+          <label>Text<textarea name="summary" maxlength="1000" required rows="3"></textarea></label>
+          <label>Type<select name="section"><option value="announcement">Announcement</option><option value="initiative">Community initiative</option></select></label>
+          <button type="submit" class="be-btn be-primary">Save as draft</button>
+        </form></article>
+        <article class="be-card"><h3>Create an event</h3><form class="be-form" id="be-staff-event">
+          <label>Event title<input name="title" required minlength="3" maxlength="140"></label>
+          <label>Description<textarea name="description" maxlength="1200" rows="2"></textarea></label>
+          <label>Start date and time<input name="starts_at" type="datetime-local" required></label>
+          <label>Venue (optional)<input name="venue" maxlength="140"></label>
+          <button type="submit" class="be-btn be-primary">Save event draft</button>
+        </form></article>
+        <article class="be-card"><h3>Fundraising project</h3><form class="be-form" id="be-staff-fundraiser">
+          <label>Project title<input name="title" required minlength="3" maxlength="140"></label>
+          <label>Project description<textarea name="description" rows="2" maxlength="1500"></textarea></label>
+          <label>What support is needed?<input name="goal_description" maxlength="250"></label>
+          <button type="submit" class="be-btn be-primary">Save project draft</button>
+        </form></article>
+        <article class="be-card"><h3>School content drafts</h3><div id="be-staff-drafts" class="be-activity">No drafts yet.</div></article>
+      </div>
+      <article class="be-card be-inbox"><h3>School inbox and member activity</h3><p>Private parent and supporter enquiries are visible only to authorised staff.</p><div id="be-staff-inbox" class="be-activity">No submissions yet.</div></article>
+    </section>
+    <footer class="be-footer"><div><strong>Butterflies Educare</strong><p>Community network preview. Launch, payments, enrolments and school details require the principal's approval.</p></div><a href="./">Return to school website</a></footer>
+  </main>
+  <dialog id="be-auth-dialog" class="be-auth-dialog" aria-labelledby="be-auth-title">
+    <button type="button" class="be-dialog-close" id="be-auth-close" aria-label="Close sign-in form">×</button>
+    <div class="be-auth-body"><span class="be-overline">Butterflies Educare</span><h2 id="be-auth-title">Sign in</h2><p id="be-auth-description">Sign in to your parent or community account.</p>
+      <div class="be-auth-tabs" role="group" aria-label="Account options">
+        <button type="button" data-auth-mode="signin" aria-pressed="true">Sign in</button>
+        <button type="button" data-auth-mode="signup" aria-pressed="false">Create account</button>
+        <button type="button" data-auth-mode="reset" aria-pressed="false">Reset password</button>
+      </div>
+      <form id="be-auth-form" class="be-form">
+        <label id="be-name-field" hidden>Your name<input name="name" autocomplete="name" minlength="2" maxlength="100"></label>
+        <label id="be-email-field">Email address<input name="email" type="email" autocomplete="email" required></label>
+        <label id="be-password-field">Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <label id="be-consent-field" class="be-checkbox" hidden><input name="consent" type="checkbox"><span>I agree that Butterflies Educare may store my contact and enquiry details to respond to requests. I understand this is a preview and should not include sensitive information about children.</span></label>
+        <button type="submit" id="be-auth-submit" class="be-btn be-primary">Sign in</button>
+        <p class="be-auth-feedback" id="be-auth-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
