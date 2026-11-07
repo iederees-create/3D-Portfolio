@@ -42,6 +42,7 @@ jobs:
           node --check public/butterflies-educare/creative-garden.js
           node --check public/butterflies-educare/experience.js
           node --check public/butterflies-educare/studio.js
+          node --check public/butterflies-educare/school-information.js
 
       - name: Install portfolio dependencies from lockfile
         run: npm ci --legacy-peer-deps --no-audit --no-fund
@@ -67,6 +68,7 @@ jobs:
           node --check dist/butterflies-educare/creative-garden.js
           node --check dist/butterflies-educare/experience.js
           node --check dist/butterflies-educare/studio.js
+          node --check dist/butterflies-educare/school-information.js
           test -s dist/index.html || { echo "::error::Portfolio homepage missing"; exit 1; }
           test -s dist/craftbill/index.html || { echo "::error::CraftBill homepage missing"; exit 1; }
 
@@ -117,6 +119,9 @@ jobs:
               parent="$(curl -fsSL --max-time 20 "$SCHOOL_URL/parent.html?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               studio="$(curl -fsSL --max-time 20 "$SCHOOL_URL/studio.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               studio_css="$(curl -fsSL --max-time 20 "$SCHOOL_URL/studio.css?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              school_info="$(curl -fsSL --max-time 20 "$SCHOOL_URL/school-information.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              privacy="$(curl -fsSL --max-time 20 "$SCHOOL_URL/privacy.html?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              sitemap="$(curl -fsSL --max-time 20 "$SCHOOL_URL/sitemap.xml?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               favicon="$(curl -fsSL --max-time 20 "$SCHOOL_URL/favicon.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               if [[ "$html" == *"<title>Butterflies Educare"* ]] &&
                  [[ "$html" == *"</html>"* ]] &&
@@ -133,6 +138,12 @@ jobs:
                  [[ "$parent" == *"studio.js"* ]] &&
                  [[ "$studio" == *"studioPanel"* ]] &&
                  [[ "$studio_css" == *"studio-showcase"* ]] &&
+                 [[ "$html" == *'content="index,follow'* ]] &&
+                 [[ "$html" == *"school-information.js"* ]] &&
+                 [[ "$parent" == *"be-school-information-form"* ]] &&
+                 [[ "$school_info" == *"be_school_information"* ]] &&
+                 [[ "$privacy" == *"interim technical information"* ]] &&
+                 [[ "$sitemap" == *"butterflies-educare/"* ]] &&
                  [[ "$favicon" == *"<svg"* ]]; then
                 echo "Confirmed published revision: $GITHUB_SHA"
                 echo "Live site: $SCHOOL_URL/"
