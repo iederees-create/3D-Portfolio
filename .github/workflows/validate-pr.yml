@@ -28,6 +28,7 @@ jobs:
           node --check public/butterflies-educare/site.js
           node --check public/butterflies-educare/atmosphere.js
           node --check public/butterflies-educare/network.js
+          node --check public/butterflies-educare/creative-garden.js
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps --no-audit --no-fund
@@ -48,5 +49,6 @@ jobs:
           node --check dist/butterflies-educare/site.js
           node --check dist/butterflies-educare/atmosphere.js
           node --check dist/butterflies-educare/network.js
+          node --check dist/butterflies-educare/creative-garden.js
           test -s dist/index.html
           test -s dist/craftbill/index.html
