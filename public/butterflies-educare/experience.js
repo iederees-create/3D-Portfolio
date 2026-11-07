@@ -105,6 +105,7 @@
     const controls = document.querySelectorAll("[data-bex-motion]");
     const sync = () => {
       document.documentElement.classList.toggle("bex-motion-paused", paused);
+      document.dispatchEvent(new Event("bex-motion-change"));
       controls.forEach(btn => {
         btn.setAttribute("aria-pressed", String(paused));
         btn.textContent = paused ? "Resume animations" : "Pause animations";
