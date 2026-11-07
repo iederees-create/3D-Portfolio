@@ -40,6 +40,7 @@ jobs:
           node --check public/butterflies-educare/atmosphere.js
           node --check public/butterflies-educare/network.js
           node --check public/butterflies-educare/creative-garden.js
+          node --check public/butterflies-educare/experience.js
 
       - name: Install portfolio dependencies from lockfile
         run: npm ci --legacy-peer-deps --no-audit --no-fund
@@ -63,6 +64,7 @@ jobs:
           node --check dist/butterflies-educare/atmosphere.js
           node --check dist/butterflies-educare/network.js
           node --check dist/butterflies-educare/creative-garden.js
+          node --check dist/butterflies-educare/experience.js
           test -s dist/index.html || { echo "::error::Portfolio homepage missing"; exit 1; }
           test -s dist/craftbill/index.html || { echo "::error::CraftBill homepage missing"; exit 1; }
 
@@ -108,6 +110,9 @@ jobs:
               script="$(curl -fsSL --max-time 20 "$SCHOOL_URL/site.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               creative="$(curl -fsSL --max-time 20 "$SCHOOL_URL/creative-garden.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               creative_css="$(curl -fsSL --max-time 20 "$SCHOOL_URL/creative-garden.css?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              experience="$(curl -fsSL --max-time 20 "$SCHOOL_URL/experience.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              experience_css="$(curl -fsSL --max-time 20 "$SCHOOL_URL/experience.css?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              parent="$(curl -fsSL --max-time 20 "$SCHOOL_URL/parent.html?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               favicon="$(curl -fsSL --max-time 20 "$SCHOOL_URL/favicon.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               if [[ "$html" == *"<title>Butterflies Educare"* ]] &&
                  [[ "$html" == *"</html>"* ]] &&
@@ -116,6 +121,10 @@ jobs:
                  [[ "$html" == *"creative-garden.js"* ]] &&
                  [[ "$creative" == *"creative-vision-20261107"* ]] &&
                  [[ "$creative_css" == *"creative-giving-garden"* ]] &&
+                 [[ "$html" == *"experience.js"* ]] &&
+                 [[ "$experience" == *"getApprovedFeed"* ]] &&
+                 [[ "$experience_css" == *"bex-journeys"* ]] &&
+                 [[ "$parent" == *"experience.js"* ]] &&
                  [[ "$favicon" == *"<svg"* ]]; then
                 echo "Confirmed published revision: $GITHUB_SHA"
                 echo "Live site: $SCHOOL_URL/"
