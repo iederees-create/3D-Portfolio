@@ -26,6 +26,8 @@ const creativeCSS = html.includes('href="./creative-garden.css"') ? load('creati
 const creativeJS = html.includes('src="./creative-garden.js"') ? load('creative-garden.js') : null;
 const experienceCSS = html.includes('href="./experience.css"') ? load('experience.css') : null;
 const experienceJS = html.includes('src="./experience.js"') ? load('experience.js') : null;
+const studioCSS = html.includes('href="./studio.css"') ? load("studio.css") : null;
+const studioJS = html.includes('src="./studio.js"') ? load("studio.js") : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -45,7 +47,11 @@ if (creativeJS !== null && (!creativeJS.includes('creative-vision-20261107') || 
 if (experienceCSS !== null && (!experienceCSS.includes('bex-journeys') || !experienceCSS.includes('bex-guide') || Buffer.byteLength(experienceCSS,'utf8') < 2000)) problems.push('School experience CSS missing or incomplete');
 if (experienceJS !== null && (!experienceJS.includes('RULE-BASED') || !experienceJS.includes('getApprovedFeed') || !experienceJS.includes('downloadEvent') || Buffer.byteLength(experienceJS,'utf8') < 3000)) problems.push('School experience JavaScript missing or incomplete');
 if (parentHTML !== null && experienceJS !== null && (!parentHTML.includes('href="./experience.css"') || !parentHTML.includes('src="./experience.js"'))) problems.push('Parent portal is missing the new experience module');
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+if (studioCSS !== null && (Buffer.byteLength(studioCSS,'utf8') < 5000 || !studioCSS.includes('studio-bottom-nav') || !studioCSS.includes('studio-showcase'))) problems.push('Studio CSS missing or truncated');
+if (studioJS !== null && (Buffer.byteLength(studioJS,'utf8') < 5000 || !studioJS.includes('accountGuidance') || !studioJS.includes('studioPanel'))) problems.push('Studio JS missing or truncated');
+if (parentHTML !== null && studioJS !== null && (!parentHTML.includes('href="./studio.css"') || !parentHTML.includes('src="./studio.js"'))) problems.push('Parent portal is missing Studio files');
+if (studioJS !== null && !html.includes('src="./studio.js"')) problems.push('Homepage is missing Studio JavaScript');
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
