@@ -39,6 +39,7 @@ jobs:
           node --check public/butterflies-educare/site.js
           node --check public/butterflies-educare/atmosphere.js
           node --check public/butterflies-educare/network.js
+          node --check public/butterflies-educare/creative-garden.js
 
       - name: Install portfolio dependencies from lockfile
         run: npm ci --legacy-peer-deps --no-audit --no-fund
@@ -61,6 +62,7 @@ jobs:
           node --check dist/butterflies-educare/site.js
           node --check dist/butterflies-educare/atmosphere.js
           node --check dist/butterflies-educare/network.js
+          node --check dist/butterflies-educare/creative-garden.js
           test -s dist/index.html || { echo "::error::Portfolio homepage missing"; exit 1; }
           test -s dist/craftbill/index.html || { echo "::error::CraftBill homepage missing"; exit 1; }
 
@@ -104,11 +106,16 @@ jobs:
             if [[ "$version" == "$GITHUB_SHA" ]]; then
               html="$(curl -fsSL --max-time 20 "$SCHOOL_URL/?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               script="$(curl -fsSL --max-time 20 "$SCHOOL_URL/site.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              creative="$(curl -fsSL --max-time 20 "$SCHOOL_URL/creative-garden.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              creative_css="$(curl -fsSL --max-time 20 "$SCHOOL_URL/creative-garden.css?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               favicon="$(curl -fsSL --max-time 20 "$SCHOOL_URL/favicon.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               if [[ "$html" == *"<title>Butterflies Educare"* ]] &&
                  [[ "$html" == *"</html>"* ]] &&
                  [[ "$html" == *"site.js"* ]] &&
                  [[ "$script" == *"be_public_content"* ]] &&
+                 [[ "$html" == *"creative-garden.js"* ]] &&
+                 [[ "$creative" == *"creative-vision-20261107"* ]] &&
+                 [[ "$creative_css" == *"creative-giving-garden"* ]] &&
                  [[ "$favicon" == *"<svg"* ]]; then
                 echo "Confirmed published revision: $GITHUB_SHA"
                 echo "Live site: $SCHOOL_URL/"
