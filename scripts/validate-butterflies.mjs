@@ -24,6 +24,8 @@ const networkCSS = html.includes('href="./network.css"') ? load('network.css') :
 const networkJS = html.includes('src="./network.js"') ? load('network.js') : null;
 const creativeCSS = html.includes('href="./creative-garden.css"') ? load('creative-garden.css') : null;
 const creativeJS = html.includes('src="./creative-garden.js"') ? load('creative-garden.js') : null;
+const experienceCSS = html.includes('href="./experience.css"') ? load('experience.css') : null;
+const experienceJS = html.includes('src="./experience.js"') ? load('experience.js') : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -40,7 +42,10 @@ if (networkCSS !== null && Buffer.byteLength(networkCSS,'utf8') < 1000) problems
 if (networkJS !== null && (!networkJS.includes('signInWithPassword') || !networkJS.includes('be_parent_profiles'))) problems.push('Parent network JavaScript missing or incomplete');
 if (creativeCSS !== null && (!creativeCSS.includes('creative-giving-garden') || Buffer.byteLength(creativeCSS,'utf8') < 1000)) problems.push('Creative garden CSS missing or incomplete');
 if (creativeJS !== null && (!creativeJS.includes('creative-vision-20261107') || Buffer.byteLength(creativeJS,'utf8') < 1000)) problems.push('Creative garden JavaScript missing or incomplete');
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+if (experienceCSS !== null && (!experienceCSS.includes('bex-journeys') || !experienceCSS.includes('bex-guide') || Buffer.byteLength(experienceCSS,'utf8') < 2000)) problems.push('School experience CSS missing or incomplete');
+if (experienceJS !== null && (!experienceJS.includes('RULE-BASED') || !experienceJS.includes('getApprovedFeed') || !experienceJS.includes('downloadEvent') || Buffer.byteLength(experienceJS,'utf8') < 3000)) problems.push('School experience JavaScript missing or incomplete');
+if (parentHTML !== null && experienceJS !== null && (!parentHTML.includes('href="./experience.css"') || !parentHTML.includes('src="./experience.js"'))) problems.push('Parent portal is missing the new experience module');
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);

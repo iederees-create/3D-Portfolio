@@ -171,7 +171,7 @@
     let disposed = false;
     function animate() {
       rafId = 0;
-      if (disposed || document.hidden) return;
+      if (disposed || document.hidden || document.documentElement.classList.contains("bex-motion-paused")) return;
       rafId = requestAnimationFrame(animate);
       time += 0.016;
 
@@ -217,6 +217,9 @@
     // Pause rendering when tab is hidden; release WebGL resources when navigating away.
     document.addEventListener("visibilitychange", () => {
       if (!disposed && !document.hidden && !rafId) animate();
+    });
+    document.addEventListener("bex-motion-change", () => {
+      if (!disposed && !document.hidden && !rafId && !document.documentElement.classList.contains("bex-motion-paused")) animate();
     });
     window.addEventListener("pagehide", () => {
       disposed = true;
