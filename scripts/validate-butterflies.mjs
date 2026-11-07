@@ -19,6 +19,9 @@ const script = load('site.js');
 const favicon = load('favicon.svg');
 const atmosphereCSS = html.includes('href="./atmosphere.css"') ? load('atmosphere.css') : null;
 const atmosphereJS = html.includes('src="./atmosphere.js"') ? load('atmosphere.js') : null;
+const parentHTML = html.includes('src="./network.js"') ? load('parent.html') : null;
+const networkCSS = html.includes('href="./network.css"') ? load('network.css') : null;
+const networkJS = html.includes('src="./network.js"') ? load('network.js') : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -30,7 +33,10 @@ if (Buffer.byteLength(script, 'utf8') < 200) problems.push('site.js is missing o
 if (!/<svg\b/i.test(favicon)) problems.push('favicon.svg is invalid');
 if (atmosphereCSS !== null && Buffer.byteLength(atmosphereCSS, 'utf8') < 200) problems.push('atmosphere.css is missing or truncated');
 if (atmosphereJS !== null && Buffer.byteLength(atmosphereJS, 'utf8') < 100) problems.push('atmosphere.js is missing or truncated');
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+if (parentHTML !== null && (!parentHTML.includes('<title>Parent & Community Network') || !parentHTML.includes('id="be-auth-dialog"'))) problems.push('Parent portal HTML missing or truncated');
+if (networkCSS !== null && Buffer.byteLength(networkCSS,'utf8') < 1000) problems.push('Parent network CSS missing or truncated');
+if (networkJS !== null && (!networkJS.includes('signInWithPassword') || !networkJS.includes('be_parent_profiles'))) problems.push('Parent network JavaScript missing or incomplete');
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
