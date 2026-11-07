@@ -9,27 +9,29 @@
   <link rel="stylesheet" href="./network.css">
   <link rel="stylesheet" href="./experience.css">
   <link rel="stylesheet" href="./studio.css">
+  <link rel="stylesheet" href="./launch.css">
   <title>Parent & Community Network | Butterflies Educare</title>
   <meta name="description" content="Butterflies Educare's developing parent and community network for news, events, enrolment interest and community support.">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
   <script src="./network.js" defer></script>
+  <script src="./school-information.js" defer></script>
   <script src="./experience.js" defer></script>
   <script src="./studio.js" defer></script>
 </head>
 <body class="be-network" data-be-page="portal">
-  <div class="be-ribbon">Butterflies Educare · Development preview · No online school fees or child records</div>
+  <div class="be-ribbon">Butterflies Educare · Parent & Community Network · General enquiries only; no school fee payments or child records</div>
   <header class="be-topbar">
     <a class="be-identity" href="./"><span class="be-mark" aria-hidden="true">✿</span><span>Butterflies <strong>Educare</strong><small>Parent & Community Network</small></span></a>
     <nav class="be-top-actions" aria-label="Network navigation"><a href="./">School website</a><button id="be-sign-in" class="be-plain-btn" type="button" data-be-open-auth>Sign in</button><button id="be-sign-out" class="be-plain-btn" type="button" hidden>Sign out</button></nav>
   </header>
   <main class="be-shell">
     <section class="be-welcome">
-      <div><span class="be-overline">Growing together</span><h1>A closer connection between home and school.</h1><p>A secure space we're developing for parents, caregivers and community supporters. Stay informed, share your interest in events and help the school grow.</p><p class="be-small-note">School services and materials shown here are a preview. Enrolment submissions are requests for information only, not applications or confirmed places.</p></div>
+      <div><span class="be-overline">Growing together</span><h1>A closer connection between home and school.</h1><p>An online space for parents, caregivers and community supporters. Stay informed, share your interest in events and help the school grow.</p><p class="be-small-note">Enrolment submissions are requests for information only, not applications or confirmed places. Official operational details will appear after school approval.</p></div>
       <div class="be-welcome-card"><span class="be-welcome-graphic" aria-hidden="true">✿</span><strong>Little steps. Big possibilities.</strong><p>One community, working together for our children.</p></div>
     </section>
     <div class="be-message" id="be-status" role="status" aria-live="polite" hidden></div>
     <section class="be-entry" id="be-guest">
-      <div><span class="be-overline">Your parent space</span><h2>Everything in one welcoming place</h2><p>Create an account to keep track of your own enquiries, school messages, event RSVPs and ways to help. Existing Supabase members may sign in with their usual account.</p><div class="be-inline-actions"><button class="be-btn be-primary" type="button" data-be-open-auth data-be-auth-mode="signup">Create an account</button><button class="be-btn be-secondary" type="button" data-be-open-auth>Sign in</button></div></div>
+      <div><span class="be-overline">Your parent space</span><h2>Everything in one welcoming place</h2><p>Create an account to keep track of your own enquiries, school messages, event RSVPs and ways to help. Already have an account? Sign in using the same email and password.</p><div class="be-inline-actions"><button class="be-btn be-primary" type="button" data-be-open-auth data-be-auth-mode="signup">Create an account</button><button class="be-btn be-secondary" type="button" data-be-open-auth>Sign in</button></div></div>
       <div class="be-promise"><strong>What you'll be able to do</strong><span>School news and upcoming events</span><span>Enrolment interest enquiries</span><span>Fundraising and volunteering</span><span>Secure messages to school staff</span></div>
     </section>
     <section class="be-dashboard" id="be-dashboard" hidden>
@@ -85,6 +87,25 @@
     <section class="be-content-section" id="be-fundraising"><div class="be-section-head"><div><span class="be-overline">Make a difference</span><h2>Fundraising and sponsorship</h2><p>Discover approved projects and express your interest in supporting them. No donations or payments are taken through this preview.</p></div></div><div id="be-fundraisers-list" class="be-grid be-public-grid"><div class="be-empty">Fundraising projects will appear when approved by the school.</div></div></section>
     <section class="be-staff" id="be-staff" hidden>
       <div class="be-section-head"><div><span class="be-overline">School staff only</span><h2>School management</h2><p>Review enquiries and messages, then publish school-approved news, projects and events.</p></div></div>
+
+      <article class="be-card" id="be-school-information-panel" style="margin-bottom:22px">
+        <h3>School information for the public website</h3>
+        <p>Authorised school staff can enter verified official details. Save a draft first; publish only when the principal has checked every field. Published content appears on the homepage and in the parent network.</p>
+        <form id="be-school-information-form" class="be-form">
+          <label>School name<input name="school_name" required minlength="3" maxlength="120" value="Butterflies Educare"></label>
+          <label>About the school<textarea name="summary" rows="3" maxlength="1600" placeholder="Use the school-approved description"></textarea></label>
+          <label>Official school address<textarea name="street_address" rows="2" maxlength="350" placeholder="Enter the confirmed street address"></textarea></label>
+          <label>Public email address<input name="public_email" type="email" maxlength="254" placeholder="Confirmed school contact email"></label>
+          <label>Public phone number<input name="public_phone" type="tel" maxlength="35" placeholder="Confirmed school contact number"></label>
+          <label>Operating hours<textarea name="operating_hours" rows="2" maxlength="300" placeholder="Confirmed opening and collection hours"></textarea></label>
+          <label>Enrolment guidance<textarea name="enrolment_guidance" rows="3" maxlength="1500" placeholder="Official age criteria and how families should enquire"></textarea></label>
+          <label>Fees and payment information<textarea name="fee_guidance" rows="3" maxlength="1200" placeholder="Only amounts and methods approved by the school"></textarea></label>
+          <label class="be-checkbox"><input type="checkbox" name="published"><span>Publish these verified details on the public school website</span></label>
+          <label class="be-checkbox"><input type="checkbox" name="approved"><span>I confirm the principal or authorised school manager has verified and approved the public information above</span></label>
+          <button type="submit" class="be-btn be-primary">Save school information</button>
+          <p class="be-muted" style="font-size:.82rem">The database will reject publishing without a school description, address and contact method. This does not activate school fee collection or official child enrolments.</p>
+        </form>
+      </article>
       <div class="be-grid be-work-grid">
         <article class="be-card"><h3>Post an announcement</h3><form class="be-form" id="be-staff-post">
           <label>Title<input name="title" required minlength="3" maxlength="140"></label>
@@ -109,11 +130,11 @@
       </div>
       <article class="be-card be-inbox"><h3>School inbox and member activity</h3><p>Private parent and supporter enquiries are visible only to authorised staff.</p><div id="be-staff-inbox" class="be-activity">No submissions yet.</div></article>
     </section>
-    <footer class="be-footer"><div><strong>Butterflies Educare</strong><p>Community network preview. Launch, payments, enrolments and school details require the principal's approval.</p></div><a href="./">Return to school website</a></footer>
+    <footer class="be-footer"><div><strong>Butterflies Educare</strong><p>Parent and community network for general enquiries and school-approved updates. Payments and official child enrolments are not enabled.</p></div><a href="./privacy.html">Privacy &amp; data handling</a> · <a href="./">Return to school website</a></footer>
   </main>
   <dialog id="be-auth-dialog" class="be-auth-dialog" aria-labelledby="be-auth-title">
     <button type="button" class="be-dialog-close" id="be-auth-close" aria-label="Close sign-in form">×</button>
-    <div class="be-auth-body"><span class="be-overline">Butterflies Educare</span><h2 id="be-auth-title">Sign in</h2><p id="be-auth-description">Sign in to your parent or community account.</p>
+    <div class="be-auth-body"><span class="be-overline">Butterflies Educare</span><h2 id="be-auth-title">Sign in</h2><p id="be-auth-description">Sign in to your parent or community account.</p><p style="font-size:.8rem"><a href="./privacy.html" target="_blank" rel="noopener noreferrer">How this network handles personal information</a></p>
       <div class="be-auth-tabs" role="group" aria-label="Account options">
         <button type="button" data-auth-mode="signin" aria-pressed="true">Sign in</button>
         <button type="button" data-auth-mode="signup" aria-pressed="false">Create account</button>

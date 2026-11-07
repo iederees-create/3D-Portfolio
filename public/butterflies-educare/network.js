@@ -59,7 +59,7 @@
       if (!client) throw new Error("The account service is unavailable. Please retry later.");
       await work();
       flash("Saved successfully.");
-      if (form.id !== "be-profile-form") form.reset();
+      if (!["be-profile-form","be-school-information-form"].includes(form.id)) form.reset();
       if (isPortal && isSignedIn()) await loadPrivate();
       await loadPublic();
     } catch (error) {
@@ -406,6 +406,23 @@
       row.appendChild(actions);inbox.appendChild(row);
     }
     if(!count)inbox.appendChild(create("p","No parent or community submissions yet.","be-muted"));
+
+    await loadSchoolInformation();
+  }
+
+  async function loadSchoolInformation(){
+    if(!staffRole || !client) return;
+    const form=$("be-school-information-form");
+    if(!form) return;
+    const {data,error}=await client.from("be_school_information").select("*").eq("id","school").maybeSingle();
+    if(error){flash("Could not load school information. "+error.message,true);return;}
+    const record=data||{};
+    for(const name of ["school_name","summary","street_address","public_email","public_phone","operating_hours","enrolment_guidance","fee_guidance"]){
+      const field=form.elements.namedItem(name);
+      if(field)field.value=record[name]||((name==="school_name")?"Butterflies Educare":"");
+    }
+    form.elements.namedItem("published").checked=Boolean(record.published);
+    form.elements.namedItem("approved").checked=false;
   }
 
   function bindForms() {
@@ -459,6 +476,36 @@
       if(Number.isNaN(d.valueOf()))throw Error("Please choose a valid date and time.");
       const r=await client.from("be_school_events").insert({title:limit(value(f,"title"),140),description:limit(value(f,"description"),1200),venue:limit(value(f,"venue"),140)||null,starts_at:d.toISOString(),published:false});
       if(r.error)throw r.error;await loadStaff();
+    });
+    attach("be-school-information-form",async(f)=>{
+      if(!staffRole)throw Error("Authorised school staff access is required.");
+      const published=Boolean(f.elements.namedItem("published").checked);
+      const approved=Boolean(f.elements.namedItem("approved").checked);
+      const schoolName=value(f,"school_name");
+      const summary=value(f,"summary");
+      const address=value(f,"street_address");
+      const email=value(f,"public_email");
+      const phone=value(f,"public_phone");
+      if(published && !approved)throw Error("Confirm school-manager approval before publishing.");
+      if(published && (summary.length<15 || address.length<5 || (!email && !phone))) {
+        throw Error("To publish, provide a verified description, address and at least one official contact method.");
+      }
+      const payload={
+        id:"school",
+        school_name:limit(schoolName,120),
+        summary:limit(summary,1600)||null,
+        street_address:limit(address,350)||null,
+        public_email:limit(email,254)||null,
+        public_phone:limit(phone,35)||null,
+        operating_hours:limit(value(f,"operating_hours"),300)||null,
+        enrolment_guidance:limit(value(f,"enrolment_guidance"),1500)||null,
+        fee_guidance:limit(value(f,"fee_guidance"),1200)||null,
+        published,
+        updated_at:new Date().toISOString()
+      };
+      const result=await client.from("be_school_information").upsert(payload,{onConflict:"id"});
+      if(result.error)throw result.error;
+      await loadSchoolInformation();
     });
     attach("be-staff-fundraiser",async(f)=>{
       if(!staffRole)throw Error("Staff access required.");

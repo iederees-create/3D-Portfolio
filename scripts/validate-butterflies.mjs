@@ -28,6 +28,10 @@ const experienceCSS = html.includes('href="./experience.css"') ? load('experienc
 const experienceJS = html.includes('src="./experience.js"') ? load('experience.js') : null;
 const studioCSS = html.includes('href="./studio.css"') ? load("studio.css") : null;
 const studioJS = html.includes('src="./studio.js"') ? load("studio.js") : null;
+const launchCSS = html.includes('href="./launch.css"') ? load("launch.css") : null;
+const schoolInfoJS = html.includes('src="./school-information.js"') ? load("school-information.js") : null;
+const privacyHTML = html.includes('href="./privacy.html"') ? load("privacy.html") : null;
+const sitemap = html.includes('rel="canonical"') ? load("sitemap.xml") : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -51,7 +55,15 @@ if (studioCSS !== null && (Buffer.byteLength(studioCSS,'utf8') < 5000 || !studio
 if (studioJS !== null && (Buffer.byteLength(studioJS,'utf8') < 5000 || !studioJS.includes('accountGuidance') || !studioJS.includes('studioPanel'))) problems.push('Studio JS missing or truncated');
 if (parentHTML !== null && studioJS !== null && (!parentHTML.includes('href="./studio.css"') || !parentHTML.includes('src="./studio.js"'))) problems.push('Parent portal is missing Studio files');
 if (studioJS !== null && !html.includes('src="./studio.js"')) problems.push('Homepage is missing Studio JavaScript');
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+if (launchCSS !== null && Buffer.byteLength(launchCSS,'utf8') < 700) problems.push('Launch stylesheet missing or incomplete');
+if (schoolInfoJS !== null && (!schoolInfoJS.includes('be_school_information') || !schoolInfoJS.includes('published=eq.true') || Buffer.byteLength(schoolInfoJS,'utf8') < 700)) problems.push('School-approved information renderer missing or unsafe');
+if (privacyHTML !== null && (!privacyHTML.includes('interim technical information') || !privacyHTML.includes('noindex,follow'))) problems.push('School data-handling information page missing');
+if (sitemap !== null && !sitemap.includes('https://iederees-create.github.io/3D-Portfolio/butterflies-educare/')) problems.push('School sitemap missing');
+if (schoolInfoJS !== null && !html.includes('content="index,follow')) problems.push('School homepage must be indexable on public launch');
+if (parentHTML !== null && !parentHTML.includes('content="noindex,nofollow"')) problems.push('Private parent portal must remain noindex');
+if (parentHTML !== null && !parentHTML.includes('id="be-school-information-form"')) problems.push('Staff school-information publishing form missing');
+
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || '') + (schoolInfoJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
