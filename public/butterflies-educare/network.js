@@ -59,7 +59,7 @@
       if (!client) throw new Error("The account service is unavailable. Please retry later.");
       await work();
       flash("Saved successfully.");
-      form.reset();
+      if (form.id !== "be-profile-form") form.reset();
       if (isPortal && isSignedIn()) await loadPrivate();
       await loadPublic();
     } catch (error) {
