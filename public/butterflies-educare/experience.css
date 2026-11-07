@@ -1,0 +1,160 @@
+/* Butterflies Educare · Parent-centred experience system V2
+   Lightweight CSS/SVG dimensional art. No remote 3D payloads. */
+:root {
+  --bex-ink:#213e36; --bex-deep:#1e4539; --bex-leaf:#5c9475;
+  --bex-peach:#eaa889; --bex-gold:#efd08e; --bex-cream:#fbf8f0;
+  --bex-border:rgba(53,105,76,.15);
+  --bex-elevated:0 24px 60px rgba(34,68,48,.12);
+}
+.bex-shell{width:min(1180px,calc(100% - 42px));margin:0 auto}
+.bex-kicker{display:inline-block;color:#5c876a;letter-spacing:.17em;font-size:.73rem;text-transform:uppercase;font-weight:850}
+.bex-h2{font-family:Georgia,serif;line-height:1.12;letter-spacing:-.045em;font-weight:500;font-size:clamp(2rem,4.5vw,3.35rem);margin:12px 0 14px;color:var(--bex-ink)}
+.bex-muted{color:#687e71;line-height:1.65}
+.bex-journeys{position:relative;overflow:hidden;padding:78px 0 88px;background:linear-gradient(172deg,#f6f7ed 0%,#edf4e9 57%,#fbf8f1 100%);isolation:isolate}
+.bex-journeys::before{content:"";position:absolute;inset:-25%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle at 20% 34%,rgba(243,205,164,.28),transparent 26%),
+  radial-gradient(circle at 80% 70%,rgba(115,169,130,.18),transparent 28%);
+}
+.bex-journey-head{max-width:670px;position:relative;z-index:2}
+.bex-journey-head>p{max-width:560px;margin:0 0 29px;color:#637e6f}
+.bex-journey-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;perspective:1300px;position:relative;z-index:2}
+.bex-pathcard{position:relative;min-width:0;display:flex;flex-direction:column;text-decoration:none;color:var(--bex-ink);background:rgba(255,254,249,.91);
+  border:1px solid rgba(82,131,100,.2);border-radius:29px;padding:27px 26px 26px;min-height:295px;
+  overflow:hidden;isolation:isolate;transform-style:preserve-3d;
+  box-shadow:0 8px 24px rgba(34,77,47,.045);transition:transform .32s ease,box-shadow .32s ease,border-color .32s ease}
+.bex-pathcard:nth-child(2){background:linear-gradient(155deg,#fcf7eb,#f2efdf)}
+.bex-pathcard:nth-child(3){background:linear-gradient(155deg,#f5f9f2,#e4efe8)}
+.bex-pathcard::after{content:"";position:absolute;right:-60px;top:-75px;width:230px;height:220px;
+  background:radial-gradient(circle,rgba(244,211,156,.28),transparent 69%);z-index:-1}
+.bex-pathcard:focus-visible{outline:3px solid #b96b48;outline-offset:3px}
+.bex-pathcard:hover{border-color:#b4d0bc;box-shadow:0 25px 55px rgba(34,77,47,.13);transform:translateY(-7px)}
+.bex-card-visual{position:relative;width:124px;height:104px;margin:0 0 16px;transform-style:preserve-3d;perspective:450px;
+  filter:drop-shadow(0 13px 11px rgba(48,85,57,.12));}
+.bex-orbit-ring{position:absolute;inset:13px 1px 12px;border:2px solid rgba(96,151,107,.22);border-radius:50%;
+  transform:rotateX(66deg) rotateZ(-24deg);box-shadow:0 0 0 9px rgba(224,237,216,.25)}
+.bex-art-object{position:absolute;left:29px;top:5px;width:78px;height:90px;transform:translateZ(16px) rotate(-8deg);
+  filter:drop-shadow(1px 9px 7px rgba(61,103,72,.15));}
+.bex-art-object svg{height:100%;width:100%;overflow:visible}
+.bex-float-leaf{position:absolute;left:-5px;top:26px;width:29px;height:42px;border-radius:3% 92% 8% 88%;
+  background:linear-gradient(160deg,#b1cda3,#578f75);transform-origin:bottom right;transform:rotate(-28deg);animation:bex-leaf-wave 6s ease-in-out infinite alternate}
+.bex-float-leaf.right{left:auto;right:-3px;top:54px;width:18px;height:27px;transform:rotate(42deg);background:linear-gradient(170deg,#f9deaa,#dfab79);animation-delay:-2.8s}
+@keyframes bex-leaf-wave{from{rotate:-6deg}to{rotate:8deg}}
+.bex-pathcard strong{font:500 clamp(1.35rem,2vw,1.72rem)/1.2 Georgia,serif;letter-spacing:-.025em;display:block;margin-bottom:10px}
+.bex-pathcard .bex-card-text{font-size:.92rem;line-height:1.56;color:#5e7569;flex:1}
+.bex-linkline{display:inline-flex;align-items:center;gap:9px;margin-top:21px;font-size:.85rem;font-weight:800;color:#346f50}
+.bex-linkline svg{width:17px;height:17px;transition:transform .2s}
+.bex-pathcard:hover .bex-linkline svg{transform:translateX(5px)}
+.bex-garden-spark{position:absolute;width:18px;height:18px;transform:rotate(45deg);border-radius:75% 7% 75% 7%;
+  opacity:.45;background:linear-gradient(135deg,#fedca5,#b6d4a8);pointer-events:none;animation:bex-spark-drift 13s ease-in-out infinite alternate}
+.bex-garden-spark.one{top:16%;right:9%}
+.bex-garden-spark.two{bottom:18%;left:5%;animation-delay:-6s}
+.bex-garden-spark.three{top:35%;left:49%;animation-delay:-3s}
+@keyframes bex-spark-drift{from{translate:0 0;rotate:-12deg}to{translate:18px -22px;rotate:18deg}}
+/* Search and quick school information, restrained compared with visual cards */
+.bex-guide{position:relative;background:#fdfbf6;padding:76px 0 81px;overflow:hidden}
+.bex-guide-panel{background:linear-gradient(137deg,#f4f3e9,#e2ede3);border-radius:36px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.72fr);gap:45px;padding:42px 45px 44px;border:1px solid rgba(75,125,90,.17);box-shadow:0 19px 60px rgba(42,75,52,.065);position:relative;overflow:hidden}
+.bex-guide-main{position:relative;z-index:2}
+.bex-guide-panel h2{font:500 clamp(2rem,3.7vw,3.1rem)/1.12 Georgia,serif;letter-spacing:-.04em;color:var(--bex-ink);margin:10px 0 14px}
+.bex-guide-panel p{color:#607b6c;margin:0 0 17px}
+.bex-guide-form{margin:19px 0 12px;display:flex;align-items:center;gap:9px;min-width:0}
+.bex-guide-form input{flex:1;min-width:0;border:1px solid #b9d0bd;border-radius:14px;padding:13px 15px;min-height:48px;background:#fffefa;color:#264737;font:inherit;font-size:.91rem}
+.bex-guide-form button,.bex-action{border:0;background:#244c3e;color:white;border-radius:14px;padding:11px 17px;min-height:48px;font:750 .87rem system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.bex-guide-form button:hover,.bex-action:hover{background:#3e775d}
+.bex-guide-form button:focus-visible,.bex-action:focus-visible{outline:3px solid #bc7652;outline-offset:3px}
+.bex-guide-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.bex-guide-chip{border:1px solid #bad3c2;border-radius:999px;padding:8px 12px;background:#fbfff9;font:700 .78rem system-ui,sans-serif;color:#355e49;cursor:pointer;min-height:38px}
+.bex-guide-chip:hover{background:#e4f4e6}
+.bex-guide-answer{border-left:3px solid #e4a37b;background:rgba(255,255,255,.77);border-radius:0 14px 14px 0;
+  padding:16px 19px;margin-top:18px;min-height:66px;line-height:1.55;color:#294e3d;font-size:.93rem}
+.bex-guide-answer p{margin:0 0 12px;color:#335548}
+.bex-guide-answer strong{display:block;margin-bottom:5px}
+.bex-guide-answer a{display:inline-block;text-decoration:underline;text-underline-offset:3px;font-size:.83rem;font-weight:750;color:#276d50}
+.bex-guide-trust{font-size:.77rem!important;margin-top:14px!important;color:#5c7768!important}
+.bex-book-scene{position:relative;min-height:275px;align-self:center;display:grid;place-items:center;perspective:750px}
+.bex-book-plate{position:absolute;inset:18% 8%;border-radius:50%;background:radial-gradient(circle,rgba(250,229,175,.49),rgba(201,222,193,.2) 50%,transparent 71%);filter:blur(3px)}
+.bex-book{position:relative;width:150px;height:195px;transform-style:preserve-3d;
+  transform:rotateY(-27deg) rotateX(14deg) rotateZ(7deg);animation:bex-book-hover 8s ease-in-out infinite alternate}
+.bex-book-front{position:absolute;inset:0;border-radius:6px 17px 17px 7px;background:linear-gradient(130deg,#4e8c71 0%,#27624c 73%);
+  border:3px solid #3a7159;box-shadow:12px 12px 18px rgba(33,82,55,.19),inset 5px 0 8px rgba(255,255,255,.14);
+  transform:translateZ(12px);display:grid;place-items:center}
+.bex-book-front svg{width:90px;height:130px}
+.bex-book-pages{position:absolute;inset:8px -9px 6px 9px;border-radius:3px 17px 17px 4px;
+  background:repeating-linear-gradient(0deg,#f6f0dc 0 2px,#dedabf 2px 3px);transform:translateZ(-3px)}
+.bex-book-back{position:absolute;inset:0;background:#e7aa81;border-radius:6px 18px 18px 5px;transform:translateZ(-15px)}
+.bex-book-orbit{position:absolute;width:230px;height:230px;border:2px solid rgba(239,194,135,.42);border-radius:50%;
+  transform:rotateX(63deg) rotate(-28deg);box-shadow:0 0 0 15px rgba(255,255,244,.14)}
+.bex-book-leaf{position:absolute;width:38px;height:55px;background:linear-gradient(135deg,#f7d99f,#a1c9a3);border-radius:90% 3% 90% 3%;
+  top:11%;right:8%;transform:rotate(34deg);animation:bex-spark-drift 12s ease-in-out infinite alternate}
+.bex-book-leaf.two{left:6%;right:auto;top:auto;bottom:9%;width:24px;height:39px;background:linear-gradient(135deg,#e8a98d,#8bb792);animation-delay:-7s}
+@keyframes bex-book-hover{from{transform:rotateY(-30deg) rotateX(10deg) rotateZ(4deg) translateY(5px)}to{transform:rotateY(-20deg) rotateX(18deg) rotateZ(8deg) translateY(-12px)}}
+.bex-motion-row{display:flex;align-items:center;gap:10px;margin-top:18px;color:#6a8171;font-size:.8rem}
+.bex-motion-toggle{border:1px solid #b7cebb;border-radius:999px;background:#fffef8;padding:8px 14px;font:700 .78rem system-ui,sans-serif;color:#365b47;min-height:38px;cursor:pointer}
+.bex-motion-toggle[aria-pressed=true]{background:#e2eae1}
+.bex-motion-toggle:focus-visible{outline:3px solid #b66b4c;outline-offset:3px}
+/* Parent dashboard: quick links, non-sensitive local checklist and approved event download */
+.bex-parent-zone{margin:26px 0 29px;display:grid;grid-template-columns:1fr minmax(270px,.85fr);gap:20px}
+.bex-tool-card{border:1px solid rgba(79,123,89,.19);background:linear-gradient(145deg,#fffefa,#f3f5eb);border-radius:26px;padding:25px;box-shadow:0 10px 28px rgba(43,83,51,.04)}
+.bex-tool-card:nth-child(2){background:linear-gradient(147deg,#e8f0e4,#fffaf0)}
+.bex-tool-card h3{font:500 1.5rem Georgia,serif;letter-spacing:-.03em;margin:6px 0 10px;color:#284b3d}
+.bex-tool-card>p{font-size:.87rem;color:#627a6d;margin:0 0 14px}
+.bex-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.bex-checkline{display:flex;align-items:flex-start;gap:11px;font-size:.89rem;color:#315543;cursor:pointer}
+.bex-checkline input{flex:none;width:19px;height:19px;accent-color:#568f71;margin:3px 0 0}
+.bex-checkline:has(input:checked) span{color:#76887a;text-decoration:line-through}
+.bex-check-note{display:block;margin-top:14px;font-size:.76rem;color:#708577}
+.bex-quick-links{display:grid;gap:10px;margin-top:13px}
+.bex-quick-links a{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #cfe0cd;
+  border-radius:14px;background:rgba(255,255,255,.82);padding:11px 13px;text-decoration:none;color:#2e5644;font-size:.87rem;font-weight:750}
+.bex-quick-links a:hover{background:#fff}
+.bex-event-save{border:1px solid #cddccf;padding:16px 20px;background:#eff5ea;border-radius:18px;margin-bottom:20px}
+.bex-event-save strong{font:500 1.27rem Georgia,serif;display:block;color:#2c503e}
+.bex-event-save p{font-size:.85rem;color:#687f70;margin:6px 0}
+.bex-event-save button{border:1px solid #92b39b;border-radius:999px;background:#fffefa;color:#275b42;
+  padding:9px 14px;min-height:42px;font-weight:750;font-size:.82rem;margin-top:8px;cursor:pointer}
+.bex-event-save[hidden]{display:none}
+.bex-parent-orbit{position:relative;overflow:hidden;isolation:isolate}
+.bex-parent-orbit::after{content:"";position:absolute;inset:12%;border:2px solid rgba(255,250,228,.46);border-radius:50%;
+  transform:rotateX(62deg) rotate(-14deg);pointer-events:none;box-shadow:0 0 0 11px rgba(255,255,255,.08)}
+.bex-parent-orbit .be-welcome-graphic{display:inline-block;transform-style:preserve-3d;animation:bex-bloom-turn 10s ease-in-out infinite alternate}
+@keyframes bex-bloom-turn{from{transform:rotateY(-18deg) rotateZ(-10deg) scale(.94)}to{transform:rotateY(18deg) rotateZ(10deg) scale(1.05)}}
+.be-auth-dialog{box-shadow:0 35px 95px rgba(21,56,38,.26)!important;border:1px solid rgba(187,214,182,.4)!important}
+.be-auth-body{background:radial-gradient(circle at 100% 2%,rgba(248,222,176,.27),transparent 36%),#fffefa}
+/* Shared focus, mobile reflow and motion controls */
+.bex-journeys *, .bex-guide *{box-sizing:border-box}
+.bex-journeys a:focus-visible,.bex-guide button:focus-visible,.bex-guide a:focus-visible,
+.bex-checkline input:focus-visible,.bex-event-save button:focus-visible{outline:3px solid #c57b50;outline-offset:3px}
+.bex-motion-paused *, .bex-motion-paused *::before,.bex-motion-paused *::after{
+  animation-play-state:paused!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+.bex-motion-paused .creative-flyby{display:none!important}
+.bex-motion-paused .bex-book{transform:rotateY(-27deg) rotateX(14deg) rotateZ(7deg)}
+@media(max-width:970px){
+  .bex-journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bex-journey-grid .bex-pathcard:last-child{grid-column:1/-1;min-height:240px}
+  .bex-guide-panel{grid-template-columns:1fr minmax(170px,.56fr);gap:18px;padding:32px}
+}
+@media(max-width:740px){
+  .bex-shell{width:calc(100% - 34px)}
+  .bex-journeys{padding:54px 0 62px}
+  .bex-journey-grid{grid-template-columns:1fr;gap:13px}
+  .bex-journey-grid .bex-pathcard:last-child{grid-column:auto}
+  .bex-pathcard{min-height:210px;padding:21px 23px}
+  .bex-card-visual{margin-bottom:5px;transform:scale(.81);transform-origin:top left;height:83px}
+  .bex-guide{padding:55px 0}
+  .bex-guide-panel{grid-template-columns:1fr;padding:26px 22px;border-radius:27px;gap:15px}
+  .bex-book-scene{display:none}
+  .bex-parent-zone{grid-template-columns:1fr}
+  .bex-garden-spark.three{display:none}
+}
+@media(max-width:400px){
+  .bex-shell{width:calc(100% - 26px)}
+  .bex-guide-form{flex-direction:column;align-items:stretch}
+  .bex-guide-form input,.bex-guide-form button{width:100%}
+  .bex-guide-chip{font-size:.74rem}
+  .bex-pathcard{border-radius:22px}
+  .bex-tool-card{padding:21px 18px}
+}
+@media(prefers-reduced-motion:reduce){
+ .bex-garden-spark,.bex-book,.bex-float-leaf,.bex-book-leaf,.bex-parent-orbit .be-welcome-graphic{animation:none!important}
+ .bex-pathcard,.bex-linkline svg{transition:none!important}
+ .bex-pathcard:hover{transform:none}
+}
