@@ -72,8 +72,34 @@
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isMobile = window.innerWidth < 760 || /Mobi|Android/i.test(navigator.userAgent);
 
-  if (canvas && typeof THREE !== "undefined" && !prefersReduced && !isMobile) {
-    try { initButterflies(); } catch (err) { console.warn("3D scene unavailable; showing static illustration."); }
+  // Load the heavier 3D engine only for suitable desktop visitors, after first paint.
+  // The existing CSS butterflies stay visible if the CDN or WebGL is unavailable.
+  const canUse3D = Boolean(canvas && !prefersReduced && !isMobile);
+  let threeSceneStarted = false;
+  function startThreeScene() {
+    if (!canUse3D || threeSceneStarted || typeof THREE === "undefined" ||
+        document.documentElement.classList.contains("bex-motion-paused")) return;
+    threeSceneStarted = true;
+    try { initButterflies(); }
+    catch (err) { console.warn("3D scene unavailable; showing the illustrated butterflies."); }
+  }
+  document.addEventListener("bex-motion-change", startThreeScene);
+  if (canUse3D) {
+    const loadThree = () => {
+      if (typeof THREE !== "undefined") { startThreeScene(); return; }
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      script.async = true;
+      script.onload = startThreeScene;
+      script.onerror = () => console.warn("3D library could not load; CSS butterflies remain available.");
+      document.head.appendChild(script);
+    };
+    const scheduleLoad = () => {
+      if ("requestIdleCallback" in window) window.requestIdleCallback(loadThree, { timeout: 1800 });
+      else window.setTimeout(loadThree, 50);
+    };
+    if (document.readyState === "complete") scheduleLoad();
+    else window.addEventListener("load", scheduleLoad, { once: true });
   }
 
   function initButterflies() {
