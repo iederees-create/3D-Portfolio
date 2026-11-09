@@ -32,6 +32,10 @@ const launchCSS = html.includes('href="./launch.css"') ? load("launch.css") : nu
 const schoolInfoJS = html.includes('src="./school-information.js"') ? load("school-information.js") : null;
 const privacyHTML = html.includes('href="./privacy.html"') ? load("privacy.html") : null;
 const sitemap = html.includes('rel="canonical"') ? load("sitemap.xml") : null;
+const calendarHTML = html.includes('href="./calendar.html"') ? load('calendar.html') : null;
+const calendarJS = calendarHTML ? load('calendar.js') : null;
+const calendarCSS = calendarHTML ? load('calendar.css') : null;
+const calendarTeaserCSS = html.includes('href="./calendar-teaser.css"') ? load('calendar-teaser.css') : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
@@ -62,8 +66,16 @@ if (sitemap !== null && !sitemap.includes('https://iederees-create.github.io/3D-
 if (schoolInfoJS !== null && !html.includes('content="index,follow')) problems.push('School homepage must be indexable on public launch');
 if (parentHTML !== null && !parentHTML.includes('content="noindex,nofollow"')) problems.push('Private parent portal must remain noindex');
 if (parentHTML !== null && !parentHTML.includes('id="be-school-information-form"')) problems.push('Staff school-information publishing form missing');
+if (calendarHTML !== null && (Buffer.byteLength(calendarHTML,'utf8') < 4000 || !calendarHTML.includes('id="cal-days"') || !calendarHTML.includes('id="cal-request-form"') || !calendarHTML.includes('id="cal-staff"'))) problems.push('Shared school calendar page missing or truncated');
+if (calendarJS !== null && (Buffer.byteLength(calendarJS,'utf8') < 5000 || !calendarJS.includes('be_request_class_slot') || !calendarJS.includes('be_staff_review_class_proposal'))) problems.push('Guest-class calendar booking logic missing');
+if (calendarCSS !== null && (Buffer.byteLength(calendarCSS,'utf8') < 1500 || !calendarCSS.includes('cal-calendar-layout'))) problems.push('Responsive calendar styling missing');
+if (calendarTeaserCSS !== null && Buffer.byteLength(calendarTeaserCSS,'utf8') < 800) problems.push('Calendar discovery panel missing');
+if (calendarHTML !== null && !html.includes('be-calendar-promo')) problems.push('Homepage must link guest-class calendar');
+if (parentHTML !== null && calendarHTML !== null && !parentHTML.includes('href="./calendar.html"')) problems.push('Parent network must link shared calendar');
+if (sitemap !== null && calendarHTML !== null && !sitemap.includes('calendar.html')) problems.push('School sitemap must include shared calendar');
 
-if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || '') + (schoolInfoJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+
+if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || '') + (schoolInfoJS || '') + (calendarJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
