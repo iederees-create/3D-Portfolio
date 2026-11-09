@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f7f7ee">
+  <title>School Calendar & Guest Classes | Butterflies Educare</title>
+  <meta name="description" content="See Butterflies Educare's published school events and available times to propose a guest class. All class proposals require school approval.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="canonical" href="https://iederees-create.github.io/3D-Portfolio/butterflies-educare/calendar.html">
+  <link rel="stylesheet" href="./calendar.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
+  <script src="./calendar.js" defer></script>
+</head>
+<body>
+  <div class="cal-ribbon">BUTTERFLIES EDUCARE · One shared school calendar · South African Standard Time (SAST)</div>
+  <header class="cal-header">
+    <a class="cal-brand" href="./"><span aria-hidden="true" class="cal-brand-symbol">✿</span><span>Butterflies <strong>Educare</strong><small>School & Community Calendar</small></span></a>
+    <nav aria-label="Main navigation" class="cal-nav"><a href="./">School website</a><a href="./parent.html">Parent network</a><button type="button" id="cal-account" class="cal-account-btn">Sign in</button></nav>
+  </header>
+  <main id="cal-main">
+    <section class="cal-hero" aria-labelledby="cal-heading">
+      <div class="cal-hero-inner">
+        <div class="cal-hero-copy">
+          <span class="cal-eyebrow">Good things happen together</span>
+          <h1 id="cal-heading">One calendar.<em> More possibilities.</em></h1>
+          <p>Find school activities and open time slots for community members who would like to share a skill, story or special class.</p>
+          <div class="cal-hero-actions"><a href="#cal-month" class="cal-button cal-primary">Explore the calendar</a><a href="#cal-how" class="cal-button cal-outline">How guest classes work</a></div>
+          <p class="cal-mini">Class proposals are requests only. The school confirms every class and may require safety checks first.</p>
+        </div>
+        <div class="cal-art" aria-hidden="true">
+          <div class="cal-orbit cal-orbit-one"></div><div class="cal-orbit cal-orbit-two"></div>
+          <div class="cal-art-sheet"><div class="cal-art-top"><span>OUR SCHOOL</span><span>✿</span></div><div class="cal-art-lines"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="cal-art-badge">Growing together</div></div>
+          <span class="cal-art-leaf cal-art-leaf-one"></span><span class="cal-art-leaf cal-art-leaf-two"></span>
+        </div>
+      </div>
+    </section>
+    <div class="cal-alert" id="cal-alert" role="status" aria-live="polite" hidden></div>
+    <section class="cal-section" id="cal-month" aria-labelledby="cal-month-heading">
+      <div class="cal-section-head"><div><span class="cal-eyebrow">School events + open class times</span><h2 id="cal-month-heading">The community calendar</h2><p>Browse real, school-published dates. Available class times are shown in green.</p></div><div class="cal-account-state" id="cal-user-state">Public calendar</div></div>
+      <div class="cal-calendar-layout">
+        <div class="cal-calendar-shell">
+          <div class="cal-calendar-top">
+            <div class="cal-calendar-nav"><button type="button" id="cal-prev" aria-label="Previous month" class="cal-chevron">‹</button><h3 id="cal-month-label">Calendar</h3><button type="button" id="cal-next" aria-label="Next month" class="cal-chevron">›</button></div>
+            <button type="button" id="cal-today" class="cal-today">This month</button>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+          <div id="cal-days" class="cal-days" role="group" aria-label="Calendar dates"></div>
+          <div class="cal-key"><span><i class="cal-dot event"></i> School event</span><span><i class="cal-dot slot"></i> Available guest-class time</span></div>
+        </div>
+        <aside class="cal-upcoming">
+          <div class="cal-upcoming-head"><span class="cal-eyebrow">Selected day</span><h3 id="cal-day-heading">Choose a date</h3></div>
+          <div class="cal-filter-group" role="group" aria-label="Filter calendar">
+            <button class="cal-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="cal-filter" type="button" data-filter="event" aria-pressed="false">School events</button>
+            <button class="cal-filter" type="button" data-filter="slot" aria-pressed="false">Open slots</button>
+          </div>
+          <div id="cal-day-items" class="cal-day-items" aria-live="polite"><p class="cal-empty">Select a date to see its activities.</p></div>
+        </aside>
+      </div>
+      <p class="cal-small">Showing published school information only. Times use South African Standard Time. Staff may make changes; confirm arrangements directly with the school.</p>
+    </section>
+    <section class="cal-how-section" id="cal-how">
+      <div class="cal-content"><span class="cal-eyebrow">For community presenters</span><h2>Share something wonderful with our learners.</h2><p>Have a skill, story, language, musical activity or creative idea to share? The school can make suitable class times available for you to request.</p>
+      <div class="cal-steps">
+        <article><span class="cal-number">01</span><h3>Choose an open time</h3><p>Browse green available slots on the calendar. No times are shown until the school publishes them.</p></article>
+        <article><span class="cal-number">02</span><h3>Tell us about your class</h3><p>Use your account to share a short description and relevant experience. No learner information is needed.</p></article>
+        <article><span class="cal-number">03</span><h3>Wait for school approval</h3><p>School staff review the request and safeguarding arrangements. You can see when the class is approved.</p></article>
+      </div>
+      <div class="cal-how-note"><strong>Important:</strong> An open slot is an invitation to propose a class, not permission to teach or enter the school. The principal remains responsible for approval and appropriate supervision.</div>
+      </div>
+    </section>
+    <section class="cal-private" id="cal-my-requests" hidden>
+      <div class="cal-content"><div class="cal-section-head"><div><span class="cal-eyebrow">Your account</span><h2>My class proposals</h2><p>Your submissions and their school-review status are private to you and authorised school staff.</p></div></div>
+      <div id="cal-my-list" class="cal-proposal-list"></div></div>
+    </section>
+    <section class="cal-private" id="cal-staff" hidden>
+      <div class="cal-content"><div class="cal-section-head"><div><span class="cal-eyebrow">Authorised school team</span><h2>Manage class availability</h2><p>Publish genuine open times, then review and approve guest-class requests before they appear as confirmed school events.</p></div></div>
+        <div class="cal-staff-grid">
+          <article class="cal-card"><h3>Publish an available time</h3>
+            <form id="cal-slot-form" class="cal-form">
+              <label>Start (South African time)<input type="datetime-local" name="starts" required></label>
+              <label>End (South African time)<input type="datetime-local" name="ends" required></label>
+              <label>Room or activity area<input name="venue" maxlength="120" value="Activity room" required></label>
+              <label>Optional class theme<input name="topic_hint" maxlength="150" placeholder="e.g. Art, stories or movement"></label>
+              <label class="cal-check"><input type="checkbox" name="published" checked><span>Make this time available to prospective presenters</span></label>
+              <button class="cal-button cal-primary" type="submit">Save time slot</button>
+            </form>
+          </article>
+          <article class="cal-card"><h3>Manage published slots</h3><p class="cal-small">Busy and approved slots cannot be removed here. To cancel a confirmed class, use the proposal review list below.</p><div id="cal-staff-slots" class="cal-review-list"></div></article>
+        </div>
+        <article class="cal-card cal-review"><h3>Review guest-class proposals</h3><p>Presenter details are available to authorised school staff only. Check suitability, safeguarding and principal approval before accepting.</p><div id="cal-review-list" class="cal-review-list"></div></article>
+      </div>
+    </section>
+    <section class="cal-cta"><div class="cal-content"><h2>Every great class begins with an idea.</h2><p>New to Butterflies Educare? You can create an account through our parent and community network. An account is needed to submit a guest-class proposal.</p><a href="./parent.html" class="cal-button cal-primary">Open parent & community accounts</a></div></section>
+  </main>
+  <footer class="cal-footer"><div><strong>Butterflies Educare</strong><span>Community calendar and guest-class requests</span></div><div><a href="./">School website</a><a href="./parent.html">Parent network</a><a href="./privacy.html">Data handling</a></div></footer>
+  <dialog id="cal-dialog" class="cal-dialog" aria-labelledby="cal-dialog-heading"><div class="cal-dialog-inner">
+    <button id="cal-dialog-close" class="cal-dialog-close" type="button" aria-label="Close dialog">×</button>
+    <span class="cal-eyebrow">Guest-class request</span>
+    <h2 id="cal-dialog-heading">Propose a class</h2>
+    <p id="cal-slot-explainer" class="cal-small"></p>
+    <form id="cal-request-form" class="cal-form">
+      <input type="hidden" name="slot_id">
+      <label>Class title<input name="class_title" minlength="3" maxlength="120" required placeholder="e.g. A creative storytelling session"></label>
+      <label>What would you teach or share?<textarea name="class_summary" minlength="15" maxlength="1000" required rows="4" placeholder="Explain the activity and what learners might enjoy"></textarea></label>
+      <label>Your relevant experience<textarea name="background_summary" minlength="5" maxlength="500" required rows="3" placeholder="Tell the school why you'd be a good fit"></textarea></label>
+      <label class="cal-check"><input type="checkbox" name="acknowledge" required><span>I understand this is a request, not a confirmed booking, and the school may require safeguarding checks and supervision.</span></label>
+      <button class="cal-button cal-primary" type="submit">Send class proposal</button>
+    </form>
+  </div></dialog>
+  <dialog id="cal-auth-dialog" class="cal-dialog" aria-labelledby="cal-auth-heading"><div class="cal-dialog-inner">
+    <button type="button" class="cal-dialog-close" id="cal-auth-close" aria-label="Close sign-in">×</button>
+    <span class="cal-eyebrow">Parent & community account</span><h2 id="cal-auth-heading">Sign in to request a class</h2>
+    <p class="cal-small">Use your existing Butterflies Educare account. If you don't have one, create one through the parent network.</p>
+    <form id="cal-login-form" class="cal-form">
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+      <button type="submit" class="cal-button cal-primary">Sign in</button>
+    </form>
+    <p class="cal-small"><a href="./parent.html">Create an account, reset your password or complete your profile</a></p>
+  </div></dialog>
+</body>
+</html>
