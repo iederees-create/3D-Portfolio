@@ -108,6 +108,7 @@
   <link rel="stylesheet" href="./experience.css">
   <link rel="stylesheet" href="./studio.css">
   <link rel="stylesheet" href="./launch.css">
+  <link rel="stylesheet" href="./calendar-teaser.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
 </head>
 <body>
@@ -121,7 +122,7 @@
       </a>
       <button class="menu-toggle" id="menu-toggle" aria-controls="site-nav" aria-expanded="false">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        <a href="#about">Our Story</a><a href="#explore">Explore</a><a href="#parents">For Parents</a><a href="#community">Community</a><a href="#contact" class="btn btn-dark">Get in touch</a>
+        <a href="#about">Our Story</a><a href="#explore">Explore</a><a href="#parents">For Parents</a><a href="./calendar.html">School Calendar</a><a href="#community">Community</a><a href="#contact" class="btn btn-dark">Get in touch</a>
       </nav>
     </div>
   </header>
@@ -132,7 +133,7 @@
           <span class="eyebrow">Welcome to Butterflies Educare</span>
           <h1>Little beginnings.<br><i>Beautiful</i> possibilities.</h1>
           <p class="hero-copy">A warm new digital home for our school community. Discover what matters, stay connected and help us build something wonderful together.</p>
-          <div class="hero-actions"><a class="btn btn-dark" href="#explore">Explore the school <span aria-hidden="true">↗</span></a><a class="btn btn-light" href="#parents">For parents <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-actions"><a class="btn btn-dark" href="#explore">Explore the school <span aria-hidden="true">↗</span></a><a class="btn btn-light" href="#parents">For parents <span aria-hidden="true">↗</span></a><a class="btn btn-light" href="./calendar.html">Calendar &amp; guest classes <span aria-hidden="true">↗</span></a></div>
           <div class="hero-note"><span class="tiny-dot" aria-hidden="true"></span> A growing digital space for families, with official details added as confirmed.</div>
         </div>
         <div class="hero-illustration">
@@ -179,6 +180,16 @@
         </div>
       </div>
     </section>
+    <section class="be-calendar-promo" id="guest-classes" aria-labelledby="be-calendar-title">
+      <div class="be-calendar-promo-inner">
+        <div><span class="be-calendar-promo-eyebrow">School events &amp; community guest classes</span>
+          <h2 id="be-calendar-title">Bring your ideas into our classroom.</h2>
+          <p>Parents can see published school events. Local artists, storytellers, musicians and other community members can choose an open time to propose a class. Every request goes to the school for approval first.</p>
+          <a href="./calendar.html">Explore the shared school calendar</a>
+        </div>
+        <div class="be-calendar-promo-art" aria-hidden="true"><div class="be-calendar-promo-leaf">✿</div></div>
+      </div>
+    </section>
     <section class="section" id="about"><div class="wrap split">
       <div class="split-copy"><span class="eyebrow">Our story</span><h2>A school story worth sharing.</h2><p>Every school has a unique story. This space will introduce Butterflies Educare in the school's own words — its beginnings, what it values and its vision for the children and families it serves.</p><p>We're working with the school to add the correct background, programme details, staff information and photographs with the appropriate permissions.</p><div class="pill-list"><span class="pill">School story — coming soon</span><span class="pill">Programmes — being confirmed</span></div></div>
       <div class="side-note"><span class="eyebrow">From the heart</span><p class="big-quote">Big dreams often begin with little steps.</p><small>Our first step: creating a welcoming, useful online home for Butterflies Educare.</small></div>
@@ -203,7 +214,7 @@
     </div></section>
     <section class="final-cta" id="contact"><div class="wrap"><span class="eyebrow">Let's keep growing</span><h2>See you soon, Butterflies family.</h2><p>The Parent &amp; Community Network is open for general enquiries, news and community support. Official school hours, contact details and fees will be published once confirmed. Formal applications and payments are not yet available.</p><a class="btn btn-dark" href="./parent.html">Open the parent network</a> <span class="pill">School operational details being verified</span></div></section>
   </main>
-  <footer class="footer"><div class="wrap footer-inner"><div><strong>Butterflies Educare</strong><p>A digital home for the school community. Operational details are added once verified.</p></div><p>© <span id="year"></span> Butterflies Educare · <a class="be-privacy-link" href="./privacy.html">Privacy &amp; data handling</a> · <a href="#top">Back to top ↑</a></p></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><div><strong>Butterflies Educare</strong><p>A digital home for the school community. Operational details are added once verified.</p></div><p>© <span id="year"></span> Butterflies Educare · <a href="./calendar.html">School Calendar</a> · <a class="be-privacy-link" href="./privacy.html">Privacy &amp; data handling</a> · <a href="#top">Back to top ↑</a></p></div></footer>
   <script src="./site.js" defer></script>
   <script src="./atmosphere.js" defer></script>
   <script src="./network.js" defer></script>

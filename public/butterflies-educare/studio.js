@@ -25,6 +25,7 @@
       home:"M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z",
       users:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
       flower:"M12 12c-3-7-9-5-8-1 1 3 5 4 8 1 3-7 9-5 8-1-1 3-5 4-8 1zM12 12c-7-3-5-9-1-8 3 1 4 5 1 8 7 3 5 9 1 8-3-1-4-5-1-8z",
+      calendar:"M3 5h18v16H3zM7 3v4m10-4v4M3 11h18M7 15h3m4 0h3",
       up:"M12 19V5m-7 7 7-7 7 7"
     };
     path.setAttribute("d",shapes[name]||shapes.home);
@@ -75,8 +76,8 @@
     const nav=create("nav","studio-bottom-nav");
     nav.setAttribute("aria-label","Quick navigation");
     const links=isPortal?
-      [[HOME,"School","home"],["#be-dashboard","My space","users"],["#be-fundraising","Support","flower"]]:
-      [[HOME,"Home","home"],[PARENT,"Parent hub","users"],["#community","Support","flower"]];
+      [[HOME,"School","home"],["./calendar.html","Calendar","calendar"],["#be-dashboard","My space","users"]]:
+      [[HOME,"Home","home"],[PARENT,"Parent hub","users"],["./calendar.html","Calendar","calendar"]];
     links.forEach(([url,name,icon],idx)=>{
       const a=create("a","",name);
       a.href=url;

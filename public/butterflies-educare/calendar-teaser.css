@@ -1,0 +1,22 @@
+/* Butterflies Educare - shared-calendar promotional panel on school homepage */
+.be-calendar-promo{padding:27px 0 73px;background:linear-gradient(143deg,#f6f4e9,#eff3e9);position:relative;overflow:hidden}
+.be-calendar-promo-inner{max-width:1120px;margin:0 auto;padding:39px 42px;border-radius:33px;
+ display:grid;grid-template-columns:1.2fr .7fr;gap:28px;align-items:center;
+ background:radial-gradient(ellipse at 91% 16%,rgba(168,207,151,.25),transparent 51%),linear-gradient(142deg,#275440,#1d4538);
+ color:#f8f8ed;box-shadow:0 24px 54px rgba(31,72,45,.14);position:relative;isolation:isolate;overflow:hidden}
+.be-calendar-promo-inner::after{content:"";position:absolute;right:-81px;top:-100px;width:330px;height:330px;border:2px solid rgba(243,227,168,.20);
+ border-radius:50%;box-shadow:0 0 0 28px rgba(213,231,187,.055);z-index:-1}
+.be-calendar-promo-eyebrow{font-size:.74rem;letter-spacing:.16em;font-weight:850;color:#f0d6a1;text-transform:uppercase}
+.be-calendar-promo h2{font:500 clamp(2rem,3.4vw,3rem)/1.12 Georgia,serif;letter-spacing:-.04em;margin:12px 0 13px;color:#fff8e8}
+.be-calendar-promo p{color:#dcebd9;line-height:1.66;font-size:.94rem;max-width:600px}
+.be-calendar-promo a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#f5dfa9;color:#264d38;
+ font-size:.87rem;font-weight:850;border-radius:999px;padding:12px 19px;min-height:45px;margin-top:15px}
+.be-calendar-promo a:hover{background:#fff1cc}.be-calendar-promo a:focus-visible{outline:3px solid #f1b995;outline-offset:3px}
+.be-calendar-promo-art{position:relative;display:grid;place-items:center;min-height:195px}
+.be-calendar-promo-leaf{width:156px;height:172px;border:2px solid rgba(250,229,166,.5);border-radius:40px;
+ background:linear-gradient(150deg,#c0dcb8,#e4f2d7);box-shadow:16px 20px 29px rgba(9,41,25,.23);
+ transform:rotate(11deg);display:grid;place-items:center;font:500 3.3rem Georgia,serif;color:#407a58}
+.be-calendar-promo-leaf::before{content:"";position:absolute;width:67px;height:91px;left:-42px;bottom:-35px;background:linear-gradient(145deg,#a7cba4,#dfdda6);
+ border-radius:6% 88% 7% 85%;transform:rotate(-21deg)}
+.be-calendar-promo-leaf::after{content:"";position:absolute;width:57px;height:79px;right:-40px;top:-30px;background:linear-gradient(150deg,#e7b694,#f8deaf);border-radius:88% 4% 86% 8%;transform:rotate(-23deg)}
+@media(max-width:820px){.be-calendar-promo{padding:19px 18px 54px}.be-calendar-promo-inner{grid-template-columns:1fr;padding:31px 27px}.be-calendar-promo-art{display:none}}

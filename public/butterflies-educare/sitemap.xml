@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/butterflies-educare/</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/butterflies-educare/calendar.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>daily</changefreq>
   </url>
 </urlset>
