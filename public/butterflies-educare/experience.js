@@ -120,6 +120,12 @@
   }
 
   const generic = {
+    guestclasses: {
+      title: "Come and give a guest class",
+      body: "Community presenters can browse open times on the shared school calendar, sign in and send a class idea. The school reviews all requests and safeguarding arrangements before a class is confirmed.",
+      link: "./calendar.html",
+      label: "See available class times"
+    },
     enrolment: {
       title: "Enrolment information",
       body: "You can request enrolment information in the parent network. The school has not yet published confirmed acceptance criteria, availability, fees or registration dates. An enquiry is not an application or an offered place.",
@@ -164,6 +170,7 @@
     }
   };
   const matches = [
+    [/teach|guest.class|present.*class|give.*class|offer.*class|class.slot|workshop|facilitat/i,"guestclasses"],
     [/admission|enrol|enroll|apply|application|registration|register|space|age group|place/i,"enrolment"],
     [/fees?|price|cost|payment|pay|donat|tuition|bank/i,"fees"],
     [/open|hours?|time|address|where|location|map|direction|drop.?off/i,"hours"],
@@ -213,7 +220,7 @@
           return {
             title: topic === "events" ? "Upcoming school events" : topic === "fundraising" ? "Approved fundraising projects" : "School announcements",
             body: "Nothing has been published by the school in this category yet. Check the parent network for future verified updates.",
-            link: PARENT + (topic === "events"?"#be-events":topic === "fundraising"?"#be-fundraising":"#be-news"),
+            link: topic === "events" ? "./calendar.html" : PARENT + (topic === "fundraising"?"#be-fundraising":"#be-news"),
             label:"Browse school updates"
           };
         }
@@ -224,7 +231,7 @@
         return {
           title: topic === "events" ? "Confirmed school events" : topic === "fundraising" ? "Published school projects" : "Published school news",
           body: first + ". These items come from the school's published feed; see the parent network for full details.",
-          link: PARENT + (topic === "events"?"#be-events":topic === "fundraising"?"#be-fundraising":"#be-news"),
+          link: topic === "events" ? "./calendar.html" : PARENT + (topic === "fundraising"?"#be-fundraising":"#be-news"),
           label:"See published details"
         };
       } catch {
@@ -282,7 +289,7 @@
     form.append(input,submit);
     content.appendChild(form);
     const chips=create("div","bex-guide-examples");
-    const chipData=[["Enrolment","enrolment"],["School events","events"],["Fees","fees"],["Fundraising","fundraising"],["Contact","contact"]];
+    const chipData=[["Enrolment","enrolment"],["School events","events"],["Offer a class","guestclasses"],["Fees","fees"],["Fundraising","fundraising"],["Contact","contact"]];
     const answer=create("div","bex-guide-answer");
     answer.setAttribute("role","status");
     answer.setAttribute("aria-live","polite");
