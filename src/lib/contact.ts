@@ -1,6 +1,6 @@
 /** Shared contact paths (same values the project detail pages already use). */
 export const CONTACT_EMAIL = 'iedereesfrancis@gmail.com';
-export const WHATSAPP_NUMBER = '27629494708';
+export const WHATSAPP_NUMBER = '27762851980';
 
 export function hireMailto(subject = 'Project enquiry from your portfolio', body?: string) {
   const query = [`subject=${encodeURIComponent(subject)}`];
