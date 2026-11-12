@@ -6,6 +6,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const root = path.resolve(process.argv[2] || 'public/butterflies-educare');
 const problems = [];
@@ -96,6 +97,44 @@ if (sitemap !== null && calendarHTML !== null && !sitemap.includes('calendar.htm
 
 
 if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || '') + (schoolInfoJS || '') + (calendarJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
+
+/* Application and school-management release checks. */
+const applicationPage = load('apply-2027.html');
+const applicationScript = load('applications-2027.js');
+const applicationCSS = load('applications-2027.css');
+const principalPage = load('principal.html');
+const principalScript = load('principal-dashboard.js');
+const principalCSS = load('principal-dashboard.css');
+
+if (!html.includes('href="./apply-2027.html"')) problems.push('Homepage 2027 application link is missing');
+if (parentHTML !== null && !parentHTML.includes('href="./apply-2027.html"')) problems.push('Parent portal 2027 application link is missing');
+if (!applicationPage.includes('id="application-form"') ||
+    !applicationPage.includes('id="review-summary"') ||
+    !applicationPage.includes('id="staff-panel"')) problems.push('2027 school application flow missing from public bundle');
+if (!applicationScript.includes('be_submit_application_2027') ||
+    !applicationScript.includes('be_review_application_2027') ||
+    !applicationScript.includes('be_application_health_2027')) problems.push('2027 application JS workflow missing');
+if (!applicationCSS.includes('.form-step')) problems.push('2027 form styling missing');
+if (!principalPage.includes('id="principal-app"') ||
+    !principalPage.includes('id="developer-tools"') ||
+    !principalPage.includes('id="owner-staff-form"')) problems.push('School management / owner console missing');
+if (!principalScript.includes('be_developer_owners') ||
+    !principalScript.includes('be_owner_manage_staff') ||
+    !principalScript.includes('be_owner_list_staff')) problems.push('Developer owner role checks missing');
+if (!principalCSS.includes('.owner-console')) problems.push('Developer owner responsive styling missing');
+if (networkCSS !== null && !networkCSS.includes('body.be-network a.be-btn.be-primary:visited')) problems.push('Dark parent CTA link text contrast fix missing');
+
+for (const filename of [
+  'site.js', 'atmosphere.js', 'network.js', 'creative-garden.js',
+  'experience.js', 'studio.js', 'school-information.js', 'calendar.js',
+  'applications-2027.js', 'principal-dashboard.js'
+]) {
+  const checked = spawnSync(process.execPath, ['--check', path.join(root, filename)], { encoding: 'utf8' });
+  if (checked.status !== 0) {
+    problems.push('JavaScript syntax check failed for ' + filename + ': ' +
+      (checked.stderr || checked.error?.message || 'unknown error').slice(0, 200));
+  }
+}
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
