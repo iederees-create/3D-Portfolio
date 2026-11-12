@@ -12,6 +12,7 @@
   let profile = null;
   let staffRole = null;
   let authMode = "signin";
+  let pendingConfirmEmail = "";
   let activity = { enrolments: [], rsvps: [], messages: [], sponsors: [], volunteers: [] };
 
   const create = (tag, text, className) => {
@@ -104,9 +105,115 @@
     }
   }
 
+  function ensureEmailConfirmation() {
+    let panel = $("be-email-confirmation");
+    if (panel) return panel;
+    const body = document.querySelector("#be-auth-dialog .be-auth-body");
+    if (!body) return null;
+    panel = create("section", null, "be-confirmation");
+    panel.id = "be-email-confirmation";
+    panel.hidden = true;
+    panel.innerHTML = [
+      '<div class="be-confirm-icon" aria-hidden="true">✉</div>',
+      '<p class="be-confirm-lead">We\'ve requested a verification email for:</p>',
+      '<p class="be-confirm-address" id="be-confirm-email"></p>',
+      '<ol class="be-confirm-steps"><li>Open your email inbox.</li><li>Find the verification message and click <strong>Confirm email</strong>.</li><li>Come back to Butterflies Educare and sign in.</li></ol>',
+      '<p class="be-confirm-help">No email yet? Give it a moment and check your Spam or Junk folder. Make sure the address above is correct.</p>',
+      '<p id="be-confirm-feedback" class="be-auth-feedback" role="status" aria-live="polite"></p>',
+      '<div class="be-confirm-actions"><button type="button" class="be-btn be-primary" id="be-confirm-resend">Resend verification email</button><button type="button" class="be-btn be-secondary" id="be-confirm-signin">Go to sign in</button><button type="button" class="be-confirm-edit" id="be-confirm-edit">Use a different email</button></div>',
+      '<details class="be-confirm-otp"><summary>Did you receive a verification code instead?</summary><label for="be-confirm-code">Enter the code from your email</label><input id="be-confirm-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,8}" maxlength="8" placeholder="6-digit code"><button type="button" class="be-btn be-secondary" id="be-confirm-verify">Verify code</button></details>'
+    ].join("");
+    body.appendChild(panel);
+    $("be-confirm-resend").addEventListener("click", resendEmailConfirmation);
+    $("be-confirm-signin").addEventListener("click", () => {
+      setAuthMode("signin");
+      const input = $("be-auth-form")?.elements.namedItem("email");
+      if (input) input.value = pendingConfirmEmail;
+    });
+    $("be-confirm-edit").addEventListener("click", () => {
+      setAuthMode("signup");
+      const input = $("be-auth-form")?.elements.namedItem("email");
+      if (input) { input.value = pendingConfirmEmail; input.focus(); input.select(); }
+    });
+    $("be-confirm-verify").addEventListener("click", verifyConfirmationCode);
+    return panel;
+  }
+  function showEmailConfirmation(email) {
+    pendingConfirmEmail = email;
+    const panel = ensureEmailConfirmation();
+    if (!panel) return;
+    $("be-auth-title").textContent = "Check your email";
+    $("be-auth-description").hidden = true;
+    $("be-auth-dialog").querySelector(".be-auth-tabs").hidden = true;
+    $("be-auth-form").hidden = true;
+    $("be-confirm-email").textContent = email;
+    $("be-confirm-feedback").textContent = "";
+    $("be-confirm-code").value = "";
+    panel.hidden = false;
+    $("be-auth-title").focus?.();
+  }
+  async function resendEmailConfirmation() {
+    if (!client || !pendingConfirmEmail) return;
+    const button = $("be-confirm-resend");
+    const feedback = $("be-confirm-feedback");
+    button.disabled = true;
+    feedback.textContent = "Requesting another verification email…";
+    try {
+      const result = await client.auth.resend({
+        type: "signup",
+        email: pendingConfirmEmail,
+        options: { emailRedirectTo: new URL(PORTAL, location.href).href }
+      });
+      feedback.textContent = result.error
+        ? "We couldn't send another email just now. Please wait a little and try again."
+        : "Another email has been requested. Check your inbox and Spam or Junk folder.";
+    } catch {
+      feedback.textContent = "We couldn't send another email just now. Please try again.";
+    } finally {
+      button.disabled = false;
+    }
+  }
+  async function verifyConfirmationCode() {
+    if (!client || !pendingConfirmEmail) return;
+    const token = $("be-confirm-code").value.trim();
+    const feedback = $("be-confirm-feedback");
+    if (!/^[0-9]{6,8}$/.test(token)) {
+      feedback.textContent = "Enter the code shown in your verification email.";
+      return;
+    }
+    const button = $("be-confirm-verify");
+    button.disabled = true;
+    feedback.textContent = "Checking your code…";
+    try {
+      const response = await client.auth.verifyOtp({ email: pendingConfirmEmail, token, type: "signup" });
+      if (response.error) {
+        feedback.textContent = "That code could not be verified. Check it and try again, or request a new email.";
+        return;
+      }
+      closeAuth();
+      if (!isPortal) location.href = PORTAL;
+      else {
+        await refreshAuth();
+        flash("Your email has been verified. Welcome to Butterflies Educare.");
+      }
+    } catch {
+      feedback.textContent = "We couldn't check the code right now. Please try again.";
+    } finally {
+      button.disabled = false;
+    }
+  }
+
   function setAuthMode(mode) {
     authMode = mode;
+    const confirmPanel = $("be-email-confirmation");
+    if (confirmPanel) confirmPanel.hidden = true;
+    const dialog = $("be-auth-dialog");
+    const tabs = dialog?.querySelector(".be-auth-tabs");
+    if (tabs) tabs.hidden = false;
+    const authForm = $("be-auth-form");
+    if (authForm) authForm.hidden = false;
     const title = $("be-auth-title"), description = $("be-auth-description"), submit = $("be-auth-submit");
+    if (description) description.hidden = false;
     const name = $("be-name-field"), email = $("be-email-field"), password = $("be-password-field"), consent = $("be-consent-field");
     if (!title || !submit) return;
     const names = {signin:"Sign in",signup:"Create your account",reset:"Reset password",recovery:"Choose a new password"};
@@ -216,7 +323,7 @@
           data:{ full_name:name, school_app:"butterflies-educare" }
         }});
         if (!response.error && !response.data.session) {
-          if (feedback) feedback.textContent="Please check your inbox and confirm your email address, then sign in. If the link opens the wrong site, the school preview URL must be added to Supabase Auth redirect settings.";
+          showEmailConfirmation(email);
           return;
         }
       } else if (authMode==="reset") {
