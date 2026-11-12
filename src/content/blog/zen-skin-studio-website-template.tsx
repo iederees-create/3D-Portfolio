@@ -430,12 +430,12 @@ export default function ZenSkinStudioContent() {
           </a>
           , or send a WhatsApp message to{" "}
           <a
-            href="https://wa.me/27629494708"
+            href="https://wa.me/27762851980"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-400 hover:text-primary-300 font-semibold"
           >
-            +27 62 949 4708
+            +27 76 285 1980
           </a>
           . You can also explore the full portfolio of projects at{" "}
           <a
