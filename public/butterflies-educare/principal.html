@@ -21,6 +21,49 @@
 <div class="metric-grid" id="principal-metrics"><div class="metric"><span>2027 applications</span><strong>—</strong></div><div class="metric"><span>Waiting for review</span><strong>—</strong></div><div class="metric"><span>Parent accounts</span><strong>—</strong></div><div class="metric"><span>Unanswered messages</span><strong>—</strong></div></div>
 </section>
 <section class="principal-next"><div><h2>Your daily priorities</h2><p id="principal-priority">Checking submissions and school activity…</p></div><div class="principal-quicklinks"><a href="./apply-2027.html#staff-panel" class="button primary">Review 2027 applications</a><a href="./calendar.html" class="button secondary">Manage class bookings</a><a href="./parent.html#be-staff" class="button secondary">Publish school information</a></div></section>
+<section id="developer-tools" class="owner-console" aria-labelledby="developer-title" hidden>
+  <div class="section-heading"><div><span class="eyebrow">Developer owner access</span><h2 id="developer-title">System control centre</h2><p>Technical oversight and access management, separate from the principal's daily school tasks.</p></div><span class="owner-badge">Developer owner</span></div>
+  <div class="owner-grid">
+    <article class="owner-card">
+      <h3>System checks</h3>
+      <p class="owner-lede">Live checks for your school's connected services and current website release.</p>
+      <div class="owner-status-list">
+        <div><span>School database</span><strong id="owner-db-health">Checking…</strong></div>
+        <div><span>Website deployment</span><strong id="owner-release-health">Checking…</strong></div>
+        <div><span>Backend API</span><strong id="owner-api-health">Checking…</strong></div>
+        <div><span>Developer account</span><strong id="owner-auth-health">Verified access</strong></div>
+      </div>
+      <button type="button" class="button secondary" id="owner-recheck">Run checks again</button>
+    </article>
+    <article class="owner-card">
+      <h3>School team access</h3>
+      <p class="owner-lede">Only grant access to people whose identities and school responsibilities you have verified.</p>
+      <div id="owner-staff-list" class="owner-team-list"><p>Loading school staff…</p></div>
+      <form id="owner-staff-form" class="owner-role-form">
+        <label>Verified account email<input type="email" name="email" placeholder="staff@example.com" required autocomplete="off"></label>
+        <label>Permission<select name="role"><option value="staff">School staff</option><option value="admin">School administrator</option><option value="remove">Remove school access</option></select></label>
+        <button class="button primary" type="submit">Update staff access</button>
+        <p class="fine" id="owner-role-feedback" role="status" aria-live="polite">The person must already have an email-verified account.</p>
+      </form>
+    </article>
+    <article class="owner-card">
+      <h3>Developer shortcuts</h3>
+      <p class="owner-lede">Access project configuration and deployment details in your connected tools.</p>
+      <div class="owner-links">
+        <a href="https://supabase.com/dashboard/project/sijvvbozaufzpjirijhb" target="_blank" rel="noopener">Open school database</a>
+        <a href="https://github.com/iederees-create/3D-Portfolio/actions" target="_blank" rel="noopener">View website deployments</a>
+        <a href="./apply-2027.html#staff-panel">Review all 2027 applications</a>
+        <a href="./parent.html#be-staff">School publishing tools</a>
+        <a href="./privacy.html">Privacy and data handling</a>
+      </div>
+    </article>
+    <article class="owner-card">
+      <h3>Access changes</h3>
+      <p class="owner-lede">A record of school access changes made through this dashboard.</p>
+      <div class="owner-audit" id="owner-role-audit"><p>No access changes recorded yet.</p></div>
+    </article>
+  </div>
+</section>
 <section class="principal-workspace" aria-labelledby="records-title">
 <div class="section-heading"><div><span class="eyebrow">All school records</span><h2 id="records-title">Manage your school</h2><p>Select a section to view its entries. Search names, topics or statuses.</p></div></div>
 <div class="workspace-layout">
