@@ -10,7 +10,7 @@ import { projectSlug, projects } from './WorkPage';
 import { isInternalProjectUrl, toRouterPath } from '../lib/site';
 
 // ─── Contact constants ────────────────────────────────────
-const WHATSAPP = '27629494708';
+const WHATSAPP = '27762851980';
 const EMAIL = 'iedereesfrancis@gmail.com';
 
 // Projects that should NOT show the contact CTA
