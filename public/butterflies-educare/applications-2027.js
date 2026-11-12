@@ -52,7 +52,7 @@
     field("health_consent").checked=Boolean(data.health?.health_consent_at);
     for(const name of ["accept_conduct","accept_fees","accept_privacy","declaration"])field(name).checked=false;
   }
-  const formData = () => Object.fromEntries(fields.map(name=>[name,val(name)||null]));
+  const formData = () => Object.fromEntries(fields.map(name=>[name,name==="child_dob"||name==="child_gender" ? (val(name)||null) : val(name)]));
   function row(parent,label,value) {
     const r=node("div",null,"review-row");
     r.append(node("span",label),node("strong",String(value||"Not provided")));
@@ -180,7 +180,11 @@
     role=staff.data?.staff_role||null;
     $("staff-panel").hidden=role!=="admin";
     await loadList();
-    if(role==="admin")await loadStaff();
+    if(role==="admin"){
+      await loadStaff();
+      const reviewId=new URLSearchParams(location.search).get("review");
+      if(reviewId && /^[0-9a-f-]{36}$/i.test(reviewId)) await openStaffApplication(reviewId).catch(e=>feedback("Could not open review: "+safeError(e),true));
+    }
     const qs=new URLSearchParams(location.search);
     if(qs.has("new"))await createApplication();
     db.auth.onAuthStateChange((event)=>{if(event==="SIGNED_OUT")location.href="./parent.html";});
