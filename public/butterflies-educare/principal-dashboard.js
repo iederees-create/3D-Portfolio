@@ -24,6 +24,7 @@
     school:{title:"School information",description:"Official school details. Only verified information should be published.",table:"be_school_information",cols:"id,school_name,summary,street_address,public_email,public_phone,operating_hours,enrolment_guidance,fee_guidance,published,updated_at",titleKey:"school_name",summaryKey:"summary",labels:{street_address:"School address",public_email:"Email",public_phone:"Phone",operating_hours:"Hours",enrolment_guidance:"Admissions",fee_guidance:"Fees"},statusKey:"published",time:"updated_at"}
   };
   let db,user,current="applications",offset=0,rows=[],more=false,loading=false,initialized=false,searchTimer=null;
+  let isOwner=false;
   const pageSize=25;
   function flash(msg,error=false){const n=$("principal-feedback");n.textContent=msg;n.hidden=false;n.classList.toggle("error",error);}
   function setState(allowed){$("principal-loading").hidden=true;$("principal-denied").hidden=allowed;$("principal-app").hidden=!allowed;}
@@ -143,6 +144,112 @@
     $("badge-applications").textContent=pending>0?String(pending):"";
   }
   async function refreshAll(){await Promise.all([metrics(),selectSection(current)]);}
+  async function ownerStaffList(){
+    if(!isOwner)return;
+    const target=$("owner-staff-list");
+    target.replaceChildren(node("p","Loading school team…"));
+    const r=await db.rpc("be_owner_list_staff");
+    target.replaceChildren();
+    if(r.error){target.append(node("p","Could not load school team: "+r.error.message));return;}
+    if(!(r.data||[]).length){target.append(node("p","No verified school staff accounts yet."));return;}
+    r.data.forEach(item=>{
+      const card=node("div",null,"owner-team-row");
+      const names=node("div");
+      names.append(node("strong",item.email||"School member"),node("small",item.confirmed?"Confirmed school account":"Email not verified"));
+      card.append(names,node("span",item.staff_role==="admin"?"Administrator":"Staff","chip"));
+      target.append(card);
+    });
+  }
+  async function ownerAudit(){
+    if(!isOwner)return;
+    const target=$("owner-role-audit");
+    target.replaceChildren();
+    const r=await db.from("be_staff_role_audit").select("target_id,previous_role,new_role,changed_at").order("changed_at",{ascending:false}).limit(25);
+    if(r.error){target.append(node("p","Audit history unavailable: "+r.error.message));return;}
+    if(!(r.data||[]).length){target.append(node("p","No staff permission changes recorded yet."));return;}
+    r.data.forEach(item=>{
+      const entry=node("div");
+      const change=(item.previous_role||"No access")+" → "+(item.new_role||"Removed");
+      entry.append(node("strong",change),node("small",fmt(item.changed_at)+" · Account "+String(item.target_id).slice(0,8)));
+      target.append(entry);
+    });
+  }
+  function checkState(id,value,state="success"){
+    const el=$(id);if(!el)return;
+    el.textContent=value;
+    el.dataset.state=state;
+  }
+  async function ownerSystemChecks(){
+    if(!isOwner)return;
+    checkState("owner-db-health","Checking…","warning");
+    checkState("owner-release-health","Checking…","warning");
+    checkState("owner-api-health","Checking…","warning");
+    const checks=[
+      (async()=>{
+        const r=await db.from("be_school_information").select("id",{head:true,count:"exact"});
+        checkState("owner-db-health",r.error?"Database query failed":"Connected",r.error?"error":"success");
+      })(),
+      (async()=>{
+        try{
+          const response=await fetch("https://api.github.com/repos/iederees-create/3D-Portfolio/actions/runs?per_page=1",{headers:{Accept:"application/vnd.github+json"},cache:"no-store"});
+          if(!response.ok)throw Error("GitHub response "+response.status);
+          const result=await response.json();const run=result.workflow_runs?.[0];
+          if(!run){checkState("owner-release-health","No runs available","warning");return;}
+          const finished=run.status==="completed";
+          checkState("owner-release-health",!finished?"Running":run.conclusion==="success"?"Latest check passed":"Latest check: "+(run.conclusion||"unknown"),!finished?"warning":run.conclusion==="success"?"success":"error");
+        }catch{checkState("owner-release-health","Could not check","warning");}
+      })(),
+      (async()=>{
+        try{
+          const controller=new AbortController();
+          const timer=setTimeout(()=>controller.abort(),9000);
+          try{
+            const response=await fetch("https://product-listing-server.onrender.com/api/butterflies/health",{signal:controller.signal,cache:"no-store"});
+            checkState("owner-api-health",response.ok?"Responding":"HTTP "+response.status,response.ok?"success":"warning");
+          }finally{clearTimeout(timer);}
+        }catch{checkState("owner-api-health","Unavailable or starting","warning");}
+      })()
+    ];
+    await Promise.allSettled(checks);
+  }
+  async function manageOwnerStaff(event){
+    event.preventDefault();
+    if(!isOwner)return;
+    const form=event.currentTarget;
+    const email=form.elements.namedItem("email").value.trim();
+    const role=form.elements.namedItem("role").value;
+    const feedback=$("owner-role-feedback");
+    const submit=form.querySelector("[type=submit]");
+    if(!form.reportValidity())return;
+    if(!window.confirm("Change school access for "+email+" to "+(role==="remove"?"No school access":role)+"? Only continue if you have verified this person's identity."))return;
+    submit.disabled=true;
+    feedback.textContent="Checking account and updating school permissions…";
+    try{
+      const r=await db.rpc("be_owner_manage_staff",{p_email:email,p_role:role});
+      if(r.error)throw r.error;
+      feedback.textContent=role==="remove"?"School access removed.":"School access updated. The person can sign in with their existing account.";
+      form.reset();
+      await Promise.allSettled([ownerStaffList(),ownerAudit()]);
+    }catch(e){
+      feedback.textContent="Access was not changed: "+e.message;
+    }finally{submit.disabled=false;}
+  }
+  async function ownerRefresh(){
+    if(!isOwner)return;
+    await Promise.allSettled([ownerStaffList(),ownerAudit(),ownerSystemChecks()]);
+  }
+  async function initOwner(){
+    const r=await db.from("be_developer_owners").select("user_id").eq("user_id",user.id).maybeSingle();
+    if(r.error||!r.data)return;
+    isOwner=true;
+    $("developer-tools").hidden=false;
+    $("principal-email").textContent=(user.email||"") + " · Developer owner";
+    document.querySelector(".principal-intro h1").textContent="School control centre";
+    document.querySelector(".principal-intro > p").textContent="Manage the same school activities as the principal, with additional technical oversight and verified staff access controls.";
+    $("owner-staff-form").addEventListener("submit",manageOwnerStaff);
+    $("owner-recheck").addEventListener("click",ownerRefresh);
+    await ownerRefresh();
+  }
   async function init(){
     if(!window.supabase?.createClient){$("principal-loading").hidden=true;flash("The secure school service is unavailable. Refresh and try again.",true);return;}
     db=window.supabase.createClient(ROOT,KEY,{auth:{storageKey:"butterflies-educare-session",autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
@@ -160,7 +267,7 @@
     $("load-more-records").addEventListener("click",fetchPage);
     $("principal-refresh").addEventListener("click",refreshAll);
     db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){setState(false);location.href="./parent.html";}});
-    initialized=true;await refreshAll();
+    initialized=true;await Promise.allSettled([refreshAll(),initOwner()]);
   }
   init().catch(e=>{$("principal-loading").hidden=true;flash("Could not load school management: "+e.message,true);});
 })();
