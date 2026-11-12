@@ -530,7 +530,18 @@
       flash("You're signed out.");
     });
     if(isPortal)bindForms();
-    initAuth().catch(e=>flash(e.message||"Account system unavailable.",true));
+    initAuth().then(() => {
+      const query = new URLSearchParams(location.search);
+      if (isPortal && client && !user && query.get("setup") === "principal") {
+        openAuth("signup");
+        const authForm = $("be-auth-form");
+        if (authForm) {
+          authForm.elements.namedItem("name").value = "Butterflies Educare";
+          authForm.elements.namedItem("email").value = "Butterfliesedu@gmail.com";
+          authForm.elements.namedItem("password").focus();
+        }
+      }
+    }).catch(e=>flash(e.message||"Account system unavailable.",true));
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bootstrap,{once:true});else bootstrap();
 })();
