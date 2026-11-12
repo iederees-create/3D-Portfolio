@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-ZA">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f8f5ed">
+<title>School Management | Butterflies Educare</title>
+<meta name="description" content="Private management dashboard for verified Butterflies Educare administrators.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="./applications-2027.css"><link rel="stylesheet" href="./principal-dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script><script src="./principal-dashboard.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to dashboard</a>
+<header class="topbar"><a class="brand" href="./"><img src="./favicon.svg" alt="" width="42" height="42"><span>Butterflies <strong>Educare</strong><small>School management</small></span></a><nav aria-label="School navigation"><a href="./">School homepage</a><a href="./parent.html">Parent portal</a><a href="./calendar.html">Calendar</a></nav></header>
+<main class="shell" id="main">
+<section class="principal-intro"><span class="eyebrow">Butterflies Educare / Private management</span><h1>Good morning, Principal.</h1><p>One simple place to oversee applications, families, communications, classroom activities and the school's public information.</p><p class="fine" id="principal-date"></p></section>
+<p class="feedback" id="principal-feedback" role="status" aria-live="polite" hidden></p>
+<section id="principal-loading" class="card centered"><h2>Checking school access</h2><p>Verifying your account and permissions securely…</p></section>
+<section id="principal-denied" class="card centered" hidden><h2>School management access required</h2><p>This area is for authorised school administrators only. Sign in using your verified school management account.</p><a class="button primary" href="./parent.html">Open parent login</a><p class="fine">If you are the principal and your account is not yet approved, your developer must verify your identity and activate your school administrator role.</p></section>
+<div id="principal-app" hidden>
+<div class="principal-actions"><div class="account-badge"><span class="account-dot"></span><span id="principal-email">Verified school administrator</span></div><button id="principal-refresh" type="button" class="button secondary">Refresh information</button></div>
+<section aria-labelledby="overview-title"><div class="section-heading"><div><span class="eyebrow">At a glance</span><h2 id="overview-title">School overview</h2><p>Live records stored in the Butterflies Educare network.</p></div></div>
+<div class="metric-grid" id="principal-metrics"><div class="metric"><span>2027 applications</span><strong>—</strong></div><div class="metric"><span>Waiting for review</span><strong>—</strong></div><div class="metric"><span>Parent accounts</span><strong>—</strong></div><div class="metric"><span>Unanswered messages</span><strong>—</strong></div></div>
+</section>
+<section class="principal-next"><div><h2>Your daily priorities</h2><p id="principal-priority">Checking submissions and school activity…</p></div><div class="principal-quicklinks"><a href="./apply-2027.html#staff-panel" class="button primary">Review 2027 applications</a><a href="./calendar.html" class="button secondary">Manage class bookings</a><a href="./parent.html#be-staff" class="button secondary">Publish school information</a></div></section>
+<section class="principal-workspace" aria-labelledby="records-title">
+<div class="section-heading"><div><span class="eyebrow">All school records</span><h2 id="records-title">Manage your school</h2><p>Select a section to view its entries. Search names, topics or statuses.</p></div></div>
+<div class="workspace-layout">
+<nav id="principal-sections" class="section-tabs" aria-label="Management sections">
+<button type="button" data-section="applications" aria-current="page">2027 applications <span id="badge-applications"></span></button>
+<button type="button" data-section="parents">Parents &amp; guardians</button>
+<button type="button" data-section="messages">Parent messages</button>
+<button type="button" data-section="enquiries">Enrolment enquiries</button>
+<button type="button" data-section="classes">Guest-class requests</button>
+<button type="button" data-section="slots">Available class slots</button>
+<button type="button" data-section="events">School events</button>
+<button type="button" data-section="rsvps">Event responses</button>
+<button type="button" data-section="announcements">News &amp; announcements</button>
+<button type="button" data-section="fundraising">Fundraising projects</button>
+<button type="button" data-section="sponsors">Sponsorship enquiries</button>
+<button type="button" data-section="volunteers">Volunteers</button>
+<button type="button" data-section="school">School information</button>
+</nav>
+<div class="workspace-main">
+<div class="workspace-toolbar"><div><h3 id="section-heading">2027 applications</h3><p id="section-hint">Review new and existing applications.</p></div><div class="workspace-search"><label for="principal-search">Search this section</label><input id="principal-search" type="search" placeholder="Search records…" autocomplete="off"></div></div>
+<div class="record-toolbar"><span id="record-count" aria-live="polite">Loading…</span><label for="status-filter">Status <select id="status-filter"><option value="">All statuses</option></select></label></div>
+<div id="principal-records" class="records-list" aria-live="polite"></div>
+<div class="record-actions"><button id="load-more-records" type="button" class="button secondary" hidden>Load more records</button></div>
+</div></div>
+</section>
+<section class="principal-notes"><h2>Important setup checks</h2><div class="check-grid"><article><strong>School content and policies</strong><p>Verify official contact details, fees, Code of Conduct, safeguarding and the school's approved privacy notices before publishing.</p></article><article><strong>Parent communication</strong><p>Review new messages, reply promptly and use the secure parent portal rather than sharing children's information in public chats.</p></article><article><strong>Online payments</strong><p>Existing debit orders can continue. No online fees or fundraising checkout is activated here.</p></article></div></section>
+</div>
+</main>
+<footer><span>Butterflies Educare · Private school administration</span><span><a href="./parent.html">Parent network</a> · <a href="./privacy.html">Privacy</a></span></footer>
+</body></html>
