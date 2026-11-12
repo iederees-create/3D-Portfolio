@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./studio.css">
   <link rel="stylesheet" href="./launch.css">
   <title>Parent & Community Network | Butterflies Educare</title>
-  <meta name="description" content="Butterflies Educare's developing parent and community network for news, events, enrolment interest and community support.">
+  <meta name="description" content="Butterflies Educare's parent and community network for news, events, enrolment interest and community support.">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
   <script src="./network.js" defer></script>
   <script src="./school-information.js" defer></script>
@@ -48,7 +48,7 @@
             <label>Display name<input name="display_name" autocomplete="name" minlength="2" maxlength="100" required></label>
             <label>Contact number (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="25"></label>
             <label>Preferred communication<select name="preferred_contact"><option value="email">Email</option><option value="phone">Phone</option></select></label>
-            <label class="be-checkbox"><input name="privacy_consent" type="checkbox" required><span>I agree that my contact details and requests are stored securely for school communication. I will not submit sensitive child information in this preview.</span></label>
+            <label class="be-checkbox"><input name="privacy_consent" type="checkbox" required><span>I agree that my contact details and requests are stored securely for school communication. I will not submit sensitive information about children through this form.</span></label>
             <button class="be-btn be-primary" type="submit">Save profile</button>
           </form>
         </article>
@@ -84,7 +84,7 @@
     </section>
     <section class="be-content-section" id="be-news"><div class="be-section-head"><div><span class="be-overline">School news</span><h2>Stay in the loop</h2><p>Only approved school updates appear publicly.</p></div></div><div id="be-news-list" class="be-grid be-public-grid"><div class="be-empty">Updates will appear once the school publishes them.</div></div></section>
     <section class="be-content-section" id="be-events"><div class="be-section-head"><div><span class="be-overline">Community calendar</span><h2>School events</h2><p>Browse published events and RSVP when signed in. The shared calendar also shows available guest-class times.</p></div><a href="./calendar.html" class="be-btn be-secondary">Open shared calendar</a></div><div id="be-events-list" class="be-grid be-public-grid"><div class="be-empty">School events will appear here once confirmed.</div></div></section>
-    <section class="be-content-section" id="be-fundraising"><div class="be-section-head"><div><span class="be-overline">Make a difference</span><h2>Fundraising and sponsorship</h2><p>Discover approved projects and express your interest in supporting them. No donations or payments are taken through this preview.</p></div></div><div id="be-fundraisers-list" class="be-grid be-public-grid"><div class="be-empty">Fundraising projects will appear when approved by the school.</div></div></section>
+    <section class="be-content-section" id="be-fundraising"><div class="be-section-head"><div><span class="be-overline">Make a difference</span><h2>Fundraising and sponsorship</h2><p>Discover approved projects and express your interest in supporting them. Donations and online payments are not currently available.</p></div></div><div id="be-fundraisers-list" class="be-grid be-public-grid"><div class="be-empty">Fundraising projects will appear when approved by the school.</div></div></section>
     <section class="be-staff" id="be-staff" hidden>
       <div class="be-section-head"><div><span class="be-overline">School staff only</span><h2>School management</h2><p>Review enquiries, messages and approved school content. Guest-class time slots and class proposals are managed in the same shared calendar.</p></div><a href="./calendar.html#cal-staff" class="be-btn be-primary">Manage class calendar</a></div>
 
@@ -144,7 +144,7 @@
         <label id="be-name-field" hidden>Your name<input name="name" autocomplete="name" minlength="2" maxlength="100"></label>
         <label id="be-email-field">Email address<input name="email" type="email" autocomplete="email" required></label>
         <label id="be-password-field">Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
-        <label id="be-consent-field" class="be-checkbox" hidden><input name="consent" type="checkbox"><span>I agree that Butterflies Educare may store my contact and enquiry details to respond to requests. I understand this is a preview and should not include sensitive information about children.</span></label>
+        <label id="be-consent-field" class="be-checkbox" hidden><input name="consent" type="checkbox"><span>I agree that Butterflies Educare may store my contact and enquiry details to respond to requests. I understand this form must not include sensitive information about children.</span></label>
         <button type="submit" id="be-auth-submit" class="be-btn be-primary">Sign in</button>
         <p class="be-auth-feedback" id="be-auth-feedback" role="status" aria-live="polite"></p>
       </form>
