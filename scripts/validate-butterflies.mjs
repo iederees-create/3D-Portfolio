@@ -38,6 +38,26 @@ const calendarCSS = calendarHTML ? load('calendar.css') : null;
 const calendarTeaserCSS = html.includes('href="./calendar-teaser.css"') ? load('calendar-teaser.css') : null;
 
 if (Buffer.byteLength(html, 'utf8') < 4096) problems.push('index.html is unexpectedly small');
+
+/* Guard the fully designed homepage against accidental replacement with a bare hero.
+   The school experience relies on these sections and client assets existing together. */
+const requiredHomeSections = [
+  'id="top"', 'id="explore"', 'id="about"', 'id="news"',
+  'id="parents"', 'id="community"', 'id="contact"', 'be-calendar-promo'
+];
+for (const section of requiredHomeSections) {
+  if (!html.includes(section)) problems.push('Full school homepage section missing: ' + section);
+}
+const requiredHomeAssets = [
+  'src="./site.js"', 'src="./atmosphere.js"', 'src="./network.js"',
+  'src="./creative-garden.js"', 'src="./experience.js"',
+  'src="./studio.js"', 'src="./school-information.js"'
+];
+for (const asset of requiredHomeAssets) {
+  if (!html.includes(asset)) problems.push('School homepage script missing: ' + asset);
+}
+if (Buffer.byteLength(html, 'utf8') < 24000) problems.push('Full interactive school homepage is unexpectedly short');
+
 if (!/^\s*<!doctype html>/i.test(html)) problems.push('index.html is not a full HTML document');
 if (!/<html\b[^>]*>/i.test(html) || !/<\/html\s*>/i.test(html)) problems.push('HTML root is incomplete');
 if (!/<title>\s*Butterflies Educare\b/i.test(html)) problems.push('School page title is missing');
