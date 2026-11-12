@@ -329,8 +329,8 @@ export default function AmoreNailsCtWebsiteContent() {
           </li>
           <li>
             💬 WhatsApp:{" "}
-            <a href="https://wa.me/27629494708" className="text-primary-400 hover:text-primary-300 font-semibold" target="_blank" rel="noopener noreferrer">
-              +27 62 949 4708
+            <a href="https://wa.me/27762851980" className="text-primary-400 hover:text-primary-300 font-semibold" target="_blank" rel="noopener noreferrer">
+              +27 76 285 1980
             </a>
           </li>
           <li>

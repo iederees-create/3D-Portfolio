@@ -52,7 +52,7 @@ export default function TerminalEasterEgg() {
         setHistory([]);
         return;
       case 'contact':
-        output = 'Email: iedereesfrancis@gmail.com | WhatsApp: +27 62 949 4708';
+        output = 'Email: iedereesfrancis@gmail.com | WhatsApp: +27 76 285 1980';
         break;
       case 'sudo':
         output = 'nice try ;)';

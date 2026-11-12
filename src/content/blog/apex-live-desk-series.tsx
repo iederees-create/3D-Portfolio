@@ -125,7 +125,7 @@ export function WhatThisDeskWillNeverClaim() {
       <H id="never">What this desk will not claim</H>
       <P>I will not claim the EA prints a salary. I will not claim 54% is an edge when the payout is 0.31 against 0.35. I will not switch the public run to live money to look braver. I will not send you signals in a Telegram that I refuse to show on the website.</P>
       <P>I will show the demo, the pauses, the partner link, and the risk line. Trading can lose more than you put in on leveraged products. Educational, not advice.</P>
-      <P>Start here: <A href={DESK}>Apex Trade Network</A>. Iederees Francis. WhatsApp +27629494708.</P>
+      <P>Start here: <A href={DESK}>Apex Trade Network</A>. Iederees Francis. WhatsApp +27762851980.</P>
     </Article>
   );
 }

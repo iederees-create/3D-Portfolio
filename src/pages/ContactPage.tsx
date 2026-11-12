@@ -14,7 +14,7 @@ import {
 import { PROFILE_IMAGE_ALT, PROFILE_IMAGE_PATH, PROFILE_NAME, publicAsset } from '../lib/site';
 
 // ─── Constants ────────────────────────────────────────────
-const WHATSAPP_NUMBER = '27629494708';
+const WHATSAPP_NUMBER = '27762851980';
 const EMAIL = 'iedereesfrancis@gmail.com';
 
 function buildWALink(source: string, interest: string, name: string, extra: string) {
@@ -365,7 +365,7 @@ export default function ContactPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs text-slate-500 uppercase tracking-wide font-semibold">WhatsApp</p>
-                  <p className="text-sm text-white font-semibold group-hover:text-green-300 transition-colors">+27 62 949 4708</p>
+                  <p className="text-sm text-white font-semibold group-hover:text-green-300 transition-colors">+27 76 285 1980</p>
                 </div>
               </a>
 
@@ -383,7 +383,7 @@ export default function ContactPage() {
               </a>
 
               <a
-                href="tel:+27629494708"
+                href="tel:+27762851980"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/8 transition-all group"
               >
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
@@ -391,7 +391,7 @@ export default function ContactPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs text-slate-500 uppercase tracking-wide font-semibold">Phone</p>
-                  <p className="text-sm text-white font-semibold group-hover:text-white transition-colors">+27 62 949 4708</p>
+                  <p className="text-sm text-white font-semibold group-hover:text-white transition-colors">+27 76 285 1980</p>
                 </div>
               </a>
             </div>
