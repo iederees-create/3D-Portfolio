@@ -26,3 +26,8 @@
 .be-confirm-otp .be-btn{width:100%;border-radius:12px}
 .be-confirmation .be-auth-feedback{min-height:1.4em;line-height:1.45}
 @media(max-width:700px){.be-confirm-steps{gap:10px}.be-confirmation{padding-top:0}}
+
+/* Ensure call-to-action links stay readable over dark button backgrounds. */
+body.be-network a.be-btn.be-primary,
+body.be-network a.be-btn.be-primary:visited { color:#ffffff; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; min-width:170px; text-align:center; }
+body.be-network a.be-btn.be-primary:hover,body.be-network a.be-btn.be-primary:focus-visible { color:#ffffff; background:#345e4d; }
