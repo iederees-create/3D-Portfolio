@@ -177,6 +177,8 @@
     setVisible("be-dashboard",Boolean(user));
     setVisible("be-guest",!user);
     setVisible("be-staff",Boolean(user && staffRole));
+    setVisible("be-principal-link",Boolean(user && staffRole === "admin"));
+    setVisible("be-principal-dashboard-link",Boolean(user && staffRole === "admin"));
     setVisible("be-sign-in",!user);
     setVisible("be-sign-out",Boolean(user));
     $("be-account-role").textContent = staffRole ? "School " + staffRole : "Parent / supporter";
