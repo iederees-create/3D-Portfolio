@@ -22,21 +22,21 @@
   <div class="be-ribbon">Butterflies Educare · Parent & Community Network · General enquiries only; no school fee payments or child records</div>
   <header class="be-topbar">
     <a class="be-identity" href="./"><span class="be-mark" aria-hidden="true">✿</span><span>Butterflies <strong>Educare</strong><small>Parent & Community Network</small></span></a>
-    <nav class="be-top-actions" aria-label="Network navigation"><a href="./">School website</a><a href="./calendar.html">School calendar</a><button id="be-sign-in" class="be-plain-btn" type="button" data-be-open-auth>Sign in</button><button id="be-sign-out" class="be-plain-btn" type="button" hidden>Sign out</button></nav>
+    <nav class="be-top-actions" aria-label="Network navigation"><a href="./">School website</a><a href="./calendar.html">School calendar</a><a href="./apply-2027.html">2027 applications</a><a id="be-principal-link" href="./principal.html" hidden>Principal dashboard</a><button id="be-sign-in" class="be-plain-btn" type="button" data-be-open-auth>Sign in</button><button id="be-sign-out" class="be-plain-btn" type="button" hidden>Sign out</button></nav>
   </header>
   <main class="be-shell">
     <section class="be-welcome">
-      <div><span class="be-overline">Growing together</span><h1>A closer connection between home and school.</h1><p>An online space for parents, caregivers and community supporters. Stay informed, share your interest in events and help the school grow.</p><p class="be-small-note">Enrolment submissions are requests for information only, not applications or confirmed places. Official operational details will appear after school approval.</p></div>
+      <div><span class="be-overline">Growing together</span><h1>A closer connection between home and school.</h1><p>An online space for parents, caregivers and community supporters. Stay informed, share your interest in events and help the school grow.</p><p class="be-small-note">The 2027 school application is now a separate private form. Applications are reviewed by the school; submitting one does not confirm a place.</p></div>
       <div class="be-welcome-card"><span class="be-welcome-graphic" aria-hidden="true">✿</span><strong>Little steps. Big possibilities.</strong><p>One community, working together for our children.</p></div>
     </section>
     <div class="be-message" id="be-status" role="status" aria-live="polite" hidden></div>
     <section class="be-entry" id="be-guest">
       <div><span class="be-overline">Your parent space</span><h2>Everything in one welcoming place</h2><p>Create an account to keep track of your own enquiries, school messages, event RSVPs and ways to help. Already have an account? Sign in using the same email and password.</p><div class="be-inline-actions"><button class="be-btn be-primary" type="button" data-be-open-auth data-be-auth-mode="signup">Create an account</button><button class="be-btn be-secondary" type="button" data-be-open-auth>Sign in</button></div></div>
-      <div class="be-promise"><strong>What you'll be able to do</strong><span>School news and upcoming events</span><span>Enrolment interest enquiries</span><span>Fundraising and volunteering</span><span>Secure messages to school staff</span></div>
+      <div class="be-promise"><strong>What you'll be able to do</strong><span>School news and upcoming events</span><span>2027 school applications</span><span>Fundraising and volunteering</span><span>Secure messages to school staff</span></div>
     </section>
     <section class="be-dashboard" id="be-dashboard" hidden>
       <div class="be-section-head"><div><span class="be-overline">Your dashboard</span><h2 id="be-greeting">Welcome to your network</h2><p>Only your account activity is shown here. School staff can review submitted enquiries after their accounts are authorised.</p></div><span class="be-chip" id="be-account-role">Parent / supporter</span></div>
-      <div class="be-grid be-quick-grid">
+      <div class="be-inline-actions" style="margin:0 0 22px;display:flex;gap:10px;flex-wrap:wrap"><a class="be-btn be-primary" href="./apply-2027.html">My 2027 applications</a><a class="be-btn be-secondary" href="./calendar.html">School calendar</a><a class="be-btn be-secondary" id="be-principal-dashboard-link" href="./principal.html" hidden>Principal management</a></div><div class="be-grid be-quick-grid">
         <article class="be-stat"><span>Your enrolment enquiries</span><strong id="be-count-enrolment">0</strong></article>
         <article class="be-stat"><span>Event responses</span><strong id="be-count-rsvp">0</strong></article>
         <article class="be-stat"><span>Messages sent</span><strong id="be-count-messages">0</strong></article>
@@ -52,7 +52,7 @@
             <button class="be-btn be-primary" type="submit">Save profile</button>
           </form>
         </article>
-        <article class="be-card"><h3>Enrolment information enquiry</h3><p>Request guidance on enrolment. Please do not send children's names, medical information or identification documents here.</p>
+        <article class="be-card"><h3>2027 school application</h3><p>Apply for a school place in 2027. Save drafts, supply guardian and emergency contacts, review school policies, and follow the status of each child\'s application.</p><a class="be-btn be-primary" href="./apply-2027.html">Open 2027 application form</a></article><article class="be-card"><h3>Enrolment information enquiry</h3><p>Request guidance on enrolment. Please do not send children's names, medical information or identification documents here.</p>
           <form id="be-enrolment-form" class="be-form">
             <label>Age group to enquire about<select name="age_group" required><option value="unsure">Not sure</option><option value="0-2">0–2 years</option><option value="3-4">3–4 years</option><option value="5-6">5–6 years</option></select></label>
             <label>When are you interested?<select name="preferred_start"><option value="unsure">Not sure yet</option><option value="asap">As soon as possible</option><option value="next_term">Next term</option><option value="next_year">Next year</option></select></label>
@@ -130,7 +130,7 @@
       </div>
       <article class="be-card be-inbox"><h3>School inbox and member activity</h3><p>Private parent and supporter enquiries are visible only to authorised staff.</p><div id="be-staff-inbox" class="be-activity">No submissions yet.</div></article>
     </section>
-    <footer class="be-footer"><div><strong>Butterflies Educare</strong><p>Parent and community network for general enquiries and school-approved updates. Payments and official child enrolments are not enabled.</p></div><a href="./privacy.html">Privacy &amp; data handling</a> · <a href="./">Return to school website</a></footer>
+    <footer class="be-footer"><div><strong>Butterflies Educare</strong><p>Parent community, general enquiries and 2027 school applications. No online payments are taken here.</p></div><a href="./privacy.html">Privacy &amp; data handling</a> · <a href="./">Return to school website</a></footer>
   </main>
   <dialog id="be-auth-dialog" class="be-auth-dialog" aria-labelledby="be-auth-title">
     <button type="button" class="be-dialog-close" id="be-auth-close" aria-label="Close sign-in form">×</button>
