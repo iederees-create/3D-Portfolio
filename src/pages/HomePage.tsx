@@ -51,6 +51,7 @@ const services = [
 
 /** Four scannable examples. Looked up by title so they stay in sync with WorkPage data. */
 const featuredTitles = [
+  'Butterflies Educare School Platform',
   'CraftBill — Angular SaaS',
   'Summit Painting CT',
   'Amore Nails CT',
