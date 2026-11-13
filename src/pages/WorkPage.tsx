@@ -82,6 +82,56 @@ const projectMedia = (slug: string, label: string): Pick<Project, 'coverImage' |
 export const projects: Project[] = [
 
   {
+    title: 'Butterflies Educare School Platform',
+    category: 'Education',
+    description: 'A live, mobile-first school website and connected parent network for Butterflies Educare. The platform brings together 2027 applications, saved parent profiles, private school management, announcements, events and guest-class proposals in one welcoming experience.',
+    tags: ['EdTech', 'JavaScript', 'HTML5', 'CSS3', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'GitHub Pages', 'UX/UI', 'Responsive Design', 'Accessibility', 'Authentication'],
+    liveUrl: 'https://iederees-create.github.io/3D-Portfolio/butterflies-educare/',
+    featured: true,
+    coverImage: import.meta.env.BASE_URL + 'projects/butterflies-educare/cover.svg',
+    mediaAlt: 'Illustrated Butterflies Educare school platform overview, not a live screenshot',
+    galleryImages: [
+      import.meta.env.BASE_URL + 'projects/butterflies-educare/01-school-home.svg',
+      import.meta.env.BASE_URL + 'projects/butterflies-educare/02-parent-application.svg',
+      import.meta.env.BASE_URL + 'projects/butterflies-educare/03-school-dashboard.svg',
+    ],
+    galleryImageAlts: [
+      'Illustrated design concept showing the Butterflies Educare public school homepage and family calls to action',
+      'Illustrated five-step 2027 application interface with guardian details and save-and-continue flow',
+      'Illustrated private school dashboard with fictional placeholders, no real parent or learner records',
+    ],
+    toolBadge: 'Live school website · 2027 enrolment rollout · November 2026',
+    toolHighlight: 'Public school website, parent account entry and event calendar are linked from the live demo. Private application and principal dashboards require authorised accounts. Visual media are labelled illustrations, not screenshots, and no child or parent records are disclosed.',
+    features: [
+      'Responsive early-years branding with custom butterfly visuals, motion and mobile-friendly navigation',
+      'Parent account creation, email confirmation, sign-in, password recovery and profile management',
+      'Five-step 2027 application workflow with saved drafts, guardian and emergency contacts, optional health information and policy acknowledgements',
+      'Private school administration dashboard for applications, enquiries, communications, announcements and events',
+      'Unified calendar for school activities and guest-class proposals with school review controls',
+      'Supabase PostgreSQL with row-level policies for parent-owned records and verified school administrators',
+      'Developer-owner access for release checks, staff roles and a school-permission audit trail',
+      'Automated GitHub Pages build, source validation and live-release verification',
+      'Existing school debit-order processes retained; online fee checkout is not activated',
+    ],
+    caseStudy: {
+      methodology: 'Started with the principal’s supplied registration, conduct and fees documents and mapped the school’s needs into separate visitor, parent, school staff and developer-owner journeys. Built an accessible, visual public site and a progressive application flow with plain-language field guidance, draft saving and confirmation steps. Connected the frontend to Supabase for authentication and private school records, then published through the existing GitHub Pages portfolio pipeline to avoid introducing new hosting costs.',
+      toolsUsed: ['HTML5', 'CSS3', 'JavaScript', 'Supabase Auth', 'PostgreSQL', 'Supabase Row-Level Security', 'GitHub Actions', 'GitHub Pages', 'Responsive Design', 'Accessibility'],
+      technicalChallenge: {
+        title: 'Combining a playful school website with reliable, permission-aware administration',
+        body: 'Families needed an inviting, simple mobile experience, while school staff needed to manage sensitive applications and communicate securely. The solution separates the public school pages from authenticated application records, protects access in database policies rather than just hiding buttons, and provides a different control surface for school administrators and the developer. A previous homepage regression also motivated automated checks for missing creative sections and application scripts.',
+      },
+      privacyDesign: 'The public portfolio shows only illustrative interfaces and links to public school pages. Real applications and optional medical details belong in private Supabase tables with parent-scoped access and school-administrator review permissions. No real child data, school passwords or administrative screens are exposed in the portfolio media. School-approved privacy wording, record retention and operational acceptance still require sign-off before the system is treated as fully verified.',
+      testResults: [
+        'Automated GitHub Pages build and live-release checks passed during the November 2026 rollout.',
+        'CI now checks the animated school homepage, application and principal modules, required links and JavaScript syntax.',
+        'Verified-account school administrator and developer-owner database permissions were checked after configuration.',
+        'A complete parent-to-principal live enrolment submission has not yet been independently verified; no application completion rates or school outcomes are claimed.',
+      ],
+    },
+  },
+
+
+  {
     title: 'CraftBill — Angular SaaS',
     category: 'AI / Web App / Support Automation',
     status: 'In development',
