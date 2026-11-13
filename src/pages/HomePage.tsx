@@ -53,7 +53,6 @@ const services = [
 const featuredTitles = [
   'Butterflies Educare School Platform',
   'CraftBill — Angular SaaS',
-  'Summit Painting CT',
   'Amore Nails CT',
   'InsightForge Business Analytics Studio',
 ];
