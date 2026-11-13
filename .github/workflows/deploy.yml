@@ -73,6 +73,11 @@ jobs:
           node --check dist/butterflies-educare/calendar.js
           test -s dist/index.html || { echo "::error::Portfolio homepage missing"; exit 1; }
           test -s dist/craftbill/index.html || { echo "::error::CraftBill homepage missing"; exit 1; }
+          test -s dist/work/butterflies-educare-school-platform/index.html || { echo "::error::Butterflies portfolio project route missing"; exit 1; }
+          test -s dist/blog/butterflies-educare-school-platform-case-study/index.html || { echo "::error::Butterflies case study article route missing"; exit 1; }
+          test -s dist/projects/butterflies-educare/cover.svg || { echo "::error::Butterflies portfolio cover asset missing"; exit 1; }
+          test -s dist/projects/butterflies-educare/01-school-home.svg || { echo "::error::Butterflies gallery asset missing"; exit 1; }
+          grep -q 'Butterflies Educare School Platform' dist/work/butterflies-educare-school-platform/index.html || { echo "::error::Project metadata missing"; exit 1; }
 
       - name: Stamp exact publishing revision for live verification
         run: |
@@ -128,6 +133,9 @@ jobs:
               calendar_js="$(curl -fsSL --max-time 20 "$SCHOOL_URL/calendar.js?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               calendar_css="$(curl -fsSL --max-time 20 "$SCHOOL_URL/calendar.css?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               favicon="$(curl -fsSL --max-time 20 "$SCHOOL_URL/favicon.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              portfolio_project="$(curl -fsSL --max-time 20 "https://iederees-create.github.io/3D-Portfolio/work/butterflies-educare-school-platform/?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              portfolio_article="$(curl -fsSL --max-time 20 "https://iederees-create.github.io/3D-Portfolio/blog/butterflies-educare-school-platform-case-study/?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
+              portfolio_cover="$(curl -fsSL --max-time 20 "https://iederees-create.github.io/3D-Portfolio/projects/butterflies-educare/cover.svg?rev=$GITHUB_SHA&try=$attempt" 2>/dev/null || true)"
               if [[ "$html" == *"<title>Butterflies Educare"* ]] &&
                  [[ "$html" == *"</html>"* ]] &&
                  [[ "$html" == *"site.js"* ]] &&
@@ -156,7 +164,10 @@ jobs:
                  [[ "$calendar" == *"cal-staff"* ]] &&
                  [[ "$calendar_js" == *"be_request_class_slot"* ]] &&
                  [[ "$calendar_css" == *"cal-calendar-layout"* ]] &&
-                 [[ "$favicon" == *"<svg"* ]]; then
+                 [[ "$favicon" == *"<svg"* ]] &&
+                 [[ "$portfolio_project" == *"Butterflies Educare School Platform"* ]] &&
+                 [[ "$portfolio_article" == *"Building Butterflies Educare"* ]] &&
+                 [[ "$portfolio_cover" == *"illustrated overview"* ]]; then
                 echo "Confirmed published revision: $GITHUB_SHA"
                 echo "Live site: $SCHOOL_URL/"
                 exit 0
