@@ -1,4 +1,5 @@
 import type { ArticleContentComponent, ArticleMeta } from './types';
+import ButterfliesEducareSchoolPlatformCaseStudy from './butterflies-educare-school-platform-case-study';
 import TradeBusinessQuoteCalculatorContent from './trade-business-quote-calculator';
 import EtsySellerSeoToolkitContent from './etsy-seller-seo-toolkit';
 import BookingLinkToLandingPageContent from './booking-link-to-landing-page';
@@ -87,6 +88,22 @@ import EvidenceLedQAOperationsReviewContent from './evidence-led-qa-operations-r
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+
+  {
+    slug: 'butterflies-educare-school-platform-case-study',
+    title: 'Building Butterflies Educare: A School Website, 2027 Registrations and Parent Portal',
+    excerpt: 'A real early-years school project combining custom visual design, a parent network, 2027 applications and principal management. How the UX, Supabase permissions, privacy boundaries and deployment checks fit together.',
+    datePublished: '2026-11-13',
+    dateModified: '2026-11-13',
+    author: 'Iederees Francis',
+    category: 'Case Study / EdTech',
+    tags: ['Case Study', 'EdTech', 'School Website', 'Parent Portal', 'Supabase', 'PostgreSQL', 'Web Development', 'UX/UI'],
+    readingTimeMinutes: 7,
+    coverImage: import.meta.env.BASE_URL + 'projects/butterflies-educare/cover.svg',
+    coverImageAlt: 'Illustrated overview of the Butterflies Educare school website and private parent platform',
+    relatedSlugs: ['why-educational-businesses-need-custom-learning-hubs', 'evidence-led-qa-operations-review', 'send-website-enquiries-structured-lead-tracker'],
+  },
+
   {
     slug: 'evidence-led-qa-operations-review',
     title: 'How to Run an Evidence-Led QA and Operations Review',
@@ -1067,6 +1084,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'butterflies-educare-school-platform-case-study': ButterfliesEducareSchoolPlatformCaseStudy,
   'evidence-led-qa-operations-review': EvidenceLedQAOperationsReviewContent,
   'turn-product-catalogue-into-retail-promotions': PromoPilotRetailPromotionWorkflowContent,
   'maia-by-make-conversational-automation': MaiaByMakeConversationalAutomationContent,
