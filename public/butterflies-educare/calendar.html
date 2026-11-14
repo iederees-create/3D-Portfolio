@@ -27,7 +27,7 @@
           <span class="cal-eyebrow">Good things happen together</span>
           <h1 id="cal-heading">One calendar.<em> More possibilities.</em></h1>
           <p>Find school activities and open time slots for community members who would like to share a skill, story or special class.</p>
-          <div class="cal-hero-actions"><a href="#cal-month" class="cal-button cal-primary">Explore the calendar</a><a href="#cal-how" class="cal-button cal-outline">How guest classes work</a></div>
+          <div class="cal-hero-actions"><a href="#cal-month" class="cal-button cal-primary">Explore the calendar</a><a href="#cal-how" class="cal-button cal-outline">How guest classes work</a><a href="#weekly-classes" class="cal-button cal-outline">Existing classes</a></div>
           <p class="cal-mini">Class proposals are requests only. The school confirms every class and may require safety checks first.</p>
         </div>
         <div class="cal-art" aria-hidden="true">
@@ -48,19 +48,27 @@
           </div>
           <div class="cal-weekdays" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
           <div id="cal-days" class="cal-days" role="group" aria-label="Calendar dates"></div>
-          <div class="cal-key"><span><i class="cal-dot event"></i> School event</span><span><i class="cal-dot slot"></i> Available guest-class time</span></div>
+          <div class="cal-key"><span><i class="cal-dot event"></i> School event</span><span><i class="cal-dot slot"></i> Available guest-class time</span><span><i class="cal-dot regular"></i> Weekly classes</span></div>
         </div>
         <aside class="cal-upcoming">
           <div class="cal-upcoming-head"><span class="cal-eyebrow">Selected day</span><h3 id="cal-day-heading">Choose a date</h3></div>
           <div class="cal-filter-group" role="group" aria-label="Filter calendar">
             <button class="cal-filter" type="button" data-filter="all" aria-pressed="true">All</button>
             <button class="cal-filter" type="button" data-filter="event" aria-pressed="false">School events</button>
-            <button class="cal-filter" type="button" data-filter="slot" aria-pressed="false">Open slots</button>
+            <button class="cal-filter" type="button" data-filter="slot" aria-pressed="false">Open slots</button><button class="cal-filter" type="button" data-filter="regular" aria-pressed="false">Weekly classes</button>
           </div>
           <div id="cal-day-items" class="cal-day-items" aria-live="polite"><p class="cal-empty">Select a date to see its activities.</p></div>
         </aside>
       </div>
       <p class="cal-small">Showing published school information only. Times use South African Standard Time. Staff may make changes; confirm arrangements directly with the school.</p>
+    </section>
+    <section class="cal-section cal-regular-section" id="weekly-classes" aria-labelledby="regular-class-title">
+      <div class="cal-section-head"><div><span class="cal-eyebrow">Current weekly activities</span><h2 id="regular-class-title">Classes already taking place</h2><p>Explore the school's weekly class programme and register your interest directly. Classes shown here are recurring patterns; exact term dates, venues and any fees must be confirmed with the school.</p></div></div>
+      <div id="cal-regular-list" class="cal-regular-grid" aria-live="polite"><p>Loading weekly classes…</p></div>
+      <p class="cal-small">Registering interest is not confirmation of a class place or payment. Your enquiry is shared privately with authorised school administrators.</p>
+    </section>
+    <section class="cal-private cal-interests-section" id="cal-my-interests" hidden>
+      <div class="cal-content"><div class="cal-section-head"><div><span class="cal-eyebrow">Your account</span><h2>My class registration enquiries</h2><p>Check which existing classes you've enquired about.</p></div></div><div id="cal-interests-list" class="cal-proposal-list"></div></div>
     </section>
     <section class="cal-how-section" id="cal-how">
       <div class="cal-content"><span class="cal-eyebrow">For community presenters</span><h2>Share something wonderful with our learners.</h2><p>Have a skill, story, language, musical activity or creative idea to share? The school can make suitable class times available for you to request.</p>
@@ -109,6 +117,21 @@
       <label>Your relevant experience<textarea name="background_summary" minlength="5" maxlength="500" required rows="3" placeholder="Tell the school why you'd be a good fit"></textarea></label>
       <label class="cal-check"><input type="checkbox" name="acknowledge" required><span>I understand this is a request, not a confirmed booking, and the school may require safeguarding checks and supervision.</span></label>
       <button class="cal-button cal-primary" type="submit">Send class proposal</button>
+    </form>
+  </div></dialog>
+  <dialog id="cal-interest-dialog" class="cal-dialog" aria-labelledby="cal-interest-heading"><div class="cal-dialog-inner">
+    <button id="cal-interest-close" class="cal-dialog-close" type="button" aria-label="Close class registration enquiry">×</button>
+    <span class="cal-eyebrow">Existing school classes</span><h2 id="cal-interest-heading">Register your interest</h2>
+    <p id="cal-interest-class" class="cal-small"></p>
+    <form id="cal-interest-form" class="cal-form">
+      <input type="hidden" name="class_id">
+      <label>Your name<input name="parent_name" maxlength="100" minlength="2" required autocomplete="name"></label>
+      <label>Your email<input name="contact_email" type="email" maxlength="200" required autocomplete="email"></label>
+      <label>Contact number (optional)<input name="contact_phone" type="tel" maxlength="40" autocomplete="tel"></label>
+      <label>Age group (optional)<select name="age_group"><option value="">Select if applicable</option><option>4–6 years</option><option>7–10 years</option><option>11–14 years</option><option>15–18 years</option><option>Adult</option><option>Other / unsure</option></select></label>
+      <label>Questions (optional)<textarea name="enquiry" maxlength="800" rows="3" placeholder="Anything you would like the school to know? Do not include children's names or medical details."></textarea></label>
+      <label class="cal-check"><input name="privacy_ack" type="checkbox" required><span>I understand this is a registration enquiry only, and agree to share these contact details privately with authorised Butterflies Educare school administrators for follow-up.</span></label>
+      <button class="cal-button cal-primary" type="submit">Send registration enquiry</button>
     </form>
   </div></dialog>
   <dialog id="cal-auth-dialog" class="cal-dialog" aria-labelledby="cal-auth-heading"><div class="cal-dialog-inner">
