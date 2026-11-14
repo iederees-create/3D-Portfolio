@@ -1,48 +1,30 @@
-# Butterflies Educare — email verification codes
+# Butterflies Educare — current email confirmation method
 
-The parent portal supports email code entry for new-account confirmation, re-sending the signup email, and returning to code entry later from the sign-in form. The Supabase **hosted** "Confirm sign up" email template must also send the actual code, otherwise Supabase will keep emailing its existing confirmation link.
+> **Update, 14 November 2026:** The earlier email-code proposal was not activated. Butterflies Educare uses standard Supabase email confirmation links. This document supersedes the earlier code instructions despite its historical filename.
 
-## Hosted project configuration (required)
+## Parent signup journey
 
-Project: `sijvvbozaufzpjirijhb` (portfolio)
+1. Open https://iederees-create.github.io/3D-Portfolio/butterflies-educare/parent.html and choose **Create account**.
+2. Enter name, email address, a password and the required account consent, then select **Create account**.
+3. The parent sees a **Check your email** screen with their email address and three instructions.
+4. Open the confirmation email and select the **Confirm email** link.
+5. Return to the parent portal and sign in using the same email and password.
+6. If no email arrives, check Spam/Junk and select **Resend confirmation email**. If the address was mistyped, return to the account form and use the correct address.
 
-1. Sign in to [Supabase Dashboard](https://supabase.com/dashboard/project/sijvvbozaufzpjirijhb).
-2. Go to **Authentication → Email Templates → Confirm sign up**.
-3. Set the subject to: **Your Butterflies Educare verification code**.
-4. Replace the template body with the following **conditional** HTML, then save. The Supabase Auth project is shared with other applications. The condition sends a **code to Butterflies school signups** and preserves the standard confirmation link for other apps.
+No verification-code entry is presented or required.
 
-```html
-{{ if and .Data (eq (index .Data "school_app") "butterflies-educare") }}
-<div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;padding:30px 22px;color:#234b3e">
-  <h2 style="margin:0 0 12px;font-size:28px">Welcome to Butterflies Educare</h2>
-  <p>Thank you for creating your parent account.</p>
-  <p>Enter this verification code on the Butterflies Educare website to confirm your email address:</p>
-  <p style="font-size:36px;letter-spacing:8px;font-weight:bold;background:#edf6ec;border-radius:12px;padding:18px;text-align:center">{{ .Token }}</p>
-  <p>Return to the website and select <strong>Verify my email</strong>.</p>
-  <p>If you didn't create an account, you can safely ignore this email. Never share the code with anyone.</p>
-  <p style="font-size:12px;color:#718578;margin-top:24px">Butterflies Educare · Play, Learn, Grow, Together</p>
-</div>
-{{ else }}
-<h2>Confirm your email address</h2>
-<p>Follow the link below to confirm this email address and finish signing up.</p>
-<p><a href="{{ .ConfirmationURL }}">Confirm email address</a></p>
-{{ end }}
-```
+## Technical implementation
 
-The exact Go-template expression `{{ .Token }}` is mandatory. Do not use plain text like "123456" in the actual template. Do not modify invitation, password-reset, or email-change templates.
+- Supabase Auth signup uses `client.auth.signUp({ email, password, options: { emailRedirectTo, data } })`.
+- On signup without an active session, the app shows the email-link confirmation screen.
+- The `client.auth.resend({ type: 'signup', email, options: { emailRedirectTo } })` button requests a fresh link.
+- If a user tries to sign in before confirming their email, the confirmation screen is shown again.
+- Keep Supabase email confirmation **enabled**.
+- **Do not** change the shared Supabase project's confirmation email template to send a code; the same Auth project serves other applications.
+- Check the Supabase Authentication URL Configuration redirect allow list for the parent URL:
+  `https://iederees-create.github.io/3D-Portfolio/butterflies-educare/parent.html`.
+- Test with a new test mailbox that is controlled by the school or developer. Verify account creation, receipt of the link, confirmation, sign-in, link resend, and the invalid/wrong-email paths. Do not enter real children's details into test applications.
 
-5. Confirm `Authentication → Providers → Email` has confirmation enabled. Do **not** disable email confirmation.
-6. In `Authentication → URL Configuration`, ensure the Butterflies Educare parent page is in the redirect allow list and the site URL does not point to an unrelated application.
-7. Test with a **new fictional/test parent** email that you own: create account → receive code → enter code on parent page → confirm account → sign in → check parent profile. Test a wrong code and resend flow. Test from a private/incognito browser to ensure no pre-existing session is masking failures.
-8. Monitor Supabase email delivery and signup rate limits. For high public usage, configure a properly verified SMTP sender, preferably on a school-controlled domain.
-
-## Implementation status
-
-- Code entry UI, resend and `supabase.auth.verifyOtp({ email, token, type: 'email' })`: implemented in `public/butterflies-educare/network.js`.
-- Entry point from login screen: `public/butterflies-educare/parent.html`.
-- Supabase Auth mail template update: **manual hosted-dashboard action required**. The connected Supabase tools can inspect project data and schema but cannot edit hosted authentication email templates.
-- Full email-delivery acceptance test: **pending** until template change and use of a test inbox.
+**Project:** `sijvvbozaufzpjirijhb`.
 
 Supabase reference: https://supabase.com/docs/guides/auth/auth-email-templates
-
-**Note:** This Supabase project also serves other features; changing a project-wide email confirmation template can affect any other app using the same Supabase Auth project. Verify those apps can handle an email-code confirmation before replacing links universally. If not, use a branded template containing both `{{ .Token }}` and a `{{ .ConfirmationURL }}` fallback during the transition, or isolate school Auth in a dedicated project.
