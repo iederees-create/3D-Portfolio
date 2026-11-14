@@ -9,9 +9,10 @@ Project: `sijvvbozaufzpjirijhb` (portfolio)
 1. Sign in to [Supabase Dashboard](https://supabase.com/dashboard/project/sijvvbozaufzpjirijhb).
 2. Go to **Authentication → Email Templates → Confirm sign up**.
 3. Set the subject to: **Your Butterflies Educare verification code**.
-4. Replace the template body with the following HTML, then save:
+4. Replace the template body with the following **conditional** HTML, then save. The Supabase Auth project is shared with other applications. The condition sends a **code to Butterflies school signups** and preserves the standard confirmation link for other apps.
 
 ```html
+{{ if and .Data (eq (index .Data "school_app") "butterflies-educare") }}
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;padding:30px 22px;color:#234b3e">
   <h2 style="margin:0 0 12px;font-size:28px">Welcome to Butterflies Educare</h2>
   <p>Thank you for creating your parent account.</p>
@@ -21,6 +22,11 @@ Project: `sijvvbozaufzpjirijhb` (portfolio)
   <p>If you didn't create an account, you can safely ignore this email. Never share the code with anyone.</p>
   <p style="font-size:12px;color:#718578;margin-top:24px">Butterflies Educare · Play, Learn, Grow, Together</p>
 </div>
+{{ else }}
+<h2>Confirm your email address</h2>
+<p>Follow the link below to confirm this email address and finish signing up.</p>
+<p><a href="{{ .ConfirmationURL }}">Confirm email address</a></p>
+{{ end }}
 ```
 
 The exact Go-template expression `{{ .Token }}` is mandatory. Do not use plain text like "123456" in the actual template. Do not modify invitation, password-reset, or email-change templates.
