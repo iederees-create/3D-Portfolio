@@ -98,6 +98,20 @@ if (sitemap !== null && calendarHTML !== null && !sitemap.includes('calendar.htm
 
 if (/sb_secret_|service_role|NOWPAYMENTS_API_KEY|YOCO_SECRET_KEY/i.test(script + (atmosphereJS || '') + (networkJS || '') + (creativeJS || '') + (experienceJS || '') + (studioJS || '') + (schoolInfoJS || '') + (calendarJS || ''))) problems.push('Potential secret accidentally included in browser JavaScript');
 
+/* WhatsApp website-support release checks: every school route must expose the same safe enquiry widget. */
+const supportJS=load('whatsapp-support.js');
+const supportCSS=load('whatsapp-support.css');
+for (const page of ['index.html','parent.html','calendar.html','privacy.html','apply-2027.html','principal.html']) {
+  const source=page==='index.html'?html:load(page);
+  if (!source.includes('href="./whatsapp-support.css"') || !source.includes('src="./whatsapp-support.js"'))
+    problems.push('WhatsApp Support widget missing from '+page);
+}
+if (!supportJS.includes('27762851980') || !supportJS.includes('https://wa.me/') ||
+    !supportJS.includes('My question: ') || !supportJS.includes('const url = new URL(window.location.href)'))
+  problems.push('WhatsApp support message, number or private-URL protection missing');
+if (!supportCSS.includes('.be-wa-trigger') || !supportCSS.includes('.be-wa-dialog'))
+  problems.push('WhatsApp support button or enquiry dialog styling missing');
+
 /* Application and school-management release checks. */
 const applicationPage = load('apply-2027.html');
 const applicationScript = load('applications-2027.js');
@@ -127,7 +141,7 @@ if (networkCSS !== null && !networkCSS.includes('body.be-network a.be-btn.be-pri
 for (const filename of [
   'site.js', 'atmosphere.js', 'network.js', 'creative-garden.js',
   'experience.js', 'studio.js', 'school-information.js', 'calendar.js',
-  'applications-2027.js', 'principal-dashboard.js'
+  'applications-2027.js', 'principal-dashboard.js', 'whatsapp-support.js'
 ]) {
   const checked = spawnSync(process.execPath, ['--check', path.join(root, filename)], { encoding: 'utf8' });
   if (checked.status !== 0) {
