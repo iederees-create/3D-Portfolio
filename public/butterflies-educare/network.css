@@ -31,3 +31,16 @@
 body.be-network a.be-btn.be-primary,
 body.be-network a.be-btn.be-primary:visited { color:#ffffff; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; min-width:170px; text-align:center; }
 body.be-network a.be-btn.be-primary:hover,body.be-network a.be-btn.be-primary:focus-visible { color:#ffffff; background:#345e4d; }
+
+/* Code-first verification flow; also supports existing link emails during migration. */
+.be-verify-link{background:transparent;border:0;color:#265f4d;text-align:left;text-decoration:underline;text-underline-offset:3px;padding:7px 0;font-size:.85rem;font-weight:750;justify-self:start;cursor:pointer}
+.be-verify-link:hover,.be-verify-link:focus-visible{color:#193e33}
+.be-confirm-email-label{display:block;margin-top:10px;margin-bottom:6px;color:#214d3c;font-weight:750;font-size:.85rem}
+.be-confirmation #be-confirm-email-input{width:100%;min-height:46px;border:1.5px solid #cfdbd0;background:#fff;border-radius:12px;padding:12px 13px;color:#214d3c;font-size:1rem}
+.be-confirmation #be-confirm-email-input:focus-visible{outline:3px solid #b9dacb;outline-offset:2px}
+.be-confirmation .be-confirm-otp{padding:15px 17px;margin:18px 0 11px;display:block;background:#e9f2e9;border:1px solid #caddcf}
+.be-confirmation .be-confirm-otp label{margin-top:0;font-size:.86rem}
+.be-confirmation .be-confirm-otp input{background:#fff;margin-top:10px;font-size:1.15rem;font-weight:700;letter-spacing:.1em}
+.be-confirmation .be-confirm-otp .be-btn{min-height:48px}
+.be-confirmation .be-confirm-actions{grid-template-columns:1fr}
+.be-confirmation .be-confirm-help{line-height:1.6}
