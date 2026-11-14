@@ -112,6 +112,22 @@ if (!supportJS.includes('27762851980') || !supportJS.includes('https://wa.me/') 
 if (!supportCSS.includes('.be-wa-trigger') || !supportCSS.includes('.be-wa-dialog'))
   problems.push('WhatsApp support button or enquiry dialog styling missing');
 
+/* Existing school activities and printable admission paperwork */
+const registrationPrintHTML=load('registration-print.html');
+const behaviourDraftHTML=load('conduct-policy-draft.html');
+if (!calendarHTML?.includes('id="cal-regular-list"') || !calendarHTML?.includes('id="cal-interest-form"'))
+ problems.push('Existing weekly class programme or registration form is missing');
+if (!calendarJS?.includes('be_regular_classes') || !calendarJS?.includes('be_submit_regular_class_interest'))
+ problems.push('Class timetable or secure parent registration enquiry logic is missing');
+if (!registrationPrintHTML.includes('2027 Registration Form') || !registrationPrintHTML.includes('Emergency Contact'))
+ problems.push('2027 printable hardcopy registration form is missing');
+if (!behaviourDraftHTML.includes('Kindness, Respect') || !behaviourDraftHTML.includes('For principal review'))
+ problems.push('Draft positive-behaviour policy is missing');
+if (!html.includes('href="./registration-print.html"'))
+ problems.push('Printable application should be linked from school homepage');
+if (!html.includes('href="./calendar.html#weekly-classes"'))
+ problems.push('Current weekly classes should be discoverable from homepage');
+
 /* Application and school-management release checks. */
 const applicationPage = load('apply-2027.html');
 const applicationScript = load('applications-2027.js');
