@@ -116,3 +116,23 @@
 @media(max-width:700px){.cal-header{padding:13px 18px}.cal-nav{gap:9px}.cal-nav a{font-size:.77rem}.cal-brand{font-size:.87rem}.cal-brand-symbol{width:36px;height:36px;border-radius:12px;font-size:1.25rem}.cal-brand small{font-size:.57rem}.cal-account-btn{padding:8px 11px;min-height:37px;font-size:.76rem}.cal-hero{padding:39px 0 47px}.cal-hero-inner{display:block;padding:0 19px}.cal-hero h1{font-size:clamp(2.45rem,10vw,3.6rem)}.cal-art{display:none}.cal-hero-actions{gap:8px}.cal-section{padding:41px 15px 53px}.cal-section-head{flex-direction:column;align-items:flex-start}.cal-calendar-shell,.cal-upcoming{padding:16px;border-radius:23px}.cal-calendar-nav{gap:6px}.cal-calendar-nav h3{min-width:138px;font-size:1.27rem}.cal-chevron{height:33px;width:33px}.cal-days,.cal-weekdays{gap:4px}.cal-days{min-height:290px}.cal-day{min-height:47px;border-radius:10px;font-size:.77rem;padding:5px 2px}.cal-pips i{width:6px;height:6px}.cal-filter{font-size:.72rem}.cal-steps{grid-template-columns:1fr;gap:11px}.cal-steps article{min-height:0}.cal-content{padding:0 19px}.cal-how-section,.cal-private{padding:49px 0 57px}.cal-footer{flex-direction:column;align-items:flex-start;padding:28px 20px;gap:16px}.cal-dialog-inner{padding:27px 21px}}
 @media(max-width:375px){.cal-header{flex-wrap:wrap}.cal-nav{width:100%;justify-content:space-between}.cal-weekdays,.cal-days{gap:3px}.cal-calendar-shell{padding:13px}.cal-day{min-height:43px}.cal-calendar-nav h3{min-width:126px}.cal-item{padding:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cal-art-sheet{animation:none!important}.cal-button{transition:none!important}.cal-button:hover{transform:none}}
+
+/* Existing weekly activities and registration interest (no child record collection). */
+.cal-regular-section{background:linear-gradient(152deg,#f7fbf4,#eff6ea 60%,#fff9f0);border-top:1px solid #d9e8d9}
+.cal-regular-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:26px 0 20px}
+.cal-regular-card{background:#fff;border:1px solid #dbe7dc;border-radius:22px;padding:23px;display:flex;flex-direction:column;gap:9px;box-shadow:0 8px 22px rgba(27,72,52,.04)}
+.cal-regular-card h3{font:500 26px/1.19 Georgia,serif;margin:0;color:#255346}
+.cal-regular-card p{font-size:13px;line-height:1.6;margin:0;color:#5b7769}
+.cal-regular-card .cal-regular-eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:850;color:#5b9a78}
+.cal-regular-card .cal-class-time{font-size:15px;font-weight:750;color:#224c3d}
+.cal-regular-card .cal-class-age{font-weight:750;color:#6d845d}
+.cal-regular-card .cal-class-description{font-size:12px}
+.cal-regular-card .cal-register-button{align-self:flex-start;margin-top:auto;min-height:43px;font-size:13px}
+.cal-dot.regular{background:#c17b49}
+.cal-pips i.regular{background:#c17b49}
+.cal-item-badge.regular{background:#f8ebdc;color:#845329}
+.cal-interests-section{background:#f6faf3}
+#cal-interest-form .cal-check{margin:10px 0 15px;align-items:flex-start}
+#cal-interest-form .cal-check span{font-size:13px;line-height:1.55}
+@media(max-width:1050px){.cal-regular-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:660px){.cal-regular-grid{grid-template-columns:1fr}.cal-regular-card{padding:20px}.cal-regular-card h3{font-size:24px}}
