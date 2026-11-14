@@ -36,7 +36,7 @@ const alertMsg=(message,error=false)=>{
 function open(id){const d=$(id);if(d&&!d.open)d.showModal();}
 function close(id){const d=$(id);if(d?.open)d.close();}
 function regularOnDay(key) {
- const d=new Date(key+"T12:00:00+02:00").getDay(),iso=((d+6)%7)+1;
+ const d=new Date(key+"T12:00:00+02:00").getUTCDay(),iso=((d+6)%7)+1;
  return st.regular.flatMap(a=> (Array.isArray(a.sessions)?a.sessions:[])
   .filter(s=>Number(s.weekday)===iso)
   .map(s=>({...a,kind:"regular",starts_at:s.start?key+"T"+s.start+":00+02:00":null,
