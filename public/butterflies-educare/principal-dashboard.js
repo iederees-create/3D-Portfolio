@@ -13,6 +13,8 @@
     parents:{title:"Parents & guardians",description:"Parent accounts with profiles saved in the school network.",table:"be_parent_profiles",cols:"user_id,display_name,contact_email,phone,preferred_contact,updated_at",titleKey:"display_name",summaryKey:"contact_email",labels:{contact_email:"Email",phone:"Phone",preferred_contact:"Preferred contact"},time:"updated_at"},
     messages:{title:"Parent messages",description:"Read private messages and reply directly to parent accounts.",table:"be_parent_messages",cols:"id,parent_id,subject,body,staff_reply,status,created_at",titleKey:"subject",summaryKey:"body",labels:{body:"Message",staff_reply:"School reply"},statusKey:"status",time:"created_at"},
     enquiries:{title:"Enrolment enquiries",description:"General requests for enrolment information, separate from formal 2027 applications.",table:"be_enrolment_enquiries",cols:"id,parent_id,age_group,preferred_start,status,created_at",titleKey:"age_group",labels:{preferred_start:"Requested start"},statusKey:"status",time:"created_at"},
+    "regular-classes":{title:"Existing weekly classes",description:"The recurring activities provided by the school. Contact details, exact venues, fees and term exceptions may still need confirmation.",table:"be_regular_classes",cols:"id,title,instructor,age_range,schedule_note,published,accepting_interest,updated_at",titleKey:"title",summaryKey:"schedule_note",labels:{instructor:"Class leader",age_range:"Age group",accepting_interest:"Accepting enquiries"},statusKey:"published",time:"updated_at"},
+    "class-interests":{title:"Class registrations & enquiries",description:"Private parent enquiries for existing weekly activities. These are not confirmed places.",table:"be_regular_class_interests",cols:"id,class_id,parent_name,contact_email,contact_phone,age_group,enquiry,status,created_at,be_regular_classes(title)",titleKey:"parent_name",summaryKey:"enquiry",labels:{contact_email:"Email",contact_phone:"Phone",age_group:"Age group"},statusKey:"status",time:"created_at"},
     classes:{title:"Guest-class requests",description:"Proposals from people interested in teaching or running an activity.",table:"be_class_proposals",cols:"id,presenter_name,presenter_email,class_title,class_summary,state,created_at",titleKey:"class_title",summaryKey:"class_summary",labels:{presenter_name:"Presenter",presenter_email:"Email",class_summary:"Proposal"},statusKey:"state",time:"created_at"},
     slots:{title:"Available class slots",description:"School calendar availability and approved teaching slots.",table:"be_class_slots",cols:"id,starts_at,ends_at,venue,topic_hint,state,published,created_at",titleKey:"topic_hint",labels:{starts_at:"Starts",ends_at:"Ends",venue:"Venue",published:"Published"},statusKey:"state",time:"created_at"},
     events:{title:"School events",description:"Events available to the school community, including draft and published items.",table:"be_school_events",cols:"id,title,description,starts_at,ends_at,venue,published,created_at",titleKey:"title",summaryKey:"description",labels:{starts_at:"Starts",venue:"Venue"},statusKey:"published",time:"created_at"},
@@ -53,6 +55,27 @@
       link.href="./apply-2027.html?review="+encodeURIComponent(rowData.id)+"#staff-panel";
       buttons.append(link);
     }
+    if(current==="class-interests") {
+      const course=rowData.be_regular_classes?.title;
+      if(course)card.insertBefore(node("p","Class: "+course),card.children[1]||null);
+      if(rowData.status==="new" || rowData.status==="contacted") {
+        const next=rowData.status==="new"?"contacted":"closed";
+        const b=node("button",next==="contacted"?"Mark contacted":"Close enquiry","button secondary");
+        b.type="button";
+        b.addEventListener("click",async()=>{
+          b.disabled=true;
+          const result=await db.from("be_regular_class_interests").update({status:next}).eq("id",rowData.id).select("id");
+          if(result.error || !result.data?.length){
+            flash("Could not update class enquiry: "+(result.error?.message||"No record changed"),true);
+          }else{
+            flash("Class enquiry updated.");
+            await selectSection("class-interests");
+          }
+          b.disabled=false;
+        });
+        buttons.append(b);
+      }
+    }
     if(current==="messages") {
       const details=node("details");
       const summary=node("summary",rowData.staff_reply?"View or update reply":"Write a reply to this parent");
@@ -72,7 +95,7 @@
       });
       details.append(save);card.append(details);
     }
-    if(["classes","slots","events","rsvps"].includes(current)){const link=node("a","Open shared calendar","button secondary");link.href="./calendar.html";buttons.append(link);}
+    if(["classes","slots","events","rsvps","regular-classes"].includes(current)){const link=node("a","Open shared calendar","button secondary");link.href="./calendar.html";buttons.append(link);}
     if(["announcements","fundraising","school"].includes(current)){const link=node("a","Open school publishing tools","button secondary");link.href="./parent.html#be-staff";buttons.append(link);}
     if(buttons.childElementCount)card.append(buttons);
     return card;
