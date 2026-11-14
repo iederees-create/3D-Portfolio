@@ -14,7 +14,7 @@ const show=(id,yes)=>{$(id).hidden=!yes;};
 const today=new Date(),fmtYear=new Intl.DateTimeFormat("en-GB",{timeZone:TZ,year:"numeric"}),fmtMonthNum=new Intl.DateTimeFormat("en-GB",{timeZone:TZ,month:"2-digit"});
 const st={
  year:Number(fmtYear.format(today)),month:Number(fmtMonthNum.format(today))-1,
- selected:null,filter:"all",events:[],slots:[],my:[],staffSlots:[],proposals:[]
+ selected:null,filter:"all",events:[],slots:[],my:[],staffSlots:[],proposals:[],regular:[]
 };
 const baseMonth=st.year*12+st.month;
 let db=null,user=null,profile=null,staff=null;
@@ -35,11 +35,90 @@ const alertMsg=(message,error=false)=>{
 };
 function open(id){const d=$(id);if(d&&!d.open)d.showModal();}
 function close(id){const d=$(id);if(d?.open)d.close();}
+function regularOnDay(key) {
+ const d=new Date(key+"T12:00:00+02:00").getDay(),iso=((d+6)%7)+1;
+ return st.regular.flatMap(a=> (Array.isArray(a.sessions)?a.sessions:[])
+  .filter(s=>Number(s.weekday)===iso)
+  .map(s=>({...a,kind:"regular",starts_at:s.start?key+"T"+s.start+":00+02:00":null,
+   time_label:s.start&&s.end?s.start+"–"+s.end+" SAST":a.schedule_note})));
+}
+async function loadRegularClasses() {
+ if(!db)return;
+ const r=await db.from("be_regular_classes").select("id,title,instructor,age_range,schedule_note,sessions,description,fee_note,accepting_interest").eq("published",true).order("title");
+ const list=$("cal-regular-list");list.replaceChildren();
+ if(r.error) {list.appendChild(el("p","Weekly class details are temporarily unavailable.","cal-empty"));return;}
+ st.regular=r.data||[];
+ if(!st.regular.length){list.appendChild(el("p","Class information will be added here after confirmation.","cal-empty"));return;}
+ st.regular.forEach(a=>{
+  const card=el("article",null,"cal-regular-card");
+  put(card,"span","Weekly programme","cal-regular-eyebrow");
+  put(card,"h3",a.title);
+  if(a.instructor)put(card,"p",a.instructor,"cal-class-tutor");
+  put(card,"p",a.schedule_note,"cal-class-time");
+  put(card,"p",a.age_range||"Please enquire about ages","cal-class-age");
+  if(a.description)put(card,"p",a.description,"cal-class-description");
+  if(a.accepting_interest)card.append(btn("Register interest",()=>openRegularInterest(a),"cal-button cal-primary cal-register-button"));
+  list.appendChild(card);
+ });
+ renderGrid();renderSelected();
+}
+function openRegularInterest(a){
+ if(!user){
+  alertMsg("Please sign in or create a parent account before registering your interest.",true);
+  open("cal-auth-dialog");
+  return;
+ }
+ const f=$("cal-interest-form");
+ f.reset();
+ f.elements.namedItem("class_id").value=a.id;
+ f.elements.namedItem("parent_name").value=profile?.display_name||user.user_metadata?.full_name||"";
+ f.elements.namedItem("contact_email").value=user.email||"";
+ $("cal-interest-class").textContent=a.title+" — "+a.schedule_note+" This is a registration enquiry, not a confirmed place.";
+ open("cal-interest-dialog");
+}
+async function sendRegularInterest(e){
+ e.preventDefault();
+ if(!user){alertMsg("Please sign in to register interest.",true);return;}
+ const form=e.currentTarget,b=form.querySelector('button[type="submit"]');
+ if(!form.reportValidity())return;
+ b.disabled=true;
+ try{
+  const r=await db.rpc("be_submit_regular_class_interest",{
+   p_class_id:val(form,"class_id"),
+   p_parent_name:val(form,"parent_name"),
+   p_email:val(form,"contact_email"),
+   p_phone:val(form,"contact_phone"),
+   p_age_group:val(form,"age_group"),
+   p_enquiry:val(form,"enquiry"),
+   p_ack:form.elements.namedItem("privacy_ack").checked
+  });
+  if(r.error)throw r.error;
+  close("cal-interest-dialog");
+  alertMsg("Your class registration enquiry has been sent. The school will contact you; no place or payment is confirmed.");
+  await loadRegularInterests();
+  $("cal-my-interests").scrollIntoView({behavior:"smooth",block:"start"});
+ }catch(err){alertMsg("Could not send registration enquiry: "+(err.message||"Please try again"),true);}
+ finally{b.disabled=false;}
+}
+async function loadRegularInterests(){
+ if(!db||!user)return;
+ const list=$("cal-interests-list");list.replaceChildren();
+ const r=await db.from("be_regular_class_interests").select("id,class_id,status,created_at,be_regular_classes(title)").eq("parent_id",user.id).order("created_at",{ascending:false}).limit(50);
+ if(r.error){list.appendChild(el("p","Your class enquiries could not be loaded.","cal-empty"));return;}
+ if(!(r.data||[]).length){list.appendChild(el("p","You have not enquired about any existing classes yet.","cal-empty"));return;}
+ r.data.forEach(a=>{
+  const card=el("article",null,"cal-proposal");
+  put(card,"strong",a.be_regular_classes?.title||"School class");
+  put(card,"p","Status: "+a.status+" · "+dayLong.format(new Date(a.created_at)));
+  list.appendChild(card);
+ });
+}
 function entriesOnDay(key,filter="all"){
  return [
  ...st.events.filter(x=>dayKey(x.starts_at)===key).map(x=>({...x,kind:"event"})),
- ...st.slots.filter(x=>dayKey(x.starts_at)===key).map(x=>({...x,kind:"slot"}))
- ].filter(x=>filter==="all"||x.kind===filter).sort((a,b)=>new Date(a.starts_at)-new Date(b.starts_at));
+ ...st.slots.filter(x=>dayKey(x.starts_at)===key).map(x=>({...x,kind:"slot"})),
+ ...regularOnDay(key)
+ ].filter(x=>filter==="all"||x.kind===filter).sort((a,b)=>String(a.starts_at||a.schedule_note||"").localeCompare(String(b.starts_at||b.schedule_note||"")));
 }
 function renderGrid(){
  const root=$("cal-days");root.replaceChildren();
@@ -59,6 +138,7 @@ function renderGrid(){
   const dots=el("span",null,"cal-pips");
   if(items.some(i=>i.kind==="event"))dots.appendChild(el("i",null,"event"));
   if(items.some(i=>i.kind==="slot"))dots.appendChild(el("i",null,"slot"));
+  if(items.some(i=>i.kind==="regular"))dots.appendChild(el("i",null,"regular"));
   b.appendChild(dots);root.appendChild(b);
  }
 }
@@ -95,8 +175,14 @@ function renderSelected(){
  if(!items.length){root.appendChild(el("p","No published events or open class times for this date.","cal-empty"));return;}
  items.forEach(item=>{
   const card=el("article",null,"cal-item type-"+item.kind);
-  put(card,"span",item.kind==="event"?"School event":"Available guest-class time","cal-item-badge "+item.kind);
-  put(card,"strong",item.kind==="event"?item.title:(item.topic_hint||"Community guest class"));
+  put(card,"span",item.kind==="event"?"School event":item.kind==="regular"?"Weekly class":"Available guest-class time","cal-item-badge "+item.kind);
+  put(card,"strong",item.kind==="event"||item.kind==="regular"?item.title:(item.topic_hint||"Community guest class"));
+  if(item.kind==="regular"){
+   put(card,"p",item.time_label+" · Weekly guide; dates and venue to confirm");
+   if(item.instructor)put(card,"p",item.instructor);
+   card.appendChild(btn("Register interest",()=>openRegularInterest(item),"cal-action"));
+   root.appendChild(card);return;
+  }
   const end=item.ends_at||new Date(new Date(item.starts_at).getTime()+3600000).toISOString();
   put(card,"p",range({starts_at:item.starts_at,ends_at:end})+" · "+(item.venue||"School"));
   if(item.kind==="event"){
@@ -142,8 +228,8 @@ async function refreshAccount(){
  }
  $("cal-account").textContent=user?"Sign out":"Sign in";
  $("cal-user-state").textContent=user?(staff?"School team account":"Signed in: "+(profile?.display_name||user.email||"Account")):"Public calendar";
- show("cal-my-requests",Boolean(user));show("cal-staff",Boolean(staff));
- if(user)await loadMine();
+ show("cal-my-requests",Boolean(user));show("cal-my-interests",Boolean(user));show("cal-staff",Boolean(staff));
+ if(user)await Promise.all([loadMine(),loadRegularInterests()]);
  if(staff)await loadStaff();
 }
 async function loadMine(){
@@ -302,15 +388,17 @@ async function init(){
   const r=await db.auth.signOut();if(r.error){alertMsg(r.error.message,true);return;}
   await refreshAccount();alertMsg("You have signed out.");
  });
- [["cal-dialog","cal-dialog-close"],["cal-auth-dialog","cal-auth-close"]].forEach(([dialog,buttonId])=>{
+ [["cal-dialog","cal-dialog-close"],["cal-auth-dialog","cal-auth-close"],["cal-interest-dialog","cal-interest-close"]].forEach(([dialog,buttonId])=>{
   $(buttonId).addEventListener("click",()=>close(dialog));
   $(dialog).addEventListener("click",e=>{if(e.target===$(dialog))close(dialog);});
  });
  $("cal-slot-form").addEventListener("submit",createSlot);
+ $("cal-interest-form").addEventListener("submit",sendRegularInterest);
  $("cal-request-form").addEventListener("submit",sendRequest);
  $("cal-login-form").addEventListener("submit",signIn);
  db.auth.onAuthStateChange(evt=>{if(["SIGNED_IN","SIGNED_OUT","TOKEN_REFRESHED","USER_UPDATED"].includes(evt))setTimeout(()=>refreshAccount().catch(e=>alertMsg(e.message,true)),0);});
- await Promise.all([refreshAccount(),refreshMonth()]);
+ await Promise.all([refreshAccount(),loadRegularClasses()]);
+ await refreshMonth();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>init().catch(e=>alertMsg(e.message,true)),{once:true});
 else init().catch(e=>alertMsg(e.message,true));
