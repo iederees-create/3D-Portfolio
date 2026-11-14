@@ -38,7 +38,7 @@ The exact Go-template expression `{{ .Token }}` is mandatory. Do not use plain t
 
 ## Implementation status
 
-- Code entry UI, resend and `supabase.auth.verifyOtp({ email, token, type: 'signup' })`: implemented in `public/butterflies-educare/network.js`.
+- Code entry UI, resend and `supabase.auth.verifyOtp({ email, token, type: 'email' })`: implemented in `public/butterflies-educare/network.js`.
 - Entry point from login screen: `public/butterflies-educare/parent.html`.
 - Supabase Auth mail template update: **manual hosted-dashboard action required**. The connected Supabase tools can inspect project data and schema but cannot edit hosted authentication email templates.
 - Full email-delivery acceptance test: **pending** until template change and use of a test inbox.
