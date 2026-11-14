@@ -100,7 +100,7 @@
         '<label id="be-email-field">Email address<input name="email" type="email" autocomplete="email" required></label>' +
         '<label id="be-password-field">Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>' +
         '<label id="be-consent-field" class="be-checkbox" hidden><input name="consent" type="checkbox"><span>I agree that my contact details and requests may be stored for school communications. I will not submit sensitive information about children.</span></label>' +
-        '<button class="be-btn be-primary" type="submit" id="be-auth-submit">Sign in</button><p class="be-auth-feedback" id="be-auth-feedback" role="status" aria-live="polite"></p></form></div>';
+        '<button class="be-btn be-primary" type="submit" id="be-auth-submit">Sign in</button><button type="button" id="be-open-code" class="be-verify-link">Have a verification code?</button><p class="be-auth-feedback" id="be-auth-feedback" role="status" aria-live="polite"></p></form></div>';
       document.body.appendChild(dialog);
     }
   }
@@ -115,13 +115,13 @@
     panel.hidden = true;
     panel.innerHTML = [
       '<div class="be-confirm-icon" aria-hidden="true">✉</div>',
-      '<p class="be-confirm-lead">We\'ve requested a verification email for:</p>',
-      '<p class="be-confirm-address" id="be-confirm-email"></p>',
-      '<ol class="be-confirm-steps"><li>Open your email inbox.</li><li>Find the verification message and click <strong>Confirm email</strong>.</li><li>Come back to Butterflies Educare and sign in.</li></ol>',
-      '<p class="be-confirm-help">No email yet? Give it a moment and check your Spam or Junk folder. Make sure the address above is correct.</p>',
+      '<p class="be-confirm-lead">Enter the verification code sent to your email address:</p>',
+      '<label class="be-confirm-email-label" for="be-confirm-email-input">Email address</label><input id="be-confirm-email-input" type="email" autocomplete="email" required placeholder="your@email.com">',
+      '<ol class="be-confirm-steps"><li>Check your email inbox.</li><li>Copy the code from the Butterflies Educare email.</li><li>Enter the code below and select <strong>Verify my email</strong>.</li></ol>',
+      '<p class="be-confirm-help">Check Spam or Junk if the message is missing. If your email has a confirmation link instead of a code, that link will still work while the school email template is being updated.</p>',
       '<p id="be-confirm-feedback" class="be-auth-feedback" role="status" aria-live="polite"></p>',
-      '<div class="be-confirm-actions"><button type="button" class="be-btn be-primary" id="be-confirm-resend">Resend verification email</button><button type="button" class="be-btn be-secondary" id="be-confirm-signin">Go to sign in</button><button type="button" class="be-confirm-edit" id="be-confirm-edit">Use a different email</button></div>',
-      '<details class="be-confirm-otp"><summary>Did you receive a verification code instead?</summary><label for="be-confirm-code">Enter the code from your email</label><input id="be-confirm-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,8}" maxlength="8" placeholder="6-digit code"><button type="button" class="be-btn be-secondary" id="be-confirm-verify">Verify code</button></details>'
+      '<div class="be-confirm-actions"><button type="button" class="be-btn be-secondary" id="be-confirm-resend">Send another verification email</button><button type="button" class="be-btn be-secondary" id="be-confirm-signin">Already verified? Sign in</button></div>',
+      '<div class="be-confirm-otp"><label for="be-confirm-code">Verification code</label><input id="be-confirm-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,8}" maxlength="8" placeholder="Enter the code from your email"><button type="button" class="be-btn be-primary" id="be-confirm-verify">Verify my email</button></div>'
     ].join("");
     body.appendChild(panel);
     $("be-confirm-resend").addEventListener("click", resendEmailConfirmation);
@@ -129,11 +129,6 @@
       setAuthMode("signin");
       const input = $("be-auth-form")?.elements.namedItem("email");
       if (input) input.value = pendingConfirmEmail;
-    });
-    $("be-confirm-edit").addEventListener("click", () => {
-      setAuthMode("signup");
-      const input = $("be-auth-form")?.elements.namedItem("email");
-      if (input) { input.value = pendingConfirmEmail; input.focus(); input.select(); }
     });
     $("be-confirm-verify").addEventListener("click", verifyConfirmationCode);
     return panel;
@@ -146,14 +141,17 @@
     $("be-auth-description").hidden = true;
     $("be-auth-dialog").querySelector(".be-auth-tabs").hidden = true;
     $("be-auth-form").hidden = true;
-    $("be-confirm-email").textContent = email;
+    $("be-confirm-email-input").value = email;
     $("be-confirm-feedback").textContent = "";
     $("be-confirm-code").value = "";
     panel.hidden = false;
-    $("be-auth-title").focus?.();
+    $("be-confirm-code").focus();
   }
   async function resendEmailConfirmation() {
-    if (!client || !pendingConfirmEmail) return;
+    if (!client) return;
+    const confirmationEmail = $("be-confirm-email-input");
+    if (!confirmationEmail?.checkValidity()) { confirmationEmail?.reportValidity(); return; }
+    pendingConfirmEmail = confirmationEmail.value.trim().toLowerCase();
     const button = $("be-confirm-resend");
     const feedback = $("be-confirm-feedback");
     button.disabled = true;
@@ -174,7 +172,10 @@
     }
   }
   async function verifyConfirmationCode() {
-    if (!client || !pendingConfirmEmail) return;
+    if (!client) return;
+    const confirmationEmail = $("be-confirm-email-input");
+    if (!confirmationEmail?.checkValidity()) { confirmationEmail?.reportValidity(); return; }
+    pendingConfirmEmail = confirmationEmail.value.trim().toLowerCase();
     const token = $("be-confirm-code").value.trim();
     const feedback = $("be-confirm-feedback");
     if (!/^[0-9]{6,8}$/.test(token)) {
@@ -203,6 +204,15 @@
     }
   }
 
+  function openCodeEntry() {
+    if (!client) { flash("Account service unavailable. Please try again.", true); return; }
+    const email = $("be-auth-form")?.elements.namedItem("email")?.value?.trim()?.toLowerCase() || "";
+    ensureEmailConfirmation();
+    showEmailConfirmation(email);
+    const input = $("be-confirm-email-input");
+    if (!email) input?.focus();
+  }
+
   function setAuthMode(mode) {
     authMode = mode;
     const confirmPanel = $("be-email-confirmation");
@@ -219,7 +229,7 @@
     const names = {signin:"Sign in",signup:"Create your account",reset:"Reset password",recovery:"Choose a new password"};
     const desc = {
       signin:"Sign in using the email and password for your account.",
-      signup:"Create a secure parent or community account. Email confirmation may be required.",
+      signup:"Create your account, then confirm your email using the message we send you.",
       reset:"We'll email you a password reset link.",
       recovery:"Enter a new password to finish recovering your account."
     };
@@ -236,6 +246,7 @@
     }
     if (consent) { consent.hidden = mode!=="signup"; consent.querySelector("input").required = mode==="signup"; }
     document.querySelectorAll("[data-auth-mode]").forEach((b) => b.setAttribute("aria-pressed",String(b.dataset.authMode===mode)));
+    setVisible("be-open-code",mode==="signin" || mode==="signup");
     const feedback = $("be-auth-feedback");
     if (feedback) { feedback.textContent = ""; feedback.classList.remove("be-error-text"); }
   }
@@ -315,6 +326,10 @@
       let response;
       if (authMode==="signin") {
         response = await client.auth.signInWithPassword({email,password});
+        if (response.error && /email not confirmed/i.test(response.error.message || "")) {
+          showEmailConfirmation(email);
+          return;
+        }
       } else if (authMode==="signup") {
         const name = value(form,"name");
         if (name.length<2 || !form.elements.namedItem("consent").checked) throw Error("Please enter your name and agree to the privacy notice.");
@@ -630,6 +645,7 @@
     $("be-auth-close")?.addEventListener("click",closeAuth);
     $("be-auth-dialog")?.addEventListener("click",e=>{if(e.target===$("be-auth-dialog"))closeAuth();});
     $("be-auth-form")?.addEventListener("submit",handleAuth);
+    $("be-open-code")?.addEventListener("click", openCodeEntry);
     $("be-sign-out")?.addEventListener("click",async()=>{
       if(client) await client.auth.signOut();
       user=null;profile=null;staffRole=null;
