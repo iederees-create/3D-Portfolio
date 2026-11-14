@@ -186,7 +186,7 @@
     button.disabled = true;
     feedback.textContent = "Checking your code…";
     try {
-      const response = await client.auth.verifyOtp({ email: pendingConfirmEmail, token, type: "signup" });
+      const response = await client.auth.verifyOtp({ email: pendingConfirmEmail, token, type: "email" });
       if (response.error) {
         feedback.textContent = "That code could not be verified. Check it and try again, or request a new email.";
         return;
