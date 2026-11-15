@@ -237,7 +237,7 @@
     if (!client) return;
     const result = await client.auth.getUser();
     user = result?.data?.user || null;
-    if (!user) profile = null;
+    if (!user) { profile = null; $("be-profile-form")?.reset(); }
     staffRole = null;
     if (user) {
       const [p, s] = await Promise.all([
@@ -258,6 +258,7 @@
     setVisible("be-sign-out",Boolean(user));
     $("be-account-role").textContent = staffRole ? "School " + staffRole : "Parent / supporter";
     $("be-greeting").textContent = user ? "Welcome, " + (profile?.display_name || user.email?.split("@")[0] || "friend") : "Welcome to your network";
+    if (window.beFamilyRefresh) await window.beFamilyRefresh({client,user,profile,staffRole});
     if (user) {
       const form = $("be-profile-form");
       if (form) {
@@ -276,7 +277,7 @@
     const submit = $("be-auth-submit");
     if (submit) submit.disabled = true;
     const email = value(form,"email").toLowerCase();
-    const password = value(form,"password");
+    const password = String(new FormData(form).get("password") || "");
     const feedback = $("be-auth-feedback");
     try {
       if (!client) throw Error("Account service unavailable.");
@@ -365,7 +366,7 @@
             await client.from("be_event_rsvps").insert({event_id:item.id,parent_id:user.id});
           if(result.error)throw result.error;
           flash("Your event response has been saved.");
-          await loadPrivate();await loadPublic();
+          await loadPrivate();await loadPublic();if(window.beFamilyRefresh)await window.beFamilyRefresh({client,user,profile,staffRole});
         }catch(e){flash(e.message,true);}
       }));
       return card;
@@ -373,8 +374,10 @@
     renderPublic("be-fundraisers-list",fundraisers,"The school hasn't published fundraising projects yet.",(item)=>{
       const card=publicCard(item.title,item.description,"School project");
       if(item.goal_description)card.appendChild(create("small",item.goal_description));
-      card.appendChild(btn("Offer support",()=>{
+      const supportChoice=create("select",null,"family-select");supportChoice.setAttribute("aria-label","How to support "+item.title);[["volunteer","Volunteer my time"],["goods","Offer goods or services"],["sponsor","Discuss sponsorship"]].forEach(([v,t])=>{const o=create("option",t);o.value=v;supportChoice.append(o);});if(isPortal)card.append(supportChoice);
+      card.appendChild(btn("Offer support",async()=>{
         if(!requireAccount())return;
+        if(window.beFamilyFundraiser){try{await window.beFamilyFundraiser(item.id,supportChoice.value);}catch(e){flash(e.message,true);}return;}
         $("be-sponsor-form")?.scrollIntoView({behavior:"smooth",block:"center"});
       }));
       return card;
@@ -525,6 +528,7 @@
       if(p.error)throw p.error;profile=p.data;
       $("be-greeting").textContent="Welcome, "+profile.display_name;
       f.elements.namedItem("privacy_consent").checked=true;
+      if(window.beFamilyRefresh)await window.beFamilyRefresh({client,user,profile,staffRole});
     });
     attach("be-enrolment-form",async(f)=>{
       if(!requireAccount())throw Error("Save your profile first.");

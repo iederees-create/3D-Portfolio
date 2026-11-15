@@ -1,3 +1,4 @@
+import BuildJournal from '../components/BuildJournal';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock } from 'lucide-react';
@@ -45,6 +46,7 @@ export default function BlogIndexPage() {
           </p>
         </motion.div>
 
+        <div className="mb-12"><BuildJournal compact /></div>
         <div className="grid grid-cols-1 gap-6">
           {sorted.map((article, i) => (
             <motion.div

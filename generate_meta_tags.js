@@ -202,3 +202,6 @@ ${sitemapUrls.map(url => `  <url>\n    <loc>${siteUrl}${url}</loc>\n    <lastmod
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapContent);
 
 console.log('Meta tag and sitemap generation complete!');
+
+fs.mkdirSync(path.join(distDir,"development"), {recursive:true});
+fs.writeFileSync(path.join(distDir,"development/index.html"),generateHtml("development/","Development Journal | NextGenWebs","Follow live public development updates from Iederees Francis.","projects/butterflies-educare/cover.svg"));

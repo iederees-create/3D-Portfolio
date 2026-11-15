@@ -17,6 +17,7 @@ import { useAnalytics } from './hooks/useAnalytics';
 import HomePage from './pages/HomePage';
 const WorkPage = lazy(() => import('./pages/WorkPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const DevelopmentPage = lazy(() => import('./pages/DevelopmentPage'));
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const ArticlePage = lazy(() => import('./pages/ArticlePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -238,6 +239,7 @@ function Footer() {
           <a href="https://www.linkedin.com/in/iederees-francis-936717392/" target="_blank" rel="noreferrer" className={linkClass}>LinkedIn</a>
           <Link to="/about" className={linkClass}>About</Link>
           <Link to="/blog" className={linkClass}>Blog</Link>
+          <Link to="/development/" className={linkClass}>Build journal</Link>
           <a href="https://nextgenwebs.etsy.com" target="_blank" rel="noreferrer" className={linkClass}>Templates (Etsy)</a>
         </nav>
 
@@ -266,6 +268,7 @@ function AnimatedRoutes() {
         <Route path="/projects/qualified-lead-research" element={<PageWrapper><LeadResearchProjectPage /></PageWrapper>} />
         <Route path="/services/qa-operations-review" element={<PageWrapper><QAOperationsReviewPage /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutPage /></PageWrapper>} />
+        <Route path="/development" element={<PageWrapper><DevelopmentPage /></PageWrapper>} />
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />

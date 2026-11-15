@@ -68,7 +68,7 @@ if (Buffer.byteLength(script, 'utf8') < 200) problems.push('site.js is missing o
 if (!/<svg\b/i.test(favicon)) problems.push('favicon.svg is invalid');
 if (atmosphereCSS !== null && Buffer.byteLength(atmosphereCSS, 'utf8') < 200) problems.push('atmosphere.css is missing or truncated');
 if (atmosphereJS !== null && Buffer.byteLength(atmosphereJS, 'utf8') < 100) problems.push('atmosphere.js is missing or truncated');
-if (parentHTML !== null && (!parentHTML.includes('<title>Parent & Community Network') || !parentHTML.includes('id="be-auth-dialog"'))) problems.push('Parent portal HTML missing or truncated');
+if (parentHTML !== null && (!parentHTML.includes('<title>My Family | Butterflies Educare') || !parentHTML.includes('id="be-auth-dialog"'))) problems.push('Parent portal HTML missing or truncated');
 if (networkCSS !== null && Buffer.byteLength(networkCSS,'utf8') < 1000) problems.push('Parent network CSS missing or truncated');
 if (networkJS !== null && (!networkJS.includes('signInWithPassword') || !networkJS.includes('be_parent_profiles'))) problems.push('Parent network JavaScript missing or incomplete');
 if (creativeCSS !== null && (!creativeCSS.includes('creative-giving-garden') || Buffer.byteLength(creativeCSS,'utf8') < 1000)) problems.push('Creative garden CSS missing or incomplete');
@@ -165,6 +165,8 @@ for (const filename of [
       (checked.stderr || checked.error?.message || 'unknown error').slice(0, 200));
   }
 }
+
+if (parentHTML && (!parentHTML.includes('src="./family-hub.js"') || !parentHTML.includes('href="./family-hub.css"'))) problems.push("Family workspace assets missing");
 
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);

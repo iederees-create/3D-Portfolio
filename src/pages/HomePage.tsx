@@ -1,3 +1,4 @@
+import BuildJournal from '../components/BuildJournal';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -274,6 +275,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="px-6 py-12 max-w-7xl mx-auto"><BuildJournal compact /></div>
       {/* ── Final CTA ── */}
       <section className="px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 text-center sm:p-12">

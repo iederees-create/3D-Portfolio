@@ -9,6 +9,9 @@
   const short=v=>String(v==null?"—":v).replace(/\s+/g," ").slice(0,1500);
   const status=v=>String(v===true?"Published":v===false?"Draft":v||"—").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
   const sectionConfig={
+    "family-children":{title:"Family child profiles",description:"Basic profiles supplied by guardians. These do not confirm school placement.",table:"be_family_children",cols:"id,parent_id,display_name,birth_date,school_group,created_at",titleKey:"display_name",labels:{parent_id:"Guardian account",birth_date:"Date of birth",school_group:"Group supplied by guardian"},time:"created_at"},
+    "family-classes":{title:"Child class requests",description:"Review requests and confirm places after checking with the class provider.",table:"be_family_class_requests",cols:"id,parent_id,status,created_at,be_family_children(display_name),be_regular_classes(title)",titleKey:"status",labels:{parent_id:"Guardian account"},statusKey:"status",time:"created_at"},
+    "family-support":{title:"Fundraiser participation",description:"Offers of time, goods and sponsorship for specific school projects. No payments are collected.",table:"be_family_fundraiser_support",cols:"id,parent_id,status,support_type,created_at,be_fundraising_projects(title)",titleKey:"support_type",labels:{parent_id:"Supporter account"},statusKey:"status",time:"created_at"},
     applications:{title:"2027 applications",description:"Review submitted applications and track their status.",table:"be_applications_2027",cols:"id,parent_id,child_full_name,guardian_name,guardian_phone,guardian_email,status,review_note,submitted_at,created_at",titleKey:"child_full_name",summaryKey:"guardian_name",labels:{guardian_name:"Parent / guardian",guardian_phone:"Phone",guardian_email:"Email",review_note:"Review note"},statusKey:"status",time:"created_at"},
     parents:{title:"Parents & guardians",description:"Parent accounts with profiles saved in the school network.",table:"be_parent_profiles",cols:"user_id,display_name,contact_email,phone,preferred_contact,updated_at",titleKey:"display_name",summaryKey:"contact_email",labels:{contact_email:"Email",phone:"Phone",preferred_contact:"Preferred contact"},time:"updated_at"},
     messages:{title:"Parent messages",description:"Read private messages and reply directly to parent accounts.",table:"be_parent_messages",cols:"id,parent_id,subject,body,staff_reply,status,created_at",titleKey:"subject",summaryKey:"body",labels:{body:"Message",staff_reply:"School reply"},statusKey:"status",time:"created_at"},
@@ -54,6 +57,12 @@
       const link=node("a","View and review application","button primary");
       link.href="./apply-2027.html?review="+encodeURIComponent(rowData.id)+"#staff-panel";
       buttons.append(link);
+    }
+    if(current==="family-classes" || current==="family-support") {
+      const label=current==="family-classes" ? (rowData.be_family_children?.display_name||"Child")+" · "+(rowData.be_regular_classes?.title||"Class") : rowData.be_fundraising_projects?.title||"Fundraiser";
+      card.prepend(node("h4",label));
+      const options=current==="family-classes" ? [["confirmed","Confirm place"],["declined","Decline request"]] : [["contacted","Mark contacted"]];
+      for(const [next,title] of options){const b=node("button",title,"button secondary");b.type="button";b.onclick=async()=>{b.disabled=true;try{const r=await db.from(c.table).update({status:next}).eq("id",rowData.id).select("id");if(r.error||!r.data?.length)throw Error(r.error?.message||"No record changed");flash("Request updated.");await selectSection(current);}catch(e){flash(e.message,true);}finally{b.disabled=false;}};buttons.append(b);}
     }
     if(current==="class-interests") {
       const course=rowData.be_regular_classes?.title;

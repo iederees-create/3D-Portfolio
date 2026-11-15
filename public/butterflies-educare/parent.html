@@ -10,9 +10,11 @@
   <link rel="stylesheet" href="./experience.css">
   <link rel="stylesheet" href="./studio.css">
   <link rel="stylesheet" href="./launch.css">
-  <title>Parent & Community Network | Butterflies Educare</title>
+  <title>My Family | Butterflies Educare</title>
   <meta name="description" content="Butterflies Educare's parent and community network for news, events, enrolment interest and community support.">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.0" defer></script>
+  <link rel="stylesheet" href="./family-hub.css">
+  <script src="./family-hub.js" defer></script>
   <script src="./network.js" defer></script>
   <script src="./school-information.js" defer></script>
   <script src="./experience.js" defer></script>
@@ -49,7 +51,7 @@
             <label>Display name<input name="display_name" autocomplete="name" minlength="2" maxlength="100" required></label>
             <label>Contact number (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="25"></label>
             <label>Preferred communication<select name="preferred_contact"><option value="email">Email</option><option value="phone">Phone</option></select></label>
-            <label class="be-checkbox"><input name="privacy_consent" type="checkbox" required><span>I agree that my contact details and requests are stored securely for school communication. I will not submit sensitive information about children through this form.</span></label>
+            <label class="be-checkbox"><input name="privacy_consent" type="checkbox" required><span>I agree that my contact details and requests are stored securely for school communication. Child profiles contain basic family information only; medical and identification documents must use the school’s approved process.</span></label>
             <button class="be-btn be-primary" type="submit">Save profile</button>
           </form>
         </article>
