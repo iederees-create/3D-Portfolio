@@ -364,12 +364,19 @@ async function sendRequest(e){
 }
 async function signIn(e){
  e.preventDefault();const f=e.currentTarget,b=f.querySelector('button[type="submit"]');b.disabled=true;
+ let feedback=$("cal-login-feedback");
+ if(!feedback){feedback=el("p","","cal-small");feedback.id="cal-login-feedback";feedback.setAttribute("role","alert");feedback.setAttribute("aria-live","polite");f.prepend(feedback);}
+ feedback.textContent="Signing in…";
  try{
-  const r=await db.auth.signInWithPassword({email:val(f,"email").toLowerCase(),password:val(f,"password")});
+  const r=await db.auth.signInWithPassword({email:val(f,"email").toLowerCase(),password:String(new FormData(f).get("password")||"")});
   if(r.error)throw r.error;
   close("cal-auth-dialog");f.reset();await refreshAccount();
   alertMsg("Signed in. You can now choose an open class time.");
- }catch(e){alertMsg(e.message||"Sign in failed.",true);}finally{b.disabled=false;}
+ }catch(e){
+  feedback.textContent=e.code==="invalid_credentials" ? "The email or password was not accepted. Check your details, or use Reset password in the parent portal below." : (e.message||"Sign in failed. Please try again.");
+  feedback.style.color="#8b2430";
+  const recovery=el("a","Open parent portal to reset your password","cal-small");recovery.href="./parent.html";feedback.appendChild(document.createElement("br"));feedback.appendChild(recovery);
+ }finally{b.disabled=false;}
 }
 async function init(){
  if(!window.supabase?.createClient){alertMsg("Calendar service failed to load. Please try again.",true);return;}
