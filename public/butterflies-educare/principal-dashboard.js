@@ -9,6 +9,7 @@
   const short=v=>String(v==null?"—":v).replace(/\s+/g," ").slice(0,1500);
   const status=v=>String(v===true?"Published":v===false?"Draft":v||"—").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
   const sectionConfig={
+    "presenter-proposals":{title:"Detailed class proposals",description:"Private provider requests with dates, course details, fees and practical requirements. Approval does not publish or reserve a calendar slot.",table:"be_presenter_requests",cols:"*",titleKey:"class_title",summaryKey:"class_description",labels:{presenter_name:"Presenter",organisation:"Organisation",contact_email:"Email",contact_phone:"Phone",age_group:"Audience / ages",experience:"Experience and references",preferred_start:"Proposed first session (SAST)",course_end:"Course end date",duration_minutes:"Session length (minutes)",frequency:"Frequency",session_count:"Number of sessions",availability:"Availability, alternatives and preparation",fees:"Fees and payment basis",materials:"Materials / equipment",space_needs:"Space and access needs",max_attendees:"Maximum participants",school_reply:"School reply"},statusKey:"status",time:"created_at"},
     "family-children":{title:"Family child profiles",description:"Basic profiles supplied by guardians. These do not confirm school placement.",table:"be_family_children",cols:"id,parent_id,display_name,birth_date,school_group,created_at",titleKey:"display_name",labels:{parent_id:"Guardian account",birth_date:"Date of birth",school_group:"Group supplied by guardian"},time:"created_at"},
     "family-classes":{title:"Child class requests",description:"Review requests and confirm places after checking with the class provider.",table:"be_family_class_requests",cols:"id,parent_id,status,created_at,be_family_children(display_name),be_regular_classes(title)",titleKey:"status",labels:{parent_id:"Guardian account"},statusKey:"status",time:"created_at"},
     "family-support":{title:"Fundraiser participation",description:"Offers of time, goods and sponsorship for specific school projects. No payments are collected.",table:"be_family_fundraiser_support",cols:"id,parent_id,status,support_type,created_at,be_fundraising_projects(title)",titleKey:"support_type",labels:{parent_id:"Supporter account"},statusKey:"status",time:"created_at"},
@@ -47,7 +48,7 @@
     for(const [key,label] of Object.entries(c.labels||{})) {
       if(key===c.summaryKey)continue;
       let v=rowData[key];
-      if(key.endsWith("_at")||["starts_at","ends_at"].includes(key))v=fmt(v);
+      if(key.endsWith("_at")||["starts_at","ends_at","preferred_start"].includes(key))v=fmt(v);
       addField(details,label,v);
     }
     if(details.childElementCount)card.append(details);
@@ -84,6 +85,14 @@
         });
         buttons.append(b);
       }
+    }
+    if(current==="presenter-proposals") {
+      const form=node("form");form.className="planner-form";
+      const label=node("label","Review status"),choice=node("select");for(const [v,t] of [["pending","Pending"],["needs_information","Request more information"],["approved","Approve arrangements"],["declined","Decline"]])choice.add(new Option(t,v));choice.value=rowData.status;
+      const replyLabel=node("label","Reply to the provider"),reply=node("textarea");reply.rows=3;reply.maxLength=1500;reply.value=rowData.school_reply||"";replyLabel.append(reply);label.append(choice);
+      const ackLabel=node("label","I have checked provider suitability, safeguarding, supervision, fees and proposed arrangements."),ack=node("input");ack.type="checkbox";ackLabel.prepend(ack);
+      const save=node("button","Save review and reply","button primary");save.type="submit";form.append(label,replyLabel,ackLabel,save);form.onsubmit=async e=>{e.preventDefault();if(choice.value==="approved"&&!ack.checked){flash("Confirm the school checks before approving arrangements.",true);return;}save.disabled=true;try{const r=await db.from("be_presenter_requests").update({status:choice.value,school_reply:reply.value.trim()}).eq("id",rowData.id).select("id");if(r.error||!r.data?.length)throw Error(r.error?.message||"No proposal changed");flash("Review saved. The provider can read your reply in their account.");await selectSection(current);}catch(e){flash(e.message,true);}finally{save.disabled=false;}};card.append(form);
+      if(rowData.status==="approved"){const draft=node("button","Create first-session calendar draft","button secondary");draft.type="button";draft.onclick=async()=>{draft.disabled=true;try{const prior=await db.from("be_school_events").select("id").eq("title",rowData.class_title).eq("starts_at",rowData.preferred_start).limit(1);if(prior.error)throw prior.error;if(prior.data?.length)throw Error("A matching event already exists. Review it in school events.");const ends=new Date(new Date(rowData.preferred_start).getTime()+rowData.duration_minutes*60000).toISOString();const r=await db.from("be_school_events").insert({title:rowData.class_title,description:(rowData.class_description+" Audience: "+rowData.age_group+". First session of "+rowData.session_count+" proposed session(s); remaining dates arranged by the school.").slice(0,1200),starts_at:rowData.preferred_start,ends_at:ends,published:false}).select("id");if(r.error)throw r.error;flash("First-session event saved as an unpublished draft. Confirm the venue and publish through school tools when ready.");}catch(e){flash(e.message,true);}finally{draft.disabled=false;}};buttons.append(draft);}
     }
     if(current==="messages") {
       const details=node("details");
@@ -321,7 +330,7 @@
     $("load-more-records").addEventListener("click",fetchPage);
     $("principal-refresh").addEventListener("click",refreshAll);
     db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){setState(false);location.href="./parent.html";}});
-    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner()]);
+    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner(),window.beInsightsInit?.({db,user})]);
   }
   init().catch(e=>{$("principal-loading").hidden=true;flash("Could not load school management: "+e.message,true);});
 })();

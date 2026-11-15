@@ -136,3 +136,5 @@
 #cal-interest-form .cal-check span{font-size:13px;line-height:1.55}
 @media(max-width:1050px){.cal-regular-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:660px){.cal-regular-grid{grid-template-columns:1fr}.cal-regular-card{padding:20px}.cal-regular-card h3{font-size:24px}}
+
+#offer-a-class{scroll-margin-top:100px}.presenter-panel{padding:28px;background:#fff;border:1px solid #d4e2d7;border-radius:22px}.presenter-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.presenter-wide{grid-column:1/-1}#presenter-fields{border:0;padding:20px 0;min-width:0}#presenter-fields legend{font:25px Georgia,serif;padding:12px 0}.presenter-request-card{border-top:1px solid #d4e2d7;padding:18px 0}.presenter-request-card h4{margin:0 0 8px}.presenter-panel>.cal-button{margin:12px 0}@media(max-width:700px){.presenter-grid{grid-template-columns:1fr}.presenter-wide{grid-column:auto}.presenter-panel{padding:20px}}

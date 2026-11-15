@@ -157,7 +157,7 @@ if (networkCSS !== null && !networkCSS.includes('body.be-network a.be-btn.be-pri
 for (const filename of [
   'site.js', 'atmosphere.js', 'network.js', 'creative-garden.js',
   'experience.js', 'studio.js', 'school-information.js', 'calendar.js',
-  'applications-2027.js', 'principal-dashboard.js', 'whatsapp-support.js'
+  'applications-2027.js', 'principal-dashboard.js', 'whatsapp-support.js', 'school-insights.js', 'presenter-requests.js'
 ]) {
   const checked = spawnSync(process.execPath, ['--check', path.join(root, filename)], { encoding: 'utf8' });
   if (checked.status !== 0) {
@@ -175,6 +175,9 @@ for (const file of ['apply-2027.html','registration-print.html','fees-policy.htm
   }
 }
 if(!load('principal.html').includes('id="fundraising-planner"')) problems.push('Principal fundraising planner missing');
+if(!load('principal.html').includes('id="school-insights"')) problems.push('School visual statistics missing');
+if(!load('calendar.html').includes('id="offer-a-class"')) problems.push('Detailed class proposal entry point missing');
+if(!load('getting-started.html').includes('Parents &amp; guardians')) problems.push('School onboarding guide missing');
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
   process.exitCode = 1;

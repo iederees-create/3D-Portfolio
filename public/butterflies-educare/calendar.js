@@ -163,6 +163,7 @@ function propose(slot){
  if(!profile?.privacy_consent_at){
   alertMsg("First complete your account profile and privacy acknowledgement in the parent network, then return to this calendar.",true);return;
  }
+ if(window.bePresenterChooseSlot){window.bePresenterChooseSlot(slot);return;}
  const f=$("cal-request-form");f.reset();f.elements.namedItem("slot_id").value=slot.id;
  $("cal-slot-explainer").textContent=labelTime(slot.starts_at)+" – "+clock.format(new Date(slot.ends_at))+" · "+slot.venue+"; subject to school approval.";
  open("cal-dialog");
@@ -220,7 +221,7 @@ async function refreshAccount(){
  user=response.data?.user||null;profile=null;staff=null;
  if(user){
   const [p,r]=await Promise.all([
-   db.from("be_parent_profiles").select("display_name,privacy_consent_at").eq("user_id",user.id).maybeSingle(),
+   db.from("be_parent_profiles").select("display_name,phone,privacy_consent_at").eq("user_id",user.id).maybeSingle(),
    db.from("be_staff_memberships").select("staff_role").eq("user_id",user.id).maybeSingle()
   ]);
   if(!p.error)profile=p.data;
@@ -231,6 +232,7 @@ async function refreshAccount(){
  show("cal-my-requests",Boolean(user));show("cal-my-interests",Boolean(user));show("cal-staff",Boolean(staff));
  if(user)await Promise.all([loadMine(),loadRegularInterests()]);
  if(staff)await loadStaff();
+ if(window.bePresenterRefresh)await window.bePresenterRefresh({db,user,profile,openSignIn:()=>open("cal-auth-dialog")});
 }
 async function loadMine(){
  const root=$("cal-my-list");root.replaceChildren();
