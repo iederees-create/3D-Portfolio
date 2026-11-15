@@ -168,6 +168,13 @@ for (const filename of [
 
 if (parentHTML && (!parentHTML.includes('src="./family-hub.js"') || !parentHTML.includes('href="./family-hub.css"'))) problems.push("Family workspace assets missing");
 
+for (const file of ['apply-2027.html','registration-print.html','fees-policy.html']) {
+  const text=load(file);
+  for (const expected of ['R2,350','R2,550','R3,350','R100','12 months','March, June and September']) {
+    if(!text.includes(expected)) problems.push(file+' missing confirmed fee policy detail: '+expected);
+  }
+}
+if(!load('principal.html').includes('id="fundraising-planner"')) problems.push('Principal fundraising planner missing');
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
   process.exitCode = 1;

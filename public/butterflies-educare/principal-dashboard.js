@@ -282,6 +282,28 @@
     $("owner-recheck").addEventListener("click",ownerRefresh);
     await ownerRefresh();
   }
+
+  async function initFundraisingPlanner(){
+    const choice=$("plan-project"), feedback=$("plan-feedback");if(!choice)return;
+    let plans=[];
+    const check=r=>{if(r.error)throw r.error;return r.data||[];};
+    const say=(text,error=false)=>{feedback.textContent=text;feedback.style.color=error?"#922c22":"#245b49";};
+    const selected=()=>plans.find(p=>p.id===choice.value);
+    const show=()=>{const p=selected();$("plan-title").value=p?.title||"";$("plan-description").value=p?.description||"";$("plan-goal").value=p?.goal_description||"";$("fundraising-calendar-form").reset();};
+    async function load(){plans=check(await db.from("be_fundraising_projects").select("id,title,description,goal_description").eq("published",false).order("created_at"));choice.replaceChildren(new Option(plans.length?"Choose a proposal":"No unpublished proposals",""));for(const p of plans)choice.add(new Option(p.title,p.id));}
+    choice.addEventListener("change",show);
+    $("fundraising-plan-form").addEventListener("submit",async e=>{
+      e.preventDefault();const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;
+      try{const p=selected();if(!p)throw Error("Choose a planning proposal first.");const change={title:$("plan-title").value.trim(),description:$("plan-description").value.trim(),goal_description:$("plan-goal").value.trim()};if(change.title.length<3)throw Error("Enter a title of at least 3 characters.");const rows=check(await db.from("be_fundraising_projects").update(change).eq("id",p.id).eq("published",false).select("id"));if(!rows.length)throw Error("This project may have been published. Refresh before editing it.");Object.assign(p,change);choice.options[choice.selectedIndex].textContent=p.title;say("Planning draft saved. It remains unpublished.");}catch(err){say(err.message,true);}finally{b.disabled=false;}
+    });
+    $("fundraising-calendar-form").addEventListener("submit",async e=>{
+      e.preventDefault();const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;
+      try{const p=selected();if(!p)throw Error("Choose and save a fundraising proposal first.");const dateValue=$("plan-start").value,endValue=$("plan-end").value;const start=new Date(dateValue+":00+02:00"),end=endValue?new Date(endValue+":00+02:00"):null;if(!dateValue||Number.isNaN(+start)||start<=new Date())throw Error("Choose a future proposed start date.");if(end&&(Number.isNaN(+end)||end<=start))throw Error("End time must be after the start.");const payload={title:p.title,description:"PROPOSED FUNDRAISER - awaiting principal approval. "+p.description,starts_at:start.toISOString(),ends_at:end?.toISOString()||null,venue:$("plan-venue").value.trim()||null,published:false};payload.description=payload.description.slice(0,1200);
+      const matches=check(await db.from("be_school_events").select("id,published").eq("title",p.title).eq("starts_at",payload.starts_at).limit(2));if(matches.some(x=>x.published))throw Error("A published event already uses this title and date. Manage it through the school calendar.");const r=matches.length?await db.from("be_school_events").update(payload).eq("id",matches[0].id).eq("published",false).select("id"):await db.from("be_school_events").insert(payload).select("id");if(!check(r).length)throw Error("The calendar draft could not be saved. Refresh and try again.");say("Calendar draft saved for "+fmt(payload.starts_at)+". It is unpublished and families cannot see it yet.");}catch(err){say(err.message,true);}finally{b.disabled=false;}
+    });
+    try{await load();}catch(err){say("Could not load fundraising proposals: "+err.message,true);}
+  }
+
   async function init(){
     if(!window.supabase?.createClient){$("principal-loading").hidden=true;flash("The secure school service is unavailable. Refresh and try again.",true);return;}
     db=window.supabase.createClient(ROOT,KEY,{auth:{storageKey:"butterflies-educare-session",autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
@@ -299,7 +321,7 @@
     $("load-more-records").addEventListener("click",fetchPage);
     $("principal-refresh").addEventListener("click",refreshAll);
     db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){setState(false);location.href="./parent.html";}});
-    initialized=true;await Promise.allSettled([refreshAll(),initOwner()]);
+    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner()]);
   }
   init().catch(e=>{$("principal-loading").hidden=true;flash("Could not load school management: "+e.message,true);});
 })();
