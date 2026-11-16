@@ -1,3 +1,4 @@
+import ButterfliesSchoolAppUpdate from './butterflies-school-app-fundraising-update';
 import type { ArticleContentComponent, ArticleMeta } from './types';
 import ButterfliesEducareSchoolPlatformCaseStudy from './butterflies-educare-school-platform-case-study';
 import TradeBusinessQuoteCalculatorContent from './trade-business-quote-calculator';
@@ -88,13 +89,25 @@ import EvidenceLedQAOperationsReviewContent from './evidence-led-qa-operations-r
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'butterflies-school-app-fundraising-update',
+    title: 'From School Website to Installable App: My Latest Butterflies Educare Build',
+    excerpt: 'One account across web and app, school enrolment insights, class-provider requests and 15 fundraising ideas with cost scenarios. A practical development update from a real Cape Town school project.',
+    datePublished: '2026-11-16', dateModified: '2026-11-16',
+    author: 'Iederees Francis', category: 'Build Update / EdTech',
+    tags: ['Web Development', 'PWA', 'Supabase', 'EdTech', 'JavaScript'],
+    readingTimeMinutes: 5,
+    coverImage: import.meta.env.BASE_URL + 'projects/butterflies-educare/cover.svg',
+    coverImageAlt: 'Illustrated Butterflies Educare project overview; no private school records',
+    relatedSlugs: ['butterflies-educare-school-platform-case-study', 'why-educational-businesses-need-custom-learning-hubs'],
+  },
 
   {
     slug: 'butterflies-educare-school-platform-case-study',
     title: 'Building Butterflies Educare: A School Website, 2027 Registrations and Parent Portal',
     excerpt: 'A real early-years school project combining custom visual design, a parent network, 2027 applications and principal management. How the UX, Supabase permissions, privacy boundaries and deployment checks fit together.',
     datePublished: '2026-11-13',
-    dateModified: '2026-11-13',
+    dateModified: '2026-11-16',
     author: 'Iederees Francis',
     category: 'Case Study / EdTech',
     tags: ['Case Study', 'EdTech', 'School Website', 'Parent Portal', 'Supabase', 'PostgreSQL', 'Web Development', 'UX/UI'],
@@ -1084,6 +1097,7 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'butterflies-school-app-fundraising-update': ButterfliesSchoolAppUpdate,
   'butterflies-educare-school-platform-case-study': ButterfliesEducareSchoolPlatformCaseStudy,
   'evidence-led-qa-operations-review': EvidenceLedQAOperationsReviewContent,
   'turn-product-catalogue-into-retail-promotions': PromoPilotRetailPromotionWorkflowContent,

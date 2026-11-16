@@ -1,0 +1,26 @@
+const base = import.meta.env.BASE_URL;
+export default function ButterfliesSchoolAppUpdate() {
+  return <div className="prose prose-invert prose-lg max-w-none text-slate-300">
+    <p className="lead text-xl text-slate-200">The next step for Butterflies Educare was making the school platform easier to return to. I added an installable web app, a clearer family hub and practical tools for the principal to compare fundraising ideas.</p>
+    <p>This is a real client project I’m building in Cape Town. The work starts with everyday questions from the school: How do families get connected? How can someone offer a class? And how would an event actually raise money?</p>
+    <h2>One account, on the website and the app</h2>
+    <p>The installable app opens from a butterfly icon on a phone or computer. Parents and community members use their existing website email and password, with the same profiles, registrations and permissions. Its home screen gives parents, class providers and approved staff a clear route into their work.</p>
+    <p>I used a progressive web app with a school-specific manifest and service worker, served from the existing GitHub Pages deployment. The school app has its own scope inside the portfolio. It opens the same school pages and backend rather than introducing a second account system.</p>
+    <p>Account actions require an internet connection. The service worker uses network requests for school pages and provides an offline explanation when a page cannot load; it does not cache private profiles or submitted records. This release installs through the browser and is not an App Store or Google Play listing.</p>
+    <h2>Turning school requests into usable workflows</h2>
+    <ul><li>A family hub for profile updates, children’s profiles, class requests and event participation.</li><li>Enrolment summaries and account-linking indicators to help the principal see which families still need help getting online.</li><li>A class-provider request process covering age groups, programme details, fees, availability and requirements.</li><li>School fee policy included in online and printable registration materials.</li></ul>
+    <p>The school’s statistics depend on the register and account links being populated. I’m showing the capability here, not claiming that every family has already joined.</p>
+    <h2>“How would this make money?” became a product feature</h2>
+    <p>I added 15 fundraising ideas, each with an explanation of income, fixed and variable costs, three participation scenarios and a break-even point. The principal can compare ideas and save a preference while I handle the detailed planning with the school.</p>
+    <div className="not-prose overflow-x-auto my-8 rounded-2xl border border-white/15 p-5"><p className="font-bold text-white">Example: Sponsored Story Week — illustrative planning figures</p><table className="mt-4 w-full text-left text-sm"><tbody><tr><th className="py-2">Collected pledges</th><td>25 × R50 = R1,250</td></tr><tr><th className="py-2">Estimated setup costs</th><td>R100</td></tr><tr><th className="py-2">Illustrative surplus</th><td>R1,150</td></tr><tr><th className="py-2">Break-even</th><td>2 collected R50 pledges</td></tr></tbody></table><p className="mt-4 text-sm">These are assumptions, not actual proceeds, confirmed pledges or supplier quotes. Extra costs reduce the surplus.</p></div>
+    <p>The research also revealed conflicting published fees for one provider. I kept that uncertainty visible instead of treating a convenient price as confirmed. Free host admission is described as free, with any optional school contribution explained separately.</p>
+    <p>Choosing an idea saves a preference. It does not book a venue, publish an event or collect money. Final arrangements and approval come before calendar publication and invitations.</p>
+    <h2>What I checked</h2>
+    <p>Checks covered 15 idea cards, 45 financial scenarios, break-even boundaries, loss scenarios and the saved-choice flow. Database checks confirmed administrator access and blocked ordinary accounts from reading the private analysis. The app manifest, icon dimensions, page integration, production build and deployed revision were checked.</p>
+    <p>Physical-phone installation and a complete live parent-to-principal acceptance walkthrough still need device and operational testing. Adoption, money raised and time saved have not yet been measured.</p>
+    <h2>What I’m building towards</h2>
+    <p>I want the software to help a small school make decisions and stay connected. This project brings together frontend development, authentication, database permissions, financial modelling and deployment work around that goal.</p>
+    <p>If your school, small business or community organisation needs a website that supports its day-to-day work, <a href={base+'contact/'}>get in touch about your project</a>.</p>
+    <div className="not-prose my-8 flex flex-wrap gap-3"><a className="rounded-full bg-emerald-300 px-5 py-3 font-bold text-slate-950" href={base+'butterflies-educare/app.html'}>Explore the school app</a><a className="rounded-full border border-white/30 px-5 py-3 text-white" href={base+'work/butterflies-educare-school-platform/'}>View the full project</a></div>
+  </div>;
+}

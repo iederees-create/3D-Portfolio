@@ -30,6 +30,7 @@ export default function ButterfliesEducareSchoolPlatformCaseStudy() {
         </div>
       </div>
 
+      <p><strong>16 November update:</strong> The platform now includes an installable school app with shared website accounts, enrolment insights and 15 fundraising comparisons. <a href={import.meta.env.BASE_URL + 'blog/butterflies-school-app-fundraising-update/'}>Read the latest build update.</a></p>
       <h2 className="mt-10 border-b border-white/10 pb-3 text-2xl font-bold text-white">The challenge: one home for disconnected school tasks</h2>
       <p>
         Families needed clear school information and a simpler way to apply for 2027. The principal needed

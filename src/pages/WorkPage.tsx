@@ -84,7 +84,7 @@ export const projects: Project[] = [
   {
     title: 'Butterflies Educare School Platform',
     category: 'Education',
-    description: 'A live, mobile-first school website and connected parent network for Butterflies Educare. The platform brings together 2027 applications, saved parent profiles, private school management, announcements, events and guest-class proposals in one welcoming experience.',
+    description: 'A live school website and installable web app with shared accounts, family profiles, 2027 applications, school enrolment insights, class-provider requests and 15 fundraising comparisons. Built for Butterflies Educare in Cape Town.',
     tags: ['EdTech', 'JavaScript', 'HTML5', 'CSS3', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'GitHub Pages', 'UX/UI', 'Responsive Design', 'Accessibility', 'Authentication'],
     liveUrl: 'https://iederees-create.github.io/3D-Portfolio/butterflies-educare/',
     featured: true,
@@ -100,9 +100,12 @@ export const projects: Project[] = [
       'Illustrated five-step 2027 application interface with guardian details and save-and-continue flow',
       'Illustrated private school dashboard with fictional placeholders, no real parent or learner records',
     ],
-    toolBadge: 'Live school website · 2027 enrolment rollout · November 2026',
+    toolBadge: 'Live website & installable app · Updated 16 November 2026',
     toolHighlight: 'Public school website, parent account entry and event calendar are linked from the live demo. Private application and principal dashboards require authorised accounts. Visual media are labelled illustrations, not screenshots, and no child or parent records are disclosed.',
     features: [
+      'Installable school web app with the same website accounts, profiles and permissions',
+      'Enrolment summaries and family account-linking indicators for school administrators',
+      '15 fundraising ideas with income, cost, surplus and break-even scenarios',
       'Responsive early-years branding with custom butterfly visuals, motion and mobile-friendly navigation',
       'Parent account creation, email confirmation, sign-in, password recovery and profile management',
       'Five-step 2027 application workflow with saved drafts, guardian and emergency contacts, optional health information and policy acknowledgements',
