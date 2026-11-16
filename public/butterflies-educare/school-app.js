@@ -1,0 +1,7 @@
+(()=>{'use strict';let promptEvent;const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;const button=document.getElementById('install-app'),status=document.getElementById('install-status');
+function refresh(){if(button)button.hidden=installed()||!promptEvent;if(installed()&&status)status.textContent='Welcome to your school app. Open your portal below using your existing school account.';}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptEvent=e;refresh();});window.addEventListener('appinstalled',()=>{promptEvent=null;if(button)button.hidden=true;if(status)status.textContent='Butterflies is installed. Look for the butterfly icon on your device.';});
+if(button)button.onclick=async()=>{if(!promptEvent)return;const event=promptEvent;promptEvent=null;refresh();try{await event.prompt();await event.userChoice;}catch{if(status)status.textContent='Use your browser menu to add Butterflies to your home screen.';}};
+refresh();if('serviceWorker' in navigator)navigator.serviceWorker.register('./school-sw.js',{scope:'./'}).catch(()=>{});
+if(!installed()&&!location.pathname.endsWith('/app.html')){const link=document.createElement('a');link.href='./app.html';link.textContent='Get the Butterflies app';link.style.cssText='display:block;text-align:center;padding:14px;background:#244b3d;color:#fff;font:600 15px system-ui;text-decoration:none';document.body.append(link);}
+})();
