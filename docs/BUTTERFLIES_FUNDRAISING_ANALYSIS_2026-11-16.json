@@ -1,0 +1,373 @@
+[
+  {
+    "title": "Butterflies Pre-order Bake Sale",
+    "kind": "School-led idea",
+    "model": "Sell prepaid packs; purchase ingredients only after the order deadline. School keeps sales less ingredients, packaging and setup.",
+    "unit": "packs",
+    "price": 35,
+    "variable": 18,
+    "fixed": 150,
+    "counts": [
+      15,
+      30,
+      50
+    ],
+    "preparation": "3 weeks; proposed collection 14:00\u201316:00, date to be chosen.",
+    "venue": "School collection point, subject to approval",
+    "learning": "Counting, following a recipe and community participation.",
+    "verified": "No supplier prices, orders or donated ingredients confirmed. R18 per pack is an ingredient/packaging allowance, not a retail quote. BBC Children in Need lists bake sales among fundraising ideas. That is method inspiration only; Butterflies would run its own separate campaign.",
+    "checks": "Cost a sample recipe; agree pack size, allergens, safe preparation, kitchen capacity and collection. Get enough preorders before spending. Unsold extras are not assumed.",
+    "verdict": "Good first pilot: preorders control waste and cash exposure.",
+    "sources": [
+      "https://www.bbcchildreninneed.co.uk/fundraising/more-fundraising-ideas/"
+    ],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Butterflies Book & Toy Swap",
+    "kind": "School-led idea",
+    "model": "Suggested R20 voluntary contribution per participating family; donated items exchanged without buying stock. Keep a free participation option.",
+    "unit": "contributing families",
+    "price": 20,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      10,
+      25,
+      40
+    ],
+    "preparation": "2\u20133 weeks; proposed Saturday 09:00\u201311:00, date to be chosen.",
+    "venue": "School, subject to approval",
+    "learning": "Sharing, reading, reuse and sorting.",
+    "verified": "Stock and staffing are assumed donated; no donations pledged yet.",
+    "checks": "Check toy condition, small parts and age suitability; explain swapping rules. Contributions are optional, so attendance does not equal income.",
+    "verdict": "Low cash risk; modest income and good parent engagement.",
+    "sources": [],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Sponsor a Classroom Resource",
+    "kind": "School-led campaign",
+    "model": "Ask adults or businesses to contribute R100 towards a priced resource wish list. Donations are restricted to the stated resource purpose.",
+    "unit": "R100 contributions",
+    "price": 100,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      5,
+      15,
+      30
+    ],
+    "preparation": "2 weeks to verify wish list; run for 4 weeks and report purchases.",
+    "venue": "Online campaign / school",
+    "learning": "Improves classroom learning resources; no sales task for children.",
+    "verified": "No sponsors or resource quotes confirmed. Gross donations are not unrestricted profit.",
+    "checks": "Get item quotes, target and payment method; avoid tax-deduction promises. Record receipts, acknowledge sponsors privately if preferred and publish spending totals.",
+    "verdict": "Strong resource funding potential if a clear wish list attracts sponsors.",
+    "sources": [],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Butterflies Family Picnic & Activity Morning",
+    "kind": "School-led idea",
+    "model": "Sell a R60 family activity ticket; families bring their own picnic. Include simple school-run games, not catered meals.",
+    "unit": "family tickets",
+    "price": 60,
+    "variable": 15,
+    "fixed": 600,
+    "counts": [
+      10,
+      25,
+      40
+    ],
+    "preparation": "6\u20138 weeks; proposed Saturday 09:00\u201312:00, date to be chosen.",
+    "venue": "School grounds if suitable; otherwise venue quote required",
+    "learning": "Movement, cooperative play and family connection.",
+    "verified": "R15 per family materials and R600 setup/contingency are estimates. No paid venue or catering included.",
+    "checks": "Check site capacity, toilets, supervision, weather backup and access. Stop or reprice if a paid venue is necessary.",
+    "verdict": "Moderate surplus only once enough families commit.",
+    "sources": [],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Community Skills & Class Showcase",
+    "kind": "School-led idea",
+    "model": "Sell R40 participant places in short taster activities delivered by volunteer providers. School retains the fee after materials/setup.",
+    "unit": "participant places",
+    "price": 40,
+    "variable": 10,
+    "fixed": 300,
+    "counts": [
+      10,
+      25,
+      40
+    ],
+    "preparation": "6\u20138 weeks; proposed Saturday 09:00\u201311:00, date to be chosen.",
+    "venue": "School, subject to approval",
+    "learning": "Try age-appropriate art, movement or practical skills.",
+    "verified": "No providers confirmed. Model assumes provider time is donated; paid presenters reduce surplus.",
+    "checks": "Get provider proposals, references, age range, lesson duration, material costs, capacity and any recurring class sales terms.",
+    "verdict": "Useful for discovering classes; profit depends on volunteer presenters.",
+    "sources": [],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Butterflies Family Fun Day & Market",
+    "kind": "School-led idea",
+    "model": "Charge outside vendors R150 per stall. Family entry free. Model excludes speculative food sales, games income and donations.",
+    "unit": "paid vendor stalls",
+    "price": 150,
+    "variable": 20,
+    "fixed": 1200,
+    "counts": [
+      5,
+      10,
+      15
+    ],
+    "preparation": "10\u201312 weeks; proposed Saturday 09:00\u201313:00, date to be chosen.",
+    "venue": "School only if capacity and operating arrangements allow",
+    "learning": "Community enterprise and family activities.",
+    "verified": "R20 per stall and R1200 shared setup are estimates; no vendors, rentals or sponsorship confirmed.",
+    "checks": "Confirm demand and deposits before committing. Check power, toilets, waste, weather, stall terms and necessary operating arrangements. Paid equipment or security must be costed.",
+    "verdict": "Higher workload; little surplus at ten stalls unless setup is sponsored.",
+    "sources": [],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "VWS Firefighting Open Day \u2014 family learning event",
+    "kind": "Existing event / venue",
+    "model": "A separate, optional R25 school donation from willing families. Free host admission stays free. Parents pay their own travel, adult tickets, food and extras directly; no school transport is promised.",
+    "unit": "donating families",
+    "price": 25,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Near-term dates are provisional school plans; check availability and school requirements before any invitation.",
+    "venue": "See organiser venue and schedule below",
+    "learning": "Community helpers, fire awareness and nature.",
+    "verified": "Published 28 November 2026, 09:00\u201316:00. Children free with compulsory Quicket registration; adult paid entry needs reconfirmation. Proposed school window 09:30\u201312:00.",
+    "checks": "VWS is itself fundraising. Obtain permission before any associated school collection; otherwise run a separate school campaign. Confirm tickets, preschool activities and parent supervision.",
+    "verdict": "Education first; modest and uncertain school income. Donations may be zero.",
+    "sources": [
+      "https://www.quicket.co.za/events/398575-vws-open-day-2026/"
+    ],
+    "cost_basis": "R100 is an estimated school printing/admin allowance. Admission and transport are outside this donation-only model and paid by families directly. If school pays them, subtract the full cost; do not present this as an all-in family price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Streetopia \u2014 family art event",
+    "kind": "Existing event / venue",
+    "model": "A separate, optional R25 school donation from willing families. Free host admission stays free. Parents pay their own travel, adult tickets, food and extras directly; no school transport is promised.",
+    "unit": "donating families",
+    "price": 25,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Near-term dates are provisional school plans; check availability and school requirements before any invitation.",
+    "venue": "See organiser venue and schedule below",
+    "learning": "Creativity and community art.",
+    "verified": "Official organiser lists 28 November 2026, 10:00\u201318:00, free entry. Proposed school window 10:00\u201312:00; alternative to VWS on the same day.",
+    "checks": "Confirm a preschool route, crowd/noise suitability and organiser rules. No vending or collection at the host event assumed.",
+    "verdict": "Education first; modest and uncertain school income. Donations may be zero.",
+    "sources": [
+      "https://www.afrikaburn.org/afrikaburn-events/streetopia/",
+      "https://streetopia.co.za/"
+    ],
+    "cost_basis": "R100 is an estimated school printing/admin allowance. Admission and transport are outside this donation-only model and paid by families directly. If school pays them, subtract the full cost; do not present this as an all-in family price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Museum of Childhood \u2014 family learning event",
+    "kind": "Existing event / venue",
+    "model": "A separate, optional R25 school donation from willing families. Free host admission stays free. Parents pay their own travel, adult tickets, food and extras directly; no school transport is promised.",
+    "unit": "donating families",
+    "price": 25,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Near-term dates are provisional school plans; check availability and school requirements before any invitation.",
+    "venue": "See organiser venue and schedule below",
+    "learning": "Stories, play and childhood heritage.",
+    "verified": "Free public admission; published Wednesday\u2013Saturday 10:00\u201316:00. Proposed 25 November 10:00\u201312:00 is not a booked museum event.",
+    "checks": "Confirm preschool group admission and any activity fee. The separately advertised Grade 3\u20134 programme is not automatically suitable. No special story-time booking assumed.",
+    "verdict": "Education first; modest and uncertain school income. Donations may be zero.",
+    "sources": [
+      "https://www.museumofchildhood.org.za/instructions"
+    ],
+    "cost_basis": "R100 is an estimated school printing/admin allowance. Admission and transport are outside this donation-only model and paid by families directly. If school pays them, subtract the full cost; do not present this as an all-in family price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Iziko Planetarium \u2014 space learning event",
+    "kind": "Existing venue",
+    "model": "Illustrative R65 learner package = R40 published school admission + R5 estimated school materials + R20 school contribution. No transport, food or adult admission included.",
+    "unit": "learner places",
+    "price": 65,
+    "variable": 45,
+    "fixed": 200,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Plan for a later confirmed date. Iziko asks schools to apply to WCED eight weeks before a visit; check applicability to this school. The earlier 2 December suggestion is not ready to invite.",
+    "venue": "25 Queen Victoria Street, Cape Town",
+    "learning": "Space, Earth, Sun and Moon, subject to preschool show suitability.",
+    "verified": "Published school Planetarium tariff R40 per learner; public local rates differ. School rate, chaperone costs and group slot need confirmation.",
+    "checks": "Confirm age fit, show duration, adult charges, booking rules, permissions and travel. At a R60 child public rate, variable cost becomes R65 and this price makes a loss after setup.",
+    "verdict": "Educational value; limited fundraising margin and booking lead time.",
+    "sources": [
+      "https://www.iziko.org.za/visit/",
+      "https://www.iziko.org.za/education/admin/",
+      "https://www.iziko.org.za/museums/planetarium/"
+    ],
+    "cost_basis": "Only the R40 learner tariff is published. R5 per learner and R200 setup are planning allowances. Adult admission, transport and paid staff excluded and must be quoted; school package not yet on sale.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Sponsored Story Week",
+    "kind": "New school-led idea",
+    "model": "Adults pledge a flat R50 for a child\u2019s week of shared reading; no per-book competition and no requirement to pay to participate.",
+    "unit": "collected pledges",
+    "price": 50,
+    "variable": 0,
+    "fixed": 100,
+    "counts": [
+      10,
+      25,
+      40
+    ],
+    "preparation": "2\u20133 weeks preparation; one school week, with optional 10-minute daily family reading.",
+    "venue": "School and home",
+    "learning": "Language, family reading and confidence.",
+    "verified": "Original school proposal; no partner, pledges or materials prices confirmed. Existing books and volunteer time assumed. Read for Good documents sponsored reading as a fundraising method. This proposal is an independent Butterflies campaign, not enrolment in that UK charity programme or a claim to its branding/rewards.",
+    "checks": "Use flat pledges, record collections rather than promises, keep participation free and do not publish child rankings or family donation amounts.",
+    "verdict": "Promising low-cost pilot; depends on actual collected pledges.",
+    "sources": [
+      "https://readforgood.org/about-us/"
+    ],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Grow & Give Seedling Sale",
+    "kind": "New school-led idea",
+    "model": "Sell R20 seedling pots grown by the school; R8 per pot allowed for seed, growing medium and container.",
+    "unit": "pots sold",
+    "price": 20,
+    "variable": 8,
+    "fixed": 120,
+    "counts": [
+      10,
+      30,
+      50
+    ],
+    "preparation": "4\u20136 weeks growing lead time; proposed Friday collection 14:00\u201316:00.",
+    "venue": "School collection point",
+    "learning": "Plant life cycles, care and counting.",
+    "verified": "R8 per pot and R120 setup are estimates; no nursery or supplier quote. Donated containers are assumed clean and suitable. RHS school-gardening guidance includes plant sales as a fundraising method; it does not establish local prices or demand.",
+    "checks": "Choose non-toxic plants, obtain material prices, test germination, allow losses and take preorders. Budget is per saleable pot, not per seed planted.",
+    "verdict": "Small, educational fundraiser; growing failures and low demand reduce surplus.",
+    "sources": [
+      "https://www.rhs.org.uk/education-learning/school-gardening/resources/getting-started/raising-money-using-your-school-garden"
+    ],
+    "cost_basis": "School planning allowances only; no supplier quotation or demand survey yet. Fixed costs include a small consumables/contingency allowance. Volunteer time and existing school venue are assumed donated. Any paid labour, venue hire, transport, payment fees or extra costs must be added before setting a price.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Intaka Island \u2014 nature learning event",
+    "kind": "New existing-venue idea",
+    "model": "Illustrative R45 learner package = R20 published school entrance + R5 estimated activity sheet/materials + R20 school contribution. Entrance-only model, no boat or guided programme.",
+    "unit": "learner places",
+    "price": 45,
+    "variable": 25,
+    "fixed": 200,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Allow 6\u20138 weeks to confirm school requirements and booking; suggested weekday 09:30\u201311:00, no date reserved.",
+    "venue": "Intaka Island, Century City",
+    "learning": "Wetlands, birds and nature observation; preschool route must be agreed.",
+    "verified": "Official price list: school entrance R20 per learner; three-activity education programme R66. One educator free per ten learners; extra educator R71. Cashless from 1 January 2026.",
+    "checks": "Confirm preschool group eligibility, safe water-edge route, exact supervision, adult costs, weather and transport. The R66 programme cannot be sold at the R45 entrance-only scenario price.",
+    "verdict": "Affordable entrance-only option; adult and transport costs can erase margin.",
+    "sources": [
+      "https://intaka.co.za/book-now/",
+      "https://intaka.co.za/what-to-do/"
+    ],
+    "cost_basis": "R20 school entrance is published. R5 materials and R200 setup are estimates. Additional adults, transport and paid staffing are excluded; quote them before offering a package.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Iziko Mobile Museum \u2014 learning at school",
+    "kind": "New visiting-provider idea",
+    "model": "Illustrative R25 voluntary contribution per participating family, with a reserved R260 provider visit allowance plus R100 setup. Keep a free participation route.",
+    "unit": "contributing families",
+    "price": 25,
+    "variable": 0,
+    "fixed": 360,
+    "counts": [
+      10,
+      20,
+      30
+    ],
+    "preparation": "Ask about availability 6\u20138 weeks ahead; proposed weekday 10:00\u201311:00, duration and date unconfirmed.",
+    "venue": "Butterflies Educare, subject to provider acceptance",
+    "learning": "Museum objects and age-adapted learning without group transport.",
+    "verified": "Official tariff page lists R260 per mobile visit, while the education booking page says free. This conflict is unresolved; R260 is a provisional allowance, not a quote.",
+    "checks": "Ask outreach contact sharmans@iziko.org.za / 021 481 3812 to confirm eligibility, charge, travel, capacity, topic and preschool duration. No school collection associated with the provider without agreement.",
+    "verdict": "Potentially practical; verify fee conflict. If free, model surplus rises by R260.",
+    "sources": [
+      "https://www.iziko.org.za/visit/",
+      "https://www.iziko.org.za/education/admin/"
+    ],
+    "cost_basis": "Fixed R360 = disputed R260 visit tariff allowance + estimated R100 setup. No extra travel fee or paid staff assumed. Revised quote must replace this before a decision to spend.",
+    "checked_on": "2026-11-16"
+  },
+  {
+    "title": "Cape Town Science Centre \u2014 discovery event",
+    "kind": "New existing-venue benchmark",
+    "model": "Illustrative R110 learner package = R85 group admission + R5 estimated materials + R20 school contribution. This is a higher-cost comparator, not a free-event recommendation.",
+    "unit": "learner places",
+    "price": 110,
+    "variable": 90,
+    "fixed": 200,
+    "counts": [
+      16,
+      25,
+      35
+    ],
+    "preparation": "Plan 6\u20138 weeks ahead; suggested weekday 10:00\u201312:00, slot and date unconfirmed.",
+    "venue": "370B Main Road, Observatory",
+    "learning": "Hands-on discovery; select preschool activities with the centre.",
+    "verified": "2026 booking form: groups larger than 15 R85 per person; one supervising adult per ten learners free; extra adults R45. R300 deposit for up to 30 learners, then R10 per additional learner.",
+    "checks": "Confirm preschool programme, group size, deposit treatment, chaperones, optional workshop costs and cancellation terms. Model assumes deposit is credited to total, not a second fee; verify. Transport/adults extra.",
+    "verdict": "Costs families more for the same R20 per-place contribution; lower priority for a low-cost campaign.",
+    "sources": [
+      "https://www.ctsc.org.za/wp-content/uploads/2026/01/CTSC-School-Group-BOOKING-FORM-2026-updated-Feb-2026.pdf",
+      "https://www.ctsc.org.za/schools/book-a-school-group-visit/"
+    ],
+    "cost_basis": "R85 group tariff is published subject to eligibility. R5 materials and R200 setup estimated. No workshop, transport, additional adult or paid staff cost included.",
+    "checked_on": "2026-11-16"
+  }
+]
