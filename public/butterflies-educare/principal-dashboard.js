@@ -308,7 +308,7 @@
     $("fundraising-calendar-form").addEventListener("submit",async e=>{
       e.preventDefault();const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;
       try{const p=selected();if(!p)throw Error("Choose and save a fundraising proposal first.");const dateValue=$("plan-start").value,endValue=$("plan-end").value;const start=new Date(dateValue+":00+02:00"),end=endValue?new Date(endValue+":00+02:00"):null;if(!dateValue||Number.isNaN(+start)||start<=new Date())throw Error("Choose a future proposed start date.");if(end&&(Number.isNaN(+end)||end<=start))throw Error("End time must be after the start.");const payload={title:p.title,description:"PROPOSED FUNDRAISER - awaiting principal approval. "+p.description,starts_at:start.toISOString(),ends_at:end?.toISOString()||null,venue:$("plan-venue").value.trim()||null,published:false};payload.description=payload.description.slice(0,1200);
-      const matches=check(await db.from("be_school_events").select("id,published").eq("title",p.title).eq("starts_at",payload.starts_at).limit(2));if(matches.some(x=>x.published))throw Error("A published event already uses this title and date. Manage it through the school calendar.");const r=matches.length?await db.from("be_school_events").update(payload).eq("id",matches[0].id).eq("published",false).select("id"):await db.from("be_school_events").insert(payload).select("id");if(!check(r).length)throw Error("The calendar draft could not be saved. Refresh and try again.");say("Calendar draft saved for "+fmt(payload.starts_at)+". It is unpublished and families cannot see it yet.");}catch(err){say(err.message,true);}finally{b.disabled=false;}
+      const matches=check(await db.from("be_school_events").select("id,published").eq("title",p.title).eq("starts_at",payload.starts_at).limit(2));if(matches.some(x=>x.published))throw Error("A published event already uses this title and date. Manage it through the school calendar.");const r=matches.length?await db.from("be_school_events").update(payload).eq("id",matches[0].id).eq("published",false).select("id"):await db.from("be_school_events").insert(payload).select("id");const saved=check(r);if(!saved.length)throw Error("The calendar draft could not be saved. Refresh and try again.");const linked=await db.from("be_fundraising_projects").update({calendar_event_id:saved[0].id}).eq("id",p.id).eq("published",false).select("id");if(!check(linked).length)throw Error("Calendar draft saved, but linking it failed. Refresh before approval.");say("Calendar draft saved for "+fmt(payload.starts_at)+". It is unpublished and families cannot see it yet.");}catch(err){say(err.message,true);}finally{b.disabled=false;}
     });
     try{await load();}catch(err){say("Could not load fundraising proposals: "+err.message,true);}
   }
@@ -330,7 +330,7 @@
     $("load-more-records").addEventListener("click",fetchPage);
     $("principal-refresh").addEventListener("click",refreshAll);
     db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){setState(false);location.href="./parent.html";}});
-    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner(),window.beInsightsInit?.({db,user})]);
+    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner(),window.beInsightsInit?.({db,user}),window.beFundraiserApprovalInit?.({db,user})]);
   }
   init().catch(e=>{$("principal-loading").hidden=true;flash("Could not load school management: "+e.message,true);});
 })();

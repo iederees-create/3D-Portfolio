@@ -35,6 +35,9 @@
     catch { return "Date to be confirmed"; }
   };
   const value = (form, name) => String(new FormData(form).get(name) || "").trim();
+  const returnEventId = () => {const id=new URLSearchParams(location.search).get("return_event");return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id||"")?id:null;};
+  const authReturnUrl = () => {const u=new URL(PORTAL,location.href),id=returnEventId();if(id)u.searchParams.set("return_event",id);return u.href;};
+  const returnEventIfReady = () => {const id=returnEventId();if(!isPortal||!id||!user||!profile?.privacy_consent_at||authMode==="recovery")return false;location.href=new URL("./event.html?event="+encodeURIComponent(id),location.href).href;return true;};
   const limit = (text, max) => String(text || "").slice(0, max);
   const setVisible = (id, visible) => { const node = $(id); if (node) node.hidden = !visible; };
   const btn = (label, action, className = "be-icon-button") => {
@@ -231,6 +234,7 @@
       }
     });
     await refreshAuth();
+    if(returnEventIfReady())return;
     await loadPublic();
   }
   async function refreshAuth() {
@@ -292,7 +296,7 @@
         const name = value(form,"name");
         if (name.length<2 || !form.elements.namedItem("consent").checked) throw Error("Please enter your name and agree to the privacy notice.");
         response = await client.auth.signUp({email,password,options:{
-          emailRedirectTo: new URL(PORTAL,location.href).href,
+          emailRedirectTo: authReturnUrl(),
           data:{ full_name:name, school_app:"butterflies-educare" }
         }});
         if (!response.error && !response.data.session) {
@@ -311,7 +315,7 @@
       if (response?.error) throw response.error;
       closeAuth();
       if (!isPortal) location.href=PORTAL;
-      else { await refreshAuth(); flash(authMode==="recovery"?"Password updated.":"You're signed in."); }
+      else { await refreshAuth(); if(returnEventIfReady())return; flash(authMode==="recovery"?"Password updated.":"You're signed in."); }
     } catch (e) {
       if (feedback) { feedback.textContent=e.message||"Sign-in failed."; feedback.classList.add("be-error-text"); }
     } finally { if(submit)submit.disabled=false; }
@@ -528,6 +532,7 @@
       if(p.error)throw p.error;profile=p.data;
       $("be-greeting").textContent="Welcome, "+profile.display_name;
       f.elements.namedItem("privacy_consent").checked=true;
+      if(returnEventIfReady())return;
       if(window.beFamilyRefresh)await window.beFamilyRefresh({client,user,profile,staffRole});
     });
     attach("be-enrolment-form",async(f)=>{
