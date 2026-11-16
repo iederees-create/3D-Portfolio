@@ -330,7 +330,7 @@
     $("load-more-records").addEventListener("click",fetchPage);
     $("principal-refresh").addEventListener("click",refreshAll);
     db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){setState(false);location.href="./parent.html";}});
-    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner(),window.beInsightsInit?.({db,user}),window.beFundraiserApprovalInit?.({db,user})]);
+    initialized=true;await Promise.allSettled([refreshAll(),initOwner(),initFundraisingPlanner(),window.beInsightsInit?.({db,user}),window.beFundraiserApprovalInit?.({db,user}),window.beOutingShortlistInit?.({db,user})]);
   }
   init().catch(e=>{$("principal-loading").hidden=true;flash("Could not load school management: "+e.message,true);});
 })();

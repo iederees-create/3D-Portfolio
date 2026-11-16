@@ -157,7 +157,7 @@ if (networkCSS !== null && !networkCSS.includes('body.be-network a.be-btn.be-pri
 for (const filename of [
   'site.js', 'atmosphere.js', 'network.js', 'creative-garden.js',
   'experience.js', 'studio.js', 'school-information.js', 'calendar.js',
-  'applications-2027.js', 'principal-dashboard.js', 'whatsapp-support.js', 'school-insights.js', 'presenter-requests.js', 'fundraiser-approval.js', 'event-invitation.js'
+  'applications-2027.js', 'principal-dashboard.js', 'whatsapp-support.js', 'school-insights.js', 'presenter-requests.js', 'fundraiser-approval.js', 'event-invitation.js', 'outing-shortlist.js'
 ]) {
   const checked = spawnSync(process.execPath, ['--check', path.join(root, filename)], { encoding: 'utf8' });
   if (checked.status !== 0) {
@@ -180,6 +180,7 @@ if(!load('calendar.html').includes('id="offer-a-class"')) problems.push('Detaile
 if(!load('getting-started.html').includes('Parents &amp; guardians')) problems.push('School onboarding guide missing');
 if(!load('principal.html').includes('id="fundraiser-publish"')) problems.push('Fundraiser approval action missing');
 if(!load('event.html').includes('id="invite-rsvp"')) problems.push('Event RSVP invitation missing');
+if(!load('principal.html').includes('id="outing-shortlist"')) problems.push('Researched outing choice list missing');
 if (problems.length) {
   for (const problem of problems) console.error('::error::Butterflies Educare: ' + problem);
   process.exitCode = 1;
