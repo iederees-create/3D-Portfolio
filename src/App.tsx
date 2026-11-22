@@ -25,6 +25,10 @@ const CredentialsPage = lazy(() => import('./pages/CredentialsPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const LeadResearchProjectPage = lazy(() => import('./pages/projects/LeadResearchProjectPage'));
 const QAOperationsReviewPage = lazy(() => import('./pages/services/QAOperationsReviewPage'));
+const SapArchiveLandingPage = lazy(() => import('./pages/sap-archive/SapArchiveLandingPage'));
+const SapArchiveQuizPage = lazy(() => import('./pages/sap-archive/SapArchiveQuizPage'));
+const SapArchiveGuidePage = lazy(() => import('./pages/sap-archive/SapArchiveGuidePage'));
+const SapArchiveBookPage = lazy(() => import('./pages/sap-archive/SapArchiveBookPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 // Optional chrome that renders WebGL or is only for fun: loaded on demand.
@@ -56,7 +60,7 @@ function ScrollProgress() {
     <motion.div
       aria-hidden
       style={{ scaleX }}
-      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-primary-500 via-primary-300 to-white/80"
+      className="no-print fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-primary-500 via-primary-300 to-white/80"
     />
   );
 }
@@ -76,6 +80,8 @@ function ScrollToTop() {
 const navLinks = [
   { to: '/',             label: 'Home' },
   { to: '/work',         label: 'Work' },
+  { to: '/blog',         label: 'Blog' },
+  { to: '/sap-archive',  label: 'SAP archive' },
   { to: '/credentials',  label: 'Credentials' },
   { to: '/contact',      label: 'Contact' },
 ];
@@ -113,7 +119,7 @@ function Navbar() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 w-full bg-surface-elevated/95 backdrop-blur-md border-b border-white/5"
+      className="no-print fixed top-0 left-0 right-0 z-50 w-full bg-surface-elevated/95 backdrop-blur-md border-b border-white/5"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
 
@@ -124,7 +130,7 @@ function Navbar() {
         </Link>
 
         {/* Desktop nav — only when there is real room (lg+) */}
-        <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 flex-1" aria-label="Primary">
+        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1" aria-label="Primary">
           {navLinks.map(({ to, label }) => (
             <NavLink
               key={to}
@@ -227,7 +233,7 @@ function Navbar() {
 function Footer() {
   const linkClass = 'text-slate-400 hover:text-white transition-colors text-sm';
   return (
-    <footer className="relative z-10 border-t border-white/5 py-12 px-6">
+    <footer className="no-print relative z-10 border-t border-white/5 py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-center md:text-left">
           <p className="font-bold text-sm text-white tracking-wide">Iederees Francis</p>
@@ -239,6 +245,7 @@ function Footer() {
           <a href="https://www.linkedin.com/in/iederees-francis-936717392/" target="_blank" rel="noreferrer" className={linkClass}>LinkedIn</a>
           <Link to="/about" className={linkClass}>About</Link>
           <Link to="/blog" className={linkClass}>Blog</Link>
+          <Link to="/sap-archive/" className={linkClass}>SAP archive</Link>
           <Link to="/development/" className={linkClass}>Build journal</Link>
           <a href="https://nextgenwebs.etsy.com" target="_blank" rel="noreferrer" className={linkClass}>Templates (Etsy)</a>
         </nav>
@@ -271,6 +278,10 @@ function AnimatedRoutes() {
         <Route path="/development" element={<PageWrapper><DevelopmentPage /></PageWrapper>} />
         <Route path="/blog" element={<PageWrapper><BlogIndexPage /></PageWrapper>} />
         <Route path="/blog/:slug" element={<PageWrapper><ArticlePage /></PageWrapper>} />
+        <Route path="/sap-archive" element={<PageWrapper><SapArchiveLandingPage /></PageWrapper>} />
+        <Route path="/sap-archive/check" element={<PageWrapper><SapArchiveQuizPage /></PageWrapper>} />
+        <Route path="/sap-archive/guide" element={<PageWrapper><SapArchiveGuidePage /></PageWrapper>} />
+        <Route path="/sap-archive/book" element={<PageWrapper><SapArchiveBookPage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
         <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
         <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
@@ -321,10 +332,14 @@ export default function App() {
     <div className="relative w-full min-h-screen bg-surface text-slate-100 overflow-x-hidden transition-colors duration-300">
       <ScrollToTop />
       <ScrollProgress />
-      <Chrome3D isHome={location.pathname === '/'} />
+      <div className="no-print">
+        <Chrome3D isHome={location.pathname === '/'} />
+      </div>
       <Suspense fallback={null}>
-        {isAssessmentRunning && <MiniGame onClose={stopAssessment} />}
-        <TerminalEasterEgg />
+        <div className="no-print">
+          {isAssessmentRunning && <MiniGame onClose={stopAssessment} />}
+          <TerminalEasterEgg />
+        </div>
       </Suspense>
 
       <Navbar />
@@ -336,7 +351,9 @@ export default function App() {
       <Footer />
 
       {/* Floating NextGenWebs AI assistant — visible on all pages */}
-      <NextGenWebsAssistant />
+      <div className="no-print">
+        <NextGenWebsAssistant />
+      </div>
 
       <MemberSignup 
         isOpen={isVIPModalOpen} 

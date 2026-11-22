@@ -10,6 +10,8 @@ interface SEOProps {
   ogImage?: string;
   ogImageAlt?: string;
   noIndex?: boolean;
+  /** Use this string as the document title, with no extra site-name suffix. */
+  exactTitle?: string;
   children?: React.ReactNode;
 }
 
@@ -27,10 +29,11 @@ export default function SEO({
   ogImage = DEFAULT_OG_IMAGE,
   ogImageAlt,
   noIndex = false,
+  exactTitle,
   children,
 }: SEOProps) {
   const url = toAbsoluteUrl(path);
-  const fullTitle = path === '' ? title : `${title} | ${SITE_NAME}`;
+  const fullTitle = exactTitle ?? (path === '' ? title : `${title} | ${SITE_NAME}`);
 
   return (
     <Helmet>
