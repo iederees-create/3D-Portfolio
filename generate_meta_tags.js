@@ -193,6 +193,35 @@ for (const route of ['admin-dashboard', 'admin-dashbourd']) {
 console.log('Preserving GitHub Pages SPA fallback...');
 fs.copyFileSync(path.join(__dirname, 'public', '404.html'), path.join(distDir, '404.html'));
 
+// 3b. SAP archive inbound pages. Static index.html files so GitHub Pages
+// can open and refresh these routes directly, alongside public/404.html.
+console.log('Generating SAP archive entry pages...');
+const sapArchivePages = [
+  {
+    path: 'sap-archive/',
+    title: 'What happens to your historical SAP documents after S/4HANA? | Iederees Francis, NextGenWebs',
+    description: 'A practical look at SAP document archiving for UK manufacturers moving to S/4HANA. Take the readiness check or book a free 30-minute consultation.',
+  },
+  {
+    path: 'sap-archive/check/',
+    title: 'SAP Archive Readiness Check | NextGenWebs',
+    description: 'Six quick questions. About three minutes. Find out where your historical SAP documents stand.',
+  },
+  {
+    path: 'sap-archive/guide/',
+    title: '5 questions to answer before you switch off your old SAP archive | NextGenWebs',
+    description: 'A practical guide for SAP Directors, IT Directors and Enterprise Architects in UK manufacturing',
+  },
+];
+
+for (const page of sapArchivePages) {
+  const outPath = path.join(distDir, page.path, 'index.html');
+  ensureDirectoryExistence(outPath);
+  fs.writeFileSync(outPath, generateHtml(page.path, page.title, page.description, ''));
+  sitemapUrls.push(page.path);
+  console.log(`Generated: ${page.path}`);
+}
+
 // 4. Generate sitemap.xml
 console.log('Generating sitemap.xml...');
 const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>

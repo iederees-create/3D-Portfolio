@@ -127,6 +127,48 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/sap-archive/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/sap-archive/check/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/sap-archive/guide/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/dvelop-2026-news-roundup-sap-document-management/</loc>
+    <lastmod>2026-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/rise-with-sap-teched-2026-cloud-erp-private-documents/</loc>
+    <lastmod>2026-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/uk-e-invoicing-2029-roadmap-sap-document-retention/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://iederees-create.github.io/3D-Portfolio/blog/sap-ecc-2027-2030-maintenance-dates-historical-documents/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://iederees-create.github.io/3D-Portfolio/blog/how-qualified-lead-research-works/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>

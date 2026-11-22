@@ -82,6 +82,12 @@ import LocalizeProductExplainerAiAudioContent from './localize-product-explainer
 import ChooseElevenlabsPlanActualWorkloadContent from './choose-elevenlabs-plan-actual-workload';
 import HumanRecordingOrAiVoiceoverGuideContent from './human-recording-or-ai-voiceover-guide';
 import EvidenceLedQAOperationsReviewContent from './evidence-led-qa-operations-review';
+import {
+  Dvelop2026NewsRoundupPost,
+  RiseWithSapTechEd2026Post,
+  SapEccMaintenanceDatesPost,
+  UkEInvoicing2029Post,
+} from './sap-archive-inbound';
 
 /**
  * Article metadata, newest first. To add article #4: write its content
@@ -89,6 +95,70 @@ import EvidenceLedQAOperationsReviewContent from './evidence-led-qa-operations-r
  * component below in `articleContentMap` — nothing else needs to change.
  */
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'dvelop-2026-news-roundup-sap-document-management',
+    title: 'd.velop in 2026: Gartner recognition, a migration partnership and AI in the SAP archive',
+    excerpt: "A roundup of d.velop's 2026 news for SAP teams: Gartner Magic Quadrant placement, a content migration partnership, d.velop AI and SAP integration.",
+    datePublished: '2026-12-03',
+    dateModified: '2026-12-03',
+    author: 'Iederees Francis, NextGenWebs',
+    category: 'SAP document archiving',
+    tags: ['d.velop', 'Document management', 'SAP ArchiveLink', 'AI', 'Content migration', 'Gartner'],
+    readingTimeMinutes: 6,
+    relatedSlugs: [
+      'rise-with-sap-teched-2026-cloud-erp-private-documents',
+      'sap-ecc-2027-2030-maintenance-dates-historical-documents',
+      'uk-e-invoicing-2029-roadmap-sap-document-retention',
+    ],
+  },
+  {
+    slug: 'rise-with-sap-teched-2026-cloud-erp-private-documents',
+    title: 'RISE with SAP after TechEd 2026: AI migration assistants, SAP Cloud ERP Private and the documents question',
+    excerpt: 'SAP is adding AI to RISE with SAP and SAP Cloud ERP Private. A plain summary of the 2026 news, and why historical documents still need a plan.',
+    datePublished: '2026-12-01',
+    dateModified: '2026-12-01',
+    author: 'Iederees Francis, NextGenWebs',
+    category: 'SAP document archiving',
+    tags: ['RISE with SAP', 'SAP Cloud ERP Private', 'S/4HANA', 'SAP TechEd 2026', 'Migration', 'Document archiving'],
+    readingTimeMinutes: 6,
+    relatedSlugs: [
+      'sap-ecc-2027-2030-maintenance-dates-historical-documents',
+      'dvelop-2026-news-roundup-sap-document-management',
+      'uk-e-invoicing-2029-roadmap-sap-document-retention',
+    ],
+  },
+  {
+    slug: 'uk-e-invoicing-2029-roadmap-sap-document-retention',
+    title: 'UK e-invoicing from April 2029: what the new HMRC roadmap means for SAP teams',
+    excerpt: "The UK's e-invoicing roadmap confirms VAT e-invoices from 1 April 2029, using Peppol. What SAP teams in manufacturing should note on storage and retention.",
+    datePublished: '2026-11-26',
+    dateModified: '2026-11-26',
+    author: 'Iederees Francis, NextGenWebs',
+    category: 'SAP document archiving',
+    tags: ['E-invoicing', 'HMRC', 'VAT', 'Peppol', 'SAP', 'Document retention', 'UK manufacturing'],
+    readingTimeMinutes: 6,
+    relatedSlugs: [
+      'sap-ecc-2027-2030-maintenance-dates-historical-documents',
+      'rise-with-sap-teched-2026-cloud-erp-private-documents',
+      'dvelop-2026-news-roundup-sap-document-management',
+    ],
+  },
+  {
+    slug: 'sap-ecc-2027-2030-maintenance-dates-historical-documents',
+    title: 'SAP confirms ECC maintenance dates: what 2027 and 2030 mean for your historical documents',
+    excerpt: 'SAP has reconfirmed ECC mainstream maintenance ends in 2027, with extended cover to 2030. What the timeline means for your SAP document archive.',
+    datePublished: '2026-11-22',
+    dateModified: '2026-11-22',
+    author: 'Iederees Francis, NextGenWebs',
+    category: 'SAP document archiving',
+    tags: ['SAP ECC', 'S/4HANA', 'SAP maintenance', 'Document archiving', 'UK manufacturing'],
+    readingTimeMinutes: 6,
+    relatedSlugs: [
+      'uk-e-invoicing-2029-roadmap-sap-document-retention',
+      'rise-with-sap-teched-2026-cloud-erp-private-documents',
+      'dvelop-2026-news-roundup-sap-document-management',
+    ],
+  },
   {
     slug: 'butterflies-school-app-fundraising-update',
     title: 'From School Website to Installable App: My Latest Butterflies Educare Build',
@@ -1097,6 +1167,10 @@ export const articles: ArticleMeta[] = [
 ];
 
 export const articleContentMap: Record<string, ArticleContentComponent> = {
+  'dvelop-2026-news-roundup-sap-document-management': Dvelop2026NewsRoundupPost,
+  'rise-with-sap-teched-2026-cloud-erp-private-documents': RiseWithSapTechEd2026Post,
+  'uk-e-invoicing-2029-roadmap-sap-document-retention': UkEInvoicing2029Post,
+  'sap-ecc-2027-2030-maintenance-dates-historical-documents': SapEccMaintenanceDatesPost,
   'butterflies-school-app-fundraising-update': ButterfliesSchoolAppUpdate,
   'butterflies-educare-school-platform-case-study': ButterfliesEducareSchoolPlatformCaseStudy,
   'evidence-led-qa-operations-review': EvidenceLedQAOperationsReviewContent,

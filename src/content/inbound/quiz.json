@@ -1,0 +1,150 @@
+{
+  "id": "sap-archive-readiness-check",
+  "title": "SAP Archive Readiness Check",
+  "subtitle": "Six quick questions. About three minutes. Find out where your historical SAP documents stand.",
+  "suggested_path": "/sap-archive/check/",
+  "disclosure": "Run by Iederees Francis (NextGenWebs), an independent business-development partner working with delaware. Not an official SAP, delaware or d.velop tool.",
+  "placeholders": {
+    "booking": "{{BOOKING_LINK}}",
+    "guide": "{{GUIDE_LINK}}",
+    "privacy": "{{PRIVACY_LINK}}"
+  },
+  "outcomes": {
+    "A": {
+      "label": "Situation 1: ECC to S/4HANA migration",
+      "short": "Your S/4HANA move is the natural moment to decide what happens to your historical documents."
+    },
+    "B": {
+      "label": "Situation 2: No structured document management",
+      "short": "Documents linked to SAP are spread across drives, inboxes or paper."
+    },
+    "C": {
+      "label": "Situation 3: SharePoint without proper SAP integration",
+      "short": "SharePoint holds SAP-related documents, but the link to SAP is manual or partial."
+    },
+    "W": {
+      "label": "Well covered",
+      "short": "Your archive, access and retention look in good shape."
+    }
+  },
+  "scoring": {
+    "method": "Each answer adds points to one or more outcomes. Sum the points per outcome across all answered questions. The outcome with the highest total is the result.",
+    "minimum_for_situation": "If the highest of A, B and C is below 3, show W (well covered).",
+    "w_requires": "W is only shown if A, B and C are all below 3, or if W is strictly higher than each of A, B and C.",
+    "tie_break_order": ["A", "C", "B", "W"],
+    "tie_break_note": "If two situations tie, show the first in tie_break_order and mention the second as 'also worth a look'.",
+    "secondary_outcome": "If the second-highest of A, B, C is 3 or more, show it as 'Also worth a look' under the main result."
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Where is your SAP core today?",
+      "options": [
+        { "id": "q1a", "text": "SAP ECC, with an S/4HANA move planned or under way", "points": { "A": 3 } },
+        { "id": "q1b", "text": "SAP ECC, with no S/4HANA plan agreed yet", "points": { "A": 2 } },
+        { "id": "q1c", "text": "S/4HANA is live, but ECC or other legacy systems are still running", "points": { "A": 2 } },
+        { "id": "q1d", "text": "S/4HANA is live and legacy systems are already retired", "points": { "W": 1 } }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Where do most documents linked to SAP transactions (invoices, delivery notes, certificates, contracts) live?",
+      "options": [
+        { "id": "q2a", "text": "In a dedicated archive that is integrated with SAP", "points": { "W": 2, "A": 1 } },
+        { "id": "q2b", "text": "In SharePoint", "points": { "C": 3 } },
+        { "id": "q2c", "text": "On shared drives, in email or on paper", "points": { "B": 3 } },
+        { "id": "q2d", "text": "A mix of the above, depending on site or department", "points": { "B": 2, "C": 1 } }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "How are documents connected to the SAP record they belong to?",
+      "options": [
+        { "id": "q3a", "text": "Automatically, through an SAP-integrated interface", "points": { "W": 2 } },
+        { "id": "q3b", "text": "Someone uploads or links them by hand", "points": { "C": 2, "B": 1 } },
+        { "id": "q3c", "text": "They are not connected; people search separately", "points": { "B": 2, "C": 1 } },
+        { "id": "q3d", "text": "Not sure", "points": { "B": 1, "C": 1 } }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "When someone needs a document related to an SAP transaction, how do they usually find it?",
+      "options": [
+        { "id": "q4a", "text": "Directly from the transaction or a single search, quickly", "points": { "W": 2 } },
+        { "id": "q4b", "text": "They have to log into SAP and know where to look", "points": { "A": 1 } },
+        { "id": "q4c", "text": "They search folders, SharePoint sites or inboxes", "points": { "B": 1, "C": 1 } },
+        { "id": "q4d", "text": "They ask a colleague who knows", "points": { "B": 2 } }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "If your current SAP system or archive were switched off, is there an agreed plan for the historical documents?",
+      "options": [
+        { "id": "q5a", "text": "Yes, it is documented and part of our SAP roadmap", "points": { "W": 2 } },
+        { "id": "q5b", "text": "It is being discussed but not decided", "points": { "A": 2 } },
+        { "id": "q5c", "text": "No, it has not come up yet", "points": { "A": 2, "B": 1 } },
+        { "id": "q5d", "text": "We would keep the old system running to be safe", "points": { "A": 2 } }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "If an auditor or customer asked, could you show which documents were retained, for how long, and when?",
+      "options": [
+        { "id": "q6a", "text": "Yes, retention rules are applied and auditable", "points": { "W": 2 } },
+        { "id": "q6b", "text": "Partly, for some document types", "points": { "C": 1, "B": 1 } },
+        { "id": "q6c", "text": "It would take a lot of manual effort", "points": { "B": 2 } },
+        { "id": "q6d", "text": "Not sure who owns retention for SAP documents", "points": { "B": 1, "C": 1 } }
+      ]
+    }
+  ],
+  "results": {
+    "A": {
+      "headline": "Your situation: ECC to S/4HANA migration",
+      "body": "Your S/4HANA move is the right moment to decide what happens to the documents sitting in and around ECC. The key questions are whether you migrate everything, keep the legacy system running, or decommission it, and how users will reach historical documents afterwards. Making the archive part of the transformation plan, rather than an afterthought, usually means fewer surprises late in the programme. A practical first step is to list which document types are linked to ECC, which ones you must keep, and who owns them.",
+      "next_steps": [
+        "Read the guide: 5 questions to answer before you switch off your old SAP archive",
+        "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
+      ],
+      "cta_text": "Book a free 30-minute consultation",
+      "cta_link": "{{BOOKING_LINK}}"
+    },
+    "B": {
+      "headline": "Your situation: no structured document management",
+      "body": "Documents linked to your SAP transactions are spread across shared drives, inboxes or paper. That works while the people who know where things are stay put. It gets harder when someone leaves, when an auditor asks what was kept and when, or when SAP changes. The goal is simple: documents linked to the SAP records they belong to, kept under a clear retention policy, and easy to find. A good first step is to pick one process, such as supplier invoices or quality certificates, and map where those documents live today.",
+      "next_steps": [
+        "Read the guide: 5 questions to answer before you switch off your old SAP archive",
+        "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
+      ],
+      "cta_text": "Book a free 30-minute consultation",
+      "cta_link": "{{BOOKING_LINK}}"
+    },
+    "C": {
+      "headline": "Your situation: SharePoint without proper SAP integration",
+      "body": "SharePoint holds SAP-related documents, but the connection to SAP is manual or partial. That often means someone uploading and matching files by hand, users leaving the transaction to find what they need, and retention rules that are hard to apply consistently. The question is not whether SharePoint is a good tool, it is whether SAP documents are properly linked and governed. A useful first step is to check how many SAP-related documents are added by hand each month and who maintains the links.",
+      "next_steps": [
+        "Read the guide: 5 questions to answer before you switch off your old SAP archive",
+        "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
+      ],
+      "cta_text": "Book a free 30-minute consultation",
+      "cta_link": "{{BOOKING_LINK}}"
+    },
+    "W": {
+      "headline": "Well covered",
+      "body": "Your documents appear to be linked to SAP, easy to find and governed by clear retention rules. That puts you in a strong position. It is still worth checking two things from time to time: whether your archive fits your SAP roadmap for the next few years, and when its contract and support arrangements come up for renewal, so any decision is made on purpose rather than by default.",
+      "next_steps": [
+        "Read the guide to sense-check your plan",
+        "If a second opinion would help, book a free 30-minute consultation with delaware specialists John or Oksana"
+      ],
+      "cta_text": "Book a free 30-minute consultation",
+      "cta_link": "{{BOOKING_LINK}}"
+    }
+  },
+  "lead_capture": {
+    "position": "Optional, shown after the result. The result is always shown without requiring an email.",
+    "fields": ["First name", "Work email", "Company", "Job title"],
+    "consent_text": "Send me my result and the guide. I agree that Iederees Francis (NextGenWebs) may contact me about this topic. I can unsubscribe at any time. See the privacy notice: {{PRIVACY_LINK}}",
+    "consent_required": true,
+    "consent_prechecked": false
+  },
+  "footer": "This check gives a general indication only. It is not an assessment of your systems and makes no claim about costs or savings."
+}
