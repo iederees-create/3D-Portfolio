@@ -1,5 +1,4 @@
-/** Campaign tokens that must stay literal until Iederees replaces them. */
-export const BOOKING_LINK = '{{BOOKING_LINK}}';
+/** Privacy notice URL still to be supplied. Booking now goes to the on-site request form. */
 export const PRIVACY_LINK = '{{PRIVACY_LINK}}';
 
 export const SAP_ARCHIVE_PATH = '/sap-archive/';

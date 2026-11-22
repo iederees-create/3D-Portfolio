@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { enrichBookingHref, readQuizResult } from './booking';
 import {
   applyCampaignTokens,
   isPlaceholderHref,
@@ -39,7 +40,12 @@ export function CampaignLink({
   className?: string;
   cta?: boolean;
 }) {
-  const resolved = resolveCampaignHref(href);
+  const location = useLocation();
+  const resolved = enrichBookingHref(
+    resolveCampaignHref(href),
+    location,
+    readQuizResult()?.id ?? null,
+  );
   const classes = cta ? `inbound-cta ${className ?? ''}`.trim() : className;
   const stop = (event: { stopPropagation: () => void }) => event.stopPropagation();
   const link = isPlaceholderHref(resolved) ? (

@@ -130,7 +130,7 @@ If you ticked all five, you are well prepared. If two or more are open, it is wo
 
 delaware's specialists, John and Oksana, offer a **free 30-minute consultation** for SAP customers on SAP Private Cloud or on-premise landscapes. They will look at your current setup, your S/4HANA roadmap, your retention needs and how users find documents today, and give you an informed view of your options. There is no obligation, and no promise of savings before your situation has been properly assessed.
 
-**[Book a free 30-minute consultation]({{BOOKING_LINK}})**  
+**[Book a free 30-minute consultation](/sap-archive/book/)**  
 Not sure where you stand? **[Take the 3-minute SAP Archive Readiness Check]({{QUIZ_LINK}})**
 
 ---

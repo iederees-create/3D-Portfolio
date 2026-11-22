@@ -212,6 +212,11 @@ const sapArchivePages = [
     title: '5 questions to answer before you switch off your old SAP archive | NextGenWebs',
     description: 'A practical guide for SAP Directors, IT Directors and Enterprise Architects in UK manufacturing',
   },
+  {
+    path: 'sap-archive/book/',
+    title: 'Book a free SAP archive consultation | NextGenWebs',
+    description: 'Request a free 30-minute online consultation about SAP document archiving for Private Cloud or on-premise. Your details are sent to Iederees Francis at NextGenWebs before you choose a time.',
+  },
 ];
 
 for (const page of sapArchivePages) {

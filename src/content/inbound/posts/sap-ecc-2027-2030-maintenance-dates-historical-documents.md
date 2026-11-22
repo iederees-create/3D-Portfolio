@@ -68,7 +68,7 @@ A useful test for any programme team is this question: if you switched your exis
 
 ## Want to talk it through?
 
-If you are working out what happens to your SAP documents as these dates approach, take the [3-minute SAP Archive Readiness Check]({{QUIZ_LINK}}) or book a [free 30-minute consultation]({{BOOKING_LINK}}) with delaware specialists John or Oksana. The consultation covers SAP Private Cloud and on-premise landscapes, and there is no obligation.
+If you are working out what happens to your SAP documents as these dates approach, take the [3-minute SAP Archive Readiness Check]({{QUIZ_LINK}}) or book a [free 30-minute consultation](/sap-archive/book/) with delaware specialists John or Oksana. The consultation covers SAP Private Cloud and on-premise landscapes, and there is no obligation.
 
 ---
 

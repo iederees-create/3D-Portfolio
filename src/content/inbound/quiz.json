@@ -5,7 +5,7 @@
   "suggested_path": "/sap-archive/check/",
   "disclosure": "Run by Iederees Francis (NextGenWebs), an independent business-development partner working with delaware. Not an official SAP, delaware or d.velop tool.",
   "placeholders": {
-    "booking": "{{BOOKING_LINK}}",
+    "booking": "/sap-archive/book/",
     "guide": "{{GUIDE_LINK}}",
     "privacy": "{{PRIVACY_LINK}}"
   },
@@ -106,7 +106,7 @@
         "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
       ],
       "cta_text": "Book a free 30-minute consultation",
-      "cta_link": "{{BOOKING_LINK}}"
+      "cta_link": "/sap-archive/book/"
     },
     "B": {
       "headline": "Your situation: no structured document management",
@@ -116,7 +116,7 @@
         "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
       ],
       "cta_text": "Book a free 30-minute consultation",
-      "cta_link": "{{BOOKING_LINK}}"
+      "cta_link": "/sap-archive/book/"
     },
     "C": {
       "headline": "Your situation: SharePoint without proper SAP integration",
@@ -126,7 +126,7 @@
         "Talk it through in a free 30-minute consultation with delaware specialists John or Oksana (SAP Private Cloud or on-premise)"
       ],
       "cta_text": "Book a free 30-minute consultation",
-      "cta_link": "{{BOOKING_LINK}}"
+      "cta_link": "/sap-archive/book/"
     },
     "W": {
       "headline": "Well covered",
@@ -136,7 +136,7 @@
         "If a second opinion would help, book a free 30-minute consultation with delaware specialists John or Oksana"
       ],
       "cta_text": "Book a free 30-minute consultation",
-      "cta_link": "{{BOOKING_LINK}}"
+      "cta_link": "/sap-archive/book/"
     }
   },
   "lead_capture": {

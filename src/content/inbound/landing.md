@@ -4,7 +4,7 @@ suggested_path: /sap-archive/
 suggested_url: https://iederees-create.github.io/3D-Portfolio/sap-archive/
 title_tag: "What happens to your historical SAP documents after S/4HANA? | Iederees Francis, NextGenWebs"
 meta_description: "A practical look at SAP document archiving for UK manufacturers moving to S/4HANA. Take the readiness check or book a free 30-minute consultation."
-placeholders: "{{BOOKING_LINK}}, {{QUIZ_LINK}} (suggested /sap-archive/check/), {{GUIDE_LINK}} (suggested /sap-archive/guide/), {{PRIVACY_LINK}}"
+placeholders: "{{PRIVACY_LINK}}"
 design_note: "Use NextGenWebs styling. Do not use delaware, d.velop or SAP logos, colours or page templates. This is an independent partner page, not an official vendor page."
 ---
 
@@ -17,7 +17,7 @@ Invoices, delivery notes, quality records, contracts and certificates often sit 
 This page is for SAP Directors, Heads of SAP, IT Directors and Enterprise Architects in UK manufacturing who want a clear plan for those documents before the old environment is switched off.
 
 **[Take the 3-minute SAP Archive Readiness Check]({{QUIZ_LINK}})**  
-**[Book a free 30-minute consultation]({{BOOKING_LINK}})**
+**[Book a free 30-minute consultation](/sap-archive/book/)**
 
 *Independent partner page. I work with delaware as an independent business-development partner. I am not employed by, and do not speak for, SAP, delaware or d.velop.*
 
@@ -92,7 +92,7 @@ The consultation is not a product demo. It is a conversation about your landscap
 
 ## How the free consultation works
 
-**1. Book a time.** Choose a 30-minute slot that suits you via the [booking page]({{BOOKING_LINK}}). There is no cost and no obligation.
+**1. Book a time.** Choose a 30-minute slot that suits you via the [booking page](/sap-archive/book/). There is no cost and no obligation.
 
 **2. Talk to a specialist.** You speak with John or Oksana, delaware specialists in SAP document archiving. They will ask about:
 
@@ -106,7 +106,7 @@ The consultation is not a product demo. It is a conversation about your landscap
 
 What the consultation will not do: promise savings or outcomes before your platform, volumes, licences, infrastructure and requirements have been properly assessed.
 
-**[Book your free 30-minute consultation]({{BOOKING_LINK}})**
+**[Book your free 30-minute consultation](/sap-archive/book/)**
 
 ---
 
@@ -158,6 +158,6 @@ Anything you share in the readiness check or the booking form is used only to ar
 
 ## Get a clear plan for your historical SAP documents
 
-**[Take the readiness check]({{QUIZ_LINK}})** · **[Get the guide]({{GUIDE_LINK}})** · **[Book a free consultation]({{BOOKING_LINK}})**
+**[Take the readiness check]({{QUIZ_LINK}})** · **[Get the guide]({{GUIDE_LINK}})** · **[Book a free consultation](/sap-archive/book/)**
 
 *Iederees Francis, NextGenWebs. Independent business-development partner working with delaware. This is not an official SAP, delaware or d.velop page. SAP and S/4HANA are trademarks or registered trademarks of SAP SE. SharePoint is a trademark of Microsoft.*

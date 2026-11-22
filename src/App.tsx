@@ -28,6 +28,7 @@ const QAOperationsReviewPage = lazy(() => import('./pages/services/QAOperationsR
 const SapArchiveLandingPage = lazy(() => import('./pages/sap-archive/SapArchiveLandingPage'));
 const SapArchiveQuizPage = lazy(() => import('./pages/sap-archive/SapArchiveQuizPage'));
 const SapArchiveGuidePage = lazy(() => import('./pages/sap-archive/SapArchiveGuidePage'));
+const SapArchiveBookPage = lazy(() => import('./pages/sap-archive/SapArchiveBookPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 // Optional chrome that renders WebGL or is only for fun: loaded on demand.
@@ -280,6 +281,7 @@ function AnimatedRoutes() {
         <Route path="/sap-archive" element={<PageWrapper><SapArchiveLandingPage /></PageWrapper>} />
         <Route path="/sap-archive/check" element={<PageWrapper><SapArchiveQuizPage /></PageWrapper>} />
         <Route path="/sap-archive/guide" element={<PageWrapper><SapArchiveGuidePage /></PageWrapper>} />
+        <Route path="/sap-archive/book" element={<PageWrapper><SapArchiveBookPage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
         <Route path="/credentials" element={<PageWrapper><CredentialsPage /></PageWrapper>} />
         <Route path="/admin-dashboard" element={<PageWrapper><AdminDashboard /></PageWrapper>} />

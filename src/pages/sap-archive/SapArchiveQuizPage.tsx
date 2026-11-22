@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import SEO from '../../components/SEO';
 import { CampaignLink } from '../../content/inbound/InboundMarkdown';
 import quizData from '../../content/inbound/quiz.json';
-import { BOOKING_LINK, PRIVACY_LINK, SAP_GUIDE_PATH } from '../../content/inbound/placeholders';
+import { rememberQuizResult } from '../../content/inbound/booking';
+import { PRIVACY_LINK, SAP_GUIDE_PATH } from '../../content/inbound/placeholders';
 import { scoreQuiz, type OutcomeId, type QuizQuestion } from '../../content/inbound/scoreQuiz';
 import { hireMailto, whatsappLink } from '../../lib/contact';
 import SapPage from './SapPage';
@@ -56,6 +57,7 @@ export default function SapArchiveQuizPage() {
   const question = questions[step];
   const result = useMemo(() => (done ? scoreQuiz(questions, answers) : null), [done, answers]);
   const outcome = result ? quizData.results[result.primary] : null;
+  if (result && outcome) rememberQuizResult(result.primary, outcome.headline);
 
   function select(optionId: string) {
     setAnswers((current) => ({ ...current, [question.id]: optionId }));
@@ -169,7 +171,7 @@ export default function SapArchiveQuizPage() {
               <Link to={SAP_GUIDE_PATH} className="inline-flex items-center rounded-full border border-white/15 px-5 py-3 text-sm font-bold text-white hover:bg-white/5">
                 Read the guide
               </Link>
-              <CampaignLink href={BOOKING_LINK} cta>
+              <CampaignLink href="/sap-archive/book/" cta>
                 {outcome.cta_text}
               </CampaignLink>
             </div>

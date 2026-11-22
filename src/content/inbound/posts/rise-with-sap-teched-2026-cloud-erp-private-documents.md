@@ -70,7 +70,7 @@ Archive vendors are responding too. For example, d.velop states that its SAP Arc
 
 ## Want to talk it through?
 
-If your RISE or S/4HANA plan does not yet cover historical documents, try the [3-minute SAP Archive Readiness Check]({{QUIZ_LINK}}) or book a [free 30-minute consultation]({{BOOKING_LINK}}) with delaware specialists John or Oksana. The consultation covers SAP Private Cloud and on-premise landscapes, and there is no obligation.
+If your RISE or S/4HANA plan does not yet cover historical documents, try the [3-minute SAP Archive Readiness Check]({{QUIZ_LINK}}) or book a [free 30-minute consultation](/sap-archive/book/) with delaware specialists John or Oksana. The consultation covers SAP Private Cloud and on-premise landscapes, and there is no obligation.
 
 ---
 
