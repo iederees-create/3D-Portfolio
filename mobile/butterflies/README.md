@@ -11,7 +11,7 @@ cd mobile/butterflies
 gradle :shared:jvmTest :androidApp:assembleDebug :androidApp:lintDebug
 ```
 
-GitHub Actions builds and installs the APK on an emulator, runs native-screen and encrypted-storage tests, and uploads a versioned build artifact only after passing checks. GitHub prerelease publishing is attempted separately and may be unavailable when integration permissions prevent it. Tested APKs can also be published in the school website downloads directory. The app is debug-signed for testing; the private test key is retained in Actions cache, never in source or APK assets. Cache eviction can change that test certificate and require reinstalling a test build. Production release signing and store distribution are separate work.
+GitHub Actions builds and installs the APK on an emulator, runs native-screen and encrypted-storage tests, and uploads a versioned build artifact only after passing checks. GitHub prerelease publishing is attempted separately and may be unavailable when integration permissions prevent it. Tested APKs can also be published in the school website downloads directory. The app is debug-signed for testing; the explicitly configured private test key is retained in Actions cache, never in source or APK assets. Cache eviction can change that test certificate and require reinstalling a test build. Production release signing and store distribution are separate work.
 
 ## Shared accounts and data
 

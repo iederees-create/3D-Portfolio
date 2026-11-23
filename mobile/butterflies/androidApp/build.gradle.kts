@@ -11,6 +11,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+    val testKey = rootProject.file(".test-signing/debug.keystore")
+    if (testKey.exists()) signingConfigs.getByName("debug") {
+        storeFile = testKey
+        storePassword = "android"
+        keyAlias = "androiddebugkey"
+        keyPassword = "android"
+    }
     buildTypes { release { isMinifyEnabled = false } }
     lint { disable += "OldTargetApi" }
 }

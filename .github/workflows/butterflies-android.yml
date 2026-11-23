@@ -26,8 +26,14 @@ jobs:
         id: test-signing
         uses: actions/cache@v4
         with:
-          path: ~/.android/debug.keystore
-          key: butterflies-android-test-certificate-v1
+          path: mobile/butterflies/.test-signing/debug.keystore
+          key: butterflies-android-test-certificate-v2
+      - name: Prepare private Android test certificate
+        run: |
+          mkdir -p mobile/butterflies/.test-signing
+          if [ ! -f mobile/butterflies/.test-signing/debug.keystore ]; then
+            keytool -genkeypair -keystore mobile/butterflies/.test-signing/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'
+          fi
       - uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
@@ -40,8 +46,8 @@ jobs:
         if: steps.test-signing.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: ~/.android/debug.keystore
-          key: butterflies-android-test-certificate-v1
+          path: mobile/butterflies/.test-signing/debug.keystore
+          key: butterflies-android-test-certificate-v2
       - name: Enable emulator hardware acceleration
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
