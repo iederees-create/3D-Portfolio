@@ -1,0 +1,75 @@
+name: Build Butterflies Android app
+on:
+  push:
+    branches: [main]
+    paths: ['mobile/butterflies/**', '.github/workflows/butterflies-android.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: butterflies-android
+  cancel-in-progress: false
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Restore private test signing certificate
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: butterflies-android-test-certificate-v1
+      - name: Install Android build tools
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Compile native app, run shared tests and lint
+        working-directory: mobile/butterflies
+        run: gradle :shared:jvmTest :androidApp:assembleDebug :androidApp:lintDebug --stacktrace
+      - name: Enable emulator hardware acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Test installed native screens and secure storage
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          target: default
+          disable-animations: true
+          script: cd mobile/butterflies && gradle :androidApp:connectedDebugAndroidTest --stacktrace
+      - name: Prepare test download and checksum
+        run: |
+          mkdir -p apk-download
+          cp mobile/butterflies/androidApp/build/outputs/apk/debug/androidApp-debug.apk apk-download/Butterflies-Educare-0.1.0-test.apk
+          cd apk-download
+          sha256sum Butterflies-Educare-0.1.0-test.apk > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Butterflies-Educare-Android-test
+          path: apk-download/*
+      - name: Publish installable test APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if gh release view butterflies-android-v0.1.0 >/dev/null 2>&1; then
+            gh release upload butterflies-android-v0.1.0 apk-download/* --clobber
+          else
+            gh release create butterflies-android-v0.1.0 apk-download/* --target "$GITHUB_SHA" --prerelease --title 'Butterflies Educare Android 0.1.0 — test APK' --notes-file mobile/butterflies/RELEASE_NOTES.md
+          fi
+      - name: Preserve test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: butterflies-native-test-reports
+          path: |
+            mobile/butterflies/androidApp/build/reports/
+            mobile/butterflies/shared/build/reports/
