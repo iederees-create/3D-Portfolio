@@ -52,6 +52,17 @@ jobs:
             mkdir -p "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports"
             adb exec-out run-as za.co.butterflies.educare cat files/preview-home.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-home.png"
             adb exec-out run-as za.co.butterflies.educare cat files/preview-account.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-account.png"
+      - name: Check modern Android launch and navigation
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: |
+            cd mobile/butterflies && gradle :androidApp:connectedDebugAndroidTest --stacktrace
+            adb exec-out run-as za.co.butterflies.educare cat files/preview-home.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-android15-home.png"
+            adb exec-out run-as za.co.butterflies.educare cat files/preview-account.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-android15-account.png"
       - name: Prepare test download and checksum
         run: |
           mkdir -p apk-download
