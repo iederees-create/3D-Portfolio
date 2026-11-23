@@ -29,6 +29,7 @@ class MainActivity: Activity() {
     private lateinit var feedback: TextView
     private val executor=Executors.newSingleThreadExecutor()
     private var revision=0
+    private val taskRevision=ThreadLocal<Int>()
     private var staffRole=""
     private var profile: JSONObject?=null
     private var screen="home"
@@ -87,9 +88,9 @@ class MainActivity: Activity() {
         // Disable all buttons while a mutation runs; re-enable only on the same screen.
         fun enable(v: View,on: Boolean){v.isEnabled=on;if(v is android.view.ViewGroup)for(i in 0 until v.childCount)enable(v.getChildAt(i),on)}
         enable(content,false)
-        executor.execute {try{work()}catch(e:Exception){ui(stamp){notice(if(e is java.io.IOException)"Could not connect. Check your internet connection and try again. Nothing has been confirmed as saved." else e.message?:"Could not complete the request.")}}finally{ui(stamp){enable(content,true);if(feedback.text=="Connecting to your school…")notice("")}}}
+        executor.execute {taskRevision.set(stamp);try{work()}catch(e:Exception){ui(stamp){notice(if(e is java.io.IOException)"Could not connect. Check your internet connection and try again. Nothing has been confirmed as saved." else e.message?:"Could not complete the request.")}}finally{ui(stamp){enable(content,true);if(feedback.text=="Connecting to your school…")notice("")};taskRevision.remove()}}
     }
-    private fun ui(stamp: Int=revision,fn:()->Unit){runOnUiThread{if(!isFinishing&&!isDestroyed&&stamp==revision)fn()}}
+    private fun ui(stamp: Int=taskRevision.get()?:revision,fn:()->Unit){runOnUiThread{if(!isFinishing&&!isDestroyed&&stamp==revision)fn()}}
     private fun web(path: String) {startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(School.safeWebPath(path))))}
     private fun needProfile() {check(profile?.optString("privacy_consent_at").orEmpty().let{it.isNotBlank()&&it!="null"}){"Save your contact profile and privacy acknowledgement first."}}
     private fun formatTime(value: String)=runCatching{OffsetDateTime.parse(value).withOffsetSameInstant(ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm"))+" SAST"}.getOrDefault(value)

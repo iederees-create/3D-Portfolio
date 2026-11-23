@@ -38,6 +38,8 @@ class SessionStore(context: Context) {
     fun clear() { prefs.edit().clear().commit() }
 }
 
+class SchoolHttpException(val status: Int, message: String): IllegalStateException(message)
+
 class SchoolApi(private val store: SessionStore) {
     var session: JSONObject? = store.load(); private set
     val signedIn get() = session != null
@@ -57,7 +59,7 @@ class SchoolApi(private val store: SessionStore) {
             if(status !in 200..299) {
                 val e=runCatching{JSONObject(result)}.getOrNull()
                 val msg=e?.optString("msg")?.takeIf{it.isNotBlank()} ?: e?.optString("message")?.takeIf{it.isNotBlank()} ?: e?.optString("error_description")?.takeIf{it.isNotBlank()}
-                error(when(status){401,403 -> msg ?: "Sign in again or ask the school to check your access.";409 -> "This request already exists. Refresh to see its status.";else -> msg ?: "The school service could not complete this request (HTTP $status)."})
+                throw SchoolHttpException(status,when(status){401,403 -> msg ?: "Sign in again or ask the school to check your access.";409 -> "This request already exists. Refresh to see its status.";else -> msg ?: "The school service could not complete this request (HTTP $status)."})
             }
             return result
         } finally { c.disconnect() }
@@ -66,7 +68,10 @@ class SchoolApi(private val store: SessionStore) {
         val s=session ?: return null
         if(s.optLong("expires_at") < System.currentTimeMillis()/1000+90) {
             try { accept(JSONObject(request("/auth/v1/token?grant_type=refresh_token","POST",JSONObject().put("refresh_token",s.getString("refresh_token"))))) }
-            catch(e: Exception) { session=null;store.clear();throw IllegalStateException("Your session expired. Please sign in again.") }
+            catch(e: SchoolHttpException) {
+                if(e.status in listOf(400,401,403)){session=null;store.clear();throw IllegalStateException("Your session expired. Please sign in again.")}
+                throw e
+            }
         }
         return session?.getString("access_token")
     }
