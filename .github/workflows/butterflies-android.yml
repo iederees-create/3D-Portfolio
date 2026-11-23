@@ -68,6 +68,8 @@ jobs:
           mkdir -p apk-download
           cp mobile/butterflies/androidApp/build/outputs/apk/debug/androidApp-debug.apk apk-download/Butterflies-Educare-0.2.0-test.apk
           cp mobile/butterflies/androidApp/build/reports/preview-*.png apk-download/
+          echo "$GITHUB_SHA" > apk-download/BUILD_COMMIT.txt
+          python -c "from pathlib import Path; files=list(Path('apk-download').glob('preview-*.png')); assert files and all(p.read_bytes().startswith(bytes([137,80,78,71,13,10,26,10])) for p in files), 'Invalid native preview export'"
           cd apk-download
           sha256sum Butterflies-Educare-0.2.0-test.apk > SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
@@ -75,6 +77,7 @@ jobs:
           name: Butterflies-Educare-Android-test
           path: apk-download/*
       - name: Publish installable test APK
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
