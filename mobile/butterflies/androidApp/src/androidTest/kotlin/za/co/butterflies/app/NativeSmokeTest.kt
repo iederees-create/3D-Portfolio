@@ -1,4 +1,8 @@
 package za.co.butterflies.app
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import java.io.File
+import android.widget.ScrollView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,12 +19,42 @@ import org.json.JSONObject
 @RunWith(AndroidJUnit4::class)
 class NativeSmokeTest {
     private fun views(v: View): List<View> = listOf(v)+(if(v is ViewGroup)(0 until v.childCount).flatMap{views(v.getChildAt(it))}else emptyList())
+    private fun preview(activity: MainActivity,name: String) {
+        val root=activity.window.decorView
+        check(root.width>0&&root.height>0)
+        val bitmap=Bitmap.createBitmap(root.width,root.height,Bitmap.Config.ARGB_8888)
+        root.draw(Canvas(bitmap))
+        File(activity.filesDir,"preview-$name.png").outputStream().use {bitmap.compress(Bitmap.CompressFormat.PNG,100,it)}
+        bitmap.recycle()
+    }
+    @Test fun bottomNavigationStaysOutsideScrollAndOpensAccount() {
+        ActivityScenario.launch(MainActivity::class.java).use {scenario->
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            scenario.onActivity {activity->
+                val nav=views(activity.window.decorView).first {it.tag=="main-navigation"}
+                var parent=nav.parent
+                while(parent is View){assertFalse(parent is ScrollView);parent=parent.parent}
+                views(nav).first {it.tag=="tab-account"}.performClick()
+            }
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            scenario.onActivity {activity->
+                val all=views(activity.window.decorView)
+                assertTrue(all.filterIsInstance<TextView>().any {it.text.toString()=="My account"})
+                assertFalse(all.any{it is WebView})
+                assertTrue(all.first {it.tag=="tab-account"}.isSelected)
+                preview(activity,"account")
+                all.first {it.tag=="tab-home"}.performClick()
+            }
+        }
+    }
     @Test fun homeAndSignInAreNativeAndStayInsideApp() {
         ActivityScenario.launch(MainActivity::class.java).use { scenario->
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
             scenario.onActivity { activity->
                 val all=views(activity.window.decorView)
                 assertFalse(all.any{it is WebView})
                 assertTrue(all.filterIsInstance<TextView>().any{it.text.toString()=="Butterflies Educare"})
+                preview(activity,"home")
                 all.filterIsInstance<Button>().first{it.text=="Sign in with my school account"}.performClick()
                 val login=views(activity.window.decorView)
                 assertTrue(login.filterIsInstance<TextView>().any{it.text.toString()=="Welcome back"})

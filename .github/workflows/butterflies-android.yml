@@ -47,13 +47,18 @@ jobs:
           arch: x86_64
           target: default
           disable-animations: true
-          script: cd mobile/butterflies && gradle :androidApp:connectedDebugAndroidTest --stacktrace
+          script: |
+            cd mobile/butterflies && gradle :androidApp:connectedDebugAndroidTest --stacktrace
+            mkdir -p "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports"
+            adb exec-out run-as za.co.butterflies.educare cat files/preview-home.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-home.png"
+            adb exec-out run-as za.co.butterflies.educare cat files/preview-account.png > "$GITHUB_WORKSPACE/mobile/butterflies/androidApp/build/reports/preview-account.png"
       - name: Prepare test download and checksum
         run: |
           mkdir -p apk-download
-          cp mobile/butterflies/androidApp/build/outputs/apk/debug/androidApp-debug.apk apk-download/Butterflies-Educare-0.1.0-test.apk
+          cp mobile/butterflies/androidApp/build/outputs/apk/debug/androidApp-debug.apk apk-download/Butterflies-Educare-0.2.0-test.apk
+          cp mobile/butterflies/androidApp/build/reports/preview-*.png apk-download/
           cd apk-download
-          sha256sum Butterflies-Educare-0.1.0-test.apk > SHA256SUMS.txt
+          sha256sum Butterflies-Educare-0.2.0-test.apk > SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
           name: Butterflies-Educare-Android-test
@@ -63,10 +68,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          if gh release view butterflies-android-v0.1.0 >/dev/null 2>&1; then
-            gh release upload butterflies-android-v0.1.0 apk-download/* --clobber
+          if gh release view butterflies-android-v0.2.0 >/dev/null 2>&1; then
+            gh release upload butterflies-android-v0.2.0 apk-download/* --clobber
           else
-            gh release create butterflies-android-v0.1.0 apk-download/* --target "$GITHUB_SHA" --prerelease --title 'Butterflies Educare Android 0.1.0 — test APK' --notes-file mobile/butterflies/RELEASE_NOTES.md
+            gh release create butterflies-android-v0.2.0 apk-download/* --target "$GITHUB_SHA" --prerelease --title 'Butterflies Educare Android 0.2.0 — test APK' --notes-file mobile/butterflies/RELEASE_NOTES.md
           fi
       - name: Preserve test reports
         if: always()

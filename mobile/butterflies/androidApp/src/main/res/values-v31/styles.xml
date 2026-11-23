@@ -1,0 +1,1 @@
+<resources><style name="SchoolLaunch" parent="SchoolTheme"><item name="android:windowSplashScreenBackground">#F9F5EC</item><item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_motion</item><item name="android:windowSplashScreenAnimationDuration">600</item><item name="android:windowSplashScreenBrandingImage">@drawable/splash_wordmark</item></style></resources>

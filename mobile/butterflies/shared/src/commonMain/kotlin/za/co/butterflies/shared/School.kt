@@ -2,7 +2,7 @@ package za.co.butterflies.shared
 
 /** Shared app rules. Android UI and secure storage stay in the platform module. */
 object School {
-    const val version = "0.1.0"
+    const val version = "0.2.0"
     const val website = "https://iederees-create.github.io/3D-Portfolio/butterflies-educare/"
     const val backend = "https://sijvvbozaufzpjirijhb.supabase.co"
     const val publicKey = "sb_publishable_dWWgbtZUAGVqIEvjMU5DFA_3Pi98GHU"

@@ -1,4 +1,4 @@
-# Butterflies Educare native app — 0.1.0 test
+# Butterflies Educare native app — 0.2.0 test
 
 Android uses native Kotlin widgets, not WebView or a browser shell. A Kotlin Multiplatform `shared` module contains shared validation and app configuration; its JVM target is used by Android and iOS targets are configured on macOS. There is no iPhone application binary yet.
 
@@ -24,3 +24,7 @@ Native screens: welcome, sign-in/signup/reset request, contact profile, child pr
 ## Verification
 
 Shared tests cover email normalisation, invalid names/addresses, count boundaries, consent and rejecting external/traversal paths. Android instrumentation verifies native home/sign-in UI (no WebView) and encrypted session storage. No live accounts or learner records are created by tests. Physical phone acceptance of login, session restore, profile changes and school workflows is still required before wider family rollout.
+
+## Mobile presentation
+
+Branded Android launch resources support legacy phones and the Android 12+ splash API. Newer phones animate the butterfly and fade into the app without an artificial startup delay. A fixed five-tab navigation bar stays outside the scroll area. Home uses family shortcuts; Account holds profile/settings tasks. Native controls respect system text sizing, and animation follows the device setting. Public signed-out previews are rendered by instrumentation tests without using any learner records.

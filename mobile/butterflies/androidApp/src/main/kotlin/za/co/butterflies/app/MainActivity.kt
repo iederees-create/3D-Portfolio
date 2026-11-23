@@ -1,5 +1,7 @@
 package za.co.butterflies.app
 
+import android.animation.ValueAnimator
+import android.os.Build
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -37,8 +39,12 @@ class MainActivity: Activity() {
     private val muted=Color.rgb(78,105,91)
     private val cream=Color.rgb(249,245,236)
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SchoolTheme)
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE)
+        if(Build.VERSION.SDK_INT>=31) splashScreen.setOnExitAnimationListener { splash ->
+            if(ValueAnimator.areAnimatorsEnabled()) splash.view.animate().alpha(0f).setDuration(180).withEndAction { splash.remove() }.start() else splash.remove()
+        }
         api=SchoolApi(SessionStore(this));home()
     }
     override fun onDestroy(){super.onDestroy();executor.shutdownNow()}
@@ -53,36 +59,71 @@ class MainActivity: Activity() {
     }
     private fun action(label: String,parent: LinearLayout=content,callback:()->Unit): Button = Button(this).apply {
         text=label;isAllCaps=false;textSize=16f;setTextColor(Color.WHITE);minHeight=dp(52)
-        backgroundTintList=android.content.res.ColorStateList.valueOf(green)
+        background=pressSurface(green,16)
         parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{topMargin=dp(6);bottomMargin=dp(6)})
         setOnClickListener{callback()}
     }
     private fun input(label: String,value: String="",password: Boolean=false,multiline: Boolean=false): EditText {
         text(label,15f,bold=true)
         return EditText(this).apply {
-            setText(value);textSize=17f;setTextColor(green);minHeight=dp(52);setPadding(dp(10),dp(8),dp(10),dp(8));setBackgroundColor(Color.WHITE)
+            setText(value);textSize=17f;setTextColor(green);minHeight=dp(52);setPadding(dp(10),dp(8),dp(10),dp(8));background=shape(Color.WHITE,14)
             inputType=when{password->InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD;multiline->InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE;label.contains("email",true)->InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;else->InputType.TYPE_CLASS_TEXT}
             if(multiline)minLines=3
+            contentDescription=label
             isSaveEnabled=false
             content.addView(this,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
         }
     }
     private fun check(label: String)=CheckBox(this).apply {text=label;textSize=16f;setTextColor(green);content.addView(this)}
+    private fun shape(color: Int,radius: Int=20)=GradientDrawable().apply {setColor(color);cornerRadius=dp(radius).toFloat()}
+    private fun pressSurface(color: Int,radius: Int=20)=android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(if(color==green)0x33FFFFFF else 0x14244B3D),shape(color,radius),shape(Color.WHITE,radius))
+    private fun selectedTab(key: String)=when(key){"classes"->"classes";"events"->"events";"messages"->"inbox";"profile","children","child-form","requests","account","auth","staff","policies"->"account";else->"home"}
+    private fun tabBar(key: String): LinearLayout {
+        val selected=selectedTab(key)
+        val bar=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;setPadding(dp(6),dp(7),dp(6),dp(7));setBackgroundColor(Color.WHITE);elevation=dp(7).toFloat();tag="main-navigation"}
+        for((id,label) in listOf("home" to "Home","classes" to "Classes","events" to "Events","inbox" to "Inbox","account" to "Account")) {
+            val active=id==selected
+            val tab=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;gravity=Gravity.CENTER;minimumHeight=dp(62);isClickable=true;isFocusable=true;contentDescription="$label"+(if(active)", selected"else"");tag="tab-$id";isSelected=active;background=pressSurface(if(active)Color.rgb(231,240,232) else Color.WHITE,16)}
+            tab.addView(SchoolIcon(this,id,if(active)green else muted),LinearLayout.LayoutParams(dp(23),dp(23)))
+            TextView(this).apply {text=label;textSize=11f;setTextColor(if(active)green else muted);gravity=Gravity.CENTER;setPadding(0,dp(4),0,0);if(active)setTypeface(null,Typeface.BOLD);tab.addView(this)}
+            bar.addView(tab,LinearLayout.LayoutParams(0,-2,1f))
+            tab.setOnClickListener {if(active&&screen==id)return@setOnClickListener;when(id){"home"->home();"classes"->classesScreen();"events"->eventsScreen();"inbox"->if(api.signedIn)messagesScreen()else auth();else->accountScreen()}}
+        }
+        return bar
+    }
     private fun page(title: String,key: String="home") {
         revision++;screen=key
         val root=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setBackgroundColor(cream)}
-        val header=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(18),dp(16),dp(18),dp(12))}
-        val icon=ImageView(this).apply{setImageResource(za.co.butterflies.app.R.drawable.butterfly)};header.addView(icon,LinearLayout.LayoutParams(dp(48),dp(48)))
-        val brand=TextView(this).apply{text="Butterflies Educare";textSize=20f;setTextColor(green);setTypeface(null,Typeface.BOLD);setPadding(dp(10),0,0,0)};header.addView(brand,LinearLayout.LayoutParams(0,-2,1f));root.addView(header)
-        val scroll=ScrollView(this);content=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(22),dp(12),dp(22),dp(30))};scroll.addView(content);root.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
-        if(key!="home")action("Back to my school"){home()}
-        text(title,30f,bold=true)
-        feedback=text("",16f,muted)
-        text("Android test app · ${School.version}",13f,muted)
+        val header=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(8),dp(16),dp(8))}
+        if(key !in listOf("home","classes","events","messages","account")) {
+            val back=ImageButton(this).apply {setImageResource(android.R.drawable.ic_media_previous);imageTintList=android.content.res.ColorStateList.valueOf(green);contentDescription="Back";background=shape(Color.WHITE,14);setOnClickListener{this@MainActivity.back()}}
+            header.addView(back,LinearLayout.LayoutParams(dp(48),dp(48)).apply{marginEnd=dp(8)})
+        } else header.addView(ImageView(this).apply{setImageResource(R.drawable.butterfly);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(38),dp(38)))
+        val brand=TextView(this).apply{text="Butterflies Educare";textSize=18f;setTextColor(green);setTypeface(null,Typeface.BOLD);setPadding(dp(8),0,0,0)};header.addView(brand,LinearLayout.LayoutParams(0,-2,1f));root.addView(header)
+        val scroll=ScrollView(this).apply{isFillViewport=true;clipToPadding=false};content=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(20),dp(8),dp(20),dp(24))};scroll.addView(content);root.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
+        text(title,28f,bold=true)
+        feedback=text("",15f,muted).apply{visibility=View.GONE;accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE}
+        root.addView(tabBar(key))
         setContentView(root)
         root.setOnApplyWindowInsetsListener { v,insets->v.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom);insets }
     }
-    private fun notice(value: String) {feedback.text=value}
+    private fun shortcut(parent: LinearLayout,icon: String,title: String,detail: String,callback:()->Unit) {
+        val tile=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setPadding(dp(16),dp(18),dp(16),dp(18));background=pressSurface(Color.WHITE);minimumHeight=dp(150);isClickable=true;isFocusable=true;contentDescription="$title. $detail"}
+        tile.addView(SchoolIcon(this,icon,green),LinearLayout.LayoutParams(dp(28),dp(28)))
+        text(title,18f,bold=true,parent=tile);text(detail,13f,muted,parent=tile)
+        parent.addView(tile,LinearLayout.LayoutParams(0,-1,1f).apply{marginStart=dp(4);marginEnd=dp(4)})
+        tile.setOnClickListener{callback()}
+    }
+    private fun shortcutRow(left: (LinearLayout)->Unit,right: (LinearLayout)->Unit) {
+        val row=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;baselineAligned=false};content.addView(row,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)});left(row);right(row)
+    }
+    private fun menuRow(icon: String,title: String,detail: String,callback:()->Unit) {
+        val row=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(12),dp(12),dp(12));background=pressSurface(Color.WHITE,18);minimumHeight=dp(76);isClickable=true;isFocusable=true;contentDescription="$title. $detail"}
+        row.addView(SchoolIcon(this,icon,green),LinearLayout.LayoutParams(dp(26),dp(26)))
+        val words=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(14),0,dp(8),0)};row.addView(words,LinearLayout.LayoutParams(0,-2,1f));text(title,17f,bold=true,parent=words);if(detail.isNotBlank())text(detail,13f,muted,parent=words)
+        text("›",26f,parent=row);content.addView(row,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)});row.setOnClickListener{callback()}
+    }
+    private fun notice(value: String) {feedback.text=value;feedback.visibility=if(value.isBlank())View.GONE else View.VISIBLE}
     private fun task(work:()->Unit) {
         val stamp=revision;notice("Connecting to your school…");content.isEnabled=false
         // Disable all buttons while a mutation runs; re-enable only on the same screen.
@@ -95,13 +136,33 @@ class MainActivity: Activity() {
     private fun needProfile() {check(profile?.optString("privacy_consent_at").orEmpty().let{it.isNotBlank()&&it!="null"}){"Save your contact profile and privacy acknowledgement first."}}
     private fun formatTime(value: String)=runCatching{OffsetDateTime.parse(value).withOffsetSameInstant(ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm"))+" SAST"}.getOrDefault(value)
     private fun home() {
-        page(if(api.signedIn)"Your school, close by." else "Welcome to Butterflies")
-        text("Profiles, classes and school life, together.",18f,muted)
-        if(!api.signedIn){action("Sign in with my school account"){auth()};action("Create an account"){auth(true)}}
-        else {card("My account",api.email);action("My profile"){profileScreen()};action("My children"){childrenScreen()};action("My requests & applications"){requestsScreen()};action("Messages to school"){messagesScreen()};action("Sign out"){task{api.logout();ui{profile=null;staffRole="";home()}}}}
-        action("Classes"){classesScreen()};action("Events"){eventsScreen()};action("School news"){newsScreen()};action("Offer a class"){if(api.signedIn)providerScreen() else auth()}
-        if(api.signedIn){val stamp=revision;task{val p=api.list("be_parent_profiles?select=*&user_id=eq.${api.uid}").rows().firstOrNull();val role=api.list("be_staff_memberships?select=staff_role&user_id=eq.${api.uid}").rows().firstOrNull()?.optString("staff_role").orEmpty();ui(stamp){profile=p;staffRole=role;if(role in listOf("admin","staff"))action("School team"){staffScreen()};if(p==null)notice("Complete My profile before sending requests.")}}}
-        action("School fees & policies"){policies()}
+        page(if(api.signedIn)"Hello, "+(profile?.optString("display_name")?.substringBefore(" ")?.takeIf{it.isNotBlank()}?:"welcome back") else "Your school, close by.")
+        val hero=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(20),dp(18),dp(12),dp(18));background=GradientDrawable(GradientDrawable.Orientation.TL_BR,intArrayOf(Color.rgb(225,237,222),Color.rgb(244,235,215))).apply{cornerRadius=dp(24).toFloat()}}
+        val words=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL};hero.addView(words,LinearLayout.LayoutParams(0,-2,1f));text("GROWING TOGETHER",11f,muted,true,words);text(if(api.signedIn)"A little place.\nA big community."else"Welcome to\nyour school.",26f,bold=true,parent=words).setTypeface(Typeface.create("serif",Typeface.NORMAL));text("School life, in your pocket.",14f,muted,parent=words)
+        hero.addView(ImageView(this).apply{setImageResource(R.drawable.butterfly);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(90),dp(90)));content.addView(hero,LinearLayout.LayoutParams(-1,-2).apply{topMargin=dp(10);bottomMargin=dp(18)})
+        if(ValueAnimator.areAnimatorsEnabled()){hero.alpha=0f;hero.translationY=dp(8).toFloat();hero.animate().alpha(1f).translationY(0f).setDuration(240).start()}
+        if(!api.signedIn){action("Sign in with my school account"){auth()};text("One account for the app and website.",14f,muted);menuRow("account","Create an account","Join your school community"){auth(true)}}
+        else {text("For your family",20f,bold=true);shortcutRow({shortcut(it,"children","My children","Profiles & school details"){childrenScreen()}},{shortcut(it,"requests","My requests","Places & applications"){requestsScreen()}})}
+        text("Around school",20f,bold=true)
+        shortcutRow({shortcut(it,"classes","Classes","Find something to learn"){classesScreen()}},{shortcut(it,"events","Events","Join school activities"){eventsScreen()}})
+        menuRow("news","School news","Updates from Butterflies"){newsScreen()}
+        menuRow("offer","Offer a class","Share your skills with our community"){if(api.signedIn)providerScreen()else auth()}
+        if(api.signedIn){val stamp=revision;task{val p=api.list("be_parent_profiles?select=*&user_id=eq.${api.uid}").rows().firstOrNull();val role=api.list("be_staff_memberships?select=staff_role&user_id=eq.${api.uid}").rows().firstOrNull()?.optString("staff_role").orEmpty();ui(stamp){profile=p;staffRole=role;if(role in listOf("admin","staff"))menuRow("news","School team","Your school overview"){staffScreen()};if(p==null)notice("Welcome! Complete your profile in Account to send requests.")}}}
+    }
+    private fun accountScreen() {
+        page("My account","account")
+        if(!api.signedIn){card("Your own school space","Sign in to manage your profile, children and requests.");action("Sign in with my school account"){auth()};action("Create an account"){auth(true)}}
+        else {
+            card(profile?.optString("display_name")?.takeIf{it.isNotBlank()}?:"Your school account",api.email)
+            menuRow("account","My profile","Your name and contact details"){profileScreen()}
+            menuRow("children","My children","Manage child profiles"){childrenScreen()}
+            menuRow("requests","Requests & applications","Track school and class requests"){requestsScreen()}
+            menuRow("inbox","School inbox","Your messages and school replies"){messagesScreen()}
+            if(staffRole in listOf("admin","staff"))menuRow("news","School team","School overview and fundraising ideas"){staffScreen()}
+            action("Sign out"){AlertDialog.Builder(this).setTitle("Sign out?").setMessage("You can return with the same email and password.").setNegativeButton("Stay signed in",null).setPositiveButton("Sign out"){_,_->task{api.logout();ui{profile=null;staffRole="";home()}}}.show()}
+        }
+        menuRow("news","School information","Fees, privacy and contact details"){policies()}
+        text("Butterflies for Android · ${School.version} test",13f,muted)
     }
     private fun auth(signup: Boolean=false) {
         page(if(signup)"Join your school community" else "Welcome back","auth")
@@ -163,5 +224,6 @@ class MainActivity: Activity() {
         page("School overview","staff");val stamp=revision;task{val roles=api.list("be_staff_memberships?select=staff_role&user_id=eq.${api.uid}").rows();val role=roles.firstOrNull()?.optString("staff_role").orEmpty();check(role in listOf("staff","admin")){"School team access is required."};val apps=api.list("be_applications_2027?select=id,status").rows();val parents=api.list("be_parent_profiles?select=user_id").length();val children=if(role=="admin")api.list("be_school_enrolments?select=id,status,school_year&school_year=eq.${LocalDate.now().year}").rows()else emptyList();val research=if(role=="admin")api.list("be_fundraiser_analysis?select=project_id,analysis,selected").rows()else emptyList();ui(stamp){card("Parent accounts",parents.toString());card("Applications visible to your role",apps.size.toString());if(role=="admin")card("Enrolled this year",children.count{it.optString("status")=="enrolled"}.toString());text("Counts come from school records and depend on the register being populated. Staff administration is also available on the school website.",16f,muted);action("Full school administration (website)"){web("principal.html")};for(r in research){val a=r.getJSONObject("analysis");val n=a.getJSONArray("counts").getInt(1);val net=n*(a.getInt("price")-a.getInt("variable"))-a.getInt("fixed");val b=card(a.optString("title"),a.optString("model")+"\n\nIllustrative surplus at $n ${a.optString("unit")}: R$net. Estimates, not money raised.\n\n"+a.optString("checks"));action(if(r.optBoolean("selected"))"Chosen for follow-up"else"Choose this idea",b){task{api.rpc("be_choose_fundraiser_idea",JSONObject().put("p_project_id",r.getString("project_id")));ui{staffScreen()}}}}}}
     }
     private fun policies(){page("School information","policies");text("Butterflies Educare\n84 Dirkie Uys Street, Goodwood\n083 471 7929\nButterfliesedu@gmail.com",18f);action("2027 fees and payment policy"){web("fees-policy.html")};action("Privacy notice"){web("privacy.html")};action("Download paper registration"){web("registration-print.html")};text("Policies and printable documents open in your browser. Daily app features use native Android screens.",16f,muted)}
-    @Deprecated("Deprecated in Java") override fun onBackPressed(){if(screen=="home")super.onBackPressed()else home()}
+    private fun back(){when(screen){"home"->super.onBackPressed();"child-form"->childrenScreen();"profile","children","requests","policies","staff"->accountScreen();else->home()}}
+    @Deprecated("Deprecated in Java") override fun onBackPressed(){back()}
 }

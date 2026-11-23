@@ -1,5 +1,5 @@
-First downloadable native Android test app. Install the APK on Android 8 or newer and use the same school account email and password as the website.
+Butterflies for Android 0.2.0 — a mobile home for your school community.
 
-Native: sign-in/signup, profiles, children, classes and requests, events and attendance, school messages, proposals and selected school-team tools. Internet required. The full registration form, school policies and advanced administration explicitly open the website in this first version.
+New: butterfly launch screen with a gentle entrance animation, fixed Home / Classes / Events / Inbox / Account navigation, family shortcuts, a compact welcome screen, rounded controls and easier back navigation. The animation follows the device animation setting.
 
-Test build, not a Play Store or iPhone release. Physical-phone and real-account acceptance still required. No private learner data or passwords are included in the download. SHA256SUMS.txt verifies the file downloaded from this release.
+Install over the previous test app and use the same website email and password. Android 8 or newer; internet required. Full registration entry, policies and advanced administration still open the school website. This remains a test build, with physical-phone and real-account acceptance required before wider rollout.
