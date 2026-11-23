@@ -115,7 +115,7 @@ class MainActivity: Activity() {
         tile.setOnClickListener{callback()}
     }
     private fun shortcutRow(left: (LinearLayout)->Unit,right: (LinearLayout)->Unit) {
-        val row=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;baselineAligned=false};content.addView(row,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)});left(row);right(row)
+        val row=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;isBaselineAligned=false};content.addView(row,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)});left(row);right(row)
     }
     private fun menuRow(icon: String,title: String,detail: String,callback:()->Unit) {
         val row=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(12),dp(12),dp(12));background=pressSurface(Color.WHITE,18);minimumHeight=dp(76);isClickable=true;isFocusable=true;contentDescription="$title. $detail"}
