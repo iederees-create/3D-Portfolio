@@ -17,6 +17,7 @@ class SchoolIcon(context: Context,private val kind: String,private val tint: Int
         fun line(vararg xy: Float){val p=Path();p.moveTo(xy[0],xy[1]);for(i in 2 until xy.size step 2)p.lineTo(xy[i],xy[i+1]);canvas.drawPath(p,pen)}
         fun box(l:Float,t:Float,r:Float,b:Float,radius:Float=2f){canvas.drawRoundRect(RectF(l,t,r,b),radius,radius,pen)}
         when(kind){
+            "back"->{line(15f,4f,7f,12f,15f,20f);line(7f,12f,21f,12f)}
             "home"->{line(3f,10f,12f,3f,21f,10f);line(5f,9f,5f,21f,19f,21f,19f,9f);line(9f,21f,9f,14f,15f,14f,15f,21f)}
             "classes"->{line(12f,6f,12f,21f);line(12f,6f,4f,3f,3f,3f,3f,18f,5f,18f,12f,21f,19f,18f,21f,18f,21f,3f,20f,3f,12f,6f)}
             "events"->{box(3f,5f,21f,21f);line(7f,3f,7f,7f);line(17f,3f,17f,7f);line(3f,10f,21f,10f);line(8f,15f,11f,18f,17f,13f)}

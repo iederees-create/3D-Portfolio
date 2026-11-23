@@ -85,7 +85,7 @@ class MainActivity: Activity() {
             val active=id==selected
             val tab=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;gravity=Gravity.CENTER;minimumHeight=dp(62);isClickable=true;isFocusable=true;contentDescription="$label"+(if(active)", selected"else"");tag="tab-$id";isSelected=active;background=pressSurface(if(active)Color.rgb(231,240,232) else Color.WHITE,16)}
             tab.addView(SchoolIcon(this,id,if(active)green else muted),LinearLayout.LayoutParams(dp(23),dp(23)))
-            TextView(this).apply {text=label;textSize=11f;setTextColor(if(active)green else muted);gravity=Gravity.CENTER;setPadding(0,dp(4),0,0);if(active)setTypeface(null,Typeface.BOLD);tab.addView(this)}
+            TextView(this).apply {text=label;textSize=12f;setTextColor(if(active)green else muted);gravity=Gravity.CENTER;setPadding(0,dp(4),0,0);if(active)setTypeface(null,Typeface.BOLD);tab.addView(this)}
             bar.addView(tab,LinearLayout.LayoutParams(0,-2,1f))
             tab.setOnClickListener {if(active&&screen==id)return@setOnClickListener;when(id){"home"->home();"classes"->classesScreen();"events"->eventsScreen();"inbox"->if(api.signedIn)messagesScreen()else auth();else->accountScreen()}}
         }
@@ -96,7 +96,7 @@ class MainActivity: Activity() {
         val root=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setBackgroundColor(cream)}
         val header=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(8),dp(16),dp(8))}
         if(key !in listOf("home","classes","events","messages","account")) {
-            val back=ImageButton(this).apply {setImageResource(android.R.drawable.ic_media_previous);imageTintList=android.content.res.ColorStateList.valueOf(green);contentDescription="Back";background=shape(Color.WHITE,14);setOnClickListener{this@MainActivity.back()}}
+            val back=FrameLayout(this).apply {contentDescription="Back";isClickable=true;isFocusable=true;background=pressSurface(Color.WHITE,14);addView(SchoolIcon(this@MainActivity,"back",green),FrameLayout.LayoutParams(dp(24),dp(24),Gravity.CENTER));setOnClickListener{this@MainActivity.back()}}
             header.addView(back,LinearLayout.LayoutParams(dp(48),dp(48)).apply{marginEnd=dp(8)})
         } else header.addView(ImageView(this).apply{setImageResource(R.drawable.butterfly);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(38),dp(38)))
         val brand=TextView(this).apply{text="Butterflies Educare";textSize=18f;setTextColor(green);setTypeface(null,Typeface.BOLD);setPadding(dp(8),0,0,0)};header.addView(brand,LinearLayout.LayoutParams(0,-2,1f));root.addView(header)
@@ -177,6 +177,10 @@ class MainActivity: Activity() {
         if(signup)action("Already registered? Sign in"){auth()} else {action("Create account"){auth(true)};action("Reset password"){val e=email.text.toString();task{api.reset(e);ui{notice("If that address is registered, a password-reset link has been sent. Open the email to choose a password, then return to the app.")}}}}
     }
     private fun profileScreen() {
+        page("My profile","profile")
+        task {val fresh=api.list("be_parent_profiles?select=*&user_id=eq.${api.uid}").rows().firstOrNull();ui{profile=fresh;profileForm()}}
+    }
+    private fun profileForm() {
         page("My profile","profile");text("Your details are shared privately with authorised school staff.",16f,muted)
         val name=input("Your name",profile?.optString("display_name").orEmpty());val phone=input("Phone",profile?.optString("phone").orEmpty().replace("null",""))
         text("Account email: ${api.email}",16f,muted)
