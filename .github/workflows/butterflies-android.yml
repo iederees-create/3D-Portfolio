@@ -28,6 +28,8 @@ jobs:
           path: ~/.android/debug.keystore
           key: butterflies-android-test-certificate-v1
       - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
       - name: Install Android build tools
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
       - name: Compile native app, run shared tests and lint
